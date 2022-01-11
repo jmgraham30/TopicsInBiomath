@@ -1,10 +1,200 @@
 ---
-title: "About this site"
+title: "MATH 463 Topics In Biomathematics"
 description: |
-  Some additional details about the website
+  Course Syllabus
 ---
 
-```{r setup, include=FALSE}
+```{r setup, include=FALSE, message=FALSE}
 knitr::opts_chunk$set(echo = FALSE)
+library(kableExtra)
 ```
 
+
+
+# Instructor Information:
+
+* **Instructor:** Dr. Jason M. Graham
+* **Office:** LSC 319A 
+    + **Office Hours:** Mondays 10:00 - 11:00 AM and 2:00 - 3:00 PM, and Wednesdays 10:00 - 11:00 AM (You may also make an appointment to meet with me outside of scheduled office hours. Appointments are not necessary for regularly scheduled office hours.)
+* **Dr. Graham's Schedule:** [Link](https://www.dropbox.com/s/zp1bg5stofbrvjk/FALL%202021%20Schedule%20JMG.pdf?dl=0)
+* **Email:** <jason.graham@scranton.edu>
+* **Phone:** (570) 941-7491
+
+# Course Materials:
+
+## Required Textbook
+
+There is no required text for this course. Students will be provided with detailed notes, handouts, or other references.
+
+### Additional Resources:
+
+Three very good general references are:
+
+* Nonlinear Dynamics and Chaos 2nd ed. by Steven H. Strogatz, ISBN: 9780813349107. This book covers most of the mathematical techniques we will use throughout the course. 
+
+* [Lecture Notes on Mathematical Systems Biology](http://www.sontaglab.org/FTPDIR/systems_biology_notes.pdf) by Eduardo Sontag. 
+
+* [Mathematical Modelling in Systems Biology: An Introduction](https://www.math.uwaterloo.ca/~bingalls/MMSB/MMSB_w_solutions.pdf) by Brian Ingalls. 
+
+# Course Information: 
+
+## Course Description 
+
+A study of discrete and continuous mathematical models in biology.  Topics include: population dynamics of single species and interacting species, infectious diseases, population genetics, and cell populations with tumor modeling.
+
+## Prerequisites
+
+The prerequisites for this course is MATH 341 *Differential Equations* and MATH 351 *Linear Algebra*. Specifically, the student is expected to have a knowledge of the theory and applications of elementary linear algebra and basic ordinary differential equations (ODEs).
+
+## Course Goals
+
+
+## Student Learning Objectives and Assessment
+
+```{r,include=FALSE}
+objectives <- c("Work with data: identify variables as categorical, discrete, or continuous; describe basic techniques of data collection and sampling; explain and interpret basic numerical and graphical data summaries.","Work with probability distributions and random variables at an introductory level.","Explain the concept of sampling distribution.","Conduct and interpret basic statistical inferences.")
+assessments <- c("Concept quizzes, homework, labs, and exams.","Concept quizzes, homework, labs, and exams.","Concept quizzes, homework, labs, and exams.","Concept quizzes, homework, labs, and exams.")
+slos_assess <- tibble::tibble("After taking this course, the student should be able to:"=objectives,"Methods of assessment"=assessments)
+```
+
+
+
+```{r,echo=FALSE}
+kbl(slos_assess) %>%
+  kable_paper(full_width = F) %>%
+  column_spec(1, width = "30em",border_left=TRUE,border_right=TRUE) %>%
+  column_spec(2, width = "30em",border_right=TRUE)
+```
+
+### Link with Mathematics Program Learning Outcomes
+
+The student learning objectives of this course are linked with the Mathematics Program Learning Outcome 
+
+- "Demonstrate competence in analytical and critical reasoning."
+
+### Link with General Education Goals and Objectives
+
+# Course Policies and Procedures:  
+
+## COVID Safety Pertaining to the Course
+
+In consideration of the care and concern for one another and members of our community, unless you are reasonably unable to do so, please take the following steps as a student in this course to mitigate the spread of coronavirus:
+
+1) Do not attend class if you have a confirmed case of coronavirus disease (COVID) until you have fully recovered. 
+
+2) Do not attend class if you are experiencing any COVID related symptoms as described at [this link](https://www.cdc.gov/coronavirus/2019-ncov/symptoms-testing/symptoms.html).
+
+3) Do not attend class if you believe that you have been exposed to the coronavirus and might spread it to members of the class. Please visit [this link](https://www.cdc.gov/coronavirus/2019-ncov/transmission/index.html) for information on the transmission of the coronavirus.  
+
+4) Wear a [CDC approved face covering](https://www.cdc.gov/coronavirus/2019-ncov/prevent-getting-sick/diy-cloth-face-coverings.html) over your mouth and nose while in the classroom and while visiting the course instructor's office. 
+
+## Attendance
+
+It is important that you attend class regularly. If you must miss class for any reason notify the instructor as soon as possible to make arrangements to quickly make up any content missed by absence.
+
+## Assignments and Grading:
+
+### Grade Policy
+
+The course grade will be based on regular concept quizzes (15%), participation (15%), homework (15%), bi-weekly labs (15%), one mid-term exam (20%), and a final exam (20%). 
+
+### Grade Scale
+
+```{r,include=FALSE}
+grade_values <- c("94-100","90-93","87-89","83-86","80-82","76-79","72-75","69-71","65-68","60-64","<60")
+grade_letters <- c("A","A-","B+","B","B-","C+","C","C-","D+","D","F")
+grades_df <- tibble::tibble("Grade Range"=grade_values,"Letter Grade"=grade_letters)
+```
+
+Letter grades will be assigned based on the following scale:
+
+```{r,echo=FALSE}
+kbl(grades_df) %>%
+  kable_paper("striped",full_width=FALSE) 
+```
+
+
+
+
+
+### Homework
+
+
+Do not underestimate the value (and joy) of carefully working through homework problems.
+
+
+### Exams
+
+
+# Course Timeline: 
+
+## Important Dates
+
+```{r,include=FALSE}
+events <- c("Classes begin","Last day to add classes","Labor day, no classes","Last day for 100% tution refund","Last day to drop with no grade","Last day of class before fall break","Classes resume after fall break","Mid-term exam","Semester Midpoint","Last day to withdraw with W grade","Last day of class before Thanksgiving break","Classes resume after Thanksgiving","Last day of  class","Final exams begin","Final exams end")
+event_date <- c("Monday, August 30","Friday, September 3","Monday, September 6","Wednesday, September 8","Wednesday September 29","Friday, October 8","Wednesday, October 13","Thursday, October 14","Friday, October 15","Friday, November 12","Tuesday, November 23","Monday, November 29","Monday, December 13","Tuesday, December 14","Saturday, December 18")
+important_dates_df <- tibble::tibble("Event"=events,"Date"=event_date)
+```
+
+```{r,echo=FALSE}
+kbl(important_dates_df) %>%
+  kable_paper("striped",full_width = F) %>%
+  column_spec(1, width = "30em",border_left=TRUE,border_right=TRUE) %>%
+  column_spec(2, width = "30em",border_right=TRUE)
+```
+
+## Weekly Schedule
+
+- Week 1: 
+- Week 2: 
+- Week 3: 
+- Week 4: 
+- Week 5: 
+- Week 6: 
+- Week 7: 
+- Week 8: 
+- Week 9: 
+- Week 10: 
+- Week 11: 
+- Week 12: 
+- Week 13: 
+- Week 14: 
+- Week 15: 
+
+# University Resources for Students and Academic Honesty:
+
+## Students with Disabilities
+
+Reasonable academic accommodations may be provided to students who submit relevant and current documentation of their disability.  Students are encouraged to contact the Center for Teaching and Learning Excellence (CTLE) at <disabilityservices@scranton.edu> or (570) 941-4038 if they have or think they may have a disability and wish to determine eligibility for any accommodations.  For more information, please visit <http://www.scranton.edu/disabilities>. 
+
+## Writing Center Services
+
+The Writing Center focuses on helping students become better writers.  Consultants will work one-on-one with students to discuss students’ work and provide feedback at any stage of the writing process.  Scheduling appointments early in the writing progress is encouraged.
+
+To meet with a writing consultant, call (570) 941-6147 to schedule an appointment, or send an email with your available meeting times, the course for which you need assistance, and your phone number to: <writing-center@scranton.edu>. The Writing Center does offer online appointments for our distance learning students. Please contact Amye Archer at <amye.archer@scranton.edu> for more information.
+
+## Academic Honesty and Integrity
+
+Each student is expected to do their own work. It is also expected that each student respect and abide by the Academic Code of Honesty as set forth in the University of Scranton student handbook. Conduct that violates the Academic Code of Honesty includes plagiarism, duplicate submission of the same work, collusion, providing false information, unauthorized use of computers, theft and destruction of property, and unauthorized possession of tests and other materials. Steps taken in response to suspected violations may include a discussion with the instructor, an informal meeting with the dean of the college, and a hearing before the Academic Dishonesty Hearing Board. Students  who are found to have violated the Code will ordinarily be assigned the grade F by the instructor and may face other sanctions. The complete Academic Code of Honesty is located on the University website at <https://www.scranton.edu/academics/wml/acad-integ/acad-code-honesty.shtml>. 
+
+## My Reporting Obligation as a Responsible Employee
+
+As a faculty member, I am deeply invested in the well-being of each student I teach. I am here to assist you with your work in this course. Additionally, if you come to me with other non-course-related concerns, I will do my best to help. It is important for you to know that all faculty members are required to report incidents of sexual harassment or sexual misconduct involving students. This means that I cannot keep information about sexual harassment, sexual assault, sexual exploitation, intimate partner violence or stalking confidential if you share that information with me. I will keep the information as private as I can but am required to bring it to the attention of the University’s Title IX Coordinator, Elizabeth M. Garcia, or Deputy Title IX Coordinator, Christine M. Black, who, in conversation with you, will explain available support, resources, and options. I will not report anything to anybody without first letting you know and discussing choices as to how to proceed. The University’s Counseling Center (570-941-7620) is available to you as a confidential resource; counselors (in the counseling center) do not have an obligation to report to the Title IX Coordinator.
+
+## Non-discrimination Statement
+
+The University is committed to providing an educational, residential, and working environment that is free from harassment and discrimination. Members of the University community, applicants for employment or admissions, guests, and visitors have the right to be free from harassment or discrimination based on race, color, religion, ancestry, gender, sex, pregnancy, sexual orientation, gender identity or expression, age, disability, genetic information, national origin, veteran status, or any other status protected by applicable law.
+
+Students who believe they have been subject to harassment or discrimination based on any of the above class of characteristics, or experience sexual harassment, sexual misconduct or gender discrimination should contact Elizabeth M. Garcia, Title IX Coordinator, (570) 941-6645 <elizabeth.garcia2@scranton.edu>, Deputy Title IX Coordinators Christine M. Black (570) 941-6645 <christine.black@scranton.edu>, or Ms. Lauren Rivera, AVP for Student Life and Dean of Students, at (570)941-7680 <lauren.rivera@scranton.edu>. The United States Department of Education’s Office for Civil Rights (OCR) enforces Title IX. Information regarding OCR may be found at <www.ed.gov/about/offices/list/ocr/index.html>     
+
+The University of Scranton Sexual Harassment and Sexual Misconduct Policy can be found online at <https://www.scranton.edu/diversity>. All reporting options and resources are available at <https://www.scranton.edu/CARE>. 
+
+### About Pronouns
+
+It is easy to make assumptions about what pronouns people prefer, but we try not to! Please tell us in class or via a private email if you would like to let us know what your pronouns are, if/when you would like us (and others) to use them, and certainly feel free to correct us or others if we make a mistake. Using the pronouns that a person has indicated they prefer is considered both professional and polite, and as such we ask that all members of our class use the appropriate pronouns.
+
+If you have questions about this, please feel free to look up more information here (<https://www.mypronouns.org/>) or email <jason.graham@scranton.edu> with any questions.
+
+## Final Note
+
+The instructor reserves the right to modify this syllabus; students will immediately be notified of any such changes and an updated syllabus will be made available to the class via the course learning management system.

@@ -1,7 +1,7 @@
 ---
 title: "Topics in Biomathematics"
 description: |
-  Welcome to the website for MATH 463 Topics in Biomathematics.
+  Welcome to the website for MATH 463 Topics in Biomathematics!
 site: distill::distill_website
 ---
 
