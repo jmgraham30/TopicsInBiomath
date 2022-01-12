@@ -217,20 +217,20 @@ kbl(important_dates_df) %>%
 
 ## Weekly Schedule
 
-- Week 1: 
-- Week 2: 
-- Week 3: 
-- Week 4: 
-- Week 5: 
-- Week 6: Exam 1
-- Week 7: 
-- Week 8: Spring Break 
-- Week 9: 
-- Week 10: 
-- Week 11: 
-- Week 12: 
-- Week 13: 
-- Week 14: 
+- Week 1: Introduction to Biomathematics
+- Week 2: Basic Biomathematical Workflow
+- Week 3: Introduction to Mathematical Modeling
+- Week 4: Population Models
+- Week 5: Compartment Models
+- Week 6: SIR Type Models
+- Week 7: Exam 1
+- Week 8: The Chemostat Bio-reactor
+- Week 9: Spring Break 
+- Week 10: Functional Forms
+- Week 11: Mass Action and Reaction Kinetics
+- Week 12: Dimensional Analysis
+- Week 13: Phase-Plane Methods
+- Week 14: Mathematical Physiology
 - Week 15: Exam 2
 - Week 16: Additional Topics 
 - Week 17: Finals Week 
