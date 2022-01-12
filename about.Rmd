@@ -32,11 +32,14 @@ library(kableExtra)
 
 # Course Materials:
 
+* **Course Webpage:** [Link](https://topicsinbiomath.netlify.app/)
+
+
 ## Required Textbook
 
 There is no required text for this course. Students will be provided with detailed notes, handouts, or other references.
 
-## Additional Resources:
+## Additional Resources
 
 Three very good general references are:
 
