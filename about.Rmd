@@ -16,13 +16,17 @@ library(kableExtra)
 
 
 
-# Instructor Information:
+# Instructor Information
 
 * **Instructor:** Dr. Jason M. Graham
+
 * **Office:** LSC 319A 
-    + **Office Hours:** Mondays 10:00 - 11:00 AM and 2:00 - 3:00 PM, and Wednesdays 10:00 - 11:00 AM (You may also make an appointment to meet with me outside of scheduled office hours. Appointments are not necessary for regularly scheduled office hours.)
-* **Dr. Graham's Schedule:** [Link](https://www.dropbox.com/s/zp1bg5stofbrvjk/FALL%202021%20Schedule%20JMG.pdf?dl=0)
+    * **Office Hours:** Mondays 10:00 - 11:00 AM and 2:00 - 3:00 PM, and Wednesdays 10:00 - 11:00 AM (You may also make an appointment to meet with me outside of scheduled office hours. Appointments are not necessary for regularly scheduled office hours.)
+    
+    * **Dr. Graham's Schedule:** [Link](https://www.dropbox.com/s/kvu8a4f1hw7ycmt/Spring%202022%20Schedule%20JMG.pdf?dl=0)
+
 * **Email:** <jason.graham@scranton.edu>
+
 * **Phone:** (570) 941-7491
 
 # Course Materials:
@@ -31,11 +35,11 @@ library(kableExtra)
 
 There is no required text for this course. Students will be provided with detailed notes, handouts, or other references.
 
-### Additional Resources:
+## Additional Resources:
 
 Three very good general references are:
 
-* Nonlinear Dynamics and Chaos 2nd ed. by Steven H. Strogatz, ISBN: 9780813349107. This book covers most of the mathematical techniques we will use throughout the course. 
+* [Nonlinear Dynamics and Chaos 2nd ed.](https://www.stevenstrogatz.com/books/nonlinear-dynamics-and-chaos-with-applications-to-physics-biology-chemistry-and-engineering) by Steven H. Strogatz, ISBN: 9780813349107. This book covers most of the mathematical techniques we will use throughout the course. 
 
 * [Lecture Notes on Mathematical Systems Biology](http://www.sontaglab.org/FTPDIR/systems_biology_notes.pdf) by Eduardo Sontag. 
 
@@ -53,12 +57,21 @@ The prerequisites for this course is MATH 341 *Differential Equations* and MATH 
 
 ## Course Goals
 
+* Students will gain college level knowledge in applied mathematics.
+
+* Students will be able to apply mathematics to address real world problems.
+
+* Students will gain competency in analytical and critical reasoning.
+
+* Students will gain experience in utilizing R to create programs and solve problems as appropriate to the discipline of Biomathematics.
+
+* Students will gain experience using [$\LaTeX$](https://www.latex-project.org/) to prepare and revise written documents as appropriate to the discipline of Biomathematics.
 
 ## Student Learning Objectives and Assessment
 
 ```{r,include=FALSE}
-objectives <- c("Work with data: identify variables as categorical, discrete, or continuous; describe basic techniques of data collection and sampling; explain and interpret basic numerical and graphical data summaries.","Work with probability distributions and random variables at an introductory level.","Explain the concept of sampling distribution.","Conduct and interpret basic statistical inferences.")
-assessments <- c("Concept quizzes, homework, labs, and exams.","Concept quizzes, homework, labs, and exams.","Concept quizzes, homework, labs, and exams.","Concept quizzes, homework, labs, and exams.")
+objectives <- c("Use mathematical tools from calculus, differential equations, and linear algebra to analyze foundational mathematical models arising in the life sciences.","Interpret the meaning of mathematical equations or models representing various biological processes.","Utilize computing tools such as R to analyze and interpret data-driven mathematical models.","Communicate effectively in writing their work in applying the techniques of applied mathematics to problems arising in the life sciences. ")
+assessments <- c("Homework assignments and in-class written exams.","Homework assignments, model reports, and final project.","Homework assignments, model reports, and final project. ","Homework, model reports, and final project consisting of a written paper.")
 slos_assess <- tibble::tibble("After taking this course, the student should be able to:"=objectives,"Methods of assessment"=assessments)
 ```
 
@@ -77,17 +90,26 @@ The student learning objectives of this course are linked with the Mathematics P
 
 - "Demonstrate competence in analytical and critical reasoning."
 
+- "Demonstrate college-level knowledge in applied mathematics."
+
 ### Link with General Education Goals and Objectives
+
+MATH 463 has been designated an EPW Level II course. In order to fulfill the learning objectives for EPW Level II students will be asked to complete two writing intensive assignments. These are 
+
+* a model report assignment, 
+* and a final project. 
+
+Details for these assignments are described below and additional guidelines are posted on thee course learning management system. 
 
 # Course Policies and Procedures:  
 
-## COVID Safety Pertaining to the Course
+## Coronavirus Disease Safety Pertaining to the Course
 
 In consideration of the care and concern for one another and members of our community, unless you are reasonably unable to do so, please take the following steps as a student in this course to mitigate the spread of coronavirus:
 
-1) Do not attend class if you have a confirmed case of coronavirus disease (COVID) until you have fully recovered. 
+1) Do not attend class if you have a confirmed case of coronavirus disease (COVID-19) until you have fully recovered. 
 
-2) Do not attend class if you are experiencing any COVID related symptoms as described at [this link](https://www.cdc.gov/coronavirus/2019-ncov/symptoms-testing/symptoms.html).
+2) Do not attend class if you are experiencing any COVID-19 related symptoms as described at [this link](https://www.cdc.gov/coronavirus/2019-ncov/symptoms-testing/symptoms.html).
 
 3) Do not attend class if you believe that you have been exposed to the coronavirus and might spread it to members of the class. Please visit [this link](https://www.cdc.gov/coronavirus/2019-ncov/transmission/index.html) for information on the transmission of the coronavirus.  
 
@@ -95,13 +117,13 @@ In consideration of the care and concern for one another and members of our comm
 
 ## Attendance
 
-It is important that you attend class regularly. If you must miss class for any reason notify the instructor as soon as possible to make arrangements to quickly make up any content missed by absence.
+Class attendance and active participation in class discussion is strongly encouraged. If absence is necessary, please inform the instructor and develop a plan to make up for missing content as soon as possible.  
 
 ## Assignments and Grading
 
 ### Grade Policy
 
-The course grade will be based on regular concept quizzes (15%), participation (15%), homework (15%), bi-weekly labs (15%), one mid-term exam (20%), and a final exam (20%). 
+The course grade will be based on two in-class exams (totaling 50% and evenly distributed), approximately ten weekly homework assignments (20%), one model report (10%), and a final project (20%).
 
 ### Grade Scale
 
@@ -119,16 +141,31 @@ kbl(grades_df) %>%
 ```
 
 
-
-
-
 ### Homework
 
+There will be weekly homework assignments. Assignments will be posted on the course learning management system and made up of problems relating to or extending the material covered in class discussions.  Working problems is essential to learning the material and doing well on exams. 
 
 Do not underestimate the value (and joy) of carefully working through homework problems.
 
 
 ### Exams
+
+The in-class exams are meant to assess  1) students' understanding of the material covered in class and in homework assignments, 2) students' understanding of the core concepts, 3) students' problem solving abilities, and 4) students' ability to think independently. Exam 1 is scheduled for March 2, and Exam 2 is scheduled for May 4. In writing the tests, I assume that you have been studying the material at least 6 hours per week outside of class. 
+
+### Model Report
+
+As part of the required coursework for *Topics in Biomathematics*, students are required to submit a model report. The goal of this assignment is for students to read, understand, assess, and explain modeling results from a recently published paper in biomathematics. The model report will make up 10% of the course grade. Students must submit at least two drafts of a model report. A model report should be three-five typed pages and prepared using $\LaTeX$.  The first draft is due March 23 and the final draft is due May 4. A set of guidelines for the model report is posted on the course learning management system.
+
+
+### Final Project
+
+It should be recognized that the mathematical techniques developed in class are applicable in broader situations than can be covered in lectures and homework. Thus, students are asked to individually explore a topic in biomathematics beyond what is covered in lecture by means of a final project. Final projects should be an 8-12 page manuscript typed using $\LaTeX$,  and students must submit at least two drafts of their written final projects. The final draft is **due no later than 5:00pm on Wednesday May 18.** All written and presented work must be original, explained in your own words, and use proper citation for works referenced. 
+
+A set of guidelines for the final project is posted on the course learning management system. **You must choose a topic for your final project and submit a one to two paragraph description of your proposed project along with at least two scholarly references to me no later than 3:00pm on March 2.**
+
+### Use of Digital Technology
+
+Work and research in Biomathematics requires professionals in the field to make use of digital technology. The primary uses of digital technology in Biomathematics is for producing and importing data, scientific computing, visualization of data and model-based simulations, and preparing written documents to explain mathematical results. Two of the most commonly used technological tools are R for scientific computing and $\LaTeX$ for written document preparation. Students in this course will be expected to use R, and $\LaTeX$.  R can be installed to any platform via the downloads available [here](https://www.r-project.org/). R is best used with the integrative development environment RStudio which can be installed from [here](https://www.rstudio.com/). 
 
 
 # Course Timeline: 
@@ -136,8 +173,38 @@ Do not underestimate the value (and joy) of carefully working through homework p
 ## Important Dates
 
 ```{r,include=FALSE}
-events <- c("Classes begin","Last day to add classes","Labor day, no classes","Last day for 100% tution refund","Last day to drop with no grade","Last day of class before fall break","Classes resume after fall break","Mid-term exam","Semester Midpoint","Last day to withdraw with W grade","Last day of class before Thanksgiving break","Classes resume after Thanksgiving","Last day of  class","Final exams begin","Final exams end")
-event_date <- c("Monday, August 30","Friday, September 3","Monday, September 6","Wednesday, September 8","Wednesday September 29","Friday, October 8","Wednesday, October 13","Thursday, October 14","Friday, October 15","Friday, November 12","Tuesday, November 23","Monday, November 29","Monday, December 13","Tuesday, December 14","Saturday, December 18")
+events <- c("Classes begin",
+            "Last day to add classes",
+            "Last day for 100% tution refund",
+            "Last day to drop with no grade",
+            "Exam 1",
+            "Semester Midpoint",
+            "Last day of class before spring break",
+            "Classes resume after spring break",
+            "Last day to withdraw with W grade",
+            "Last day of class before Easter break",
+            "Classes resume after Easter",
+            "Exam 2", 
+            "Last day of class",
+            "Final exams begin",
+            "Final exams end")
+
+event_date <- c("Wednesday, January 26",
+                "Tuesday, February 1",
+                "Friday, February 4",
+                "Friday February 25",
+                "Wednesday, March 2",
+                "Friday, March 11",
+                "Friday, March 11",
+                "Monday, March 21",
+                "Wednesday, April 13",
+                "Wednesday, April 13",
+                "Tuesday, April 19",
+                "Wednesday, May 4",
+                "Friday, May 13",
+                "Monday, May 16",
+                "Friday, May 20")
+
 important_dates_df <- tibble::tibble("Event"=events,"Date"=event_date)
 ```
 
@@ -155,16 +222,18 @@ kbl(important_dates_df) %>%
 - Week 3: 
 - Week 4: 
 - Week 5: 
-- Week 6: 
+- Week 6: Exam 1
 - Week 7: 
-- Week 8: 
+- Week 8: Spring Break 
 - Week 9: 
 - Week 10: 
 - Week 11: 
 - Week 12: 
 - Week 13: 
 - Week 14: 
-- Week 15: 
+- Week 15: Exam 2
+- Week 16: Additional Topics 
+- Week 17: Finals Week 
 
 # University Resources for Students:
 
