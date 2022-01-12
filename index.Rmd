@@ -3,6 +3,7 @@ title: "Topics in Biomathematics"
 description: |
   Welcome to the website for MATH 463 Topics in Biomathematics!
 site: distill::distill_website
+creative_commons: CC BY-NC
 ---
 
 ```{r setup, include=FALSE}
@@ -12,4 +13,14 @@ knitr::opts_chunk$set(echo = FALSE)
 # https://rstudio.github.io/distill/website.html
 
 ```
+
+## What is MATH 463?
+
+MATH 463 *Topics in Biomathematics*, is a course taught at the [University of Scranton](https://www.scranton.edu/). See the course syllabus for more information. This site is a home for many of the course materials developed by [Jason M. Graham](https://sites.google.com/site/jasonmgrahamus/) in teaching MATH 463 since 2013. 
+
+## What is Biomathematics? 
+
+Biomathematics is concerned with the use of mathematical methods (*e.g.*, linear algebra, differential equations, dynamical systems, and probability theory) to understand phenomenon in the life sciences, it is part of the larger field of [mathematical and theoretical biology](https://en.wikipedia.org/wiki/Mathematical_and_theoretical_biology#:~:text=Mathematical%20and%20theoretical%20biology%20is,biology%20which%20deals%20with%20the). Mathematical and theoretical biology provide a solid foundation for computational and quantitative approaches to investigations in biology and medicine.
+
+
 
