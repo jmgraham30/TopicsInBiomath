@@ -1,0 +1,117 @@
+---
+title: "Course Notes 1"
+description: |
+  Introduction to Biomathematics
+author:
+  - name: Jason M. Graham 
+    url: https://topicsinbiomath.netlify.app/
+    affiliation: University of Scranton 
+    affiliation_url: https://sites.google.com/site/jasonmgrahamus/
+date: "`r Sys.Date()`"
+output: 
+  distill::distill_article:
+    toc: true
+    toc_depth: 2
+creative_commons: CC BY-NC
+bibliography: topics_in_biomath.bib
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+# Topics in Biomathematics
+
+Welcome to *Topics in Biomathematics*!  The set of notes to which this document belongs have been developed from a course, MATH 463 *Topics in Biomathematics*, taught at the [University of Scranton](https://www.scranton.edu/) since 2013. The purpose of this course is to provide students having a background in linear algebra and differential equations with a grounding in mathematical modeling for biological phenomenon. We hope that these notes may also be useful for a somewhat wider audience of individuals that are interested in mathematical or theoretical biology, or areas of applied mathematics that consider scientific problems from biology or medicine. 
+
+## Lecture Notes
+
+There are several reasons for the existence of these notes. The principal ones are
+
+1) to provide a reference that strikes a desired balance between the subjects of mathematics and science, 
+
+2) to provide a reference that includes discussion of some important topics from mathematical modeling that are relevant in contexts more general than just mathematical biology, 
+
+3) to provide a reference that helps to bridge the gap that is necessary to close in order to begin reading the research literature, and 
+
+4) to provide a reference that encourages good work flow practices such as integrating analysis, computing, and the written presentation of results.  
+
+## Course Projects
+
+When teaching MATH 463 *Topics in Biomathematics*, an important component of the course is student projects. There are two different types of projects that students in *Topics in Biomathematics* are asked to complete: model reports, and a final independent project. The model reports are meant for students to get early exposure to reading research literature that involves the development or application of mathematical models in biology and medicine. The idea is for students to get experience with the "translation" process of going from a real world biological problem to a mathematical abstraction and back again. Furthermore, students are asked to think and write critically about a mathematical model published in a recent research article. One might reasonably view the model report assignment as asking students to write a peer-review referee report for a manuscript that has already been reviewed and published. 
+
+The final independent project is meant as a capstone to the course. It is not the expectation that every student will do an entirely original research project that involves developing a novel mathematical model from scratch, although in practice this does occur fairly often. However, the final project requires a more substantial synthesis of scientific and mathematical knowledge and understanding than the model report or other assignments such as homework or written exams.     
+
+This is all meant to highlight the fact that throughout these set of lecture notes, we have tried to provide pointers to current or at least fairly recent research that is reasonably accessible to the average student in MATH 463 in order to facilitate the model report and final independent projects. Every time we discuss a topic in the notes, we follow the discussion up with specific references where students may go to in order to learn more, acquire project ideas, and see what else is out there regarding mathematical and theoretical biology. 
+
+## The Use of R
+
+Throughout these notes and the *Topics in Biomathematics* course we make regular use of the [R](https://www.r-project.org/) software and ecosystem for computing. It is impossible to do very much interesting work in science and applied mathematics, including mathematical and theoretical biology, without computation. For the purposes of this course, we will need to employ numerical methods for solving equations, optimization, and linear algebra. In addition, we will find it very helpful to be able to create visualizations that are simple yet professional in appearance. The R environment and language possesses several features that make it highly appropriate for all of these purposes. Among it's many advantages, R is also freely available.    
+
+In addition to R, we also use [RStudio](https://rstudio.com/), an integrated development environment that enhances the use of R. Using RStudio makes it possible to access the *Topics in Biomathematics* lecture notes in an interactive fashion because all of the notes are written as [R Markdown notebooks](https://rmarkdown.rstudio.com/). This allows us to integrate text, equations, figures, R code, plots, etc. and to compile the result as both html and pdf files. On top of that, students will have a template they can follow in order to write and present their work for the model report and independent final projects.   
+
+# What is Biomathematics? 
+
+Biomathematics is concerned with the use of mathematical methods (*e.g.*, linear algebra, differential equations, dynamical systems, and probability theory) to understand phenomenon in the life sciences, it is part of the larger field of [mathematical and theoretical biology](https://en.wikipedia.org/wiki/Mathematical_and_theoretical_biology#:~:text=Mathematical%20and%20theoretical%20biology%20is,biology%20which%20deals%20with%20the). Mathematical and theoretical biology provide a solid foundation for computational and quantitative approaches to investigations in biology and medicine. The general work flow in biomathematics proceeds as follows:
+
+1) Start with some real world phenomenon of interest from the life sciences.
+2) Abstract from the real world in order to highlight essential features, mechanisms, processes, etc. with the goal of answering some specific question or solving some particular problem. This typically involves making some set of simplifying assumptions about the biological world. 
+3) Represent your abstraction from step 2 mathematically, say for example as a system of equations. This typically involves the construction of a [mathematical model](https://en.wikipedia.org/wiki/Mathematical_model).
+4) Apply rigorous techniques from applied mathematics or scientific computing in order to understand the mathematical representation in step 3 with the goal of using it to solve a problem or answer a question. 
+5) Place your results from step 4 in the context of the original real world biological phenomenon. 
+
+
+It may be necessary to repeat steps 2-5 multiple times with refinements at each iteration in order for your efforts to yield something that is truly useful for addressing a scientific question. 
+
+Biomathematics, which for the purposes of this course we consider synonymous with mathematical biology, emerges as a distinct field due to the fact that carrying out the previously described steps has resulted in the (continuing) development of some common methods and terminology.  Furthermore, we carefully distinguish biomathematics from the field of [biostatistics](https://en.wikipedia.org/wiki/Biostatistics#:~:text=Biostatistics%20are%20the%20development%20and,the%20interpretation%20of%20the%20results.). While biomathematics certainly involves the use of probability and statistics, these areas play a different role within biomathematical investigations than they do in biostatistical investigations. Additionally, the relationship between theory and experiment is different in biomathematics than in biostatistics. 
+
+In the next lecture, we will spend some more time fleshing out the steps of the basic biomathematical workflow. From there, we will begin to examine some general principles related to the construction of mathematical models. That is, we will study those ideas from mathematical modeling that are essential for biomathematics. Our goal is to get to a point where developing a mathematical model and using it to answer some biological question does not seem like an impossible task.    
+
+
+# Further Reading
+
+Throughout this course, you are encouraged to look at additional references for the purposes of seeing the perspectives of others and for learning about topics and methods that are not covered explicitly in lectures or assigned reading. The following sections provide an overview of some additional texts you might want to examine at some point. 
+
+## Basic Texts in Biomathematics
+
+Several established textbooks in biomathematics are widely available. See for example, [@allenIntroductionMathematicalBiology2007; @brittonEssentialMathematicalBiology2003; @devriesCourseMathematicalBiology2006; @edelstein-keshetMathematicalModelsBiology2005;@friedmanMathematicalModelingBiological2014; @murrayMathematicalBiology2002; @murrayMathematicalBiologyII2003]. The two-volume text by Murray, [ @murrayMathematicalBiology2002; @murrayMathematicalBiologyII2003], is considered something of a standard, the books cover a variety of different topics well beyond what we can, but assume a greater mathematical background than we do in this course.  There are also several nice sets of lecture notes that are available online for free, such as those by [Byrne](https://courses.maths.ox.ac.uk/node/view_material/1397), [Chasnov](https://www.math.ust.hk/~machas/mathematical-biology.pdf), [Goldstein and Pedley](https://www.damtp.cam.ac.uk/user/phh/mathbio.html), [Ingalls](https://www.math.uwaterloo.ca/~bingalls/MMSB/Notes.pdf), and [Sontag](https://www.math.rutgers.edu/docman-lister/math-main/academics/undergraduate/interdisciplinary-majors/biomathematics-interdisciplinary-major/2198-lecture-notes-on-mathematical-systems-biology/file).  
+
+
+## Mathematical Population Dynamics
+
+The earliest motivations for the development of biomathematics comes from [theoretical ecology](https://en.wikipedia.org/wiki/Theoretical_ecology#:~:text=Theoretical%20ecology%20is%20the%20scientific,simulations%2C%20and%20advanced%20data%20analysis.) and [population dynamics](https://en.wikipedia.org/wiki/Population_dynamics). A sub-area of these fields is [mathematical epidemiology](https://en.wikipedia.org/wiki/Mathematical_modelling_of_infectious_disease). Excellent references for learning more about these fields are provided by  
+[@brauerMathematicalModelsPopulation2012; @kotElementsMathematicalEcology2001]. 
+
+## Mathematical Physiology
+
+[Mathematical physiology](https://en.wikipedia.org/wiki/Mathematical_physiology) is another large sub-discipline within biomathematics. A standard reference is provided by
+[@keenerMathematicalPhysiologyVol2009; @keenerMathematicalPhysiologyVol2009a]. Note that mathematical physiology intersects with [biophysics](https://en.wikipedia.org/wiki/Biophysics#:~:text=Biophysics%20is%20an%20interdisciplinary%20science,molecular%20to%20organismic%20and%20populations.) and [biochemistry](https://en.wikipedia.org/wiki/Biochemistry).
+
+### Neuronal Dynamics
+
+An important and well-developed topic in mathematical physiology and biophysics is [mathematical and computational neuroscience](https://en.wikipedia.org/wiki/Computational_neuroscience). Excellent references for this field are
+[@borgersIntroductionModelingNeuronal2017; @ermentroutMathematicalFoundationsNeuroscience2010]. You are also encouraged to watch the videos from two conference talks on [Brain Control](https://www.pathlms.com/siam/courses/1288/sections/1425/video_presentations/11676) and [Modeling Large Scale Brain Activity](https://www.pathlms.com/siam/courses/1288/sections/1411/video_presentations/11633). 
+
+## Mathematical Techniques and Computing 
+
+In this course, we will primarily use techniques from [linear algebra](https://en.wikipedia.org/wiki/Linear_algebra#:~:text=Linear%20algebra%20is%20the%20branch,almost%20all%20areas%20of%20mathematics.) and [ordinary differential equations](https://en.wikipedia.org/wiki/Ordinary_differential_equation). In much of our study of mathematical models arising in biomathematics, we will be equally interested in qualitative and quantitatve results. The area of applied mathematics known as [dynamical systems theory](https://en.wikipedia.org/wiki/Dynamical_systems_theory) provides the mathematical techniques for a qualitative analysis of mathematical models. During the course, we will need to develop and employ some techniques for differential equations that may not be covered in a first course in ODEs. The following two references may be very helpful in learning more about applied dynamical systems and differential equations as they relate to biomathematics [@jonesDifferentialEquationsMathematical2010; @strogatzNonlinearDynamicsChaos2015]. 
+
+When it comes to both the quantitative and qualitative analysis of differential equation models, it is very helpful to do so with the aid of a computer. Both the [R](https://www.r-project.org/) language for statistical computing and the [Julia](https://julialang.org/) language for scientific computing are excellent for our purposes. Each of these has an associated ecosystem with packages that help make mathematical modeling and analysis easier. In this course, we primarily use R because of the [phaseR](https://github.com/mjg211/phaseR) package for the phase-line and phase-plane analysis of one- and two-dimensional systems of differential equations. Furthermore, the notes for this course are written using the [RStudio](https://rstudio.com/) integrated development environment associated with R. Thus, using R and RStudio allows the reader to go through these notes interactively to enhance the learning experience.     
+
+## Approaches not Covered in Class
+
+There are many different classes of mathematical models and a variety of different approaches to biomathematics. Notably absent from the main discussion in this course is [stochastic models](https://en.wikipedia.org/wiki/Stochastic_process) (an excellent reference with applications in biology is provided by [@allenIntroductionStochasticProcesses2011])  and [game theory](https://en.wikipedia.org/wiki/Game_theory). 
+
+## Research in Biomathematics
+
+Biomathematics and related fields are active areas of research in which there are new peer-reviewed articles appearing on a daily basis. The [Society for Mathematical Biology](https://www.smb.org/) is a great source for information on what is happening in the field of biomathematcs. If you are interested to see what is going on at the cutting edge, you might also want to look at some of the following links:
+
+1) [Journal of Mathematical Biology](https://www.springer.com/journal/285)
+2) [Journal of Theoretical Biology](https://www.journals.elsevier.com/journal-of-theoretical-biology)
+3) [Bulletin of Mathematical Biology](https://www.springer.com/journal/11538)
+4) [Mathematical Biosciences and Engineering](http://www.aimspress.com/journal/MBE)
+5) [PLos Computational Biology](https://journals.plos.org/ploscompbiol/)
+6) [arXiv on Quantitative Biology](https://arxiv.org/archive/q-bio)
+
+
+
