@@ -18,11 +18,109 @@ bibliography: topics_in_biomath.bib
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = FALSE)
+library(ggplot2)
+library(ggformula)
+library(deSolve)
+library(phaseR)
 ```
 
-Distill is a publication format for scientific and technical writing, native to the web. 
+# Computation in Biomathematics
 
-Learn more about using Distill for R Markdown at <https://rstudio.github.io/distill>.
+As in other scientific disciplines, numerical and scientific computing play a central role in 
+biomathematics. For the purposes of *Topics in Biomathematics*, we are mainly interested in the numerical solution of mathematical problems, *e.g.,* ordinary differential equations, and scientific visualization, *e.g.,* plotting functions. Numerous computing platforms or environments are used in biomathematics. Some notable options include
+
+* [MATLAB](https://www.mathworks.com/products/matlab.html) or [Octave](https://www.gnu.org/software/octave/index), 
+
+* [Maple](https://www.maplesoft.com/), 
+
+* [Python](https://www.python.org/), 
+
+* [XPPAUT](http://www.math.pitt.edu/~bard/xpp/xpp.html), 
+
+* [R](https://www.r-project.org/), and
+
+* [Julia](https://julialang.org/). 
+
+
+The purpose of this document is to provide an introduction to parts of the R computing ecosystem that are particularly useful for biomathematics. 
+
+# What is R? 
+
+[R](https://en.wikipedia.org/wiki/R_(programming_language)) is an open-source statistical computing platform that was developed as an alternative to proprietary statistical software. In the years since it's initial release, R has become immensely popular and a vast ecosystem of open-source software has developed around R that greatly enhances it's utility in science.   
+
+# Why R?
+
+
+Given many other options, why do we focus on R as the computing tool of choice in *Topics in Biomathematics*? The principal reasons are:
+
+1) R is free but also well-developed and supported. 
+
+2) Even though it was developed for statistical applications, R works well for numerical computing of the sort that is useful in biomathematics. 
+
+3) The [RStudio](https://www.rstudio.com/) integrated development environment (IDE) facilitates not only coding in R but also presenting and sharing results so as to align nicely with the course objective "Communicate effectively in writing their work in applying the techniques of applied mathematics to problems arising in the life sciences.". 
+
+4) Many biologists "speak" R and it is very helpful to have a common language when collaborating on interdisciplinary problems. 
+
+
+# An Introduction to R
+
+In what follows, we illustrate some R commands that will be used commonly throughout the *Topics in Biomathematics* course. This document is by no means comprehensive. The best ways to learn more are
+
+1) the [swirl](https://swirlstats.com/) package, 
+
+2) searching the web for specific topics. 
+
+
+## Installing R and RStudio
+
+R and RStudio are both free and easy to install. The videos below can serve as a helpful guide if you want to use them. Alternatively, you can access R and RStudio through a web browser without direct installation via [RStudio Cloud](https://rstudio.cloud/). This does require an account but is free to set up.
+
+### Installation on Mac
+
+Read [this article](https://macpaw.com/how-to/download-r-on-mac?campaign=cmmx_search_dsa_us_en&ci=10147083349&adgroupid=123618298718&adpos=&ck=&targetid=dsa-1280095891351&match=&gnetwork=s&creative=523598858635&placement=&placecat=&accname=cmm&gclid=CjwKCAiA55mPBhBOEiwANmzoQjy_N3sWjtX395AVPNBDvJVDsd2mKXLboj3XikILm3OcCx7edQqcVhoC5d8QAvD_BwE) or watch this video:
+
+```{r mac_install,echo=FALSE}
+vembedr::embed_url("https://youtu.be/AEebOXiMyyI") %>%
+  vembedr::use_align("center")
+```
+
+
+### Installation on PC
+
+Read [this article](https://medium.com/@GalarnykMichael/install-r-and-rstudio-on-windows-5f503f708027) or watch this video:
+
+```{r pc_install,echo=FALSE}
+vembedr::embed_url("https://youtu.be/GAGUDL-4aVw") %>%
+  vembedr::use_align("center")
+```
+
+## R as a Calculator
+
+
+
+
+## Data in R
+
+
+
+
+## R Packages
+
+
+
+
+## Visualization in R
+
+
+
+
+## Numerical Solution of Differential Equations in R
+
+
+
+
+## Phase-Plane Methods in R
+
 
 
 
