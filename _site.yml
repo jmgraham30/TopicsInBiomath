@@ -15,6 +15,8 @@ navbar:
         href: notes001.html
       - text: "Notes 2"
         href: notes002.html
+      - text: "Notes 3"
+        href: notes003.html
     - icon: fa fa-github
       href: https://github.com/jmgraham30
 output: distill::distill_article

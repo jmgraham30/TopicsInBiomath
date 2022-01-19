@@ -1,0 +1,92 @@
+---
+title: "Course Notes 3"
+description: |
+  Introduction to Mathematical Modeling in Biomathematics
+author:
+  - name: Jason M. Graham 
+    url: https://topicsinbiomath.netlify.app/
+    affiliation: University of Scranton 
+    affiliation_url: https://sites.google.com/site/jasonmgrahamus/
+date: "`r Sys.Date()`"
+output: 
+  distill::distill_article:
+    toc: true
+    toc_depth: 2
+creative_commons: CC BY-NC
+bibliography: topics_in_biomath.bib
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+library(deSolve)
+library(tidyverse)
+library(ggformula)
+library(patchwork)
+theme_set(theme_light())
+```
+
+# Overview
+
+At this point, we have introduced the basic work flow that is often followed in the practice of biomathematics. Key components of the biomathematics work flow is the construction of a mathematical model and the use of the model to try to solve a problem or answer a question stemming from the life sciences. Mathematical modeling is the process of constructing or deriving a mathematical model. But what exactly is a mathematical model? We beleive that it is not very easy to answer this question in a way that is unique, definitive, and concise. However, we hope that as the course proceeds you will over time develop an internal understanding of what a mathematical model is and even gain some ability with building mathematical models in the context of biomathematics. 
+
+# What is a Mathematical Model? 
+
+Before we begin to address the question of what is a mathematical model, let's spend some time focusing just on not-necessarily-mathematical models. Work in science and engineering often proceeds by employing models. What is a model? Consider the following quotation:
+
+> A model is a rendition of a reality which is often too difficult or impossible to handle directly. A model is always a simplification, and a good model is one that captures the essential features of reality, leaving the unessential out [@calvettiComputationalMathematicalModeling2013]. 
+
+A great example of a scientific model is the [Bohr model](https://en.wikipedia.org/wiki/Bohr_model) for the atom. This model posits that an atom is made up of a small dense nucleus surrounded by orbiting electrons. This is a model because it does not include many atomic and nuclear details. It is a useful model because it leads to an explanation of certain chemical properties of atoms that could not be derived prior to the use of the Bohr model. Many biologists use [model organisms](https://en.wikipedia.org/wiki/Model_organism) to investigate the biological world. For example, people interested in understanding the evolution of social behavior study specific species of ants or bees. These insects are used because they are relatively easy to keep in a lab or to observe in nature and are also easy to manipulate experimentally. The use of [animal models](https://en.wikipedia.org/wiki/Animal_disease_model) is also widespread in the study of disease and drug therapies.  
+
+A mathematical model plays a similar role to models in the more general sense that we just described, but as you might imagine mathematical models are formulated and implemented mathematically. In the last lecture, we very briefly indicated two mathematical models. One for the growth of a population and another for certain cellular and molecular interactions that occur during inflammation. Let's look at another example of a mathematical model, this time one coming from physics that is likely familiar to you from a course in ordinary differential equations. 
+
+Physics and mechanics in particular is often interested in the motion of a point particle. (Notice that point particles are an abstraction from reality.) Newton's laws tell us, among other things, that the sum of all forces acting on a mass is proportional to the acceleration of the object. Furthermore, the constant of proportionality is the mass. In notation, we have that $F=ma$. Now, while $F=ma$ is an equation and you could reasonably argue that it is a "mathematical model" for how the physical world works, $F=ma$ is not really representative of what we mean by a mathematical model in most instances. The reason is that it is a general statement, a theory and not a reference to something specific. However, we can use $F=ma$ to construct mathematical models in more specific situations.      
+
+Suppose for example that we are concerned with the motion of a particle of mass $m$ attached to a spring. We can model the total force that is applied to the mass by the spring via the equation $F=-kx$. This says that the force due to the spring is linearly proportional to the displacement of the mass from it's equilibrium (resting) position. (Again, this is an abstraction from reality.) The constant of proportionality $k$ is called the spring constant. It encodes physical properties of a spring such as its stiffness. Taken together with $F=ma$ and using that acceleration is the second derivative of displacement we arrive at a **mathematical model**
+
+$\frac{d^2 x}{dt^2} = -\frac{k}{m}x.$
+
+This is a model because it is based on several abstractions from reality and ignores some details such as more fine-grained details about the material properties of real world springs. It also assumes an ideal situation where there is no friction. 
+
+As you have seen in a differential equations course, or by using methods we will discuss later, it can be deduced based on the form of the equation $\frac{d^2 x}{dt^2} = -\frac{k}{m}x$ that such a mass will oscillate with a fixed period and frequency determined by the values for $k$ and $m$. This leads us to another important point. There are several levels of "variable" involved in the model $\frac{d^2 x}{dt^2} = -\frac{k}{m}x$. There is the independent variable $t$ for time, the dependent variable for the unknown displacement $x$ (the quantity we are ultimately most interested in), and there are the **parameters** $k$ and $m$. 
+
+We will see that most mathematical models involve parameters and it will become very important to understand how the values of parameters influence the results obtained from the model. Also very important is to note that variables and parameters correspond to quantities and thus have some set of units associated with them. We will spend a lot of time talking about why units of measurement are important but take note now that a mathematical model can not make sense if there is an inconsistency between units for parameters or variables. 
+
+The last example provides some insight into mathematical modeling, that is, the process of constructing or deriving a model. We begin with an abstraction from reality that represents those parts of the world in which we are most interested in, then we specify quantities that we want to relate, establish mathematical notation, and finally write down an equation that becomes our mathematical model. While our last example was very simple (too simple), it still serves to highlight the modeling process. The next section elaborates on this.
+
+
+# Mathematical Modeling 
+
+It is important to realize two facts about mathematical modeling, especially in the context of biomathematics, from the start:
+
+1) Mathematical modeling is as much art as it is science. The point is that mathematical modeling is not routine or algorithmic. Successful modeling requires creativity and intuition developed through experience. 
+
+2) Mathematical modeling will almost certainly involve repeated refinements. Unless there is a very strong reason to do otherwise, it's best to start with the simplest possible reasonable model, even at the risk of oversimplification. If the model produces incorrect or inaccurate results relative to the problem of interest, then the model can be revised in order to fix what is glaringly wrong. 
+
+In the next lecture, we will begin to address specific techniques that can help one to get started with mathematical modeling. Here we will provide a conceptual outline of the modeling process in the form of a series of steps that one typically carries out during the course of the modeling process.
+
+1) Formulate the question or state your problem. Explicitly write down assumptions and what is known about the system that you want to develop a model for. 
+
+2) Identify key quantities and define variables and parameters of interest. At this stage you should take careful note of the units of measurement that are associated with all of the model variables and parameters.
+
+3) Develop a qualitative description of your model. Use diagrams or word equations to describe the relationships between variables. In the next lecture we will discuss compartment modeling which is a commonly used method for organizing the processes and interactions of variables in a way that helps one to more easily write down model equations. 
+4) Write down model equations corresponding to the qualitative description in the previous step. Perform [dimensional analysis](https://en.wikipedia.org/wiki/Dimensional_analysis) (covered in detail later) to make sure that there are no inconsistencies in your equations regarding units. At this stage it is very helpful to construct a table that lists all of the variables and parameters appearing in the model. The table should include the units of measurement for all of the variables and parameters as well as any specific parameters values that are known from experiment or the existing literature. 
+
+5) [Nondimensionalize](https://en.wikipedia.org/wiki/Nondimensionalization) the model. Later we will cover nondimensionalization in detail. This is a process founded on the [Buckinghma $\pi$ theorem](https://en.wikipedia.org/wiki/Buckingham_%CF%80_theorem) in which variables and parameters are rescaled to remove units. This process is extremely important as it often simplifies the model by reducing the number of parameters and pinpoints the most significant parameters (or parameter combinations) in the model.
+
+At this stage you will be ready to analyze or implement your model in order to obtain results such as qualitative or quantitative predictions. The next thing to do is determine if the model results are consistent with known information or experimental results. You have to do something to decide if your model is successful or should be revised in order to address your starting question or solve the problem you have posed. 
+
+With this overview in hand, the next lecture will cover compartment modeling and we will start to see concrete examples of mathematical models and the modeling process. 
+
+# Further Reading
+
+For general texts on mathematical modeling we recommend [@barnesMathematicalModellingCase2015; @calvettiComputationalMathematicalModeling2013; @witelskiMethodsMathematicalModelling2015]. Both [@barnesMathematicalModellingCase2015; @calvettiComputationalMathematicalModeling2013] provide good coverage of [compartment modeling](https://en.wikipedia.org/wiki/Multi-compartment_model#:~:text=A%20multi%2Dcompartment%20model%20is,entities%20being%20modelled%20are%20equivalent.). [Dimensional analysis](https://en.wikipedia.org/wiki/Dimensional_analysis) is covered well in  [@calvettiComputationalMathematicalModeling2013; @witelskiMethodsMathematicalModelling2015]. 
+
+A nice recent reference on mathematical modeling of biological systems is the chapter [@ayatiConsiderationsModelingProteus2019], which discusses modeling approaches in the context of microbial ecology. 
+
+
+
+
+
+
+
+

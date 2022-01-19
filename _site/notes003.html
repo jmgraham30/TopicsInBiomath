@@ -85,32 +85,62 @@ code span.vs { color: #20794d; } /* VerbatimString */
 code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 </style>
 
+<style>
+  div.csl-bib-body { }
+  div.csl-entry {
+    clear: both;
+    }
+  .hanging div.csl-entry {
+    margin-left:2em;
+    text-indent:-2em;
+  }
+  div.csl-left-margin {
+    min-width:2em;
+    float:left;
+  }
+  div.csl-right-inline {
+    margin-left:2em;
+    padding-left:1em;
+  }
+  div.csl-indent {
+    margin-left: 2em;
+  }
+</style>
 
   <!--radix_placeholder_meta_tags-->
-  <title>Topics in Biomathematics: MATH 463 Topics In Biomathematics</title>
+  <title>Topics in Biomathematics: Course Notes 3</title>
 
-  <meta property="description" itemprop="description" content="Course Syllabus"/>
+  <meta property="description" itemprop="description" content="Introduction to Mathematical Modeling in Biomathematics"/>
 
   <link rel="license" href="https://creativecommons.org/licenses/by-nc/4.0/"/>
 
+  <!--  https://schema.org/Article -->
+  <meta property="article:published" itemprop="datePublished" content="2022-01-19"/>
+  <meta property="article:created" itemprop="dateCreated" content="2022-01-19"/>
+  <meta name="article:author" content="Jason M. Graham"/>
 
   <!--  https://developers.facebook.com/docs/sharing/webmasters#markup -->
-  <meta property="og:title" content="Topics in Biomathematics: MATH 463 Topics In Biomathematics"/>
+  <meta property="og:title" content="Topics in Biomathematics: Course Notes 3"/>
   <meta property="og:type" content="article"/>
-  <meta property="og:description" content="Course Syllabus"/>
+  <meta property="og:description" content="Introduction to Mathematical Modeling in Biomathematics"/>
   <meta property="og:locale" content="en_US"/>
   <meta property="og:site_name" content="Topics in Biomathematics"/>
 
   <!--  https://dev.twitter.com/cards/types/summary -->
   <meta property="twitter:card" content="summary"/>
-  <meta property="twitter:title" content="Topics in Biomathematics: MATH 463 Topics In Biomathematics"/>
-  <meta property="twitter:description" content="Course Syllabus"/>
+  <meta property="twitter:title" content="Topics in Biomathematics: Course Notes 3"/>
+  <meta property="twitter:description" content="Introduction to Mathematical Modeling in Biomathematics"/>
 
   <!--/radix_placeholder_meta_tags-->
+  
+  <meta name="citation_reference" content="citation_title=Considerations for Modeling Proteus mirabilis Swarming;citation_publication_date=2019;citation_publisher=Springer;citation_author=Bruce P. Ayati"/>
+  <meta name="citation_reference" content="citation_title=Mathematical modelling with case studies;citation_publication_date=2015;citation_publisher=CRC Press, Boca Raton, FL;citation_author=B. Barnes;citation_author=G. R. Fulford"/>
+  <meta name="citation_reference" content="citation_title=Computational mathematical modeling;citation_publication_date=2013;citation_publisher=Society for Industrial and Applied Mathematics (SIAM), Philadelphia, PA;citation_author=Daniela Calvetti;citation_author=Erkki Somersalo"/>
+  <meta name="citation_reference" content="citation_title=Methods of mathematical modelling;citation_publication_date=2015;citation_publisher=Springer;citation_author=Thomas Witelski;citation_author=Mark Bowen"/>
   <!--radix_placeholder_rmarkdown_metadata-->
 
   <script type="text/json" id="radix-rmarkdown-metadata">
-  {"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["title","description","output","creative_commons"]}},"value":[{"type":"character","attributes":{},"value":["MATH 463 Topics In Biomathematics"]},{"type":"character","attributes":{},"value":["Course Syllabus\n"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["distill::distill_article"]}},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["toc","toc_float","toc_depth"]}},"value":[{"type":"logical","attributes":{},"value":[true]},{"type":"logical","attributes":{},"value":[true]},{"type":"integer","attributes":{},"value":[2]}]}]},{"type":"character","attributes":{},"value":["CC BY-NC"]}]}
+  {"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["title","description","author","date","output","creative_commons","bibliography"]}},"value":[{"type":"character","attributes":{},"value":["Course Notes 3"]},{"type":"character","attributes":{},"value":["Introduction to Mathematical Modeling in Biomathematics\n"]},{"type":"list","attributes":{},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","url","affiliation","affiliation_url"]}},"value":[{"type":"character","attributes":{},"value":["Jason M. Graham"]},{"type":"character","attributes":{},"value":["https://topicsinbiomath.netlify.app/"]},{"type":"character","attributes":{},"value":["University of Scranton"]},{"type":"character","attributes":{},"value":["https://sites.google.com/site/jasonmgrahamus/"]}]}]},{"type":"character","attributes":{},"value":["2022-01-19"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["distill::distill_article"]}},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["toc","toc_depth"]}},"value":[{"type":"logical","attributes":{},"value":[true]},{"type":"integer","attributes":{},"value":[2]}]}]},{"type":"character","attributes":{},"value":["CC BY-NC"]},{"type":"character","attributes":{},"value":["topics_in_biomath.bib"]}]}
   </script>
   <!--/radix_placeholder_rmarkdown_metadata-->
   <!--radix_placeholder_navigation_in_header-->
@@ -2039,8 +2069,6 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 
   <!--/radix_placeholder_distill-->
   <script src="site_libs/header-attrs-2.11/header-attrs.js"></script>
-  <script src="site_libs/kePrint-0.0.1/kePrint.js"></script>
-  <link href="site_libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
   <script src="site_libs/popper-2.6.0/popper.min.js"></script>
   <link href="site_libs/tippy-6.2.7/tippy.css" rel="stylesheet" />
   <link href="site_libs/tippy-6.2.7/tippy-light-border.css" rel="stylesheet" />
@@ -2060,7 +2088,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <!--radix_placeholder_front_matter-->
 
 <script id="distill-front-matter" type="text/json">
-{"title":"MATH 463 Topics In Biomathematics","description":"Course Syllabus","authors":[]}
+{"title":"Course Notes 3","description":"Introduction to Mathematical Modeling in Biomathematics","authors":[{"author":"Jason M. Graham","authorURL":"https://topicsinbiomath.netlify.app/","affiliation":"University of Scranton","affiliationURL":"https://sites.google.com/site/jasonmgrahamus/","orcidID":""}],"publishedDate":"2022-01-19T00:00:00.000-05:00","citationText":"Graham, 2022"}
 </script>
 
 <!--/radix_placeholder_front_matter-->
@@ -2097,463 +2125,80 @@ Notes
 <!--/radix_placeholder_site_before_body-->
 
 <div class="d-title">
-<h1>MATH 463 Topics In Biomathematics</h1>
+<h1>Course Notes 3</h1>
 <!--radix_placeholder_categories-->
 <!--/radix_placeholder_categories-->
-<p><p>Course Syllabus</p></p>
+<p><p>Introduction to Mathematical Modeling in Biomathematics</p></p>
 </div>
 
+<div class="d-byline">
+  Jason M. Graham <a href="https://topicsinbiomath.netlify.app/" class="uri">https://topicsinbiomath.netlify.app/</a> (University of Scranton)<a href="https://sites.google.com/site/jasonmgrahamus/" class="uri">https://sites.google.com/site/jasonmgrahamus/</a>
+  
+<br/>2022-01-19
+</div>
 
 <div class="d-article">
 <div class="d-contents d-contents-float">
 <nav class="l-text toc figcaption" id="TOC">
 <h3>Contents</h3>
 <ul>
-<li><a href="#instructor-information">Instructor Information</a></li>
-<li><a href="#course-materials">Course Materials:</a>
-<ul>
-<li><a href="#required-textbook">Required Textbook</a></li>
-<li><a href="#additional-resources">Additional Resources</a></li>
-</ul></li>
-<li><a href="#course-information">Course Information:</a>
-<ul>
-<li><a href="#course-description">Course Description</a></li>
-<li><a href="#prerequisites">Prerequisites</a></li>
-<li><a href="#course-goals">Course Goals</a></li>
-<li><a href="#student-learning-objectives-and-assessment">Student Learning Objectives and Assessment</a></li>
-</ul></li>
-<li><a href="#course-policies-and-procedures">Course Policies and Procedures:</a>
-<ul>
-<li><a href="#coronavirus-disease-safety-pertaining-to-the-course">Coronavirus Disease Safety Pertaining to the Course</a></li>
-<li><a href="#attendance">Attendance</a></li>
-<li><a href="#assignments-and-grading">Assignments and Grading</a></li>
-</ul></li>
-<li><a href="#course-timeline">Course Timeline:</a>
-<ul>
-<li><a href="#important-dates">Important Dates</a></li>
-<li><a href="#weekly-schedule">Weekly Schedule</a></li>
-</ul></li>
-<li><a href="#university-resources-for-students">University Resources for Students:</a>
-<ul>
-<li><a href="#students-with-disabilities">Students with Disabilities</a></li>
-<li><a href="#writing-center-services">Writing Center Services</a></li>
-<li><a href="#my-reporting-obligation-as-a-responsible-employee">My Reporting Obligation as a Responsible Employee</a></li>
-<li><a href="#non-discrimination-statement">Non-discrimination Statement</a></li>
-</ul></li>
-<li><a href="#academic-honesty-and-integrity">Academic Honesty and Integrity</a></li>
-<li><a href="#final-note">Final Note</a></li>
+<li><a href="#overview">Overview</a></li>
+<li><a href="#what-is-a-mathematical-model">What is a Mathematical Model?</a></li>
+<li><a href="#mathematical-modeling">Mathematical Modeling</a></li>
+<li><a href="#further-reading">Further Reading</a></li>
 </ul>
 </nav>
 </div>
-<h1 id="instructor-information">Instructor Information</h1>
-<ul>
-<li><p><strong>Instructor:</strong> Dr. Jason M. Graham</p></li>
-<li><p><strong>Office:</strong> LSC 319A</p>
-<ul>
-<li><p><strong>Office Hours:</strong> Mondays 10:00 - 11:00 AM and 2:00 - 3:00 PM, and Wednesdays 10:00 - 11:00 AM (You may also make an appointment to meet with me outside of scheduled office hours. Appointments are not necessary for regularly scheduled office hours.)</p></li>
-<li><p><strong>Dr. Graham’s Schedule:</strong> <a href="https://www.dropbox.com/s/kvu8a4f1hw7ycmt/Spring%202022%20Schedule%20JMG.pdf?dl=0">Link</a></p></li>
-</ul></li>
-<li><p><strong>Email:</strong> <a href="mailto:jason.graham@scranton.edu" class="email">jason.graham@scranton.edu</a></p></li>
-<li><p><strong>Phone:</strong> (570) 941-7491</p></li>
-</ul>
-<h1 id="course-materials">Course Materials:</h1>
-<ul>
-<li><strong>Course Webpage:</strong> <a href="https://topicsinbiomath.netlify.app/">Link</a></li>
-</ul>
-<h2 id="required-textbook">Required Textbook</h2>
-<p>There is no required text for this course. Students will be provided with detailed notes, handouts, or other references.</p>
-<h2 id="additional-resources">Additional Resources</h2>
-<p>Three very good general references are:</p>
-<ul>
-<li><p><a href="https://www.stevenstrogatz.com/books/nonlinear-dynamics-and-chaos-with-applications-to-physics-biology-chemistry-and-engineering">Nonlinear Dynamics and Chaos 2nd ed.</a> by Steven H. Strogatz, ISBN: 9780813349107. This book covers most of the mathematical techniques we will use throughout the course.</p></li>
-<li><p><a href="http://www.sontaglab.org/FTPDIR/systems_biology_notes.pdf">Lecture Notes on Mathematical Systems Biology</a> by Eduardo Sontag.</p></li>
-<li><p><a href="https://www.math.uwaterloo.ca/~bingalls/MMSB/MMSB_w_solutions.pdf">Mathematical Modelling in Systems Biology: An Introduction</a> by Brian Ingalls.</p></li>
-</ul>
-<h1 id="course-information">Course Information:</h1>
-<h2 id="course-description">Course Description</h2>
-<p>A study of discrete and continuous mathematical models in biology. Topics include: population dynamics of single species and interacting species, infectious diseases, population genetics, and cell populations with tumor modeling.</p>
-<h2 id="prerequisites">Prerequisites</h2>
-<p>The prerequisites for this course is MATH 341 <em>Differential Equations</em> and MATH 351 <em>Linear Algebra</em>. Specifically, the student is expected to have a knowledge of the theory and applications of elementary linear algebra and basic ordinary differential equations (ODEs).</p>
-<h2 id="course-goals">Course Goals</h2>
-<ul>
-<li><p>Students will gain college level knowledge in applied mathematics.</p></li>
-<li><p>Students will be able to apply mathematics to address real world problems.</p></li>
-<li><p>Students will gain competency in analytical and critical reasoning.</p></li>
-<li><p>Students will gain experience in utilizing R to create programs and solve problems as appropriate to the discipline of Biomathematics.</p></li>
-<li><p>Students will gain experience using <a href="https://www.latex-project.org/"><span class="math inline">\(\LaTeX\)</span></a> to prepare and revise written documents as appropriate to the discipline of Biomathematics.</p></li>
-</ul>
-<h2 id="student-learning-objectives-and-assessment">Student Learning Objectives and Assessment</h2>
-<div class="layout-chunk" data-layout="l-body">
-<table class=" lightable-paper" style="font-family: &quot;Arial Narrow&quot;, arial, helvetica, sans-serif; width: auto !important; margin-left: auto; margin-right: auto;">
-<thead>
-<tr>
-<th style="text-align:left;">
-After taking this course, the student should be able to:
-</th>
-<th style="text-align:left;">
-Methods of assessment
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left;width: 30em; border-left:1px solid;border-right:1px solid;">
-Use mathematical tools from calculus, differential equations, and linear algebra to analyze foundational mathematical models arising in the life sciences.
-</td>
-<td style="text-align:left;width: 30em; border-right:1px solid;">
-Homework assignments and in-class written exams.
-</td>
-</tr>
-<tr>
-<td style="text-align:left;width: 30em; border-left:1px solid;border-right:1px solid;">
-Interpret the meaning of mathematical equations or models representing various biological processes.
-</td>
-<td style="text-align:left;width: 30em; border-right:1px solid;">
-Homework assignments, model reports, and final project.
-</td>
-</tr>
-<tr>
-<td style="text-align:left;width: 30em; border-left:1px solid;border-right:1px solid;">
-Utilize computing tools such as R to analyze and interpret data-driven mathematical models.
-</td>
-<td style="text-align:left;width: 30em; border-right:1px solid;">
-Homework assignments, model reports, and final project.
-</td>
-</tr>
-<tr>
-<td style="text-align:left;width: 30em; border-left:1px solid;border-right:1px solid;">
-Communicate effectively in writing their work in applying the techniques of applied mathematics to problems arising in the life sciences.
-</td>
-<td style="text-align:left;width: 30em; border-right:1px solid;">
-Homework, model reports, and final project consisting of a written paper.
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-<h3 id="link-with-mathematics-program-learning-outcomes">Link with Mathematics Program Learning Outcomes</h3>
-<p>The student learning objectives of this course are linked with the Mathematics Program Learning Outcome</p>
-<ul>
-<li><p>“Demonstrate competence in analytical and critical reasoning.”</p></li>
-<li><p>“Demonstrate college-level knowledge in applied mathematics.”</p></li>
-</ul>
-<h3 id="link-with-general-education-goals-and-objectives">Link with General Education Goals and Objectives</h3>
-<p>MATH 463 has been designated an EPW Level II course. In order to fulfill the learning objectives for EPW Level II students will be asked to complete two writing intensive assignments. These are</p>
-<ul>
-<li>a model report assignment,</li>
-<li>and a final project.</li>
-</ul>
-<p>Details for these assignments are described below and additional guidelines are posted on thee course learning management system.</p>
-<h1 id="course-policies-and-procedures">Course Policies and Procedures:</h1>
-<h2 id="coronavirus-disease-safety-pertaining-to-the-course">Coronavirus Disease Safety Pertaining to the Course</h2>
-<p>In consideration of the care and concern for one another and members of our community, unless you are reasonably unable to do so, please take the following steps as a student in this course to mitigate the spread of coronavirus:</p>
+<h1 id="overview">Overview</h1>
+<p>At this point, we have introduced the basic work flow that is often followed in the practice of biomathematics. Key components of the biomathematics work flow is the construction of a mathematical model and the use of the model to try to solve a problem or answer a question stemming from the life sciences. Mathematical modeling is the process of constructing or deriving a mathematical model. But what exactly is a mathematical model? We beleive that it is not very easy to answer this question in a way that is unique, definitive, and concise. However, we hope that as the course proceeds you will over time develop an internal understanding of what a mathematical model is and even gain some ability with building mathematical models in the context of biomathematics.</p>
+<h1 id="what-is-a-mathematical-model">What is a Mathematical Model?</h1>
+<p>Before we begin to address the question of what is a mathematical model, let’s spend some time focusing just on not-necessarily-mathematical models. Work in science and engineering often proceeds by employing models. What is a model? Consider the following quotation:</p>
+<blockquote>
+<p>A model is a rendition of a reality which is often too difficult or impossible to handle directly. A model is always a simplification, and a good model is one that captures the essential features of reality, leaving the unessential out <span class="citation" data-cites="calvettiComputationalMathematicalModeling2013">(<a href="#ref-calvettiComputationalMathematicalModeling2013" role="doc-biblioref">Calvetti and Somersalo 2013</a>)</span>.</p>
+</blockquote>
+<p>A great example of a scientific model is the <a href="https://en.wikipedia.org/wiki/Bohr_model">Bohr model</a> for the atom. This model posits that an atom is made up of a small dense nucleus surrounded by orbiting electrons. This is a model because it does not include many atomic and nuclear details. It is a useful model because it leads to an explanation of certain chemical properties of atoms that could not be derived prior to the use of the Bohr model. Many biologists use <a href="https://en.wikipedia.org/wiki/Model_organism">model organisms</a> to investigate the biological world. For example, people interested in understanding the evolution of social behavior study specific species of ants or bees. These insects are used because they are relatively easy to keep in a lab or to observe in nature and are also easy to manipulate experimentally. The use of <a href="https://en.wikipedia.org/wiki/Animal_disease_model">animal models</a> is also widespread in the study of disease and drug therapies.</p>
+<p>A mathematical model plays a similar role to models in the more general sense that we just described, but as you might imagine mathematical models are formulated and implemented mathematically. In the last lecture, we very briefly indicated two mathematical models. One for the growth of a population and another for certain cellular and molecular interactions that occur during inflammation. Let’s look at another example of a mathematical model, this time one coming from physics that is likely familiar to you from a course in ordinary differential equations.</p>
+<p>Physics and mechanics in particular is often interested in the motion of a point particle. (Notice that point particles are an abstraction from reality.) Newton’s laws tell us, among other things, that the sum of all forces acting on a mass is proportional to the acceleration of the object. Furthermore, the constant of proportionality is the mass. In notation, we have that <span class="math inline">\(F=ma\)</span>. Now, while <span class="math inline">\(F=ma\)</span> is an equation and you could reasonably argue that it is a “mathematical model” for how the physical world works, <span class="math inline">\(F=ma\)</span> is not really representative of what we mean by a mathematical model in most instances. The reason is that it is a general statement, a theory and not a reference to something specific. However, we can use <span class="math inline">\(F=ma\)</span> to construct mathematical models in more specific situations.</p>
+<p>Suppose for example that we are concerned with the motion of a particle of mass <span class="math inline">\(m\)</span> attached to a spring. We can model the total force that is applied to the mass by the spring via the equation <span class="math inline">\(F=-kx\)</span>. This says that the force due to the spring is linearly proportional to the displacement of the mass from it’s equilibrium (resting) position. (Again, this is an abstraction from reality.) The constant of proportionality <span class="math inline">\(k\)</span> is called the spring constant. It encodes physical properties of a spring such as its stiffness. Taken together with <span class="math inline">\(F=ma\)</span> and using that acceleration is the second derivative of displacement we arrive at a <strong>mathematical model</strong></p>
+<p><span class="math inline">\(\frac{d^2 x}{dt^2} = -\frac{k}{m}x.\)</span></p>
+<p>This is a model because it is based on several abstractions from reality and ignores some details such as more fine-grained details about the material properties of real world springs. It also assumes an ideal situation where there is no friction.</p>
+<p>As you have seen in a differential equations course, or by using methods we will discuss later, it can be deduced based on the form of the equation <span class="math inline">\(\frac{d^2 x}{dt^2} = -\frac{k}{m}x\)</span> that such a mass will oscillate with a fixed period and frequency determined by the values for <span class="math inline">\(k\)</span> and <span class="math inline">\(m\)</span>. This leads us to another important point. There are several levels of “variable” involved in the model <span class="math inline">\(\frac{d^2 x}{dt^2} = -\frac{k}{m}x\)</span>. There is the independent variable <span class="math inline">\(t\)</span> for time, the dependent variable for the unknown displacement <span class="math inline">\(x\)</span> (the quantity we are ultimately most interested in), and there are the <strong>parameters</strong> <span class="math inline">\(k\)</span> and <span class="math inline">\(m\)</span>.</p>
+<p>We will see that most mathematical models involve parameters and it will become very important to understand how the values of parameters influence the results obtained from the model. Also very important is to note that variables and parameters correspond to quantities and thus have some set of units associated with them. We will spend a lot of time talking about why units of measurement are important but take note now that a mathematical model can not make sense if there is an inconsistency between units for parameters or variables.</p>
+<p>The last example provides some insight into mathematical modeling, that is, the process of constructing or deriving a model. We begin with an abstraction from reality that represents those parts of the world in which we are most interested in, then we specify quantities that we want to relate, establish mathematical notation, and finally write down an equation that becomes our mathematical model. While our last example was very simple (too simple), it still serves to highlight the modeling process. The next section elaborates on this.</p>
+<h1 id="mathematical-modeling">Mathematical Modeling</h1>
+<p>It is important to realize two facts about mathematical modeling, especially in the context of biomathematics, from the start:</p>
 <ol type="1">
-<li><p>Do not attend class if you have a confirmed case of coronavirus disease (COVID-19) until you have fully recovered.</p></li>
-<li><p>Do not attend class if you are experiencing any COVID-19 related symptoms as described at <a href="https://www.cdc.gov/coronavirus/2019-ncov/symptoms-testing/symptoms.html">this link</a>.</p></li>
-<li><p>Do not attend class if you believe that you have been exposed to the coronavirus and might spread it to members of the class. Please visit <a href="https://www.cdc.gov/coronavirus/2019-ncov/transmission/index.html">this link</a> for information on the transmission of the coronavirus.</p></li>
-<li><p>Wear a <a href="https://www.cdc.gov/coronavirus/2019-ncov/prevent-getting-sick/diy-cloth-face-coverings.html">CDC approved face covering</a> over your mouth and nose while in the classroom and while visiting the course instructor’s office.</p></li>
+<li><p>Mathematical modeling is as much art as it is science. The point is that mathematical modeling is not routine or algorithmic. Successful modeling requires creativity and intuition developed through experience.</p></li>
+<li><p>Mathematical modeling will almost certainly involve repeated refinements. Unless there is a very strong reason to do otherwise, it’s best to start with the simplest possible reasonable model, even at the risk of oversimplification. If the model produces incorrect or inaccurate results relative to the problem of interest, then the model can be revised in order to fix what is glaringly wrong.</p></li>
 </ol>
-<h2 id="attendance">Attendance</h2>
-<p>Class attendance and active participation in class discussion is strongly encouraged. If absence is necessary, please inform the instructor and develop a plan to make up for missing content as soon as possible.</p>
-<h2 id="assignments-and-grading">Assignments and Grading</h2>
-<h3 id="grade-policy">Grade Policy</h3>
-<p>The course grade will be based on two in-class exams (totaling 50% and evenly distributed), approximately ten weekly homework assignments (20%), one model report (10%), and a final project (20%).</p>
-<h3 id="grade-scale">Grade Scale</h3>
-<p>Letter grades will be assigned based on the following scale:</p>
-<div class="layout-chunk" data-layout="l-body">
-<table class=" lightable-paper lightable-striped" style="font-family: &quot;Arial Narrow&quot;, arial, helvetica, sans-serif; width: auto !important; margin-left: auto; margin-right: auto;">
-<thead>
-<tr>
-<th style="text-align:left;">
-Grade Range
-</th>
-<th style="text-align:left;">
-Letter Grade
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left;">
-94-100
-</td>
-<td style="text-align:left;">
-A
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-90-93
-</td>
-<td style="text-align:left;">
-A-
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-87-89
-</td>
-<td style="text-align:left;">
-B+
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-83-86
-</td>
-<td style="text-align:left;">
-B
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-80-82
-</td>
-<td style="text-align:left;">
-B-
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-76-79
-</td>
-<td style="text-align:left;">
-C+
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-72-75
-</td>
-<td style="text-align:left;">
-C
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-69-71
-</td>
-<td style="text-align:left;">
-C-
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-65-68
-</td>
-<td style="text-align:left;">
-D+
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-60-64
-</td>
-<td style="text-align:left;">
-D
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-&lt;60
-</td>
-<td style="text-align:left;">
-F
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-<h3 id="homework">Homework</h3>
-<p>There will be weekly homework assignments. Assignments will be posted on the course learning management system and made up of problems relating to or extending the material covered in class discussions. Working problems is essential to learning the material and doing well on exams.</p>
-<p>Do not underestimate the value (and joy) of carefully working through homework problems.</p>
-<h3 id="exams">Exams</h3>
-<p>The in-class exams are meant to assess 1) students’ understanding of the material covered in class and in homework assignments, 2) students’ understanding of the core concepts, 3) students’ problem solving abilities, and 4) students’ ability to think independently. Exam 1 is scheduled for March 2, and Exam 2 is scheduled for May 4. In writing the tests, I assume that you have been studying the material at least 6 hours per week outside of class.</p>
-<h3 id="model-report">Model Report</h3>
-<p>As part of the required coursework for <em>Topics in Biomathematics</em>, students are required to submit a model report. The goal of this assignment is for students to read, understand, assess, and explain modeling results from a recently published paper in biomathematics. The model report will make up 10% of the course grade. Students must submit at least two drafts of a model report. A model report should be three-five typed pages and prepared using <span class="math inline">\(\LaTeX\)</span>. The first draft is due March 23 and the final draft is due May 4. A set of guidelines for the model report is posted on the course learning management system.</p>
-<h3 id="final-project">Final Project</h3>
-<p>It should be recognized that the mathematical techniques developed in class are applicable in broader situations than can be covered in lectures and homework. Thus, students are asked to individually explore a topic in biomathematics beyond what is covered in lecture by means of a final project. Final projects should be an 8-12 page manuscript typed using <span class="math inline">\(\LaTeX\)</span>, and students must submit at least two drafts of their written final projects. The final draft is <strong>due no later than 5:00pm on Wednesday May 18.</strong> All written and presented work must be original, explained in your own words, and use proper citation for works referenced.</p>
-<p>A set of guidelines for the final project is posted on the course learning management system. <strong>You must choose a topic for your final project and submit a one to two paragraph description of your proposed project along with at least two scholarly references to me no later than 3:00pm on March 2.</strong></p>
-<h3 id="use-of-digital-technology">Use of Digital Technology</h3>
-<p>Work and research in Biomathematics requires professionals in the field to make use of digital technology. The primary uses of digital technology in Biomathematics is for producing and importing data, scientific computing, visualization of data and model-based simulations, and preparing written documents to explain mathematical results. Two of the most commonly used technological tools are R for scientific computing and <span class="math inline">\(\LaTeX\)</span> for written document preparation. Students in this course will be expected to use R, and <span class="math inline">\(\LaTeX\)</span>. R can be installed to any platform via the downloads available <a href="https://www.r-project.org/">here</a>. R is best used with the integrative development environment RStudio which can be installed from <a href="https://www.rstudio.com/">here</a>.</p>
-<h1 id="course-timeline">Course Timeline:</h1>
-<h2 id="important-dates">Important Dates</h2>
-<div class="layout-chunk" data-layout="l-body">
-<table class=" lightable-paper lightable-striped" style="font-family: &quot;Arial Narrow&quot;, arial, helvetica, sans-serif; width: auto !important; margin-left: auto; margin-right: auto;">
-<thead>
-<tr>
-<th style="text-align:left;">
-Event
-</th>
-<th style="text-align:left;">
-Date
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left;width: 30em; border-left:1px solid;border-right:1px solid;">
-Classes begin
-</td>
-<td style="text-align:left;width: 30em; border-right:1px solid;">
-Wednesday, January 26
-</td>
-</tr>
-<tr>
-<td style="text-align:left;width: 30em; border-left:1px solid;border-right:1px solid;">
-Last day to add classes
-</td>
-<td style="text-align:left;width: 30em; border-right:1px solid;">
-Tuesday, February 1
-</td>
-</tr>
-<tr>
-<td style="text-align:left;width: 30em; border-left:1px solid;border-right:1px solid;">
-Last day for 100% tution refund
-</td>
-<td style="text-align:left;width: 30em; border-right:1px solid;">
-Friday, February 4
-</td>
-</tr>
-<tr>
-<td style="text-align:left;width: 30em; border-left:1px solid;border-right:1px solid;">
-Last day to drop with no grade
-</td>
-<td style="text-align:left;width: 30em; border-right:1px solid;">
-Friday February 25
-</td>
-</tr>
-<tr>
-<td style="text-align:left;width: 30em; border-left:1px solid;border-right:1px solid;">
-Exam 1
-</td>
-<td style="text-align:left;width: 30em; border-right:1px solid;">
-Wednesday, March 2
-</td>
-</tr>
-<tr>
-<td style="text-align:left;width: 30em; border-left:1px solid;border-right:1px solid;">
-Semester Midpoint
-</td>
-<td style="text-align:left;width: 30em; border-right:1px solid;">
-Friday, March 11
-</td>
-</tr>
-<tr>
-<td style="text-align:left;width: 30em; border-left:1px solid;border-right:1px solid;">
-Last day of class before spring break
-</td>
-<td style="text-align:left;width: 30em; border-right:1px solid;">
-Friday, March 11
-</td>
-</tr>
-<tr>
-<td style="text-align:left;width: 30em; border-left:1px solid;border-right:1px solid;">
-Classes resume after spring break
-</td>
-<td style="text-align:left;width: 30em; border-right:1px solid;">
-Monday, March 21
-</td>
-</tr>
-<tr>
-<td style="text-align:left;width: 30em; border-left:1px solid;border-right:1px solid;">
-Last day to withdraw with W grade
-</td>
-<td style="text-align:left;width: 30em; border-right:1px solid;">
-Wednesday, April 13
-</td>
-</tr>
-<tr>
-<td style="text-align:left;width: 30em; border-left:1px solid;border-right:1px solid;">
-Last day of class before Easter break
-</td>
-<td style="text-align:left;width: 30em; border-right:1px solid;">
-Wednesday, April 13
-</td>
-</tr>
-<tr>
-<td style="text-align:left;width: 30em; border-left:1px solid;border-right:1px solid;">
-Classes resume after Easter
-</td>
-<td style="text-align:left;width: 30em; border-right:1px solid;">
-Tuesday, April 19
-</td>
-</tr>
-<tr>
-<td style="text-align:left;width: 30em; border-left:1px solid;border-right:1px solid;">
-Exam 2
-</td>
-<td style="text-align:left;width: 30em; border-right:1px solid;">
-Wednesday, May 4
-</td>
-</tr>
-<tr>
-<td style="text-align:left;width: 30em; border-left:1px solid;border-right:1px solid;">
-Last day of class
-</td>
-<td style="text-align:left;width: 30em; border-right:1px solid;">
-Friday, May 13
-</td>
-</tr>
-<tr>
-<td style="text-align:left;width: 30em; border-left:1px solid;border-right:1px solid;">
-Final exams begin
-</td>
-<td style="text-align:left;width: 30em; border-right:1px solid;">
-Monday, May 16
-</td>
-</tr>
-<tr>
-<td style="text-align:left;width: 30em; border-left:1px solid;border-right:1px solid;">
-Final exams end
-</td>
-<td style="text-align:left;width: 30em; border-right:1px solid;">
-Friday, May 20
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-<h2 id="weekly-schedule">Weekly Schedule</h2>
-<ul>
-<li>Week 1: Introduction to Biomathematics</li>
-<li>Week 2: Basic Biomathematical Workflow</li>
-<li>Week 3: Introduction to Mathematical Modeling</li>
-<li>Week 4: Population Models</li>
-<li>Week 5: Compartment Models</li>
-<li>Week 6: SIR Type Models</li>
-<li>Week 7: Exam 1</li>
-<li>Week 8: The Chemostat Bio-reactor</li>
-<li>Week 9: Spring Break</li>
-<li>Week 10: Functional Forms</li>
-<li>Week 11: Mass Action and Reaction Kinetics</li>
-<li>Week 12: Dimensional Analysis</li>
-<li>Week 13: Phase-Plane Methods</li>
-<li>Week 14: Mathematical Physiology</li>
-<li>Week 15: Exam 2</li>
-<li>Week 16: Additional Topics</li>
-<li>Week 17: Finals Week</li>
-</ul>
-<h1 id="university-resources-for-students">University Resources for Students:</h1>
-<h2 id="students-with-disabilities">Students with Disabilities</h2>
-<p>Reasonable academic accommodations may be provided to students who submit relevant and current documentation of their disability. Students are encouraged to contact the Center for Teaching and Learning Excellence (CTLE) at <a href="mailto:disabilityservices@scranton.edu" class="email">disabilityservices@scranton.edu</a> or (570) 941-4038 if they have or think they may have a disability and wish to determine eligibility for any accommodations. For more information, please visit <a href="http://www.scranton.edu/disabilities" class="uri">http://www.scranton.edu/disabilities</a>.</p>
-<h2 id="writing-center-services">Writing Center Services</h2>
-<p>The Writing Center focuses on helping students become better writers. Consultants will work one-on-one with students to discuss students’ work and provide feedback at any stage of the writing process. Scheduling appointments early in the writing progress is encouraged.</p>
-<p>To meet with a writing consultant, call (570) 941-6147 to schedule an appointment, or send an email with your available meeting times, the course for which you need assistance, and your phone number to: <a href="mailto:writing-center@scranton.edu" class="email">writing-center@scranton.edu</a>. The Writing Center does offer online appointments for our distance learning students. Please contact Amye Archer at <a href="mailto:amye.archer@scranton.edu" class="email">amye.archer@scranton.edu</a> for more information.</p>
-<h2 id="my-reporting-obligation-as-a-responsible-employee">My Reporting Obligation as a Responsible Employee</h2>
-<p>As a faculty member, I am deeply invested in the well-being of each student I teach. I am here to assist you with your work in this course. Additionally, if you come to me with other non-course-related concerns, I will do my best to help. It is important for you to know that all faculty members are required to report incidents of sexual harassment or sexual misconduct involving students. This means that I cannot keep information about sexual harassment, sexual assault, sexual exploitation, intimate partner violence or stalking confidential if you share that information with me. I will keep the information as private as I can but am required to bring it to the attention of the University’s Title IX Coordinator, Elizabeth M. Garcia, or Deputy Title IX Coordinator, Christine M. Black, who, in conversation with you, will explain available support, resources, and options. I will not report anything to anybody without first letting you know and discussing choices as to how to proceed. The University’s Counseling Center (570-941-7620) is available to you as a confidential resource; counselors (in the counseling center) do not have an obligation to report to the Title IX Coordinator.</p>
-<h2 id="non-discrimination-statement">Non-discrimination Statement</h2>
-<p>The University is committed to providing an educational, residential, and working environment that is free from harassment and discrimination. Members of the University community, applicants for employment or admissions, guests, and visitors have the right to be free from harassment or discrimination based on race, color, religion, ancestry, gender, sex, pregnancy, sexual orientation, gender identity or expression, age, disability, genetic information, national origin, veteran status, or any other status protected by applicable law.</p>
-<p>Students who believe they have been subject to harassment or discrimination based on any of the above class of characteristics, or experience sexual harassment, sexual misconduct or gender discrimination should contact Elizabeth M. Garcia, Title IX Coordinator, (570) 941-6645 <a href="mailto:elizabeth.garcia2@scranton.edu" class="email">elizabeth.garcia2@scranton.edu</a>, Deputy Title IX Coordinators Christine M. Black (570) 941-6645 <a href="mailto:christine.black@scranton.edu" class="email">christine.black@scranton.edu</a>, or Ms. Lauren Rivera, AVP for Student Life and Dean of Students, at (570)941-7680 <a href="mailto:lauren.rivera@scranton.edu" class="email">lauren.rivera@scranton.edu</a>. The United States Department of Education’s Office for Civil Rights (OCR) enforces Title IX. Information regarding OCR may be found at &lt;www.ed.gov/about/offices/list/ocr/index.html&gt;</p>
-<p>The University of Scranton Sexual Harassment and Sexual Misconduct Policy can be found online at <a href="https://www.scranton.edu/diversity" class="uri">https://www.scranton.edu/diversity</a>. All reporting options and resources are available at <a href="https://www.scranton.edu/CARE" class="uri">https://www.scranton.edu/CARE</a>.</p>
-<h3 id="about-pronouns">About Pronouns</h3>
-<p>It is easy to make assumptions about what pronouns people prefer, but we try not to! Please tell us in class or via a private email if you would like to let us know what your pronouns are, if/when you would like us (and others) to use them, and certainly feel free to correct us or others if we make a mistake. Using the pronouns that a person has indicated they prefer is considered both professional and polite, and as such we ask that all members of our class use the appropriate pronouns.</p>
-<p>If you have questions about this, please feel free to look up more information here (<a href="https://www.mypronouns.org/" class="uri">https://www.mypronouns.org/</a>) or email <a href="mailto:jason.graham@scranton.edu" class="email">jason.graham@scranton.edu</a> with any questions.</p>
-<h1 id="academic-honesty-and-integrity">Academic Honesty and Integrity</h1>
-<p>Each student is expected to do their own work. It is also expected that each student respect and abide by the Academic Code of Honesty as set forth in the University of Scranton student handbook. Conduct that violates the Academic Code of Honesty includes plagiarism, duplicate submission of the same work, collusion, providing false information, unauthorized use of computers, theft and destruction of property, and unauthorized possession of tests and other materials. Steps taken in response to suspected violations may include a discussion with the instructor, an informal meeting with the dean of the college, and a hearing before the Academic Dishonesty Hearing Board. Students who are found to have violated the Code will ordinarily be assigned the grade F by the instructor and may face other sanctions. The complete Academic Code of Honesty is located on the University website at <a href="https://www.scranton.edu/academics/wml/acad-integ/acad-code-honesty.shtml" class="uri">https://www.scranton.edu/academics/wml/acad-integ/acad-code-honesty.shtml</a>.</p>
-<h1 id="final-note">Final Note</h1>
-<p>The instructor reserves the right to modify this syllabus; students will immediately be notified of any such changes and an updated syllabus will be made available to the class via the course learning management system.</p>
+<p>In the next lecture, we will begin to address specific techniques that can help one to get started with mathematical modeling. Here we will provide a conceptual outline of the modeling process in the form of a series of steps that one typically carries out during the course of the modeling process.</p>
+<ol type="1">
+<li><p>Formulate the question or state your problem. Explicitly write down assumptions and what is known about the system that you want to develop a model for.</p></li>
+<li><p>Identify key quantities and define variables and parameters of interest. At this stage you should take careful note of the units of measurement that are associated with all of the model variables and parameters.</p></li>
+<li><p>Develop a qualitative description of your model. Use diagrams or word equations to describe the relationships between variables. In the next lecture we will discuss compartment modeling which is a commonly used method for organizing the processes and interactions of variables in a way that helps one to more easily write down model equations.</p></li>
+<li><p>Write down model equations corresponding to the qualitative description in the previous step. Perform <a href="https://en.wikipedia.org/wiki/Dimensional_analysis">dimensional analysis</a> (covered in detail later) to make sure that there are no inconsistencies in your equations regarding units. At this stage it is very helpful to construct a table that lists all of the variables and parameters appearing in the model. The table should include the units of measurement for all of the variables and parameters as well as any specific parameters values that are known from experiment or the existing literature.</p></li>
+<li><p><a href="https://en.wikipedia.org/wiki/Nondimensionalization">Nondimensionalize</a> the model. Later we will cover nondimensionalization in detail. This is a process founded on the <a href="https://en.wikipedia.org/wiki/Buckingham_%CF%80_theorem">Buckinghma <span class="math inline">\(\pi\)</span> theorem</a> in which variables and parameters are rescaled to remove units. This process is extremely important as it often simplifies the model by reducing the number of parameters and pinpoints the most significant parameters (or parameter combinations) in the model.</p></li>
+</ol>
+<p>At this stage you will be ready to analyze or implement your model in order to obtain results such as qualitative or quantitative predictions. The next thing to do is determine if the model results are consistent with known information or experimental results. You have to do something to decide if your model is successful or should be revised in order to address your starting question or solve the problem you have posed.</p>
+<p>With this overview in hand, the next lecture will cover compartment modeling and we will start to see concrete examples of mathematical models and the modeling process.</p>
+<h1 id="further-reading">Further Reading</h1>
+<p>For general texts on mathematical modeling we recommend <span class="citation" data-cites="barnesMathematicalModellingCase2015 calvettiComputationalMathematicalModeling2013 witelskiMethodsMathematicalModelling2015">(<a href="#ref-barnesMathematicalModellingCase2015" role="doc-biblioref">Barnes and Fulford 2015</a>; <a href="#ref-calvettiComputationalMathematicalModeling2013" role="doc-biblioref">Calvetti and Somersalo 2013</a>; <a href="#ref-witelskiMethodsMathematicalModelling2015" role="doc-biblioref">Witelski and Bowen 2015</a>)</span>. Both <span class="citation" data-cites="barnesMathematicalModellingCase2015 calvettiComputationalMathematicalModeling2013">(<a href="#ref-barnesMathematicalModellingCase2015" role="doc-biblioref">Barnes and Fulford 2015</a>; <a href="#ref-calvettiComputationalMathematicalModeling2013" role="doc-biblioref">Calvetti and Somersalo 2013</a>)</span> provide good coverage of <a href="https://en.wikipedia.org/wiki/Multi-compartment_model#:~:text=A%20multi%2Dcompartment%20model%20is,entities%20being%20modelled%20are%20equivalent.">compartment modeling</a>. <a href="https://en.wikipedia.org/wiki/Dimensional_analysis">Dimensional analysis</a> is covered well in <span class="citation" data-cites="calvettiComputationalMathematicalModeling2013 witelskiMethodsMathematicalModelling2015">(<a href="#ref-calvettiComputationalMathematicalModeling2013" role="doc-biblioref">Calvetti and Somersalo 2013</a>; <a href="#ref-witelskiMethodsMathematicalModelling2015" role="doc-biblioref">Witelski and Bowen 2015</a>)</span>.</p>
+<p>A nice recent reference on mathematical modeling of biological systems is the chapter <span class="citation" data-cites="ayatiConsiderationsModelingProteus2019">(<a href="#ref-ayatiConsiderationsModelingProteus2019" role="doc-biblioref">Ayati 2019</a>)</span>, which discusses modeling approaches in the context of microbial ecology.</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
+<div id="refs" class="references csl-bib-body hanging-indent" role="doc-bibliography">
+<div id="ref-ayatiConsiderationsModelingProteus2019" class="csl-entry" role="doc-biblioentry">
+Ayati, Bruce P. 2019. <span>“Considerations for <span>Modeling Proteus</span> Mirabilis <span>Swarming</span>.”</span> In <em>Proteus Mirabilis</em>, 285–96. <span>Springer</span>.
+</div>
+<div id="ref-barnesMathematicalModellingCase2015" class="csl-entry" role="doc-biblioentry">
+Barnes, B., and G. R. Fulford. 2015. <em>Mathematical Modelling with Case Studies</em>. Third. Textbooks in <span>Mathematics</span>. <span>CRC Press, Boca Raton, FL</span>. <a href="https://mathscinet.ams.org/mathscinet-getitem?mr=3288754">https://mathscinet.ams.org/mathscinet-getitem?mr=3288754</a>.
+</div>
+<div id="ref-calvettiComputationalMathematicalModeling2013" class="csl-entry" role="doc-biblioentry">
+Calvetti, Daniela, and Erkki Somersalo. 2013. <em>Computational Mathematical Modeling</em>. Mathematical <span>Modeling</span> and <span>Computation</span>. <span>Society for Industrial and Applied Mathematics (SIAM), Philadelphia, PA</span>. <a href="https://mathscinet.ams.org/mathscinet-getitem?mr=3013353">https://mathscinet.ams.org/mathscinet-getitem?mr=3013353</a>.
+</div>
+<div id="ref-witelskiMethodsMathematicalModelling2015" class="csl-entry" role="doc-biblioentry">
+Witelski, Thomas, and Mark Bowen. 2015. <em>Methods of Mathematical Modelling</em>. <span>Springer</span>.
+</div>
+</div>
 <!--radix_placeholder_article_footer-->
 <!--/radix_placeholder_article_footer-->
 </div>
@@ -2575,6 +2220,8 @@ Friday, May 20
 <!--/radix_placeholder_site_after_body-->
 <!--radix_placeholder_appendices-->
 <div class="appendix-bottom">
+<h3 id="references">References</h3>
+<div id="references-listing"></div>
 <h3 id="reuse">Reuse</h3>
 <p>Text and figures are licensed under Creative Commons Attribution <a rel="license" href="https://creativecommons.org/licenses/by-nc/4.0/">CC BY-NC 4.0</a>. The figures that have been reused from other sources don't fall under this license and can be recognized by a note in their caption: "Figure from ...".</p>
 </div>
