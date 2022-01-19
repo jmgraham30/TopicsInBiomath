@@ -244,6 +244,12 @@ If a list has named elements, we can access the names using the `names` function
 names(l2)
 ```
 
+Here is a helpful video on R lists:
+
+```{r list_video,echo=FALSE}
+vembedr::embed_url("https://youtu.be/Px9VNWHja4M") %>%
+  vembedr::use_align("center")
+```
 
 ### Data Frames in R
 
@@ -262,6 +268,13 @@ names(my_data)
 ```
 
 Typically we do not create a data frame by hand, but data is often read in as a data frame. The principal use of data frames in R is that they are the best way to provide data to plotting functions. 
+
+Here is a helpful video on R data frames:
+
+```{r df_video,echo=FALSE}
+vembedr::embed_url("https://youtu.be/9f2g7RN5N0I") %>%
+  vembedr::use_align("center")
+```
 
 ## Linear Algebra in R
 
@@ -282,6 +295,15 @@ Typically we do not create a data frame by hand, but data is often read in as a 
 
 
 
+
+Here is a helpful video on `ggplot2`:
+
+```{r ggplot_video,echo=FALSE}
+vembedr::embed_url("https://youtu.be/iOosTTQwCW4") %>%
+  vembedr::use_align("center")
+```
+
+[This article](https://stat2labs.sites.grinnell.edu/Handouts/rtutorials/IntroToggformula.html) provides more information on `ggformula`. 
 
 ## Numerical Solution of Differential Equations in R
 
