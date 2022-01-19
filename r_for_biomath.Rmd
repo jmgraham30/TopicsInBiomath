@@ -17,7 +17,6 @@ bibliography: topics_in_biomath.bib
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = FALSE)
 library(ggplot2)
 library(ggformula)
 library(deSolve)
@@ -53,7 +52,7 @@ The purpose of this document is to provide an introduction to parts of the R com
 
 Given many other options, why do we focus on R as the computing tool of choice in *Topics in Biomathematics*? The principal reasons are:
 
-1) R is free but also well-developed and supported. 
+1) R is free but also well-developed and widely-supported. 
 
 2) Even though it was developed for statistical applications, R works well for numerical computing of the sort that is useful in biomathematics. 
 
@@ -64,11 +63,18 @@ Given many other options, why do we focus on R as the computing tool of choice i
 
 # An Introduction to R
 
-In what follows, we illustrate some R commands that will be used commonly throughout the *Topics in Biomathematics* course. This document is by no means comprehensive. The best ways to learn more are
+In what follows, we illustrate some R commands that will be used commonly throughout the *Topics in Biomathematics* course. This document is by no means comprehensive. The best ways to learn more about R are
 
-1) the [swirl](https://swirlstats.com/) package, 
+1) by using the [`swirl`](https://swirlstats.com/) package, and 
 
 2) searching the web for specific topics. 
+
+Here is a short video about `swirl`:
+
+```{r swirl_video,echo=FALSE}
+vembedr::embed_url("https://youtu.be/olOJfAjzdO8") %>%
+  vembedr::use_align("center")
+```
 
 
 ## Installing R and RStudio
@@ -94,12 +100,175 @@ vembedr::embed_url("https://youtu.be/GAGUDL-4aVw") %>%
   vembedr::use_align("center")
 ```
 
+### RStudio Cloud
+
+Here is an intro to RStudio Cloud:
+
+```{r rstudio_cloud,echo=FALSE}
+vembedr::embed_url("https://youtu.be/uK1Va_UWQFc") %>%
+  vembedr::use_align("center")
+```
+
 ## R as a Calculator
 
+R can be used for basic arithmetic calculations:
 
+```{r arithmetic}
+(1 + 2) # addition
+(6 - 4) # subtraction 
+(3*5) # multiplication 
+(8/3) # division
+(2^3) # exponentiation
+```
+
+There are also a number of mathematical functions:
+
+```{r math_functions}
+(exp(1))
+(log(1))
+(log(exp(2)))
+(log10(10))
+(sin(pi/4))
+(cos(pi/3))
+```
+
+Sometimes it is convenient to store a value as a variable. The follow code stores the value of 3 as a variable `x` and then multiplies it by 1.5:
+
+```{r a_variable}
+x <- 3
+1.5*x
+```
+
+In R, the notation `<-` is the assignment operator.  
+
+You can do arithmetic with variables just like you can with numbers. For example, 
+
+```{r variable_arihtmetic}
+x <- 3
+y <- 10
+(x + y)
+(x*y)
+(y^x)
+```
+
+You should always pay close attention to the order of operations when doing arithmetic in R. Use parentheses to make sure you compute what you mean to compute. For example, 
+
+```{r op_order_1}
+((3 - 2) * 6)
+```
+
+versus
+
+```{r op_order_2}
+(3 - (2 * 6))
+```
 
 
 ## Data in R
+
+There are several common ways to represent different types of data in R. In this section we cover those that are most relevant to biomathematics. 
+
+### Numeric Vectors
+
+In R, we create a vector or array of values using concatenation with the operator `c`. For example, 
+
+```{r a_vector}
+(a <- c(1,5,-7))
+```
+
+creates a numeric vector with entries 1, 5, and -7, then we store the result as a variable called `a`. 
+
+We can perform arithmetic operations on vectors. For example, 
+
+```{r vector_arithmetic}
+b <- c(2,-1,6)
+(a + b) # vector addition
+(a-b) # vector subtraction
+(a*b) # elementwise vector multiplication 
+(a^b) # elementwise vector exponentiation 
+```
+
+**Question:** In the last code block, what is happening to produce the result corresponding to `a^b`? 
+
+We can also call math functions on vectors. For example, 
+
+```{r vector_math_funcs}
+x <- c(1,2,3)
+(exp(x))
+(cos(pi*x))
+```
+
+Note that these math functions are "vectorized" in that the operate elementwise on a vector. 
+
+### Character Vectors
+
+We can also create so-called character vectors in R. For example, 
+
+```{r char_vect}
+(A <- c("calculus","linear algebra", "differential equations"))
+```
+
+We won't make extensive use of character vectors in *Topics in Biomathematics* but it is useful to know that they exist. 
+
+### Matrices in R
+
+The `matrix` functions allows us to create a matrix in R. For example, 
+
+```{r r_matrix}
+(M <- matrix(c(1,2,3,4),2,2))
+(N <- matrix(c(1,2,3,4,5,6),2,3))
+(P <- matrix(c(1,2,3,4,5,6),3,2))
+(Q <- matrix(c(1,2,3,4,5,6),2,3,byrow=TRUE))
+```
+
+### Lists in R
+
+All of the entries in a vector or a matrix must by of the same type. For example, all numeric values or all characters. In R, lists are a data structure that allow us to store data of mixed types. For example, 
+
+```{r r_lists}
+(l1 <- list(c(1,2,3),c("jason","graham"),matrix(c(1,2,3,4),2,2)))
+(l2 <- list(initial=c(1,12),times=seq(0,10,by=1),values=matrix(1:22,11,2))) # list with names
+```
+
+Note that the entries of a list can be accessed using either indexing or names (provided that the list entries are named). For example,
+
+```{r list_accessing}
+(l1[[2]])
+(l2[[1]])
+(l2$initial)
+```
+
+If a list has named elements, we can access the names using the `names` function. For example, 
+
+```{r list_names}
+names(l2)
+```
+
+
+### Data Frames in R
+
+A data frame in R is a data structure that corresponds to something like a spreadsheet. A data frame is a special type of list object. You can think of a data frame as a cross between a list and a matrix. Here is how you ceate a data frame:
+
+```{r data_frame}
+(my_data <- data.frame(course=c("MATH 114","MATH 221","MATH 222","MATH 351", "MATH 341"),
+                       num_students=c(10,12,8,5,7),
+                       level=c("F","F","S","S","T")))
+```
+
+Note that a data frame contains rows and columns, every column is a vector (either numeric or character), and every column has the same number of entries. The columns of a data frame all have names. We can also use the `names` function to determine the column names of a data frame. For example, 
+
+```{r data_frame_names}
+names(my_data)
+```
+
+Typically we do not create a data frame by hand, but data is often read in as a data frame. The principal use of data frames in R is that they are the best way to provide data to plotting functions. 
+
+## Linear Algebra in R
+
+
+
+
+## Functions in R
 
 
 

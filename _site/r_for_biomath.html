@@ -94,8 +94,8 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   <link rel="license" href="https://creativecommons.org/licenses/by-nc/4.0/"/>
 
   <!--  https://schema.org/Article -->
-  <meta property="article:published" itemprop="datePublished" content="2022-01-18"/>
-  <meta property="article:created" itemprop="dateCreated" content="2022-01-18"/>
+  <meta property="article:published" itemprop="datePublished" content="2022-01-19"/>
+  <meta property="article:created" itemprop="dateCreated" content="2022-01-19"/>
   <meta name="article:author" content="Jason M. Graham"/>
 
   <!--  https://developers.facebook.com/docs/sharing/webmasters#markup -->
@@ -115,7 +115,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   <!--radix_placeholder_rmarkdown_metadata-->
 
   <script type="text/json" id="radix-rmarkdown-metadata">
-  {"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["title","description","author","date","output","creative_commons","bibliography"]}},"value":[{"type":"character","attributes":{},"value":["R for Biomathematics"]},{"type":"character","attributes":{},"value":["An Introduction to R for Biomathematics\n"]},{"type":"list","attributes":{},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","url","affiliation","affiliation_url"]}},"value":[{"type":"character","attributes":{},"value":["Jason M. Graham"]},{"type":"character","attributes":{},"value":["https://topicsinbiomath.netlify.app/"]},{"type":"character","attributes":{},"value":["University of Scranton"]},{"type":"character","attributes":{},"value":["https://sites.google.com/site/jasonmgrahamus/"]}]}]},{"type":"character","attributes":{},"value":["2022-01-18"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["distill::distill_article"]}},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["toc","toc_depth"]}},"value":[{"type":"logical","attributes":{},"value":[true]},{"type":"integer","attributes":{},"value":[2]}]}]},{"type":"character","attributes":{},"value":["CC BY-NC"]},{"type":"character","attributes":{},"value":["topics_in_biomath.bib"]}]}
+  {"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["title","description","author","date","output","creative_commons","bibliography"]}},"value":[{"type":"character","attributes":{},"value":["R for Biomathematics"]},{"type":"character","attributes":{},"value":["An Introduction to R for Biomathematics\n"]},{"type":"list","attributes":{},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","url","affiliation","affiliation_url"]}},"value":[{"type":"character","attributes":{},"value":["Jason M. Graham"]},{"type":"character","attributes":{},"value":["https://topicsinbiomath.netlify.app/"]},{"type":"character","attributes":{},"value":["University of Scranton"]},{"type":"character","attributes":{},"value":["https://sites.google.com/site/jasonmgrahamus/"]}]}]},{"type":"character","attributes":{},"value":["2022-01-19"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["distill::distill_article"]}},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["toc","toc_depth"]}},"value":[{"type":"logical","attributes":{},"value":[true]},{"type":"integer","attributes":{},"value":[2]}]}]},{"type":"character","attributes":{},"value":["CC BY-NC"]},{"type":"character","attributes":{},"value":["topics_in_biomath.bib"]}]}
   </script>
   <!--/radix_placeholder_rmarkdown_metadata-->
   <!--radix_placeholder_navigation_in_header-->
@@ -2064,7 +2064,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <!--radix_placeholder_front_matter-->
 
 <script id="distill-front-matter" type="text/json">
-{"title":"R for Biomathematics","description":"An Introduction to R for Biomathematics","authors":[{"author":"Jason M. Graham","authorURL":"https://topicsinbiomath.netlify.app/","affiliation":"University of Scranton","affiliationURL":"https://sites.google.com/site/jasonmgrahamus/","orcidID":""}],"publishedDate":"2022-01-18T00:00:00.000-05:00","citationText":"Graham, 2022"}
+{"title":"R for Biomathematics","description":"An Introduction to R for Biomathematics","authors":[{"author":"Jason M. Graham","authorURL":"https://topicsinbiomath.netlify.app/","affiliation":"University of Scranton","affiliationURL":"https://sites.google.com/site/jasonmgrahamus/","orcidID":""}],"publishedDate":"2022-01-19T00:00:00.000-05:00","citationText":"Graham, 2022"}
 </script>
 
 <!--/radix_placeholder_front_matter-->
@@ -2109,7 +2109,7 @@ Notes
 <div class="d-byline">
   Jason M. Graham <a href="https://topicsinbiomath.netlify.app/" class="uri">https://topicsinbiomath.netlify.app/</a> (University of Scranton)<a href="https://sites.google.com/site/jasonmgrahamus/" class="uri">https://sites.google.com/site/jasonmgrahamus/</a>
   
-<br/>2022-01-18
+<br/>2022-01-19
 </div>
 
 <div class="d-article">
@@ -2125,6 +2125,8 @@ Notes
 <li><a href="#installing-r-and-rstudio">Installing R and RStudio</a></li>
 <li><a href="#r-as-a-calculator">R as a Calculator</a></li>
 <li><a href="#data-in-r">Data in R</a></li>
+<li><a href="#linear-algebra-in-r">Linear Algebra in R</a></li>
+<li><a href="#functions-in-r">Functions in R</a></li>
 <li><a href="#r-packages">R Packages</a></li>
 <li><a href="#visualization-in-r">Visualization in R</a></li>
 <li><a href="#numerical-solution-of-differential-equations-in-r">Numerical Solution of Differential Equations in R</a></li>
@@ -2149,17 +2151,25 @@ Notes
 <h1 id="why-r">Why R?</h1>
 <p>Given many other options, why do we focus on R as the computing tool of choice in <em>Topics in Biomathematics</em>? The principal reasons are:</p>
 <ol type="1">
-<li><p>R is free but also well-developed and supported.</p></li>
+<li><p>R is free but also well-developed and widely-supported.</p></li>
 <li><p>Even though it was developed for statistical applications, R works well for numerical computing of the sort that is useful in biomathematics.</p></li>
 <li><p>The <a href="https://www.rstudio.com/">RStudio</a> integrated development environment (IDE) facilitates not only coding in R but also presenting and sharing results so as to align nicely with the course objective “Communicate effectively in writing their work in applying the techniques of applied mathematics to problems arising in the life sciences.”.</p></li>
 <li><p>Many biologists “speak” R and it is very helpful to have a common language when collaborating on interdisciplinary problems.</p></li>
 </ol>
 <h1 id="an-introduction-to-r">An Introduction to R</h1>
-<p>In what follows, we illustrate some R commands that will be used commonly throughout the <em>Topics in Biomathematics</em> course. This document is by no means comprehensive. The best ways to learn more are</p>
+<p>In what follows, we illustrate some R commands that will be used commonly throughout the <em>Topics in Biomathematics</em> course. This document is by no means comprehensive. The best ways to learn more about R are</p>
 <ol type="1">
-<li><p>the <a href="https://swirlstats.com/">swirl</a> package,</p></li>
+<li><p>by using the <a href="https://swirlstats.com/"><code>swirl</code></a> package, and</p></li>
 <li><p>searching the web for specific topics.</p></li>
 </ol>
+<p>Here is a short video about <code>swirl</code>:</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="vembedr" align="center">
+<div>
+<iframe src="https://www.youtube.com/embed/olOJfAjzdO8" width="533" height="300" frameborder="0" allowfullscreen="" data-external="1"></iframe>
+</div>
+</div>
+</div>
 <h2 id="installing-r-and-rstudio">Installing R and RStudio</h2>
 <p>R and RStudio are both free and easy to install. The videos below can serve as a helpful guide if you want to use them. Alternatively, you can access R and RStudio through a web browser without direct installation via <a href="https://rstudio.cloud/">RStudio Cloud</a>. This does require an account but is free to set up.</p>
 <h3 id="installation-on-mac">Installation on Mac</h3>
@@ -2180,13 +2190,318 @@ Notes
 </div>
 </div>
 </div>
+<h3 id="rstudio-cloud">RStudio Cloud</h3>
+<p>Here is an intro to RStudio Cloud:</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="vembedr" align="center">
+<div>
+<iframe src="https://www.youtube.com/embed/uK1Va_UWQFc" width="533" height="300" frameborder="0" allowfullscreen="" data-external="1"></iframe>
+</div>
+</div>
+</div>
 <h2 id="r-as-a-calculator">R as a Calculator</h2>
+<p>R can be used for basic arithmetic calculations:</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='op'>(</span><span class='fl'>1</span> <span class='op'>+</span> <span class='fl'>2</span><span class='op'>)</span> <span class='co'># addition</span>
+</code></pre>
+</div>
+<pre><code>[1] 3</code></pre>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='op'>(</span><span class='fl'>6</span> <span class='op'>-</span> <span class='fl'>4</span><span class='op'>)</span> <span class='co'># subtraction </span>
+</code></pre>
+</div>
+<pre><code>[1] 2</code></pre>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='op'>(</span><span class='fl'>3</span><span class='op'>*</span><span class='fl'>5</span><span class='op'>)</span> <span class='co'># multiplication </span>
+</code></pre>
+</div>
+<pre><code>[1] 15</code></pre>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='op'>(</span><span class='fl'>8</span><span class='op'>/</span><span class='fl'>3</span><span class='op'>)</span> <span class='co'># division</span>
+</code></pre>
+</div>
+<pre><code>[1] 2.666667</code></pre>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='op'>(</span><span class='fl'>2</span><span class='op'>^</span><span class='fl'>3</span><span class='op'>)</span> <span class='co'># exponentiation</span>
+</code></pre>
+</div>
+<pre><code>[1] 8</code></pre>
+</div>
+<p>There are also a number of mathematical functions:</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/Log.html'>exp</a></span><span class='op'>(</span><span class='fl'>1</span><span class='op'>)</span><span class='op'>)</span>
+</code></pre>
+</div>
+<pre><code>[1] 2.718282</code></pre>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/Log.html'>log</a></span><span class='op'>(</span><span class='fl'>1</span><span class='op'>)</span><span class='op'>)</span>
+</code></pre>
+</div>
+<pre><code>[1] 0</code></pre>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/Log.html'>log</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/Log.html'>exp</a></span><span class='op'>(</span><span class='fl'>2</span><span class='op'>)</span><span class='op'>)</span><span class='op'>)</span>
+</code></pre>
+</div>
+<pre><code>[1] 2</code></pre>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/Log.html'>log10</a></span><span class='op'>(</span><span class='fl'>10</span><span class='op'>)</span><span class='op'>)</span>
+</code></pre>
+</div>
+<pre><code>[1] 1</code></pre>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/Trig.html'>sin</a></span><span class='op'>(</span><span class='va'>pi</span><span class='op'>/</span><span class='fl'>4</span><span class='op'>)</span><span class='op'>)</span>
+</code></pre>
+</div>
+<pre><code>[1] 0.7071068</code></pre>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/Trig.html'>cos</a></span><span class='op'>(</span><span class='va'>pi</span><span class='op'>/</span><span class='fl'>3</span><span class='op'>)</span><span class='op'>)</span>
+</code></pre>
+</div>
+<pre><code>[1] 0.5</code></pre>
+</div>
+<p>Sometimes it is convenient to store a value as a variable. The follow code stores the value of 3 as a variable <code>x</code> and then multiplies it by 1.5:</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>x</span> <span class='op'>&lt;-</span> <span class='fl'>3</span>
+<span class='fl'>1.5</span><span class='op'>*</span><span class='va'>x</span>
+</code></pre>
+</div>
+<pre><code>[1] 4.5</code></pre>
+</div>
+<p>In R, the notation <code>&lt;-</code> is the assignment operator.</p>
+<p>You can do arithmetic with variables just like you can with numbers. For example,</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>x</span> <span class='op'>&lt;-</span> <span class='fl'>3</span>
+<span class='va'>y</span> <span class='op'>&lt;-</span> <span class='fl'>10</span>
+<span class='op'>(</span><span class='va'>x</span> <span class='op'>+</span> <span class='va'>y</span><span class='op'>)</span>
+</code></pre>
+</div>
+<pre><code>[1] 13</code></pre>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='op'>(</span><span class='va'>x</span><span class='op'>*</span><span class='va'>y</span><span class='op'>)</span>
+</code></pre>
+</div>
+<pre><code>[1] 30</code></pre>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='op'>(</span><span class='va'>y</span><span class='op'>^</span><span class='va'>x</span><span class='op'>)</span>
+</code></pre>
+</div>
+<pre><code>[1] 1000</code></pre>
+</div>
+<p>You should always pay close attention to the order of operations when doing arithmetic in R. Use parentheses to make sure you compute what you mean to compute. For example,</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='op'>(</span><span class='op'>(</span><span class='fl'>3</span> <span class='op'>-</span> <span class='fl'>2</span><span class='op'>)</span> <span class='op'>*</span> <span class='fl'>6</span><span class='op'>)</span>
+</code></pre>
+</div>
+<pre><code>[1] 6</code></pre>
+</div>
+<p>versus</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='op'>(</span><span class='fl'>3</span> <span class='op'>-</span> <span class='op'>(</span><span class='fl'>2</span> <span class='op'>*</span> <span class='fl'>6</span><span class='op'>)</span><span class='op'>)</span>
+</code></pre>
+</div>
+<pre><code>[1] -9</code></pre>
+</div>
 <h2 id="data-in-r">Data in R</h2>
+<p>There are several common ways to represent different types of data in R. In this section we cover those that are most relevant to biomathematics.</p>
+<h3 id="numeric-vectors">Numeric Vectors</h3>
+<p>In R, we create a vector or array of values using concatenation with the operator <code>c</code>. For example,</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='op'>(</span><span class='va'>a</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>1</span>,<span class='fl'>5</span>,<span class='op'>-</span><span class='fl'>7</span><span class='op'>)</span><span class='op'>)</span>
+</code></pre>
+</div>
+<pre><code>[1]  1  5 -7</code></pre>
+</div>
+<p>creates a numeric vector with entries 1, 5, and -7, then we store the result as a variable called <code>a</code>.</p>
+<p>We can perform arithmetic operations on vectors. For example,</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>b</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>2</span>,<span class='op'>-</span><span class='fl'>1</span>,<span class='fl'>6</span><span class='op'>)</span>
+<span class='op'>(</span><span class='va'>a</span> <span class='op'>+</span> <span class='va'>b</span><span class='op'>)</span> <span class='co'># vector addition</span>
+</code></pre>
+</div>
+<pre><code>[1]  3  4 -1</code></pre>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='op'>(</span><span class='va'>a</span><span class='op'>-</span><span class='va'>b</span><span class='op'>)</span> <span class='co'># vector subtraction</span>
+</code></pre>
+</div>
+<pre><code>[1]  -1   6 -13</code></pre>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='op'>(</span><span class='va'>a</span><span class='op'>*</span><span class='va'>b</span><span class='op'>)</span> <span class='co'># elementwise vector multiplication </span>
+</code></pre>
+</div>
+<pre><code>[1]   2  -5 -42</code></pre>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='op'>(</span><span class='va'>a</span><span class='op'>^</span><span class='va'>b</span><span class='op'>)</span> <span class='co'># elementwise vector exponentiation </span>
+</code></pre>
+</div>
+<pre><code>[1]      1.0      0.2 117649.0</code></pre>
+</div>
+<p><strong>Question:</strong> In the last code block, what is happening to produce the result corresponding to <code>a^b</code>?</p>
+<p>We can also call math functions on vectors. For example,</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>x</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>1</span>,<span class='fl'>2</span>,<span class='fl'>3</span><span class='op'>)</span>
+<span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/Log.html'>exp</a></span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span><span class='op'>)</span>
+</code></pre>
+</div>
+<pre><code>[1]  2.718282  7.389056 20.085537</code></pre>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/Trig.html'>cos</a></span><span class='op'>(</span><span class='va'>pi</span><span class='op'>*</span><span class='va'>x</span><span class='op'>)</span><span class='op'>)</span>
+</code></pre>
+</div>
+<pre><code>[1] -1  1 -1</code></pre>
+</div>
+<p>Note that these math functions are “vectorized” in that the operate elementwise on a vector.</p>
+<h3 id="character-vectors">Character Vectors</h3>
+<p>We can also create so-called character vectors in R. For example,</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='op'>(</span><span class='va'>A</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"calculus"</span>,<span class='st'>"linear algebra"</span>, <span class='st'>"differential equations"</span><span class='op'>)</span><span class='op'>)</span>
+</code></pre>
+</div>
+<pre><code>[1] &quot;calculus&quot;               &quot;linear algebra&quot;        
+[3] &quot;differential equations&quot;</code></pre>
+</div>
+<p>We won’t make extensive use of character vectors in <em>Topics in Biomathematics</em> but it is useful to know that they exist.</p>
+<h3 id="matrices-in-r">Matrices in R</h3>
+<p>The <code>matrix</code> functions allows us to create a matrix in R. For example,</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='op'>(</span><span class='va'>M</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/matrix.html'>matrix</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>1</span>,<span class='fl'>2</span>,<span class='fl'>3</span>,<span class='fl'>4</span><span class='op'>)</span>,<span class='fl'>2</span>,<span class='fl'>2</span><span class='op'>)</span><span class='op'>)</span>
+</code></pre>
+</div>
+<pre><code>     [,1] [,2]
+[1,]    1    3
+[2,]    2    4</code></pre>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='op'>(</span><span class='va'>N</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/matrix.html'>matrix</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>1</span>,<span class='fl'>2</span>,<span class='fl'>3</span>,<span class='fl'>4</span>,<span class='fl'>5</span>,<span class='fl'>6</span><span class='op'>)</span>,<span class='fl'>2</span>,<span class='fl'>3</span><span class='op'>)</span><span class='op'>)</span>
+</code></pre>
+</div>
+<pre><code>     [,1] [,2] [,3]
+[1,]    1    3    5
+[2,]    2    4    6</code></pre>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='op'>(</span><span class='va'>P</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/matrix.html'>matrix</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>1</span>,<span class='fl'>2</span>,<span class='fl'>3</span>,<span class='fl'>4</span>,<span class='fl'>5</span>,<span class='fl'>6</span><span class='op'>)</span>,<span class='fl'>3</span>,<span class='fl'>2</span><span class='op'>)</span><span class='op'>)</span>
+</code></pre>
+</div>
+<pre><code>     [,1] [,2]
+[1,]    1    4
+[2,]    2    5
+[3,]    3    6</code></pre>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='op'>(</span><span class='va'>Q</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/matrix.html'>matrix</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>1</span>,<span class='fl'>2</span>,<span class='fl'>3</span>,<span class='fl'>4</span>,<span class='fl'>5</span>,<span class='fl'>6</span><span class='op'>)</span>,<span class='fl'>2</span>,<span class='fl'>3</span>,byrow<span class='op'>=</span><span class='cn'>TRUE</span><span class='op'>)</span><span class='op'>)</span>
+</code></pre>
+</div>
+<pre><code>     [,1] [,2] [,3]
+[1,]    1    2    3
+[2,]    4    5    6</code></pre>
+</div>
+<h3 id="lists-in-r">Lists in R</h3>
+<p>All of the entries in a vector or a matrix must by of the same type. For example, all numeric values or all characters. In R, lists are a data structure that allow us to store data of mixed types. For example,</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='op'>(</span><span class='va'>l1</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>1</span>,<span class='fl'>2</span>,<span class='fl'>3</span><span class='op'>)</span>,<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"jason"</span>,<span class='st'>"graham"</span><span class='op'>)</span>,<span class='fu'><a href='https://rdrr.io/r/base/matrix.html'>matrix</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>1</span>,<span class='fl'>2</span>,<span class='fl'>3</span>,<span class='fl'>4</span><span class='op'>)</span>,<span class='fl'>2</span>,<span class='fl'>2</span><span class='op'>)</span><span class='op'>)</span><span class='op'>)</span>
+</code></pre>
+</div>
+<pre><code>[[1]]
+[1] 1 2 3
+
+[[2]]
+[1] &quot;jason&quot;  &quot;graham&quot;
+
+[[3]]
+     [,1] [,2]
+[1,]    1    3
+[2,]    2    4</code></pre>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='op'>(</span><span class='va'>l2</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span>initial<span class='op'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>1</span>,<span class='fl'>12</span><span class='op'>)</span>,times<span class='op'>=</span><span class='fu'><a href='https://rdrr.io/r/base/seq.html'>seq</a></span><span class='op'>(</span><span class='fl'>0</span>,<span class='fl'>10</span>,by<span class='op'>=</span><span class='fl'>1</span><span class='op'>)</span>,values<span class='op'>=</span><span class='fu'><a href='https://rdrr.io/r/base/matrix.html'>matrix</a></span><span class='op'>(</span><span class='fl'>1</span><span class='op'>:</span><span class='fl'>22</span>,<span class='fl'>11</span>,<span class='fl'>2</span><span class='op'>)</span><span class='op'>)</span><span class='op'>)</span> <span class='co'># list with names</span>
+</code></pre>
+</div>
+<pre><code>$initial
+[1]  1 12
+
+$times
+ [1]  0  1  2  3  4  5  6  7  8  9 10
+
+$values
+      [,1] [,2]
+ [1,]    1   12
+ [2,]    2   13
+ [3,]    3   14
+ [4,]    4   15
+ [5,]    5   16
+ [6,]    6   17
+ [7,]    7   18
+ [8,]    8   19
+ [9,]    9   20
+[10,]   10   21
+[11,]   11   22</code></pre>
+</div>
+<p>Note that the entries of a list can be accessed using either indexing or names (provided that the list entries are named). For example,</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='op'>(</span><span class='va'>l1</span><span class='op'>[[</span><span class='fl'>2</span><span class='op'>]</span><span class='op'>]</span><span class='op'>)</span>
+</code></pre>
+</div>
+<pre><code>[1] &quot;jason&quot;  &quot;graham&quot;</code></pre>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='op'>(</span><span class='va'>l2</span><span class='op'>[[</span><span class='fl'>1</span><span class='op'>]</span><span class='op'>]</span><span class='op'>)</span>
+</code></pre>
+</div>
+<pre><code>[1]  1 12</code></pre>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='op'>(</span><span class='va'>l2</span><span class='op'>$</span><span class='va'>initial</span><span class='op'>)</span>
+</code></pre>
+</div>
+<pre><code>[1]  1 12</code></pre>
+</div>
+<p>If a list has named elements, we can access the names using the <code>names</code> function. For example,</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://rdrr.io/r/base/names.html'>names</a></span><span class='op'>(</span><span class='va'>l2</span><span class='op'>)</span>
+</code></pre>
+</div>
+<pre><code>[1] &quot;initial&quot; &quot;times&quot;   &quot;values&quot; </code></pre>
+</div>
+<h3 id="data-frames-in-r">Data Frames in R</h3>
+<p>A data frame in R is a data structure that corresponds to something like a spreadsheet. A data frame is a special type of list object. You can think of a data frame as a cross between a list and a matrix. Here is how you ceate a data frame:</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='op'>(</span><span class='va'>my_data</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span><span class='op'>(</span>course<span class='op'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"MATH 114"</span>,<span class='st'>"MATH 221"</span>,<span class='st'>"MATH 222"</span>,<span class='st'>"MATH 351"</span>, <span class='st'>"MATH 341"</span><span class='op'>)</span>,
+                       num_students<span class='op'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>10</span>,<span class='fl'>12</span>,<span class='fl'>8</span>,<span class='fl'>5</span>,<span class='fl'>7</span><span class='op'>)</span>,
+                       level<span class='op'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"F"</span>,<span class='st'>"F"</span>,<span class='st'>"S"</span>,<span class='st'>"S"</span>,<span class='st'>"T"</span><span class='op'>)</span><span class='op'>)</span><span class='op'>)</span>
+</code></pre>
+</div>
+<pre><code>    course num_students level
+1 MATH 114           10     F
+2 MATH 221           12     F
+3 MATH 222            8     S
+4 MATH 351            5     S
+5 MATH 341            7     T</code></pre>
+</div>
+<p>Note that a data frame contains rows and columns, every column is a vector (either numeric or character), and every column has the same number of entries. The columns of a data frame all have names. We can also use the <code>names</code> function to determine the column names of a data frame. For example,</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://rdrr.io/r/base/names.html'>names</a></span><span class='op'>(</span><span class='va'>my_data</span><span class='op'>)</span>
+</code></pre>
+</div>
+<pre><code>[1] &quot;course&quot;       &quot;num_students&quot; &quot;level&quot;       </code></pre>
+</div>
+<p>Typically we do not create a data frame by hand, but data is often read in as a data frame. The principal use of data frames in R is that they are the best way to provide data to plotting functions.</p>
+<h2 id="linear-algebra-in-r">Linear Algebra in R</h2>
+<h2 id="functions-in-r">Functions in R</h2>
 <h2 id="r-packages">R Packages</h2>
 <h2 id="visualization-in-r">Visualization in R</h2>
 <h2 id="numerical-solution-of-differential-equations-in-r">Numerical Solution of Differential Equations in R</h2>
 <h2 id="phase-plane-methods-in-r">Phase-Plane Methods in R</h2>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
+<div class="sourceCode" id="cb38"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
 <!--radix_placeholder_article_footer-->
 <!--/radix_placeholder_article_footer-->
 </div>
