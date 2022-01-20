@@ -357,8 +357,69 @@ Let's also confirm that $Av=\lambda v$ for the first eigenvalue-eigenvector pair
 
 ## Functions in R
 
+A function is a programming construct that takes some number of inputs (possibly zero), performs some operations, and returns a value (which may be null). Writing functions is useful in general because it saves from having to rewrite the same code over and over again, makes code easier to read, and facilitates reproducibility. Additionally, code to compute numerical solutions to differential equations requires us to write a function specifying the differential equation. Thus, we are motivated to learn a little about writing functions in R. 
+Suppose we want to create a function that inputs a number, multiplies that number by 2, and returns the result. Here is how you do this:
 
-Here is a helpful video on writing functions in R:
+```{r mult_by_two_func}
+mult_by_two <- function(x){
+  return(2*x)
+}
+```
+
+Let's call our function:
+
+```{r call_mult_by_two_func}
+mult_by_two(3)
+```
+
+We can also do the following:
+
+```{r alt_call_mult_by_two_func}
+x <- 3
+mult_by_two(x)
+```
+
+What if we want to multiply by an arbitrary number? One way to do this is as follows:
+
+```{r mult_by_a}
+mult_by_a <- function(x,a=2){
+  return(a*x)
+}
+```
+
+In the function `mult_by_a` we have an optional argument with a default value. If `a` is not specified, we multiply by 2, if a value for `a` is given then it is used. For example:
+
+```{r call_mult_by_a}
+(mult_by_a(3))
+(mult_by_a(3,a=4)) # a is given by name
+x <- 4
+a <- 6
+(mult_by_a(x))
+(mult_by_a(x,a)) # a is given by position 
+```
+
+Let's try something a little more interesting. Suppose we want to compute the value of an arbitrary polynomial function. Since the coefficients uniquely determine the polynomial and since R can perform vectorized operations, we can do the following:
+
+```{r poly_func}
+poly_func <- function(x,coeff_vect=c(1)){
+  degree <- length(coeff_vect) - 1 
+  powers <- 0:degree
+  x_powers <- x^powers
+  return(sum(coeff_vect*x_powers))
+}
+```
+
+Let's test our function:
+
+```{r test_poly_func}
+(poly_func(2))
+(poly_func(2,coeff_vect=c(3)))
+(poly_func(2,coeff_vect=c(0,1)))
+(poly_func(2,coeff_vect=c(0,0,1)))
+(poly_func(2,coeff_vect=c(1,2,3)))
+```
+
+Later we will see more examples of functions in R. In you want to learn more before then, here is a helpful video on writing functions in R:
 
 ```{r functions_video,echo=FALSE}
 vembedr::embed_url("https://youtu.be/p8tAQx7ijXE") %>%
@@ -367,8 +428,24 @@ vembedr::embed_url("https://youtu.be/p8tAQx7ijXE") %>%
 
 ## R Packages
 
+R packages extend the functionality of R by implementing functions for various tasks. Packages must be installed before they can be used. Installing packages is easy to do. Either use the `install.packages` function or in RStudio use the Install icon on the Packages tab. 
 
+Once you have installed the package or packages you want to use, you can load them with the `library` function. For *Topics in Biomathematics* we will make heavy use of the plotting packages [`ggplot2`](https://ggplot2.tidyverse.org/) and [`ggformula`](http://www.mosaic-web.org/ggformula/), and the packages [`deSolve`](https://desolve.r-forge.r-project.org/) and [`phaseR`](https://www.rdocumentation.org/packages/phaseR/versions/2.1.3) for working with differential equations. To install these packages one can use
 
+```{r install_packages,eval=FALSE}
+install.packages(c("ggplot2","ggformula","deSolve","phaseR"))
+```
+
+You only ever have to install a package once. To load these packages, you run
+
+```{r load_packages,eval=FALSE}
+library(ggplot2)
+library(ggformula)
+library(deSolve)
+library(phaseR)
+```
+
+Packages must be loaded every time you begin a new R session.  
 
 ## Visualization in R
 
@@ -387,7 +464,7 @@ vembedr::embed_url("https://youtu.be/iOosTTQwCW4") %>%
 ## Numerical Solution of Differential Equations in R
 
 
-
+The book [@soetaertSolvingDEsR2012] covers much more on numerical computing with differential equations in R.  
 
 ## Phase-Plane Methods in R
 

@@ -85,6 +85,27 @@ code span.vs { color: #20794d; } /* VerbatimString */
 code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 </style>
 
+<style>
+  div.csl-bib-body { }
+  div.csl-entry {
+    clear: both;
+    }
+  .hanging div.csl-entry {
+    margin-left:2em;
+    text-indent:-2em;
+  }
+  div.csl-left-margin {
+    min-width:2em;
+    float:left;
+  }
+  div.csl-right-inline {
+    margin-left:2em;
+    padding-left:1em;
+  }
+  div.csl-indent {
+    margin-left: 2em;
+  }
+</style>
 
   <!--radix_placeholder_meta_tags-->
   <title>Topics in Biomathematics: R for Biomathematics</title>
@@ -112,6 +133,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 
   <!--/radix_placeholder_meta_tags-->
   
+  <meta name="citation_reference" content="citation_title=Solving differential equations in R;citation_publication_date=2012;citation_publisher=Springer, New York;citation_doi=10.1007/978-3-642-28070-2;citation_author=Karline Soetaert;citation_author=Jeff Cash;citation_author=Francesca Mazzia"/>
   <!--radix_placeholder_rmarkdown_metadata-->
 
   <script type="text/json" id="radix-rmarkdown-metadata">
@@ -2667,7 +2689,107 @@ $vectors
 <pre><code>[1] -1.8043114 -2.4618891 -0.9566547</code></pre>
 </div>
 <h2 id="functions-in-r">Functions in R</h2>
-<p>Here is a helpful video on writing functions in R:</p>
+<p>A function is a programming construct that takes some number of inputs (possibly zero), performs some operations, and returns a value (which may be null). Writing functions is useful in general because it saves from having to rewrite the same code over and over again, makes code easier to read, and facilitates reproducibility. Additionally, code to compute numerical solutions to differential equations requires us to write a function specifying the differential equation. Thus, we are motivated to learn a little about writing functions in R. Suppose we want to create a function that inputs a number, multiplies that number by 2, and returns the result. Here is how you do this:</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>mult_by_two</span> <span class='op'>&lt;-</span> <span class='kw'>function</span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span><span class='op'>{</span>
+  <span class='kw'><a href='https://rdrr.io/r/base/function.html'>return</a></span><span class='op'>(</span><span class='fl'>2</span><span class='op'>*</span><span class='va'>x</span><span class='op'>)</span>
+<span class='op'>}</span>
+</code></pre>
+</div>
+</div>
+<p>Let’s call our function:</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'>mult_by_two</span><span class='op'>(</span><span class='fl'>3</span><span class='op'>)</span>
+</code></pre>
+</div>
+<pre><code>[1] 6</code></pre>
+</div>
+<p>We can also do the following:</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>x</span> <span class='op'>&lt;-</span> <span class='fl'>3</span>
+<span class='fu'>mult_by_two</span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span>
+</code></pre>
+</div>
+<pre><code>[1] 6</code></pre>
+</div>
+<p>What if we want to multiply by an arbitrary number? One way to do this is as follows:</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>mult_by_a</span> <span class='op'>&lt;-</span> <span class='kw'>function</span><span class='op'>(</span><span class='va'>x</span>,<span class='va'>a</span><span class='op'>=</span><span class='fl'>2</span><span class='op'>)</span><span class='op'>{</span>
+  <span class='kw'><a href='https://rdrr.io/r/base/function.html'>return</a></span><span class='op'>(</span><span class='va'>a</span><span class='op'>*</span><span class='va'>x</span><span class='op'>)</span>
+<span class='op'>}</span>
+</code></pre>
+</div>
+</div>
+<p>In the function <code>mult_by_a</code> we have an optional argument with a default value. If <code>a</code> is not specified, we multiply by 2, if a value for <code>a</code> is given then it is used. For example:</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='op'>(</span><span class='fu'>mult_by_a</span><span class='op'>(</span><span class='fl'>3</span><span class='op'>)</span><span class='op'>)</span>
+</code></pre>
+</div>
+<pre><code>[1] 6</code></pre>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='op'>(</span><span class='fu'>mult_by_a</span><span class='op'>(</span><span class='fl'>3</span>,a<span class='op'>=</span><span class='fl'>4</span><span class='op'>)</span><span class='op'>)</span> <span class='co'># a is given by name</span>
+</code></pre>
+</div>
+<pre><code>[1] 12</code></pre>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>x</span> <span class='op'>&lt;-</span> <span class='fl'>4</span>
+<span class='va'>a</span> <span class='op'>&lt;-</span> <span class='fl'>6</span>
+<span class='op'>(</span><span class='fu'>mult_by_a</span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span><span class='op'>)</span>
+</code></pre>
+</div>
+<pre><code>[1] 8</code></pre>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='op'>(</span><span class='fu'>mult_by_a</span><span class='op'>(</span><span class='va'>x</span>,<span class='va'>a</span><span class='op'>)</span><span class='op'>)</span> <span class='co'># a is given by position </span>
+</code></pre>
+</div>
+<pre><code>[1] 24</code></pre>
+</div>
+<p>Let’s try something a little more interesting. Suppose we want to compute the value of an arbitrary polynomial function. Since the coefficients uniquely determine the polynomial and since R can perform vectorized operations, we can do the following:</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>poly_func</span> <span class='op'>&lt;-</span> <span class='kw'>function</span><span class='op'>(</span><span class='va'>x</span>,<span class='va'>coeff_vect</span><span class='op'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>1</span><span class='op'>)</span><span class='op'>)</span><span class='op'>{</span>
+  <span class='va'>degree</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/length.html'>length</a></span><span class='op'>(</span><span class='va'>coeff_vect</span><span class='op'>)</span> <span class='op'>-</span> <span class='fl'>1</span> 
+  <span class='va'>powers</span> <span class='op'>&lt;-</span> <span class='fl'>0</span><span class='op'>:</span><span class='va'>degree</span>
+  <span class='va'>x_powers</span> <span class='op'>&lt;-</span> <span class='va'>x</span><span class='op'>^</span><span class='va'>powers</span>
+  <span class='kw'><a href='https://rdrr.io/r/base/function.html'>return</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/sum.html'>sum</a></span><span class='op'>(</span><span class='va'>coeff_vect</span><span class='op'>*</span><span class='va'>x_powers</span><span class='op'>)</span><span class='op'>)</span>
+<span class='op'>}</span>
+</code></pre>
+</div>
+</div>
+<p>Let’s test our function:</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='op'>(</span><span class='fu'>poly_func</span><span class='op'>(</span><span class='fl'>2</span><span class='op'>)</span><span class='op'>)</span>
+</code></pre>
+</div>
+<pre><code>[1] 1</code></pre>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='op'>(</span><span class='fu'>poly_func</span><span class='op'>(</span><span class='fl'>2</span>,coeff_vect<span class='op'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>3</span><span class='op'>)</span><span class='op'>)</span><span class='op'>)</span>
+</code></pre>
+</div>
+<pre><code>[1] 3</code></pre>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='op'>(</span><span class='fu'>poly_func</span><span class='op'>(</span><span class='fl'>2</span>,coeff_vect<span class='op'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>0</span>,<span class='fl'>1</span><span class='op'>)</span><span class='op'>)</span><span class='op'>)</span>
+</code></pre>
+</div>
+<pre><code>[1] 2</code></pre>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='op'>(</span><span class='fu'>poly_func</span><span class='op'>(</span><span class='fl'>2</span>,coeff_vect<span class='op'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>0</span>,<span class='fl'>0</span>,<span class='fl'>1</span><span class='op'>)</span><span class='op'>)</span><span class='op'>)</span>
+</code></pre>
+</div>
+<pre><code>[1] 4</code></pre>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='op'>(</span><span class='fu'>poly_func</span><span class='op'>(</span><span class='fl'>2</span>,coeff_vect<span class='op'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>1</span>,<span class='fl'>2</span>,<span class='fl'>3</span><span class='op'>)</span><span class='op'>)</span><span class='op'>)</span>
+</code></pre>
+</div>
+<pre><code>[1] 17</code></pre>
+</div>
+<p>Later we will see more examples of functions in R. In you want to learn more before then, here is a helpful video on writing functions in R:</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="vembedr" align="center">
 <div>
@@ -2676,6 +2798,25 @@ $vectors
 </div>
 </div>
 <h2 id="r-packages">R Packages</h2>
+<p>R packages extend the functionality of R by implementing functions for various tasks. Packages must be installed before they can be used. Installing packages is easy to do. Either use the <code>install.packages</code> function or in RStudio use the Install icon on the Packages tab.</p>
+<p>Once you have installed the package or packages you want to use, you can load them with the <code>library</code> function. For <em>Topics in Biomathematics</em> we will make heavy use of the plotting packages <a href="https://ggplot2.tidyverse.org/"><code>ggplot2</code></a> and <a href="http://www.mosaic-web.org/ggformula/"><code>ggformula</code></a>, and the packages <a href="https://desolve.r-forge.r-project.org/"><code>deSolve</code></a> and <a href="https://www.rdocumentation.org/packages/phaseR/versions/2.1.3"><code>phaseR</code></a> for working with differential equations. To install these packages one can use</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://rdrr.io/r/utils/install.packages.html'>install.packages</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"ggplot2"</span>,<span class='st'>"ggformula"</span>,<span class='st'>"deSolve"</span>,<span class='st'>"phaseR"</span><span class='op'>)</span><span class='op'>)</span>
+</code></pre>
+</div>
+</div>
+<p>You only ever have to install a package once. To load these packages, you run</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://ggplot2.tidyverse.org'>ggplot2</a></span><span class='op'>)</span>
+<span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://github.com/ProjectMOSAIC/ggformula'>ggformula</a></span><span class='op'>)</span>
+<span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='http://desolve.r-forge.r-project.org/'>deSolve</a></span><span class='op'>)</span>
+<span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://github.com/mjg211/phaseR'>phaseR</a></span><span class='op'>)</span>
+</code></pre>
+</div>
+</div>
+<p>Packages must be loaded every time you begin a new R session.</p>
 <h2 id="visualization-in-r">Visualization in R</h2>
 <p>Here is a helpful video on <code>ggplot2</code>:</p>
 <div class="layout-chunk" data-layout="l-body">
@@ -2687,8 +2828,14 @@ $vectors
 </div>
 <p><a href="https://stat2labs.sites.grinnell.edu/Handouts/rtutorials/IntroToggformula.html">This article</a> provides more information on <code>ggformula</code>.</p>
 <h2 id="numerical-solution-of-differential-equations-in-r">Numerical Solution of Differential Equations in R</h2>
+<p>The book <span class="citation" data-cites="soetaertSolvingDEsR2012">(<a href="#ref-soetaertSolvingDEsR2012" role="doc-biblioref">Soetaert, Cash, and Mazzia 2012</a>)</span> covers much more on numerical computing with differential equations in R.</p>
 <h2 id="phase-plane-methods-in-r">Phase-Plane Methods in R</h2>
-<div class="sourceCode" id="cb54"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
+<div class="sourceCode" id="cb65"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
+<div id="refs" class="references csl-bib-body hanging-indent" role="doc-bibliography">
+<div id="ref-soetaertSolvingDEsR2012" class="csl-entry" role="doc-biblioentry">
+Soetaert, Karline, Jeff Cash, and Francesca Mazzia. 2012. <em>Solving Differential Equations in <span>R</span></em>. Use r! Springer, New York. <a href="https://doi.org/10.1007/978-3-642-28070-2">https://doi.org/10.1007/978-3-642-28070-2</a>.
+</div>
+</div>
 <!--radix_placeholder_article_footer-->
 <!--/radix_placeholder_article_footer-->
 </div>
