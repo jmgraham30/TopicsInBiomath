@@ -358,7 +358,12 @@ Let's also confirm that $Av=\lambda v$ for the first eigenvalue-eigenvector pair
 ## Functions in R
 
 
+Here is a helpful video on writing functions in R:
 
+```{r functions_video,echo=FALSE}
+vembedr::embed_url("https://youtu.be/p8tAQx7ijXE") %>%
+  vembedr::use_align("center")
+```
 
 ## R Packages
 
