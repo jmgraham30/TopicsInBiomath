@@ -2111,6 +2111,7 @@ Notes
 <a href="notes003.html">Notes 3</a>
 </div>
 </div>
+<a href="r_for_biomath.html">R for Biomath</a>
 <a href="https://github.com/jmgraham30">
 <i class="fa fa-github" aria-hidden="true"></i>
 </a>
@@ -2155,6 +2156,7 @@ Notes
 <li><a href="#numerical-solution-of-differential-equations-in-r">Numerical Solution of Differential Equations in R</a></li>
 <li><a href="#phase-plane-methods-in-r">Phase-Plane Methods in R</a></li>
 </ul></li>
+<li><a href="#conclusion">Conclusion</a></li>
 </ul>
 </nav>
 </div>
@@ -2866,9 +2868,498 @@ $vectors
 </div>
 <p><a href="https://stat2labs.sites.grinnell.edu/Handouts/rtutorials/IntroToggformula.html">This article</a> provides more information on <code>ggformula</code>.</p>
 <h2 id="numerical-solution-of-differential-equations-in-r">Numerical Solution of Differential Equations in R</h2>
+<p>A problem that we will often encounter is to obtain a numerical solution to an initial value problem (IVP) for an ordinary differential equation (ODE) or a system of ordinary differential equations (ODEs). An IVP for an ODE or ODEs typically takes the form</p>
+<p><span class="math inline">\(\frac{d{\bf x}}{dt} = {\bf F}({\bf x}(t),t)\)</span>,</p>
+<p><span class="math inline">\({\bf x}(t_{0}) = {\bf x}_{0}\)</span>.</p>
+<p>Here <span class="math inline">\({\bf x}\)</span> is the unknown function of time and <span class="math inline">\({\bf F}\)</span> is the right hand side function. These may be scalars (in case of a single ODE) or vectors (in case of a system of ODEs). First, we will focus on the case of solving a single scalar ODE, then we will examine systems on ODEs.</p>
+<p>For example, we might want to obtain a numerical solution to</p>
+<p><span class="math inline">\(\frac{dN}{dt} = r N\)</span>,</p>
+<p><span class="math inline">\(N(0) = 10\)</span>,</p>
+<p>with <span class="math inline">\(r=0.5\)</span> and over the time interval <span class="math inline">\([0, 5]\)</span>.</p>
+<p>In order to obtain a numerical solution to an IVP for ODEs we must provide at minimum the following information to the computer:</p>
+<ol type="1">
+<li><p>A function that describes the right hand side <span class="math inline">\({\bf F}({\bf x}(t),t)\)</span>. Note that <span class="math inline">\({\bf F}\)</span> may involve parameters whose values will also need to be specified.</p></li>
+<li><p>A time interval, <span class="math inline">\([t_{0},t_{f}]\)</span>, over which to obtain a numerical solution.</p></li>
+<li><p>Initial conditions <span class="math inline">\({\bf x}_{0}\)</span>.</p></li>
+</ol>
+<p>Finally, once we have obtained numerical solutions to an IVP for ODEs it is typically desirable to plot these solutions in one way or another. We will also see examples of ways to plot our numerical solutions in R.</p>
+<h3 id="solving-a-single-ode">Solving a Single ODE</h3>
+<p>To use the methods described in this section you must make sure that the <code>deSolve</code> package is installed and loaded. The main function for obtaining numerical solutions in the <code>deSolve</code> package is the <code>ode</code> function. In order to use it, we must write a function in R syntax that describes the right hand side of our differential equation. Let’s do this for our example problem</p>
+<p><span class="math inline">\(\frac{dN}{dt} = r N\)</span>,</p>
+<p><span class="math inline">\(N(0) = 10\)</span>,</p>
+<p>with <span class="math inline">\(r=0.5\)</span> and over the time interval <span class="math inline">\([0, 5]\)</span>.</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>My_RHS</span> <span class='op'>&lt;-</span> <span class='kw'>function</span><span class='op'>(</span><span class='va'>t</span>,<span class='va'>state</span>,<span class='va'>parameters</span><span class='op'>)</span><span class='op'>{</span>
+  <span class='fu'><a href='https://rdrr.io/r/base/with.html'>with</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/list.html'>as.list</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='va'>state</span>,<span class='va'>parameters</span><span class='op'>)</span><span class='op'>)</span>,<span class='op'>{</span>
+    <span class='va'>dN</span> <span class='op'>&lt;-</span> <span class='va'>r</span><span class='op'>*</span><span class='va'>N</span>
+    
+    <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='va'>dN</span><span class='op'>)</span><span class='op'>)</span>
+  <span class='op'>}</span><span class='op'>)</span>
+<span class='op'>}</span>
+</code></pre>
+</div>
+</div>
+<p>In addition to describing the right hand side of the differential equation, we must also specify the times at which to obtain the numerical solution and the initial condition. This is done as follows:</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>state</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span>N<span class='op'>=</span><span class='fl'>10</span><span class='op'>)</span>
+<span class='va'>times</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/seq.html'>seq</a></span><span class='op'>(</span><span class='fl'>0</span>,<span class='fl'>5</span>,by<span class='op'>=</span><span class='fl'>0.1</span><span class='op'>)</span>
+</code></pre>
+</div>
+</div>
+<p>Now we are ready to obtain the numerical solution:</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>solN</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/deSolve/man/ode.html'>ode</a></span><span class='op'>(</span>y<span class='op'>=</span><span class='va'>state</span>,times<span class='op'>=</span><span class='va'>times</span>,func<span class='op'>=</span><span class='va'>My_RHS</span>,parms<span class='op'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span>r<span class='op'>=</span><span class='fl'>0.5</span><span class='op'>)</span><span class='op'>)</span>
+</code></pre>
+</div>
+</div>
+<p>Let’s look at what has been returned by our call to the numerical solver, the results of which are stored in the variable <code>solN</code>.</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>solN</span>
+</code></pre>
+</div>
+<pre><code>   time         N
+1   0.0  10.00000
+2   0.1  10.51272
+3   0.2  11.05171
+4   0.3  11.61834
+5   0.4  12.21403
+6   0.5  12.84026
+7   0.6  13.49859
+8   0.7  14.19068
+9   0.8  14.91825
+10  0.9  15.68313
+11  1.0  16.48722
+12  1.1  17.33254
+13  1.2  18.22120
+14  1.3  19.15542
+15  1.4  20.13754
+16  1.5  21.17001
+17  1.6  22.25542
+18  1.7  23.39648
+19  1.8  24.59604
+20  1.9  25.85711
+21  2.0  27.18283
+22  2.1  28.57652
+23  2.2  30.04167
+24  2.3  31.58194
+25  2.4  33.20118
+26  2.5  34.90344
+27  2.6  36.69298
+28  2.7  38.57427
+29  2.8  40.55202
+30  2.9  42.63116
+31  3.0  44.81691
+32  3.1  47.11472
+33  3.2  49.53034
+34  3.3  52.06982
+35  3.4  54.73950
+36  3.5  57.54605
+37  3.6  60.49650
+38  3.7  63.59822
+39  3.8  66.85897
+40  3.9  70.28690
+41  4.0  73.89059
+42  4.1  77.67904
+43  4.2  81.66173
+44  4.3  85.84862
+45  4.4  90.25017
+46  4.5  94.87740
+47  4.6  99.74186
+48  4.7 104.85574
+49  4.8 110.23181
+50  4.9 115.88351
+51  5.0 121.82499</code></pre>
+</div>
+<p>The method from the <code>deSolve</code> package returns a <strong>matrix</strong> where the first column contains the time values at which we obtained numerical solution values and another column that contains the solution values corresponding to each of the time points. We can easily plot the solution values versus the time points as follows:</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span><span class='op'>(</span><span class='va'>solN</span>,col<span class='op'>=</span><span class='st'>"blue"</span><span class='op'>)</span>
+</code></pre>
+</div>
+<p><img src="r_for_biomath_files/figure-html5/plot_example-1.png" width="624" /></p>
+</div>
+<p>A nicer plot can be obtained as follows:</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/as.data.frame.html'>as.data.frame</a></span><span class='op'>(</span><span class='va'>solN</span><span class='op'>)</span>,<span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span>x<span class='op'>=</span><span class='va'>time</span>,y<span class='op'>=</span><span class='va'>N</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_point.html'>geom_point</a></span><span class='op'>(</span><span class='op'>)</span>
+</code></pre>
+</div>
+<p><img src="r_for_biomath_files/figure-html5/plot_example_ggplot-1.png" width="624" /></p>
+</div>
+<p>If we want a curve instead:</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/as.data.frame.html'>as.data.frame</a></span><span class='op'>(</span><span class='va'>solN</span><span class='op'>)</span>,<span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span>x<span class='op'>=</span><span class='va'>time</span>,y<span class='op'>=</span><span class='va'>N</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_path.html'>geom_line</a></span><span class='op'>(</span>lwd<span class='op'>=</span><span class='fl'>1</span><span class='op'>)</span>
+</code></pre>
+</div>
+<p><img src="r_for_biomath_files/figure-html5/plot_example_ggplot_line-1.png" width="624" /></p>
+</div>
+<p>We can plot the numerical solution together with the analytical solution <span class="math inline">\(N(t) = 10e^{0.5 t}\)</span> as follows:</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/as.data.frame.html'>as.data.frame</a></span><span class='op'>(</span><span class='va'>solN</span><span class='op'>)</span>,<span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span>x<span class='op'>=</span><span class='va'>time</span>,y<span class='op'>=</span><span class='va'>N</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_point.html'>geom_point</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>+</span> 
+  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_function.html'>geom_function</a></span><span class='op'>(</span>fun<span class='op'>=</span><span class='kw'>function</span><span class='op'>(</span><span class='va'>t</span><span class='op'>)</span> <span class='fl'>10</span><span class='op'>*</span><span class='fu'><a href='https://rdrr.io/r/base/Log.html'>exp</a></span><span class='op'>(</span><span class='fl'>0.5</span><span class='op'>*</span><span class='va'>t</span><span class='op'>)</span>,color<span class='op'>=</span><span class='st'>"blue"</span><span class='op'>)</span>
+</code></pre>
+</div>
+<p><img src="r_for_biomath_files/figure-html5/example_analtiycal-1.png" width="624" /></p>
+</div>
+<p><strong>Exercise:</strong> Modify what we have done using the <code>deSolve</code> package to obtain and plot a numerical solution to the IVP</p>
+<p><span class="math inline">\(\frac{dN}{dt} = r N\)</span>,</p>
+<p><span class="math inline">\(N(0) = 5\)</span>,</p>
+<p>with <span class="math inline">\(r=2.5\)</span> and over the time interval <span class="math inline">\([0, 10]\)</span>.</p>
+<h3 id="solving-a-system-of-odes">Solving a System of ODEs</h3>
+<p>Consider the following problem:</p>
+<p><span class="math inline">\(\frac{dx}{dt}=-R_{0}xy\)</span></p>
+<p><span class="math inline">\(\frac{dy}{dt}=R_{0}xy - y\)</span></p>
+<p>with <span class="math inline">\(R_{0} = 0.2\)</span> and <span class="math inline">\(x_{0} = 0.95\)</span> and <span class="math inline">\(y_{0} = 0.05\)</span>.</p>
+<p>We can code this system of ODEs in R as:</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>My_RHS</span> <span class='op'>&lt;-</span> <span class='kw'>function</span><span class='op'>(</span><span class='va'>t</span>,<span class='va'>state</span>,<span class='va'>parameters</span><span class='op'>)</span><span class='op'>{</span>
+  <span class='fu'><a href='https://rdrr.io/r/base/with.html'>with</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/list.html'>as.list</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='va'>state</span>,<span class='va'>parameters</span><span class='op'>)</span><span class='op'>)</span>,<span class='op'>{</span>
+    <span class='va'>dx</span> <span class='op'>&lt;-</span> <span class='op'>-</span><span class='va'>R0</span><span class='op'>*</span><span class='va'>x</span><span class='op'>*</span><span class='va'>y</span>
+    <span class='va'>dy</span> <span class='op'>&lt;-</span> <span class='va'>R0</span><span class='op'>*</span><span class='va'>x</span><span class='op'>*</span><span class='va'>y</span> <span class='op'>-</span> <span class='va'>y</span>
+    
+    <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='va'>dx</span>,<span class='va'>dy</span><span class='op'>)</span><span class='op'>)</span>
+  <span class='op'>}</span><span class='op'>)</span>
+<span class='op'>}</span>
+</code></pre>
+</div>
+</div>
+<p>We must specify our time interval and initial conditions:</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>state</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span>x<span class='op'>=</span><span class='fl'>0.95</span>,y<span class='op'>=</span><span class='fl'>0.05</span><span class='op'>)</span>
+<span class='va'>times</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/seq.html'>seq</a></span><span class='op'>(</span><span class='fl'>0</span>,<span class='fl'>20</span>,by<span class='op'>=</span><span class='fl'>0.1</span><span class='op'>)</span>
+</code></pre>
+</div>
+</div>
+<p>Now, we are ready to obtain the numerical solution:</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>SIR_sol</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/deSolve/man/ode.html'>ode</a></span><span class='op'>(</span>y<span class='op'>=</span><span class='va'>state</span>,times<span class='op'>=</span><span class='va'>times</span>,func<span class='op'>=</span><span class='va'>My_RHS</span>,parms<span class='op'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span>R0<span class='op'>=</span><span class='fl'>0.2</span><span class='op'>)</span><span class='op'>)</span>
+</code></pre>
+</div>
+</div>
+<p>Again, the method from the <code>deSolve</code> package returns a matrix where the first column contains the time values at which we obtained numerical solution values and another column that contains the solution values corresponding to each of the time points. We can easily plot the solution values versus the time points as follows:</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span><span class='op'>(</span><span class='va'>SIR_sol</span>,col<span class='op'>=</span><span class='st'>"blue"</span><span class='op'>)</span>
+</code></pre>
+</div>
+<p><img src="r_for_biomath_files/figure-html5/plot_system-1.png" width="624" /></p>
+</div>
+<p><strong>Question:</strong> Again, what happens if we change the value of <span class="math inline">\(R_{0}\)</span> to <span class="math inline">\(R_{0}=1.5\)</span>?</p>
+<p>Often we want to have greater control over our plots and to be able to make high quality figures. The best way to do this in R is to use the capabilities of the <code>ggplot2</code> package. In order to do this, we will first convert the matrix of solutions returned by the <code>ode</code> function from the <code>deSolve</code> package into a data frame. This is basically like an spread sheet format for data.</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>SIR_sol_df</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/as.data.frame.html'>as.data.frame</a></span><span class='op'>(</span><span class='va'>SIR_sol</span><span class='op'>)</span>
+</code></pre>
+</div>
+</div>
+<p>We can get a sense of the structure of this data by viewing the first few rows:</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span><span class='op'>(</span><span class='va'>SIR_sol_df</span><span class='op'>)</span>
+</code></pre>
+</div>
+<pre><code>  time         x          y
+1  0.0 0.9500000 0.05000000
+2  0.1 0.9490877 0.04610860
+3  0.2 0.9482474 0.04251971
+4  0.3 0.9474732 0.03921021
+5  0.4 0.9467598 0.03615738
+6  0.5 0.9461024 0.03334179</code></pre>
+</div>
+<p>It is convenient to change the names of the columns to something more meaningful as follows:</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://rdrr.io/r/base/names.html'>names</a></span><span class='op'>(</span><span class='va'>SIR_sol_df</span><span class='op'>)</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"time"</span>,<span class='st'>"susceptible"</span>,<span class='st'>"infected"</span><span class='op'>)</span>
+</code></pre>
+</div>
+</div>
+<p>Let’s look at the first few rows again:</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span><span class='op'>(</span><span class='va'>SIR_sol_df</span><span class='op'>)</span>
+</code></pre>
+</div>
+<pre><code>  time susceptible   infected
+1  0.0   0.9500000 0.05000000
+2  0.1   0.9490877 0.04610860
+3  0.2   0.9482474 0.04251971
+4  0.3   0.9474732 0.03921021
+5  0.4   0.9467598 0.03615738
+6  0.5   0.9461024 0.03334179</code></pre>
+</div>
+<p>Now, we can obtain plots by doing commands like:</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span><span class='op'>(</span>data<span class='op'>=</span><span class='va'>SIR_sol_df</span>,mapping<span class='op'>=</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span>x<span class='op'>=</span><span class='va'>time</span>,y<span class='op'>=</span><span class='va'>susceptible</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_path.html'>geom_line</a></span><span class='op'>(</span><span class='op'>)</span>
+</code></pre>
+</div>
+<p><img src="r_for_biomath_files/figure-html5/system_plot_b-1.png" width="624" /></p>
+</div>
+<p>or</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span><span class='op'>(</span>data<span class='op'>=</span><span class='va'>SIR_sol_df</span>,mapping<span class='op'>=</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span>x<span class='op'>=</span><span class='va'>time</span>,y<span class='op'>=</span><span class='va'>infected</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_path.html'>geom_line</a></span><span class='op'>(</span><span class='op'>)</span>
+</code></pre>
+</div>
+<p><img src="r_for_biomath_files/figure-html5/system_plot_c-1.png" width="624" /></p>
+</div>
+<p>Here are some other plotting alternatives:</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"> <span class='va'>SIR_df_long</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://tidyr.tidyverse.org/reference/pivot_longer.html'>pivot_longer</a></span><span class='op'>(</span><span class='va'>SIR_sol_df</span>,<span class='op'>-</span><span class='va'>time</span>,names_to <span class='op'>=</span> <span class='st'>"compartment"</span>,values_to <span class='op'>=</span> <span class='st'>"population"</span><span class='op'>)</span>
+<span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span><span class='op'>(</span><span class='va'>SIR_df_long</span>,<span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span>x<span class='op'>=</span><span class='va'>time</span>,y<span class='op'>=</span><span class='va'>population</span>,color<span class='op'>=</span><span class='va'>compartment</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_path.html'>geom_line</a></span><span class='op'>(</span>lwd<span class='op'>=</span><span class='fl'>1</span><span class='op'>)</span>
+</code></pre>
+</div>
+<p><img src="r_for_biomath_files/figure-html5/system_plot_d-1.png" width="624" /></p>
+</div>
+<p>or</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span><span class='op'>(</span><span class='va'>SIR_df_long</span>,<span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span>x<span class='op'>=</span><span class='va'>time</span>,y<span class='op'>=</span><span class='va'>population</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_path.html'>geom_line</a></span><span class='op'>(</span>lwd<span class='op'>=</span><span class='fl'>1</span><span class='op'>)</span> <span class='op'>+</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/facet_wrap.html'>facet_wrap</a></span><span class='op'>(</span><span class='op'>~</span><span class='va'>compartment</span><span class='op'>)</span>
+</code></pre>
+</div>
+<p><img src="r_for_biomath_files/figure-html5/system_plot_e-1.png" width="624" /></p>
+</div>
+<p>We can also plot <span class="math inline">\(x(t)\)</span> and <span class="math inline">\(y(t)\)</span> together as parametric curves:</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span><span class='op'>(</span><span class='va'>SIR_sol_df</span>,<span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span>x<span class='op'>=</span><span class='va'>susceptible</span>,y<span class='op'>=</span><span class='va'>infected</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_path.html'>geom_path</a></span><span class='op'>(</span>lwd<span class='op'>=</span><span class='fl'>1</span><span class='op'>)</span>
+</code></pre>
+</div>
+<p><img src="r_for_biomath_files/figure-html5/system_plot_f-1.png" width="624" /></p>
+</div>
+<p>Using color to indicate increasing values of time can be interesting:</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span><span class='op'>(</span><span class='va'>SIR_sol_df</span>,<span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span>x<span class='op'>=</span><span class='va'>susceptible</span>,y<span class='op'>=</span><span class='va'>infected</span>,color<span class='op'>=</span><span class='va'>time</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_path.html'>geom_path</a></span><span class='op'>(</span>lwd<span class='op'>=</span><span class='fl'>1</span><span class='op'>)</span>
+</code></pre>
+</div>
+<p><img src="r_for_biomath_files/figure-html5/system_plot_g-1.png" width="624" /></p>
+</div>
+<p>This color scale may not be the best, let’s change it:</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span><span class='op'>(</span><span class='va'>SIR_sol_df</span>,<span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span>x<span class='op'>=</span><span class='va'>susceptible</span>,y<span class='op'>=</span><span class='va'>infected</span>,color<span class='op'>=</span><span class='va'>time</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span> 
+  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_path.html'>geom_path</a></span><span class='op'>(</span>lwd<span class='op'>=</span><span class='fl'>1</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/scale_viridis.html'>scale_color_viridis_c</a></span><span class='op'>(</span><span class='op'>)</span>
+</code></pre>
+</div>
+<p><img src="r_for_biomath_files/figure-html5/system_plot_h-1.png" width="624" /></p>
+</div>
 <p>The book <span class="citation" data-cites="soetaertSolvingDEsR2012">(<a href="#ref-soetaertSolvingDEsR2012" role="doc-biblioref">Soetaert, Cash, and Mazzia 2012</a>)</span> covers much more on numerical computing with differential equations in R.</p>
 <h2 id="phase-plane-methods-in-r">Phase-Plane Methods in R</h2>
-<div class="sourceCode" id="cb65"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
+<p>The <code>phaseR</code> package facilitates the mix of qualitative and quantitative methods for the analysis of 1- and 2-dimensional autonomous systems of ODEs. We illustrate its usage.</p>
+<h3 id="phaser-for-scalar-equations">PhaseR for Scalar Equations</h3>
+<p>A first-order autonmous scalar ordinary differential equation is one with the general form</p>
+<p><span class="math inline">\(\frac{dx}{dt} = f(x)\)</span>,</p>
+<p>where <span class="math inline">\(f(x)\)</span> is a continuous (usually even differentiable) function that does not depend explicitly on time <span class="math inline">\(t\)</span> (this is the reason for the word autonomous). Most often, we are interested in the case when <span class="math inline">\(f(x)\)</span> is a nonlinear function and we sometimes refer to <span class="math inline">\(\frac{dx}{dt} = f(x)\)</span> as a one-dimensional system.</p>
+<p><strong>Example</strong></p>
+<p>Consider as an example the equation</p>
+<p><span class="math inline">\(\frac{dx}{dt} = x(1-x)\)</span>.</p>
+<p>The left hand side is the derivative <span class="math inline">\(\frac{dx}{dt}\)</span> and hence the (local) rate of change of <span class="math inline">\(x\)</span> as a function of time <span class="math inline">\(t\)</span>. Therefore, because of the equal sign, <span class="math inline">\(f(x)\)</span> must also provide information about the (local) rate of change of <span class="math inline">\(x\)</span> but now for various “state” values, that is, values of <span class="math inline">\(x\)</span>.</p>
+<p>We can use <code>phaseR</code> to analyze this problem.</p>
+<p>First we need to describe the differential equation:</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>nondim_logistic</span> <span class='op'>&lt;-</span> <span class='kw'>function</span> <span class='op'>(</span><span class='va'>t</span>, <span class='va'>x</span>, <span class='va'>parameters</span><span class='op'>)</span> 
+<span class='op'>{</span>
+    <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span><span class='va'>x</span> <span class='op'>*</span> <span class='op'>(</span><span class='fl'>1</span> <span class='op'>-</span> <span class='va'>x</span><span class='op'>)</span><span class='op'>)</span>
+<span class='op'>}</span>
+</code></pre>
+</div>
+</div>
+<p>Now we plot what is called the phase portrait:</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>nondim_logistic_phasePortrait</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/phaseR/man/phasePortrait.html'>phasePortrait</a></span><span class='op'>(</span><span class='va'>nondim_logistic</span>,
+                                        ylim   <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='op'>-</span><span class='fl'>0.5</span>, <span class='fl'>1.5</span><span class='op'>)</span>,
+                                        points <span class='op'>=</span> <span class='fl'>10</span>,
+                                        frac   <span class='op'>=</span> <span class='fl'>0.5</span><span class='op'>)</span>
+</code></pre>
+</div>
+<p><img src="r_for_biomath_files/figure-html5/phase_line-1.png" width="624" /></p>
+</div>
+<p>The arrows here tell us, starting from an initial state value <span class="math inline">\(x\)</span>, whether the solution to the differential equation will increase as a function of time or decrease as a function of time.</p>
+<p>Further, we can use <code>phaseR</code> to obtain some “trajectories” to our ODE:</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>nondim_logistic_flow</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/phaseR/man/flowField.html'>flowField</a></span><span class='op'>(</span><span class='va'>nondim_logistic</span>,
+                                 xlim       <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>0</span>, <span class='fl'>10</span><span class='op'>)</span>,
+                                 ylim       <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='op'>-</span><span class='fl'>0.5</span>, <span class='fl'>1.5</span><span class='op'>)</span>,
+                                 parameters <span class='op'>=</span> <span class='cn'>NULL</span>,
+                                 points     <span class='op'>=</span> <span class='fl'>15</span>,
+                                 system     <span class='op'>=</span> <span class='st'>"one.dim"</span>,add<span class='op'>=</span><span class='cn'>FALSE</span><span class='op'>)</span>
+<span class='va'>nondim_logistic_solutions</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/phaseR/man/trajectory.html'>trajectory</a></span><span class='op'>(</span><span class='va'>nondim_logistic</span>,
+                                        y0   <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>0</span>,<span class='fl'>0.5</span>,<span class='fl'>1</span>,<span class='fl'>1.5</span><span class='op'>)</span>,
+                                        tlim<span class='op'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>0</span>,<span class='fl'>10</span><span class='op'>)</span>,
+                                        system <span class='op'>=</span> <span class='st'>"one.dim"</span><span class='op'>)</span>
+</code></pre>
+</div>
+<p><img src="r_for_biomath_files/figure-html5/scalar_trajectories-1.png" width="624" /></p>
+</div>
+<p>There is an general function in <code>phaseR</code> that will carry out a complete qualitative analysis for an autonomous system (either one-dimensional or two-dimensional). For example, call the following function in the R console:</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://rdrr.io/pkg/phaseR/man/phasePlaneAnalysis.html'>phasePlaneAnalysis</a></span><span class='op'>(</span><span class='va'>nondim_logistic</span>,xlim <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>0</span>,<span class='fl'>10</span><span class='op'>)</span>,ylim <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='op'>-</span><span class='fl'>1.5</span>,<span class='fl'>1.5</span><span class='op'>)</span>,system <span class='op'>=</span> <span class='st'>"one.dim"</span><span class='op'>)</span>
+</code></pre>
+</div>
+</div>
+<h3 id="phaser-for-two-dimensional-systems">PhaseR for Two-Dimensional Systems</h3>
+<p>Let’s use <code>phaseR</code> to explore the dynamics of two-dimensional linear autonomous systems.</p>
+<p>Consider for example:</p>
+<p><span class="math inline">\(\frac{d{\bf x}}{dt} = A {\bf x}\)</span>,</p>
+<p>where <span class="math inline">\(A\)</span> is a <span class="math inline">\(2\times 2\)</span> matrix of the form</p>
+<p><span class="math inline">\(A = \left(\begin{array}{cc} a &amp; 0 \\ 0 &amp; -1 \end{array}\right)\)</span>.</p>
+<p>Let’s examine how various values of <span class="math inline">\(a\)</span> change the dynamics (specifically the phase portraits) of the systems. Observe that as long as <span class="math inline">\(a\neq 0\)</span> there is a unique steady-state <span class="math inline">\({\bf x}^{\ast}={\bf 0}\)</span>.</p>
+<h4 id="phase-portraits-for-varying-a">Phase Portraits for Varying <span class="math inline">\(a\)</span></h4>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>simple_linear</span> <span class='op'>&lt;-</span> <span class='kw'>function</span><span class='op'>(</span><span class='va'>t</span>,<span class='va'>state</span>,<span class='va'>parameters</span><span class='op'>)</span><span class='op'>{</span>
+  <span class='fu'><a href='https://rdrr.io/r/base/with.html'>with</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/list.html'>as.list</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='va'>state</span>,<span class='va'>parameters</span><span class='op'>)</span><span class='op'>)</span>,<span class='op'>{</span>
+    <span class='va'>dx</span> <span class='op'>&lt;-</span> <span class='va'>a</span><span class='op'>*</span><span class='va'>state</span><span class='op'>[</span><span class='fl'>1</span><span class='op'>]</span>
+    <span class='va'>dy</span> <span class='op'>&lt;-</span> <span class='op'>-</span><span class='va'>state</span><span class='op'>[</span><span class='fl'>2</span><span class='op'>]</span>
+    
+    <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='va'>dx</span>,<span class='va'>dy</span><span class='op'>)</span><span class='op'>)</span>
+  <span class='op'>}</span><span class='op'>)</span>
+<span class='op'>}</span>
+</code></pre>
+</div>
+</div>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>a_val</span> <span class='op'>&lt;-</span> <span class='op'>-</span><span class='fl'>2</span>
+</code></pre>
+</div>
+</div>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>simpleLinear_flowField</span>  <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/phaseR/man/flowField.html'>flowField</a></span><span class='op'>(</span><span class='va'>simple_linear</span>,
+                                       xlim       <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='op'>-</span><span class='fl'>2</span>, <span class='fl'>2</span><span class='op'>)</span>,
+                                       ylim       <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='op'>-</span><span class='fl'>2</span>, <span class='fl'>2</span><span class='op'>)</span>,
+                                       parameters <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span>a<span class='op'>=</span><span class='va'>a_val</span><span class='op'>)</span>,
+                                       points     <span class='op'>=</span> <span class='fl'>19</span>,
+                                       add <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span>
+</code></pre>
+</div>
+<p><img src="r_for_biomath_files/figure-html5/system_pp_a-1.png" width="624" /></p>
+</div>
+<p>Let’s add some solution curves:</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>simpleLinear_flowField</span>  <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/phaseR/man/flowField.html'>flowField</a></span><span class='op'>(</span><span class='va'>simple_linear</span>,
+                                       xlim       <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='op'>-</span><span class='fl'>2</span>, <span class='fl'>2</span><span class='op'>)</span>,
+                                       ylim       <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='op'>-</span><span class='fl'>2</span>, <span class='fl'>2</span><span class='op'>)</span>,
+                                       parameters <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span>a<span class='op'>=</span><span class='va'>a_val</span><span class='op'>)</span>,
+                                       points     <span class='op'>=</span> <span class='fl'>19</span>,
+                                       add <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span>
+<span class='va'>state</span>                        <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/matrix.html'>matrix</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>1</span>,<span class='fl'>1</span>,<span class='fl'>1</span>,<span class='op'>-</span><span class='fl'>1</span>,<span class='op'>-</span><span class='fl'>1</span>,<span class='fl'>1</span>,<span class='op'>-</span><span class='fl'>1</span>,<span class='op'>-</span><span class='fl'>1</span>,<span class='fl'>0</span>,<span class='fl'>2</span>,<span class='fl'>0</span>,<span class='op'>-</span><span class='fl'>2</span>,<span class='op'>-</span><span class='fl'>1</span>,<span class='fl'>0</span>,<span class='fl'>1</span>,<span class='fl'>0</span><span class='op'>)</span>,
+                                    <span class='fl'>8</span>, <span class='fl'>2</span>, byrow <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
+<span class='va'>simpleLinear_trajectory</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/phaseR/man/trajectory.html'>trajectory</a></span><span class='op'>(</span><span class='va'>simple_linear</span>,
+                                        y0         <span class='op'>=</span> <span class='va'>state</span>,
+                                        tlim       <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>0</span>, <span class='fl'>10</span><span class='op'>)</span>,
+                                        parameters <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span>a<span class='op'>=</span><span class='va'>a_val</span><span class='op'>)</span>,add<span class='op'>=</span><span class='cn'>TRUE</span><span class='op'>)</span>
+</code></pre>
+</div>
+<p><img src="r_for_biomath_files/figure-html5/system_pp_b-1.png" width="624" /></p>
+</div>
+<p>Let’s plot the numerical solutions as a function of time for specific initial conditions:</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>state</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span>x<span class='op'>=</span><span class='fl'>1</span>,y<span class='op'>=</span><span class='fl'>1</span><span class='op'>)</span>
+<span class='va'>times</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/seq.html'>seq</a></span><span class='op'>(</span><span class='fl'>0</span>,<span class='fl'>10</span>,by<span class='op'>=</span><span class='fl'>0.05</span><span class='op'>)</span>
+<span class='va'>simple_linear_sol</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/deSolve/man/ode.html'>ode</a></span><span class='op'>(</span>y<span class='op'>=</span><span class='va'>state</span>,times<span class='op'>=</span><span class='va'>times</span>,func<span class='op'>=</span><span class='va'>simple_linear</span>,parms<span class='op'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span>a<span class='op'>=</span><span class='va'>a_val</span><span class='op'>)</span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span><span class='op'>(</span><span class='va'>simple_linear_sol</span>,col<span class='op'>=</span><span class='st'>"blue"</span><span class='op'>)</span>
+</code></pre>
+</div>
+<p><img src="r_for_biomath_files/figure-html5/linear_system_sol-1.png" width="624" /></p>
+</div>
+<h4 id="two-dimensional-non-linear-autonomous-systems">Two-dimensional Non-Linear Autonomous Systems</h4>
+<p>Generally, a two-dimensional autonomous system has the form</p>
+<p><span class="math display">\[
+\begin{align*}
+\frac{dx}{dt} &amp;= f(x,y) \\
+\frac{dy}{dt} &amp;= g(x,y), 
+\end{align*}
+\]</span> Such as system is sometimes called a vector field.</p>
+<p>Let’s adapt our code to examine some phase portraits for a nonlinear system.</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>non_linear</span> <span class='op'>&lt;-</span> <span class='kw'>function</span><span class='op'>(</span><span class='va'>t</span>,<span class='va'>state</span>,<span class='va'>parameters</span><span class='op'>)</span><span class='op'>{</span>
+  <span class='fu'><a href='https://rdrr.io/r/base/with.html'>with</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/list.html'>as.list</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='va'>state</span>,<span class='va'>parameters</span><span class='op'>)</span><span class='op'>)</span>,<span class='op'>{</span>
+    <span class='va'>x</span> <span class='op'>&lt;-</span> <span class='va'>state</span><span class='op'>[</span><span class='fl'>1</span><span class='op'>]</span>
+    <span class='va'>y</span> <span class='op'>&lt;-</span> <span class='va'>state</span><span class='op'>[</span><span class='fl'>2</span><span class='op'>]</span>
+    <span class='va'>dx</span> <span class='op'>&lt;-</span> <span class='op'>-</span><span class='va'>x</span> <span class='op'>+</span> <span class='va'>x</span><span class='op'>^</span><span class='fl'>3</span>
+    <span class='va'>dy</span> <span class='op'>&lt;-</span> <span class='op'>-</span><span class='fl'>2</span><span class='op'>*</span><span class='va'>y</span>
+    
+    <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='va'>dx</span>,<span class='va'>dy</span><span class='op'>)</span><span class='op'>)</span>
+  <span class='op'>}</span><span class='op'>)</span>
+<span class='op'>}</span>
+</code></pre>
+</div>
+</div>
+<p>First we plot the vector field:</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>nonLinear_flowField</span>  <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/phaseR/man/flowField.html'>flowField</a></span><span class='op'>(</span><span class='va'>non_linear</span>,
+                                       xlim       <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='op'>-</span><span class='fl'>2</span>, <span class='fl'>2</span><span class='op'>)</span>,
+                                       ylim       <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='op'>-</span><span class='fl'>2</span>, <span class='fl'>2</span><span class='op'>)</span>,
+                                       parameters <span class='op'>=</span> <span class='cn'>NULL</span>,
+                                       points     <span class='op'>=</span> <span class='fl'>19</span>,
+                                       add <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span>
+</code></pre>
+</div>
+<p><img src="r_for_biomath_files/figure-html5/nonlinear_pp_b-1.png" width="624" /></p>
+</div>
+<p>Now we can obtain a more detailed picture of the phase portrait:</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>nonLinear_flowField</span>  <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/phaseR/man/flowField.html'>flowField</a></span><span class='op'>(</span><span class='va'>non_linear</span>,
+                                       xlim       <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='op'>-</span><span class='fl'>2</span>, <span class='fl'>2</span><span class='op'>)</span>,
+                                       ylim       <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='op'>-</span><span class='fl'>2</span>, <span class='fl'>2</span><span class='op'>)</span>,
+                                       parameters <span class='op'>=</span> <span class='cn'>NULL</span>,
+                                       points     <span class='op'>=</span> <span class='fl'>19</span>,
+                                       add <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span>
+<span class='va'>nonLinear_nullclines</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/phaseR/man/nullclines.html'>nullclines</a></span><span class='op'>(</span><span class='va'>non_linear</span>,
+                                        xlim       <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='op'>-</span><span class='fl'>2</span>, <span class='fl'>2</span><span class='op'>)</span>,
+                                        ylim       <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='op'>-</span><span class='fl'>2</span>, <span class='fl'>2</span><span class='op'>)</span>,
+                                        parameters <span class='op'>=</span> <span class='cn'>NULL</span>,
+                                        points     <span class='op'>=</span> <span class='fl'>500</span><span class='op'>)</span>
+<span class='va'>state</span>                        <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/matrix.html'>matrix</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>1.5</span>,<span class='fl'>1</span>,<span class='fl'>1.5</span>,<span class='op'>-</span><span class='fl'>1</span>,<span class='op'>-</span><span class='fl'>1.5</span>,<span class='fl'>1</span>,<span class='op'>-</span><span class='fl'>1.5</span>,<span class='op'>-</span><span class='fl'>1</span>,
+                                         <span class='op'>-</span><span class='fl'>0.5</span>,<span class='fl'>1</span>,<span class='fl'>0.5</span>,<span class='fl'>1</span>,<span class='op'>-</span><span class='fl'>0.5</span>,<span class='op'>-</span><span class='fl'>1</span>,<span class='fl'>0.5</span>,<span class='op'>-</span><span class='fl'>1</span>,<span class='op'>-</span><span class='fl'>1</span>,<span class='fl'>0</span>,<span class='fl'>1</span>,<span class='fl'>0</span>,<span class='fl'>0</span>,<span class='fl'>0</span><span class='op'>)</span>,
+                                    <span class='fl'>11</span>, <span class='fl'>2</span>, byrow <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
+<span class='va'>nonLinear_trajectory</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/phaseR/man/trajectory.html'>trajectory</a></span><span class='op'>(</span><span class='va'>non_linear</span>,
+                                        y0         <span class='op'>=</span> <span class='va'>state</span>,
+                                        tlim       <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>0</span>, <span class='fl'>10</span><span class='op'>)</span>,
+                                        parameters <span class='op'>=</span> <span class='cn'>NULL</span>,add<span class='op'>=</span><span class='cn'>TRUE</span><span class='op'>)</span>
+</code></pre>
+</div>
+<p><img src="r_for_biomath_files/figure-html5/nonlinear_pp_c-1.png" width="624" /></p>
+</div>
+<p>Observe that steady-states occur where nullclines intersect.</p>
+<p>Let’s look at the solution curves <span class="math inline">\(x(t)\)</span> and <span class="math inline">\(y(t)\)</span>:</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>state</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span>x<span class='op'>=</span><span class='op'>-</span><span class='fl'>0.5</span>,y<span class='op'>=</span><span class='fl'>1</span><span class='op'>)</span>
+<span class='va'>times</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/seq.html'>seq</a></span><span class='op'>(</span><span class='fl'>0</span>,<span class='fl'>10</span>,by<span class='op'>=</span><span class='fl'>0.05</span><span class='op'>)</span>
+<span class='va'>non_linear_sol</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/deSolve/man/ode.html'>ode</a></span><span class='op'>(</span>y<span class='op'>=</span><span class='va'>state</span>,times<span class='op'>=</span><span class='va'>times</span>,func<span class='op'>=</span><span class='va'>non_linear</span>,parms<span class='op'>=</span><span class='cn'>NULL</span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span><span class='op'>(</span><span class='va'>non_linear_sol</span>,col<span class='op'>=</span><span class='st'>"blue"</span><span class='op'>)</span>
+</code></pre>
+</div>
+<p><img src="r_for_biomath_files/figure-html5/nonlinear_pp_d-1.png" width="624" /></p>
+</div>
+<p>You can learn more about the functionality of <code>phaseR</code> by reading <a href="https://www.rdocumentation.org/packages/phaseR/versions/2.1.3">this page</a> or <a href="https://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.660.3048&amp;rep=rep1&amp;type=pdf">this article</a>.</p>
+<h1 id="conclusion">Conclusion</h1>
+<p>We have very briefly touched on the basics of R that is useful in <em>Topics in Biomathematics</em>. If there are specific topics that interest you or there is a specific type of problem you want to try to use R to solve, we recommend searching the web as there is a plethora of tutorials, documentation, and helpful discussions to be found online.</p>
+<div class="sourceCode" id="cb68"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
 <div id="refs" class="references csl-bib-body hanging-indent" role="doc-bibliography">
 <div id="ref-soetaertSolvingDEsR2012" class="csl-entry" role="doc-biblioentry">
 Soetaert, Karline, Jeff Cash, and Francesca Mazzia. 2012. <em>Solving Differential Equations in <span>R</span></em>. Use r! Springer, New York. <a href="https://doi.org/10.1007/978-3-642-28070-2">https://doi.org/10.1007/978-3-642-28070-2</a>.

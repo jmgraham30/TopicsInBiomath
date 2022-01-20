@@ -17,7 +17,7 @@ bibliography: topics_in_biomath.bib
 ---
 
 ```{r setup, include=FALSE}
-library(ggplot2)
+library(tidyverse)
 library(ggformula)
 library(deSolve)
 library(phaseR)
@@ -495,13 +495,427 @@ vembedr::embed_url("https://youtu.be/iOosTTQwCW4") %>%
 
 ## Numerical Solution of Differential Equations in R
 
+A problem that we will often encounter is to obtain a numerical solution to an initial value problem (IVP) for an ordinary differential equation (ODE) or a system of ordinary differential equations (ODEs). An IVP for an ODE or ODEs typically takes the form
+
+$\frac{d{\bf x}}{dt} = {\bf F}({\bf x}(t),t)$,
+
+${\bf x}(t_{0}) = {\bf x}_{0}$.
+
+Here ${\bf x}$ is the unknown function of time and ${\bf F}$ is the right hand side function. These may be scalars (in case of a single ODE) or vectors (in case of a system of ODEs). First, we will focus on the case of solving a single scalar ODE, then we will examine systems on ODEs. 
+
+For example, we might want to obtain a numerical solution to 
+
+$\frac{dN}{dt} = r N$,
+
+$N(0) = 10$,
+
+with $r=0.5$ and over the time interval $[0, 5]$.
+
+In order to obtain a numerical solution to an IVP for ODEs we must provide at minimum the following information to the computer:
+
+  1) A function that describes the right hand side ${\bf F}({\bf x}(t),t)$. Note that ${\bf F}$ may involve parameters whose values will also need to be specified. 
+  
+  2) A time interval, $[t_{0},t_{f}]$, over which to obtain a numerical solution.
+  
+  3) Initial conditions ${\bf x}_{0}$. 
+
+Finally, once we have obtained numerical solutions to an IVP for ODEs it is typically desirable to plot these solutions in one way or another. We will also see examples of ways to plot our numerical solutions in R. 
+
+### Solving a Single ODE
+
+To use the methods described in this section you must make sure that the `deSolve` package is installed and loaded. The main function for obtaining numerical solutions in the `deSolve` package is the `ode` function. In order to use it, we must write a function in R syntax that describes the right hand side of our differential equation. Let's do this for our example problem
+
+$\frac{dN}{dt} = r N$,
+
+$N(0) = 10$,
+
+with $r=0.5$ and over the time interval $[0, 5]$.
+
+```{r single_ode}
+My_RHS <- function(t,state,parameters){
+  with(as.list(c(state,parameters)),{
+    dN <- r*N
+    
+    list(c(dN))
+  })
+}
+```
+
+In addition to describing the right hand side of the differential equation, we must also specify the times at which to obtain the numerical solution and the initial condition. This is done as follows:
+
+```{r ode_data}
+state <- c(N=10)
+times <- seq(0,5,by=0.1)
+```
+
+Now we are ready to obtain the numerical solution:
+
+```{r solve_example}
+solN <- ode(y=state,times=times,func=My_RHS,parms=c(r=0.5))
+```
+
+Let's look at what has been returned by our call to the numerical solver, the results of which are stored in the variable `solN`. 
+
+```{r print_solution}
+solN
+```
+
+The method from the `deSolve` package returns a **matrix** where the first column contains the time values at which we obtained numerical solution values and another column that contains the solution values corresponding to each of the time points. We can easily plot the solution values versus the time points as follows:
+
+```{r plot_example}
+plot(solN,col="blue")
+```
+
+
+A nicer plot can be obtained as follows:
+
+```{r plot_example_ggplot}
+ggplot(as.data.frame(solN),aes(x=time,y=N)) + geom_point()
+```
+
+If we want a curve instead:
+
+```{r plot_example_ggplot_line}
+ggplot(as.data.frame(solN),aes(x=time,y=N)) + geom_line(lwd=1)
+```
+
+We can plot the numerical solution together with the analytical solution $N(t) = 10e^{0.5 t}$ as follows:
+
+```{r example_analtiycal}
+ggplot(as.data.frame(solN),aes(x=time,y=N)) + geom_point() + 
+  geom_function(fun=function(t) 10*exp(0.5*t),color="blue")
+```
+
+**Exercise:** Modify what we have done using the `deSolve` package to obtain and plot a numerical solution to the IVP 
+
+$\frac{dN}{dt} = r N$,
+
+$N(0) = 5$,
+
+with $r=2.5$ and over the time interval $[0, 10]$.
+
+### Solving a System of ODEs
+
+Consider the following problem:
+
+$\frac{dx}{dt}=-R_{0}xy$
+
+$\frac{dy}{dt}=R_{0}xy - y$
+
+with $R_{0} = 0.2$ and $x_{0} = 0.95$ and $y_{0} = 0.05$.
+
+We can code this system of ODEs in R as:
+
+```{r system_example}
+My_RHS <- function(t,state,parameters){
+  with(as.list(c(state,parameters)),{
+    dx <- -R0*x*y
+    dy <- R0*x*y - y
+    
+    list(c(dx,dy))
+  })
+}
+```
+
+We must specify our time interval and initial conditions:
+
+```{r system_data}
+state <- c(x=0.95,y=0.05)
+times <- seq(0,20,by=0.1)
+```
+
+Now, we are ready to obtain the numerical solution:
+
+```{r system_sol}
+SIR_sol <- ode(y=state,times=times,func=My_RHS,parms=c(R0=0.2))
+```
+
+Again, the method from the `deSolve` package returns a matrix where the first column contains the time values at which we obtained numerical solution values and another column that contains the solution values corresponding to each of the time points. We can easily plot the solution values versus the time points as follows:
+
+```{r plot_system}
+plot(SIR_sol,col="blue")
+```
+
+**Question:** Again, what happens if we change the value of $R_{0}$ to $R_{0}=1.5$?
+
+Often we want to have greater control over our plots and to be able to make high quality figures. The best way to do this in R is to use the capabilities of the `ggplot2` package. In order to do this, we will first convert the matrix of solutions returned by the `ode` function from the `deSolve` package into a data frame. This is basically like an spread sheet format for data. 
+
+```{r system_df}
+SIR_sol_df <- as.data.frame(SIR_sol)
+```
+
+We can get a sense of the structure of this data by viewing the first few rows:
+
+```{r system_df_head}
+head(SIR_sol_df)
+```
+
+It is convenient to change the names of the columns to something more meaningful as follows:
+
+```{r rename_system_df}
+names(SIR_sol_df) <- c("time","susceptible","infected")
+```
+
+Let's look at the first few rows again:
+
+```{r system_df_head_again}
+head(SIR_sol_df)
+```
+
+Now, we can obtain plots by doing commands like:
+
+```{r system_plot_b}
+ggplot(data=SIR_sol_df,mapping=aes(x=time,y=susceptible)) + geom_line()
+```
+
+or
+
+```{r system_plot_c}
+ggplot(data=SIR_sol_df,mapping=aes(x=time,y=infected)) + geom_line()
+```
+
+Here are some other plotting alternatives:
+
+```{r system_plot_d}
+ SIR_df_long <- pivot_longer(SIR_sol_df,-time,names_to = "compartment",values_to = "population")
+ggplot(SIR_df_long,aes(x=time,y=population,color=compartment)) + geom_line(lwd=1)
+```
+
+or 
+
+```{r system_plot_e}
+ggplot(SIR_df_long,aes(x=time,y=population)) + geom_line(lwd=1) + facet_wrap(~compartment)
+```
+
+We can also plot $x(t)$ and $y(t)$ together as parametric curves:
+
+```{r system_plot_f}
+ggplot(SIR_sol_df,aes(x=susceptible,y=infected)) + geom_path(lwd=1)
+```
+
+Using color to indicate increasing values of time can be interesting:
+
+```{r system_plot_g}
+ggplot(SIR_sol_df,aes(x=susceptible,y=infected,color=time)) + geom_path(lwd=1)
+```
+
+This color scale may not be the best, let's change it:
+
+```{r system_plot_h}
+ggplot(SIR_sol_df,aes(x=susceptible,y=infected,color=time)) + 
+  geom_path(lwd=1) +
+  scale_color_viridis_c()
+```
 
 The book [@soetaertSolvingDEsR2012] covers much more on numerical computing with differential equations in R.  
 
 ## Phase-Plane Methods in R
 
+The `phaseR` package facilitates the mix of qualitative and quantitative methods for the analysis of 1- and 2-dimensional autonomous systems of ODEs. We illustrate its usage. 
+
+### PhaseR for Scalar Equations
+
+A first-order autonmous scalar ordinary differential equation is one with the general form
+
+$\frac{dx}{dt} = f(x)$,
+
+where $f(x)$ is a continuous (usually even differentiable) function that does not depend explicitly on time $t$ (this is the reason for the word autonomous). Most often, we are interested in the case when $f(x)$ is a nonlinear function and we sometimes refer to $\frac{dx}{dt} = f(x)$ as a one-dimensional system. 
+
+**Example**
+
+Consider as an example the equation
+
+$\frac{dx}{dt} = x(1-x)$. 
+
+The left hand side is the derivative $\frac{dx}{dt}$ and hence the (local) rate of change of $x$ as a function of time $t$. Therefore, because of the equal sign, $f(x)$ must also provide information about the (local) rate of change of $x$ but now for various "state" values, that is, values of $x$. 
+
+We can use `phaseR` to analyze this problem. 
+
+First we need to describe the differential equation:
+
+```{r phaseR_scalar}
+nondim_logistic <- function (t, x, parameters) 
+{
+    list(x * (1 - x))
+}
+```
+
+Now we plot what is called the phase portrait:
+
+```{r phase_line}
+nondim_logistic_phasePortrait <- phasePortrait(nondim_logistic,
+                                        ylim   = c(-0.5, 1.5),
+                                        points = 10,
+                                        frac   = 0.5)
+```
+
+The arrows here tell us, starting from an initial state value $x$, whether the solution to the differential equation will increase as a function of time or decrease as a function of time. 
+
+Further, we can use `phaseR` to obtain some "trajectories" to our ODE:
+
+```{r scalar_trajectories,message=FALSE,warning=FALSE}
+nondim_logistic_flow <- flowField(nondim_logistic,
+                                 xlim       = c(0, 10),
+                                 ylim       = c(-0.5, 1.5),
+                                 parameters = NULL,
+                                 points     = 15,
+                                 system     = "one.dim",add=FALSE)
+nondim_logistic_solutions <- trajectory(nondim_logistic,
+                                        y0   = c(0,0.5,1,1.5),
+                                        tlim=c(0,10),
+                                        system = "one.dim")
+```
+
+There is an general function in `phaseR` that will carry out a complete qualitative analysis for an autonomous system (either one-dimensional or two-dimensional). For example, call the following function in the R console:
+
+```{r ,eval=FALSE}
+phasePlaneAnalysis(nondim_logistic,xlim = c(0,10),ylim = c(-1.5,1.5),system = "one.dim")
+```
 
 
+### PhaseR for Two-Dimensional Systems
+
+Let's use `phaseR` to explore the dynamics of two-dimensional linear autonomous systems. 
+
+Consider for example: 
+
+$\frac{d{\bf x}}{dt} = A {\bf x}$, 
+
+where $A$ is a $2\times 2$ matrix of the form
+
+$A = \left(\begin{array}{cc} a & 0 \\ 0 & -1 \end{array}\right)$.
+
+Let's examine how various values of $a$ change the dynamics (specifically the phase portraits) of the systems. Observe that as long as $a\neq 0$ there is a unique steady-state ${\bf x}^{\ast}={\bf 0}$. 
+
+#### Phase Portraits for Varying $a$
+
+```{r linear_system}
+simple_linear <- function(t,state,parameters){
+  with(as.list(c(state,parameters)),{
+    dx <- a*state[1]
+    dy <- -state[2]
+    
+    list(c(dx,dy))
+  })
+}
+```
 
 
+```{r examp_parm}
+a_val <- -2
+```
 
+
+```{r system_pp_a}
+simpleLinear_flowField  <- flowField(simple_linear,
+                                       xlim       = c(-2, 2),
+                                       ylim       = c(-2, 2),
+                                       parameters = c(a=a_val),
+                                       points     = 19,
+                                       add = FALSE)
+```
+
+Let's add some solution curves:
+
+```{r system_pp_b}
+simpleLinear_flowField  <- flowField(simple_linear,
+                                       xlim       = c(-2, 2),
+                                       ylim       = c(-2, 2),
+                                       parameters = c(a=a_val),
+                                       points     = 19,
+                                       add = FALSE)
+state                        <- matrix(c(1,1,1,-1,-1,1,-1,-1,0,2,0,-2,-1,0,1,0),
+                                    8, 2, byrow = TRUE)
+simpleLinear_trajectory <- trajectory(simple_linear,
+                                        y0         = state,
+                                        tlim       = c(0, 10),
+                                        parameters = c(a=a_val),add=TRUE)
+```
+
+Let's plot the numerical solutions as a function of time for specific initial conditions:
+
+```{r linear_system_sol}
+state <- c(x=1,y=1)
+times <- seq(0,10,by=0.05)
+simple_linear_sol <- ode(y=state,times=times,func=simple_linear,parms=c(a=a_val))
+plot(simple_linear_sol,col="blue")
+```
+
+#### Two-dimensional Non-Linear Autonomous Systems
+
+Generally, a two-dimensional autonomous system has the form
+
+$$
+\begin{align*}
+\frac{dx}{dt} &= f(x,y) \\
+\frac{dy}{dt} &= g(x,y), 
+\end{align*}
+$$
+Such as system is sometimes called a vector field. 
+
+Let's adapt our code to examine some phase portraits for a nonlinear system. 
+
+```{r nonlinear_pp_a}
+non_linear <- function(t,state,parameters){
+  with(as.list(c(state,parameters)),{
+    x <- state[1]
+    y <- state[2]
+    dx <- -x + x^3
+    dy <- -2*y
+    
+    list(c(dx,dy))
+  })
+}
+```
+
+First we plot the vector field:
+
+```{r nonlinear_pp_b}
+nonLinear_flowField  <- flowField(non_linear,
+                                       xlim       = c(-2, 2),
+                                       ylim       = c(-2, 2),
+                                       parameters = NULL,
+                                       points     = 19,
+                                       add = FALSE)
+```
+
+Now we can obtain a more detailed picture of the phase portrait:
+
+```{r nonlinear_pp_c}
+nonLinear_flowField  <- flowField(non_linear,
+                                       xlim       = c(-2, 2),
+                                       ylim       = c(-2, 2),
+                                       parameters = NULL,
+                                       points     = 19,
+                                       add = FALSE)
+nonLinear_nullclines <- nullclines(non_linear,
+                                        xlim       = c(-2, 2),
+                                        ylim       = c(-2, 2),
+                                        parameters = NULL,
+                                        points     = 500)
+state                        <- matrix(c(1.5,1,1.5,-1,-1.5,1,-1.5,-1,
+                                         -0.5,1,0.5,1,-0.5,-1,0.5,-1,-1,0,1,0,0,0),
+                                    11, 2, byrow = TRUE)
+nonLinear_trajectory <- trajectory(non_linear,
+                                        y0         = state,
+                                        tlim       = c(0, 10),
+                                        parameters = NULL,add=TRUE)
+```
+
+Observe that steady-states occur where nullclines intersect. 
+
+Let's look at the solution curves $x(t)$ and $y(t)$: 
+
+```{r nonlinear_pp_d}
+state <- c(x=-0.5,y=1)
+times <- seq(0,10,by=0.05)
+non_linear_sol <- ode(y=state,times=times,func=non_linear,parms=NULL)
+plot(non_linear_sol,col="blue")
+```
+
+
+You can learn more about the functionality of `phaseR` by reading [this page](https://www.rdocumentation.org/packages/phaseR/versions/2.1.3) or [this article](https://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.660.3048&rep=rep1&type=pdf). 
+
+# Conclusion
+
+We have very briefly touched on the basics of R that is useful in *Topics in Biomathematics*. If there are specific topics that interest you or there is a specific type of problem you want to try to use R to solve, we recommend searching the web as there is a plethora of tutorials, documentation, and helpful discussions to be found online.  
