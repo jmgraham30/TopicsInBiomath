@@ -450,9 +450,41 @@ Packages must be loaded every time you begin a new R session.
 ## Visualization in R
 
 
+When you present your work you should use figures and plots to clearly convey your results.  As mentioned, the two packages [`ggplot2`](https://ggplot2.tidyverse.org/) and [`ggformula`](http://www.mosaic-web.org/ggformula/) make it possible to create high-quality plots in R. These packages are powerful and extensive so we will not be able to cover their full functionality here. Hopefully what is included here is enough to get you started, at least for the purposes of *Topics in Biomathematics*. It should be noted that `ggformula` is built on top of `ggplot2`. 
 
+### Plotting a Function
 
-Here is a helpful video on `ggplot2`:
+Here are two ways to plot a simple mathematical function of the form $y=f(x)$ in R:
+
+Suppose we want to plot $f(x) = x\cos(x)$ over $[0,4\pi]$. Then we can do
+
+```{r function_plot_ggformula}
+gf_function(fun = function(x){x*cos(x)},xlim=c(0,4*pi))
+```
+
+or
+
+```{r function_plot_ggplot2}
+ggplot(data.frame(x=c(0,4*pi)),aes(x=x)) + 
+  geom_function(fun = function(x){x*cos(x)})
+```
+
+We can modify our plots in various ways. For example, 
+
+```{r function_plot_ggformula_mod}
+gf_function(fun = function(x){x*cos(x)},xlim=c(0,4*pi),color="blue",lwd=2)
+```
+
+or
+
+```{r function_plot_ggplot2_mod}
+ggplot(data.frame(x=c(0,4*pi)),aes(x=x)) + 
+  geom_function(fun = function(x){x*cos(x)},color="blue",lwd=2)
+```
+
+### More on Plots
+
+It is possible to create a variety of different types of plots using [`ggplot2`](https://ggplot2.tidyverse.org/) and [`ggformula`](http://www.mosaic-web.org/ggformula/), and plots creating using these packages can be highly customized. As we go through the *Topics in Biomathematics* course we will learn a little more about the utility of these packages. For now, we refer anyone interested to learn more to this helpful video on `ggplot2`:
 
 ```{r ggplot_video,echo=FALSE}
 vembedr::embed_url("https://youtu.be/iOosTTQwCW4") %>%

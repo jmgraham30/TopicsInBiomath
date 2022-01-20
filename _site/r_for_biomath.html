@@ -2818,7 +2818,45 @@ $vectors
 </div>
 <p>Packages must be loaded every time you begin a new R session.</p>
 <h2 id="visualization-in-r">Visualization in R</h2>
-<p>Here is a helpful video on <code>ggplot2</code>:</p>
+<p>When you present your work you should use figures and plots to clearly convey your results. As mentioned, the two packages <a href="https://ggplot2.tidyverse.org/"><code>ggplot2</code></a> and <a href="http://www.mosaic-web.org/ggformula/"><code>ggformula</code></a> make it possible to create high-quality plots in R. These packages are powerful and extensive so we will not be able to cover their full functionality here. Hopefully what is included here is enough to get you started, at least for the purposes of <em>Topics in Biomathematics</em>. It should be noted that <code>ggformula</code> is built on top of <code>ggplot2</code>.</p>
+<h3 id="plotting-a-function">Plotting a Function</h3>
+<p>Here are two ways to plot a simple mathematical function of the form <span class="math inline">\(y=f(x)\)</span> in R:</p>
+<p>Suppose we want to plot <span class="math inline">\(f(x) = x\cos(x)\)</span> over <span class="math inline">\([0,4\pi]\)</span>. Then we can do</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://rdrr.io/pkg/ggformula/man/gf_function.html'>gf_function</a></span><span class='op'>(</span>fun <span class='op'>=</span> <span class='kw'>function</span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span><span class='op'>{</span><span class='va'>x</span><span class='op'>*</span><span class='fu'><a href='https://rdrr.io/r/base/Trig.html'>cos</a></span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span><span class='op'>}</span>,xlim<span class='op'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>0</span>,<span class='fl'>4</span><span class='op'>*</span><span class='va'>pi</span><span class='op'>)</span><span class='op'>)</span>
+</code></pre>
+</div>
+<p><img src="r_for_biomath_files/figure-html5/function_plot_ggformula-1.png" width="624" /></p>
+</div>
+<p>or</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span><span class='op'>(</span>x<span class='op'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>0</span>,<span class='fl'>4</span><span class='op'>*</span><span class='va'>pi</span><span class='op'>)</span><span class='op'>)</span>,<span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span>x<span class='op'>=</span><span class='va'>x</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span> 
+  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_function.html'>geom_function</a></span><span class='op'>(</span>fun <span class='op'>=</span> <span class='kw'>function</span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span><span class='op'>{</span><span class='va'>x</span><span class='op'>*</span><span class='fu'><a href='https://rdrr.io/r/base/Trig.html'>cos</a></span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span><span class='op'>}</span><span class='op'>)</span>
+</code></pre>
+</div>
+<p><img src="r_for_biomath_files/figure-html5/function_plot_ggplot2-1.png" width="624" /></p>
+</div>
+<p>We can modify our plots in various ways. For example,</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://rdrr.io/pkg/ggformula/man/gf_function.html'>gf_function</a></span><span class='op'>(</span>fun <span class='op'>=</span> <span class='kw'>function</span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span><span class='op'>{</span><span class='va'>x</span><span class='op'>*</span><span class='fu'><a href='https://rdrr.io/r/base/Trig.html'>cos</a></span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span><span class='op'>}</span>,xlim<span class='op'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>0</span>,<span class='fl'>4</span><span class='op'>*</span><span class='va'>pi</span><span class='op'>)</span>,color<span class='op'>=</span><span class='st'>"blue"</span>,lwd<span class='op'>=</span><span class='fl'>2</span><span class='op'>)</span>
+</code></pre>
+</div>
+<p><img src="r_for_biomath_files/figure-html5/function_plot_ggformula_mod-1.png" width="624" /></p>
+</div>
+<p>or</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span><span class='op'>(</span>x<span class='op'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>0</span>,<span class='fl'>4</span><span class='op'>*</span><span class='va'>pi</span><span class='op'>)</span><span class='op'>)</span>,<span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span>x<span class='op'>=</span><span class='va'>x</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span> 
+  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_function.html'>geom_function</a></span><span class='op'>(</span>fun <span class='op'>=</span> <span class='kw'>function</span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span><span class='op'>{</span><span class='va'>x</span><span class='op'>*</span><span class='fu'><a href='https://rdrr.io/r/base/Trig.html'>cos</a></span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span><span class='op'>}</span>,color<span class='op'>=</span><span class='st'>"blue"</span>,lwd<span class='op'>=</span><span class='fl'>2</span><span class='op'>)</span>
+</code></pre>
+</div>
+<p><img src="r_for_biomath_files/figure-html5/function_plot_ggplot2_mod-1.png" width="624" /></p>
+</div>
+<h3 id="more-on-plots">More on Plots</h3>
+<p>It is possible to create a variety of different types of plots using <a href="https://ggplot2.tidyverse.org/"><code>ggplot2</code></a> and <a href="http://www.mosaic-web.org/ggformula/"><code>ggformula</code></a>, and plots creating using these packages can be highly customized. As we go through the <em>Topics in Biomathematics</em> course we will learn a little more about the utility of these packages. For now, we refer anyone interested to learn more to this helpful video on <code>ggplot2</code>:</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="vembedr" align="center">
 <div>
