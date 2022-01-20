@@ -94,8 +94,8 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   <link rel="license" href="https://creativecommons.org/licenses/by-nc/4.0/"/>
 
   <!--  https://schema.org/Article -->
-  <meta property="article:published" itemprop="datePublished" content="2022-01-19"/>
-  <meta property="article:created" itemprop="dateCreated" content="2022-01-19"/>
+  <meta property="article:published" itemprop="datePublished" content="2022-01-20"/>
+  <meta property="article:created" itemprop="dateCreated" content="2022-01-20"/>
   <meta name="article:author" content="Jason M. Graham"/>
 
   <!--  https://developers.facebook.com/docs/sharing/webmasters#markup -->
@@ -115,7 +115,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   <!--radix_placeholder_rmarkdown_metadata-->
 
   <script type="text/json" id="radix-rmarkdown-metadata">
-  {"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["title","description","author","date","output","creative_commons","bibliography"]}},"value":[{"type":"character","attributes":{},"value":["R for Biomathematics"]},{"type":"character","attributes":{},"value":["An Introduction to R for Biomathematics\n"]},{"type":"list","attributes":{},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","url","affiliation","affiliation_url"]}},"value":[{"type":"character","attributes":{},"value":["Jason M. Graham"]},{"type":"character","attributes":{},"value":["https://topicsinbiomath.netlify.app/"]},{"type":"character","attributes":{},"value":["University of Scranton"]},{"type":"character","attributes":{},"value":["https://sites.google.com/site/jasonmgrahamus/"]}]}]},{"type":"character","attributes":{},"value":["2022-01-19"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["distill::distill_article"]}},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["toc","toc_depth"]}},"value":[{"type":"logical","attributes":{},"value":[true]},{"type":"integer","attributes":{},"value":[2]}]}]},{"type":"character","attributes":{},"value":["CC BY-NC"]},{"type":"character","attributes":{},"value":["topics_in_biomath.bib"]}]}
+  {"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["title","description","author","date","output","creative_commons","bibliography"]}},"value":[{"type":"character","attributes":{},"value":["R for Biomathematics"]},{"type":"character","attributes":{},"value":["An Introduction to R for Biomathematics\n"]},{"type":"list","attributes":{},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","url","affiliation","affiliation_url"]}},"value":[{"type":"character","attributes":{},"value":["Jason M. Graham"]},{"type":"character","attributes":{},"value":["https://topicsinbiomath.netlify.app/"]},{"type":"character","attributes":{},"value":["University of Scranton"]},{"type":"character","attributes":{},"value":["https://sites.google.com/site/jasonmgrahamus/"]}]}]},{"type":"character","attributes":{},"value":["2022-01-20"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["distill::distill_article"]}},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["toc","toc_depth"]}},"value":[{"type":"logical","attributes":{},"value":[true]},{"type":"integer","attributes":{},"value":[2]}]}]},{"type":"character","attributes":{},"value":["CC BY-NC"]},{"type":"character","attributes":{},"value":["topics_in_biomath.bib"]}]}
   </script>
   <!--/radix_placeholder_rmarkdown_metadata-->
   <!--radix_placeholder_navigation_in_header-->
@@ -2064,7 +2064,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <!--radix_placeholder_front_matter-->
 
 <script id="distill-front-matter" type="text/json">
-{"title":"R for Biomathematics","description":"An Introduction to R for Biomathematics","authors":[{"author":"Jason M. Graham","authorURL":"https://topicsinbiomath.netlify.app/","affiliation":"University of Scranton","affiliationURL":"https://sites.google.com/site/jasonmgrahamus/","orcidID":""}],"publishedDate":"2022-01-19T00:00:00.000-05:00","citationText":"Graham, 2022"}
+{"title":"R for Biomathematics","description":"An Introduction to R for Biomathematics","authors":[{"author":"Jason M. Graham","authorURL":"https://topicsinbiomath.netlify.app/","affiliation":"University of Scranton","affiliationURL":"https://sites.google.com/site/jasonmgrahamus/","orcidID":""}],"publishedDate":"2022-01-20T00:00:00.000-05:00","citationText":"Graham, 2022"}
 </script>
 
 <!--/radix_placeholder_front_matter-->
@@ -2110,7 +2110,7 @@ Notes
 <div class="d-byline">
   Jason M. Graham <a href="https://topicsinbiomath.netlify.app/" class="uri">https://topicsinbiomath.netlify.app/</a> (University of Scranton)<a href="https://sites.google.com/site/jasonmgrahamus/" class="uri">https://sites.google.com/site/jasonmgrahamus/</a>
   
-<br/>2022-01-19
+<br/>2022-01-20
 </div>
 
 <div class="d-article">
@@ -2513,6 +2513,159 @@ $values
 </div>
 </div>
 <h2 id="linear-algebra-in-r">Linear Algebra in R</h2>
+<p>Linear algebra plays a central role in solving problem in biomathematics. This section demonstrates some linear algebra computations that will be used frequently in <em>Topics in Biomathematics</em> performed in R.</p>
+<h3 id="matrix-arithmetic">Matrix Arithmetic</h3>
+<p>If <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> are matrices of the same size then we can add them. Matrix addition is computed elementwise. We demonstrate this in R.</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='op'>(</span><span class='va'>A</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/matrix.html'>matrix</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>1</span>,<span class='fl'>2</span>,<span class='op'>-</span><span class='fl'>1</span>,<span class='fl'>3</span>,<span class='fl'>1</span>,<span class='fl'>0</span>,<span class='fl'>2</span>,<span class='op'>-</span><span class='fl'>1</span>,<span class='fl'>2</span><span class='op'>)</span>,<span class='fl'>3</span>,<span class='fl'>3</span>,byrow <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span><span class='op'>)</span>
+</code></pre>
+</div>
+<pre><code>     [,1] [,2] [,3]
+[1,]    1    2   -1
+[2,]    3    1    0
+[3,]    2   -1    2</code></pre>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='op'>(</span><span class='va'>B</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/matrix.html'>matrix</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>3</span>,<span class='fl'>2</span>,<span class='op'>-</span><span class='fl'>1</span>,<span class='fl'>2</span>,<span class='fl'>1</span>,<span class='op'>-</span><span class='fl'>1</span>,<span class='fl'>2</span>,<span class='op'>-</span><span class='fl'>3</span>,<span class='fl'>1</span><span class='op'>)</span>,<span class='fl'>3</span>,<span class='fl'>3</span>,byrow <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span><span class='op'>)</span>
+</code></pre>
+</div>
+<pre><code>     [,1] [,2] [,3]
+[1,]    3    2   -1
+[2,]    2    1   -1
+[3,]    2   -3    1</code></pre>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>A</span> <span class='op'>+</span> <span class='va'>B</span> <span class='co'># matrix addition</span>
+</code></pre>
+</div>
+<pre><code>     [,1] [,2] [,3]
+[1,]    4    4   -2
+[2,]    5    2   -1
+[3,]    4   -4    3</code></pre>
+</div>
+<p>We can also multiply a matrix by a number (scalar multiplication). In R</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='fl'>3</span> <span class='op'>*</span> <span class='va'>A</span>
+</code></pre>
+</div>
+<pre><code>     [,1] [,2] [,3]
+[1,]    3    6   -3
+[2,]    9    3    0
+[3,]    6   -3    6</code></pre>
+</div>
+<p>Recall that if <span class="math inline">\(A\)</span> is an <span class="math inline">\(m\times n\)</span> matrix and <span class="math inline">\(B\)</span> is an <span class="math inline">\(n \times p\)</span> matrix, then we can form the <a href="https://en.wikipedia.org/wiki/Matrix_multiplication">matrix product</a> <span class="math inline">\(AB\)</span> which will be a matrix of size <span class="math inline">\(m\times p\)</span>. We demonstrate this in R.</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='op'>(</span><span class='va'>A</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/matrix.html'>matrix</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>1</span>,<span class='fl'>2</span>,<span class='op'>-</span><span class='fl'>1</span>,<span class='fl'>3</span>,<span class='fl'>1</span>,<span class='fl'>0</span>,<span class='fl'>2</span>,<span class='op'>-</span><span class='fl'>1</span>,<span class='fl'>2</span><span class='op'>)</span>,<span class='fl'>3</span>,<span class='fl'>3</span>,byrow <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span><span class='op'>)</span>
+</code></pre>
+</div>
+<pre><code>     [,1] [,2] [,3]
+[1,]    1    2   -1
+[2,]    3    1    0
+[3,]    2   -1    2</code></pre>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='op'>(</span><span class='va'>B</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/matrix.html'>matrix</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>3</span>,<span class='fl'>2</span>,<span class='op'>-</span><span class='fl'>1</span>,<span class='fl'>2</span>,<span class='fl'>1</span>,<span class='op'>-</span><span class='fl'>1</span><span class='op'>)</span>,<span class='fl'>3</span>,<span class='fl'>2</span>,byrow <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span><span class='op'>)</span>
+</code></pre>
+</div>
+<pre><code>     [,1] [,2]
+[1,]    3    2
+[2,]   -1    2
+[3,]    1   -1</code></pre>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>A</span> <span class='op'><a href='https://rdrr.io/r/base/matmult.html'>%*%</a></span> <span class='va'>B</span> <span class='co'># matrix multiplication</span>
+</code></pre>
+</div>
+<pre><code>     [,1] [,2]
+[1,]    0    7
+[2,]    8    8
+[3,]    9    0</code></pre>
+</div>
+<p>A special case of matrix multiplication is matrix-vector multiplication. For example,</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='op'>(</span><span class='va'>v</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>1</span>,<span class='op'>-</span><span class='fl'>1</span>,<span class='fl'>1</span><span class='op'>)</span><span class='op'>)</span>
+</code></pre>
+</div>
+<pre><code>[1]  1 -1  1</code></pre>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>A</span> <span class='op'><a href='https://rdrr.io/r/base/matmult.html'>%*%</a></span> <span class='va'>v</span> <span class='co'># matrix-vector multiplication </span>
+</code></pre>
+</div>
+<pre><code>     [,1]
+[1,]   -2
+[2,]    2
+[3,]    5</code></pre>
+</div>
+<h3 id="matrix-transpose-and-determinant">Matrix Transpose and Determinant</h3>
+<p>In R, the transpose of a matrix is obtained as follows:</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://rdrr.io/r/base/t.html'>t</a></span><span class='op'>(</span><span class='va'>B</span><span class='op'>)</span>
+</code></pre>
+</div>
+<pre><code>     [,1] [,2] [,3]
+[1,]    3   -1    1
+[2,]    2    2   -1</code></pre>
+</div>
+<p>and the determinant of a square matrix is computed as</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://rdrr.io/r/base/det.html'>det</a></span><span class='op'>(</span><span class='va'>A</span><span class='op'>)</span>
+</code></pre>
+</div>
+<pre><code>[1] -5</code></pre>
+</div>
+<h3 id="eigenvalues-and-eigenvectors">Eigenvalues and Eigenvectors</h3>
+<p>Recall that if <span class="math inline">\(A\)</span> is a square matrix (<span class="math inline">\(n\times n\)</span>), then an eigenvalue-eigenvector pair is a number <span class="math inline">\(\lambda\)</span> and a non-zero vector <span class="math inline">\(v\)</span> satisfying <span class="math inline">\(Av=\lambda v\)</span>. In R, we can compute the eigenvalues and eigenvectors for a square matrix as</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='op'>(</span><span class='va'>evals_evects</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/eigen.html'>eigen</a></span><span class='op'>(</span><span class='va'>A</span><span class='op'>)</span><span class='op'>)</span>
+</code></pre>
+</div>
+<pre><code>eigen() decomposition
+$values
+[1]  3.1986912  1.7135379 -0.9122292
+
+$vectors
+           [,1]      [,2]       [,3]
+[1,] -0.5640780 0.1133046  0.4488745
+[2,] -0.7696551 0.4763782 -0.7042167
+[3,] -0.2990769 0.8719093 -0.5500823</code></pre>
+</div>
+<p>Note that the result is an R list that consists of</p>
+<ol type="1">
+<li><p>a vector that contains the eigenvalues, and</p></li>
+<li><p>a matrix, the columns of which are the eigenvectors.</p></li>
+</ol>
+<p>It is a fact from linear algebra that the determinant of a square matrix is the product of its eigenvalues. Let’s confirm this with our example matrix:</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/det.html'>det</a></span><span class='op'>(</span><span class='va'>A</span><span class='op'>)</span><span class='op'>)</span>
+</code></pre>
+</div>
+<pre><code>[1] -5</code></pre>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/prod.html'>prod</a></span><span class='op'>(</span><span class='va'>evals_evects</span><span class='op'>$</span><span class='va'>values</span><span class='op'>)</span><span class='op'>)</span>
+</code></pre>
+</div>
+<pre><code>[1] -5</code></pre>
+</div>
+<p>Let’s also confirm that <span class="math inline">\(Av=\lambda v\)</span> for the first eigenvalue-eigenvector pair we just computed.</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='op'>(</span><span class='va'>A</span> <span class='op'><a href='https://rdrr.io/r/base/matmult.html'>%*%</a></span> <span class='va'>evals_evects</span><span class='op'>$</span><span class='va'>vectors</span><span class='op'>[</span> ,<span class='fl'>1</span><span class='op'>]</span><span class='op'>)</span>
+</code></pre>
+</div>
+<pre><code>           [,1]
+[1,] -1.8043114
+[2,] -2.4618891
+[3,] -0.9566547</code></pre>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='op'>(</span><span class='va'>evals_evects</span><span class='op'>$</span><span class='va'>values</span><span class='op'>[</span><span class='fl'>1</span><span class='op'>]</span> <span class='op'>*</span> <span class='va'>evals_evects</span><span class='op'>$</span><span class='va'>vectors</span><span class='op'>[</span> ,<span class='fl'>1</span><span class='op'>]</span><span class='op'>)</span>
+</code></pre>
+</div>
+<pre><code>[1] -1.8043114 -2.4618891 -0.9566547</code></pre>
+</div>
 <h2 id="functions-in-r">Functions in R</h2>
 <h2 id="r-packages">R Packages</h2>
 <h2 id="visualization-in-r">Visualization in R</h2>
@@ -2527,7 +2680,7 @@ $values
 <p><a href="https://stat2labs.sites.grinnell.edu/Handouts/rtutorials/IntroToggformula.html">This article</a> provides more information on <code>ggformula</code>.</p>
 <h2 id="numerical-solution-of-differential-equations-in-r">Numerical Solution of Differential Equations in R</h2>
 <h2 id="phase-plane-methods-in-r">Phase-Plane Methods in R</h2>
-<div class="sourceCode" id="cb38"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
+<div class="sourceCode" id="cb54"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
 <!--radix_placeholder_article_footer-->
 <!--/radix_placeholder_article_footer-->
 </div>
@@ -2535,6 +2688,15 @@ $values
 <div class="d-appendix">
 </div>
 
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
 
 <!--radix_placeholder_site_after_body-->
 <!--/radix_placeholder_site_after_body-->

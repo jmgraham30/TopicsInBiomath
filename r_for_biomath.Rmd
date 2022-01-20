@@ -278,8 +278,82 @@ vembedr::embed_url("https://youtu.be/9f2g7RN5N0I") %>%
 
 ## Linear Algebra in R
 
+Linear algebra plays a central role in solving problem in biomathematics. This section demonstrates some linear algebra computations that will be used frequently in *Topics in Biomathematics* performed in R. 
+
+### Matrix Arithmetic
+
+If $A$ and $B$ are matrices of the same size then we can add them. Matrix addition is computed elementwise. We demonstrate this in R.
+
+```{r r_matrix_add}
+(A <- matrix(c(1,2,-1,3,1,0,2,-1,2),3,3,byrow = TRUE))
+(B <- matrix(c(3,2,-1,2,1,-1,2,-3,1),3,3,byrow = TRUE))
+A + B # matrix addition
+```
 
 
+We can also multiply a matrix by a number (scalar multiplication). In R
+
+```{r r_scalar_mult}
+3 * A
+```
+
+Recall that if $A$ is an $m\times n$ matrix and $B$ is an $n \times p$ matrix, then we can form the [matrix product](https://en.wikipedia.org/wiki/Matrix_multiplication) $AB$ which will be a matrix of size $m\times p$. We demonstrate this in R.
+
+```{r r_matrix_mult}
+(A <- matrix(c(1,2,-1,3,1,0,2,-1,2),3,3,byrow = TRUE))
+(B <- matrix(c(3,2,-1,2,1,-1),3,2,byrow = TRUE))
+A %*% B # matrix multiplication
+```
+
+A special case of matrix multiplication is matrix-vector multiplication. For example, 
+
+```{r mat_vect_mult}
+(v <- c(1,-1,1))
+A %*% v # matrix-vector multiplication 
+```
+
+### Matrix Transpose and Determinant
+
+In R, the transpose of a matrix is obtained as follows:
+
+```{r r_transpose}
+t(B)
+```
+
+and the determinant of a square matrix is computed as
+
+```{r r_det}
+det(A)
+```
+
+
+### Eigenvalues and Eigenvectors
+
+Recall that if $A$ is a square matrix ($n\times n$), then an eigenvalue-eigenvector pair is a number $\lambda$ and a non-zero vector $v$ satisfying $Av=\lambda v$. In R, we can compute the eigenvalues and eigenvectors for a square matrix as
+
+```{r}
+(evals_evects <- eigen(A))
+```
+
+Note that the result is an R list that consists of 
+
+1) a vector that contains the eigenvalues, and 
+
+2) a matrix, the columns of which are the eigenvectors.
+
+It is a fact from linear algebra that the determinant of a square matrix is the product of its eigenvalues. Let's confirm this with our example matrix:
+
+```{r evals_det}
+(det(A))
+(prod(evals_evects$values))
+```
+
+Let's also confirm that $Av=\lambda v$ for the first eigenvalue-eigenvector pair we just computed. 
+
+```{r check_eigens}
+(A %*% evals_evects$vectors[ ,1])
+(evals_evects$values[1] * evals_evects$vectors[ ,1])
+```
 
 ## Functions in R
 
