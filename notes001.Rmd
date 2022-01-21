@@ -20,6 +20,14 @@ bibliography: topics_in_biomath.bib
 knitr::opts_chunk$set(echo = FALSE)
 ```
 
+# Goals
+
+After reading this section of notes, you should
+
+1) be aware of the general structure of the course *Topics in Biomathematics*, and
+
+2) have a general sense of what the field of biomathematics is about and how we will approach learning biomathematics in the course  *Topics in Biomathematics*. 
+
 # Topics in Biomathematics
 
 Welcome to *Topics in Biomathematics*!  The set of notes to which this document belongs have been developed from a course, MATH 463 *Topics in Biomathematics*, taught at the [University of Scranton](https://www.scranton.edu/) since 2013. The purpose of this course is to provide students having a background in linear algebra and differential equations with a grounding in mathematical modeling for biological phenomenon. We hope that these notes may also be useful for a somewhat wider audience of individuals that are interested in mathematical or theoretical biology, or areas of applied mathematics that consider scientific problems from biology or medicine. 

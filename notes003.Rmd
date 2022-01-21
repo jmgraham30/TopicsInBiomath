@@ -25,6 +25,16 @@ library(patchwork)
 theme_set(theme_light())
 ```
 
+# Goals
+
+After reading this section of notes, you should
+
+1) have an understanding of the notion of "mathematical model",
+
+2) be aware of typical steps in the modeling process, and
+
+3) have gained an appreciation for the place of mathematical modeling in the basic biomathematical work flow.  
+
 # Overview
 
 At this point, we have introduced the basic work flow that is often followed in the practice of biomathematics. Key components of the biomathematics work flow is the construction of a mathematical model and the use of the model to try to solve a problem or answer a question stemming from the life sciences. Mathematical modeling is the process of constructing or deriving a mathematical model. But what exactly is a mathematical model? We beleive that it is not very easy to answer this question in a way that is unique, definitive, and concise. However, we hope that as the course proceeds you will over time develop an internal understanding of what a mathematical model is and even gain some ability with building mathematical models in the context of biomathematics. 

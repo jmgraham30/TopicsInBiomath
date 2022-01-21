@@ -25,6 +25,16 @@ library(patchwork)
 theme_set(theme_light())
 ```
 
+# Goals
+
+After reading this section of notes, you should
+
+1) have developed a greater appreciation for the basic work flow of biomathematics, 
+
+2) know the meaning of "per capita rate of change" as it relates to population growth, 
+
+3) know the basic "exponential growth" model $\frac{dN}{dt} = rN$. 
+
 # Overview 
 
 In the previous lecture, we introduced the basic work flow of biomathematics:
