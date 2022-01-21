@@ -115,8 +115,8 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   <link rel="license" href="https://creativecommons.org/licenses/by-nc/4.0/"/>
 
   <!--  https://schema.org/Article -->
-  <meta property="article:published" itemprop="datePublished" content="2022-01-20"/>
-  <meta property="article:created" itemprop="dateCreated" content="2022-01-20"/>
+  <meta property="article:published" itemprop="datePublished" content="2022-01-21"/>
+  <meta property="article:created" itemprop="dateCreated" content="2022-01-21"/>
   <meta name="article:author" content="Jason M. Graham"/>
 
   <!--  https://developers.facebook.com/docs/sharing/webmasters#markup -->
@@ -137,7 +137,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   <!--radix_placeholder_rmarkdown_metadata-->
 
   <script type="text/json" id="radix-rmarkdown-metadata">
-  {"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["title","description","author","date","output","creative_commons","bibliography"]}},"value":[{"type":"character","attributes":{},"value":["R for Biomathematics"]},{"type":"character","attributes":{},"value":["An Introduction to R for Biomathematics\n"]},{"type":"list","attributes":{},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","url","affiliation","affiliation_url"]}},"value":[{"type":"character","attributes":{},"value":["Jason M. Graham"]},{"type":"character","attributes":{},"value":["https://topicsinbiomath.netlify.app/"]},{"type":"character","attributes":{},"value":["University of Scranton"]},{"type":"character","attributes":{},"value":["https://sites.google.com/site/jasonmgrahamus/"]}]}]},{"type":"character","attributes":{},"value":["2022-01-20"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["distill::distill_article"]}},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["toc","toc_depth"]}},"value":[{"type":"logical","attributes":{},"value":[true]},{"type":"integer","attributes":{},"value":[2]}]}]},{"type":"character","attributes":{},"value":["CC BY-NC"]},{"type":"character","attributes":{},"value":["topics_in_biomath.bib"]}]}
+  {"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["title","description","author","date","output","creative_commons","bibliography"]}},"value":[{"type":"character","attributes":{},"value":["R for Biomathematics"]},{"type":"character","attributes":{},"value":["An Introduction to R for Biomathematics\n"]},{"type":"list","attributes":{},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","url","affiliation","affiliation_url"]}},"value":[{"type":"character","attributes":{},"value":["Jason M. Graham"]},{"type":"character","attributes":{},"value":["https://topicsinbiomath.netlify.app/"]},{"type":"character","attributes":{},"value":["University of Scranton"]},{"type":"character","attributes":{},"value":["https://sites.google.com/site/jasonmgrahamus/"]}]}]},{"type":"character","attributes":{},"value":["2022-01-21"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["distill::distill_article"]}},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["toc","toc_depth"]}},"value":[{"type":"logical","attributes":{},"value":[true]},{"type":"integer","attributes":{},"value":[2]}]}]},{"type":"character","attributes":{},"value":["CC BY-NC"]},{"type":"character","attributes":{},"value":["topics_in_biomath.bib"]}]}
   </script>
   <!--/radix_placeholder_rmarkdown_metadata-->
   <!--radix_placeholder_navigation_in_header-->
@@ -2086,7 +2086,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <!--radix_placeholder_front_matter-->
 
 <script id="distill-front-matter" type="text/json">
-{"title":"R for Biomathematics","description":"An Introduction to R for Biomathematics","authors":[{"author":"Jason M. Graham","authorURL":"https://topicsinbiomath.netlify.app/","affiliation":"University of Scranton","affiliationURL":"https://sites.google.com/site/jasonmgrahamus/","orcidID":""}],"publishedDate":"2022-01-20T00:00:00.000-05:00","citationText":"Graham, 2022"}
+{"title":"R for Biomathematics","description":"An Introduction to R for Biomathematics","authors":[{"author":"Jason M. Graham","authorURL":"https://topicsinbiomath.netlify.app/","affiliation":"University of Scranton","affiliationURL":"https://sites.google.com/site/jasonmgrahamus/","orcidID":""}],"publishedDate":"2022-01-21T00:00:00.000-05:00","citationText":"Graham, 2022"}
 </script>
 
 <!--/radix_placeholder_front_matter-->
@@ -2131,9 +2131,12 @@ Notes
 </div>
 
 <div class="d-byline">
-  Jason M. Graham <a href="https://topicsinbiomath.netlify.app/" class="uri">https://topicsinbiomath.netlify.app/</a> (University of Scranton)<a href="https://sites.google.com/site/jasonmgrahamus/" class="uri">https://sites.google.com/site/jasonmgrahamus/</a>
+  Jason M. Graham <a href="https://topicsinbiomath.netlify.app/"
+class="uri">https://topicsinbiomath.netlify.app/</a> (University of
+Scranton)<a href="https://sites.google.com/site/jasonmgrahamus/"
+class="uri">https://sites.google.com/site/jasonmgrahamus/</a>
   
-<br/>2022-01-20
+<br/>2022-01-21
 </div>
 
 <div class="d-article">
@@ -2141,50 +2144,88 @@ Notes
 <nav class="l-text toc figcaption" id="TOC">
 <h3>Contents</h3>
 <ul>
-<li><a href="#computation-in-biomathematics">Computation in Biomathematics</a></li>
+<li><a href="#computation-in-biomathematics">Computation in
+Biomathematics</a></li>
 <li><a href="#what-is-r">What is R?</a></li>
 <li><a href="#why-r">Why R?</a></li>
 <li><a href="#an-introduction-to-r">An Introduction to R</a>
 <ul>
-<li><a href="#installing-r-and-rstudio">Installing R and RStudio</a></li>
+<li><a href="#installing-r-and-rstudio">Installing R and
+RStudio</a></li>
 <li><a href="#r-as-a-calculator">R as a Calculator</a></li>
 <li><a href="#data-in-r">Data in R</a></li>
 <li><a href="#linear-algebra-in-r">Linear Algebra in R</a></li>
 <li><a href="#functions-in-r">Functions in R</a></li>
 <li><a href="#r-packages">R Packages</a></li>
 <li><a href="#visualization-in-r">Visualization in R</a></li>
-<li><a href="#numerical-solution-of-differential-equations-in-r">Numerical Solution of Differential Equations in R</a></li>
-<li><a href="#phase-plane-methods-in-r">Phase-Plane Methods in R</a></li>
+<li><a
+href="#numerical-solution-of-differential-equations-in-r">Numerical
+Solution of Differential Equations in R</a></li>
+<li><a href="#phase-plane-methods-in-r">Phase-Plane Methods in
+R</a></li>
 </ul></li>
 <li><a href="#conclusion">Conclusion</a></li>
 </ul>
 </nav>
 </div>
-<h1 id="computation-in-biomathematics">Computation in Biomathematics</h1>
-<p>As in other scientific disciplines, numerical and scientific computing play a central role in biomathematics. For the purposes of <em>Topics in Biomathematics</em>, we are mainly interested in the numerical solution of mathematical problems, <em>e.g.,</em> ordinary differential equations, and scientific visualization, <em>e.g.,</em> plotting functions. Numerous computing platforms or environments are used in biomathematics. Some notable options include</p>
+<h1 id="computation-in-biomathematics">Computation in
+Biomathematics</h1>
+<p>As in other scientific disciplines, numerical and scientific
+computing play a central role in biomathematics. For the purposes of
+<em>Topics in Biomathematics</em>, we are mainly interested in the
+numerical solution of mathematical problems, <em>e.g.,</em> ordinary
+differential equations, and scientific visualization, <em>e.g.,</em>
+plotting functions. Numerous computing platforms or environments are
+used in biomathematics. Some notable options include</p>
 <ul>
-<li><p><a href="https://www.mathworks.com/products/matlab.html">MATLAB</a> or <a href="https://www.gnu.org/software/octave/index">Octave</a>,</p></li>
+<li><p><a
+href="https://www.mathworks.com/products/matlab.html">MATLAB</a> or <a
+href="https://www.gnu.org/software/octave/index">Octave</a>,</p></li>
 <li><p><a href="https://www.maplesoft.com/">Maple</a>,</p></li>
 <li><p><a href="https://www.python.org/">Python</a>,</p></li>
-<li><p><a href="http://www.math.pitt.edu/~bard/xpp/xpp.html">XPPAUT</a>,</p></li>
+<li><p><a
+href="http://www.math.pitt.edu/~bard/xpp/xpp.html">XPPAUT</a>,</p></li>
 <li><p><a href="https://www.r-project.org/">R</a>, and</p></li>
 <li><p><a href="https://julialang.org/">Julia</a>.</p></li>
 </ul>
-<p>The purpose of this document is to provide an introduction to parts of the R computing ecosystem that are particularly useful for biomathematics.</p>
+<p>The purpose of this document is to provide an introduction to parts
+of the R computing ecosystem that are particularly useful for
+biomathematics.</p>
 <h1 id="what-is-r">What is R?</h1>
-<p><a href="https://en.wikipedia.org/wiki/R_(programming_language)">R</a> is an open-source statistical computing platform that was developed as an alternative to proprietary statistical software. In the years since it’s initial release, R has become immensely popular and a vast ecosystem of open-source software has developed around R that greatly enhances it’s utility in science.</p>
+<p><a
+href="https://en.wikipedia.org/wiki/R_(programming_language)">R</a> is
+an open-source statistical computing platform that was developed as an
+alternative to proprietary statistical software. In the years since it’s
+initial release, R has become immensely popular and a vast ecosystem of
+open-source software has developed around R that greatly enhances it’s
+utility in science.</p>
 <h1 id="why-r">Why R?</h1>
-<p>Given many other options, why do we focus on R as the computing tool of choice in <em>Topics in Biomathematics</em>? The principal reasons are:</p>
+<p>Given many other options, why do we focus on R as the computing tool
+of choice in <em>Topics in Biomathematics</em>? The principal reasons
+are:</p>
 <ol type="1">
 <li><p>R is free but also well-developed and widely-supported.</p></li>
-<li><p>Even though it was developed for statistical applications, R works well for numerical computing of the sort that is useful in biomathematics.</p></li>
-<li><p>The <a href="https://www.rstudio.com/">RStudio</a> integrated development environment (IDE) facilitates not only coding in R but also presenting and sharing results so as to align nicely with the course objective “Communicate effectively in writing their work in applying the techniques of applied mathematics to problems arising in the life sciences.”.</p></li>
-<li><p>Many biologists “speak” R and it is very helpful to have a common language when collaborating on interdisciplinary problems.</p></li>
+<li><p>Even though it was developed for statistical applications, R
+works well for numerical computing of the sort that is useful in
+biomathematics.</p></li>
+<li><p>The <a href="https://www.rstudio.com/">RStudio</a> integrated
+development environment (IDE) facilitates not only coding in R but also
+presenting and sharing results so as to align nicely with the course
+objective “Communicate effectively in writing their work in applying the
+techniques of applied mathematics to problems arising in the life
+sciences.”.</p></li>
+<li><p>Many biologists “speak” R and it is very helpful to have a common
+language when collaborating on interdisciplinary problems.</p></li>
 </ol>
 <h1 id="an-introduction-to-r">An Introduction to R</h1>
-<p>In what follows, we illustrate some R commands that will be used commonly throughout the <em>Topics in Biomathematics</em> course. This document is by no means comprehensive. The best ways to learn more about R are</p>
+<p>In what follows, we illustrate some R commands that will be used
+commonly throughout the <em>Topics in Biomathematics</em> course. This
+document is by no means comprehensive. The best ways to learn more about
+R are</p>
 <ol type="1">
-<li><p>by using the <a href="https://swirlstats.com/"><code>swirl</code></a> package, and</p></li>
+<li><p>by using the <a
+href="https://swirlstats.com/"><code>swirl</code></a> package,
+and</p></li>
 <li><p>searching the web for specific topics.</p></li>
 </ol>
 <p>Here is a short video about <code>swirl</code>:</p>
@@ -2196,9 +2237,15 @@ Notes
 </div>
 </div>
 <h2 id="installing-r-and-rstudio">Installing R and RStudio</h2>
-<p>R and RStudio are both free and easy to install. The videos below can serve as a helpful guide if you want to use them. Alternatively, you can access R and RStudio through a web browser without direct installation via <a href="https://rstudio.cloud/">RStudio Cloud</a>. This does require an account but is free to set up.</p>
+<p>R and RStudio are both free and easy to install. The videos below can
+serve as a helpful guide if you want to use them. Alternatively, you can
+access R and RStudio through a web browser without direct installation
+via <a href="https://rstudio.cloud/">RStudio Cloud</a>. This does
+require an account but is free to set up.</p>
 <h3 id="installation-on-mac">Installation on Mac</h3>
-<p>Read <a href="https://macpaw.com/how-to/download-r-on-mac?campaign=cmmx_search_dsa_us_en&amp;ci=10147083349&amp;adgroupid=123618298718&amp;adpos=&amp;ck=&amp;targetid=dsa-1280095891351&amp;match=&amp;gnetwork=s&amp;creative=523598858635&amp;placement=&amp;placecat=&amp;accname=cmm&amp;gclid=CjwKCAiA55mPBhBOEiwANmzoQjy_N3sWjtX395AVPNBDvJVDsd2mKXLboj3XikILm3OcCx7edQqcVhoC5d8QAvD_BwE">this article</a> or watch this video:</p>
+<p>Read <a
+href="https://macpaw.com/how-to/download-r-on-mac?campaign=cmmx_search_dsa_us_en&amp;ci=10147083349&amp;adgroupid=123618298718&amp;adpos=&amp;ck=&amp;targetid=dsa-1280095891351&amp;match=&amp;gnetwork=s&amp;creative=523598858635&amp;placement=&amp;placecat=&amp;accname=cmm&amp;gclid=CjwKCAiA55mPBhBOEiwANmzoQjy_N3sWjtX395AVPNBDvJVDsd2mKXLboj3XikILm3OcCx7edQqcVhoC5d8QAvD_BwE">this
+article</a> or watch this video:</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="vembedr" align="center">
 <div>
@@ -2207,7 +2254,9 @@ Notes
 </div>
 </div>
 <h3 id="installation-on-pc">Installation on PC</h3>
-<p>Read <a href="https://medium.com/@GalarnykMichael/install-r-and-rstudio-on-windows-5f503f708027">this article</a> or watch this video:</p>
+<p>Read <a
+href="https://medium.com/@GalarnykMichael/install-r-and-rstudio-on-windows-5f503f708027">this
+article</a> or watch this video:</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="vembedr" align="center">
 <div>
@@ -2286,7 +2335,9 @@ Notes
 </div>
 <pre><code>[1] 0.5</code></pre>
 </div>
-<p>Sometimes it is convenient to store a value as a variable. The follow code stores the value of 3 as a variable <code>x</code> and then multiplies it by 1.5:</p>
+<p>Sometimes it is convenient to store a value as a variable. The follow
+code stores the value of 3 as a variable <code>x</code> and then
+multiplies it by 1.5:</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
 <pre class="sourceCode r"><code class="sourceCode r"><span class='va'>x</span> <span class='op'>&lt;-</span> <span class='fl'>3</span>
@@ -2296,7 +2347,8 @@ Notes
 <pre><code>[1] 4.5</code></pre>
 </div>
 <p>In R, the notation <code>&lt;-</code> is the assignment operator.</p>
-<p>You can do arithmetic with variables just like you can with numbers. For example,</p>
+<p>You can do arithmetic with variables just like you can with numbers.
+For example,</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
 <pre class="sourceCode r"><code class="sourceCode r"><span class='va'>x</span> <span class='op'>&lt;-</span> <span class='fl'>3</span>
@@ -2316,7 +2368,9 @@ Notes
 </div>
 <pre><code>[1] 1000</code></pre>
 </div>
-<p>You should always pay close attention to the order of operations when doing arithmetic in R. Use parentheses to make sure you compute what you mean to compute. For example,</p>
+<p>You should always pay close attention to the order of operations when
+doing arithmetic in R. Use parentheses to make sure you compute what you
+mean to compute. For example,</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
 <pre class="sourceCode r"><code class="sourceCode r"><span class='op'>(</span><span class='op'>(</span><span class='fl'>3</span> <span class='op'>-</span> <span class='fl'>2</span><span class='op'>)</span> <span class='op'>*</span> <span class='fl'>6</span><span class='op'>)</span>
@@ -2333,9 +2387,12 @@ Notes
 <pre><code>[1] -9</code></pre>
 </div>
 <h2 id="data-in-r">Data in R</h2>
-<p>There are several common ways to represent different types of data in R. In this section we cover those that are most relevant to biomathematics.</p>
+<p>There are several common ways to represent different types of data in
+R. In this section we cover those that are most relevant to
+biomathematics.</p>
 <h3 id="numeric-vectors">Numeric Vectors</h3>
-<p>In R, we create a vector or array of values using concatenation with the operator <code>c</code>. For example,</p>
+<p>In R, we create a vector or array of values using concatenation with
+the operator <code>c</code>. For example,</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
 <pre class="sourceCode r"><code class="sourceCode r"><span class='op'>(</span><span class='va'>a</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>1</span>,<span class='fl'>5</span>,<span class='op'>-</span><span class='fl'>7</span><span class='op'>)</span><span class='op'>)</span>
@@ -2343,7 +2400,8 @@ Notes
 </div>
 <pre><code>[1]  1  5 -7</code></pre>
 </div>
-<p>creates a numeric vector with entries 1, 5, and -7, then we store the result as a variable called <code>a</code>.</p>
+<p>creates a numeric vector with entries 1, 5, and -7, then we store the
+result as a variable called <code>a</code>.</p>
 <p>We can perform arithmetic operations on vectors. For example,</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
@@ -2368,7 +2426,8 @@ Notes
 </div>
 <pre><code>[1]      1.0      0.2 117649.0</code></pre>
 </div>
-<p><strong>Question:</strong> In the last code block, what is happening to produce the result corresponding to <code>a^b</code>?</p>
+<p><strong>Question:</strong> In the last code block, what is happening
+to produce the result corresponding to <code>a^b</code>?</p>
 <p>We can also call math functions on vectors. For example,</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
@@ -2383,7 +2442,8 @@ Notes
 </div>
 <pre><code>[1] -1  1 -1</code></pre>
 </div>
-<p>Note that these math functions are “vectorized” in that the operate elementwise on a vector.</p>
+<p>Note that these math functions are “vectorized” in that the operate
+elementwise on a vector.</p>
 <h3 id="character-vectors">Character Vectors</h3>
 <p>We can also create so-called character vectors in R. For example,</p>
 <div class="layout-chunk" data-layout="l-body">
@@ -2394,9 +2454,11 @@ Notes
 <pre><code>[1] &quot;calculus&quot;               &quot;linear algebra&quot;        
 [3] &quot;differential equations&quot;</code></pre>
 </div>
-<p>We won’t make extensive use of character vectors in <em>Topics in Biomathematics</em> but it is useful to know that they exist.</p>
+<p>We won’t make extensive use of character vectors in <em>Topics in
+Biomathematics</em> but it is useful to know that they exist.</p>
 <h3 id="matrices-in-r">Matrices in R</h3>
-<p>The <code>matrix</code> functions allows us to create a matrix in R. For example,</p>
+<p>The <code>matrix</code> functions allows us to create a matrix in R.
+For example,</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
 <pre class="sourceCode r"><code class="sourceCode r"><span class='op'>(</span><span class='va'>M</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/matrix.html'>matrix</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>1</span>,<span class='fl'>2</span>,<span class='fl'>3</span>,<span class='fl'>4</span><span class='op'>)</span>,<span class='fl'>2</span>,<span class='fl'>2</span><span class='op'>)</span><span class='op'>)</span>
@@ -2429,7 +2491,10 @@ Notes
 [2,]    4    5    6</code></pre>
 </div>
 <h3 id="lists-in-r">Lists in R</h3>
-<p>All of the entries in a vector or a matrix must by of the same type. For example, all numeric values or all characters. In R, lists are a data structure that allow us to store data of mixed types. For example,</p>
+<p>All of the entries in a vector or a matrix must by of the same type.
+For example, all numeric values or all characters. In R, lists are a
+data structure that allow us to store data of mixed types. For
+example,</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
 <pre class="sourceCode r"><code class="sourceCode r"><span class='op'>(</span><span class='va'>l1</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>1</span>,<span class='fl'>2</span>,<span class='fl'>3</span><span class='op'>)</span>,<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"jason"</span>,<span class='st'>"graham"</span><span class='op'>)</span>,<span class='fu'><a href='https://rdrr.io/r/base/matrix.html'>matrix</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>1</span>,<span class='fl'>2</span>,<span class='fl'>3</span>,<span class='fl'>4</span><span class='op'>)</span>,<span class='fl'>2</span>,<span class='fl'>2</span><span class='op'>)</span><span class='op'>)</span><span class='op'>)</span>
@@ -2469,7 +2534,8 @@ $values
 [10,]   10   21
 [11,]   11   22</code></pre>
 </div>
-<p>Note that the entries of a list can be accessed using either indexing or names (provided that the list entries are named). For example,</p>
+<p>Note that the entries of a list can be accessed using either indexing
+or names (provided that the list entries are named). For example,</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
 <pre class="sourceCode r"><code class="sourceCode r"><span class='op'>(</span><span class='va'>l1</span><span class='op'>[[</span><span class='fl'>2</span><span class='op'>]</span><span class='op'>]</span><span class='op'>)</span>
@@ -2487,7 +2553,8 @@ $values
 </div>
 <pre><code>[1]  1 12</code></pre>
 </div>
-<p>If a list has named elements, we can access the names using the <code>names</code> function. For example,</p>
+<p>If a list has named elements, we can access the names using the
+<code>names</code> function. For example,</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
 <pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://rdrr.io/r/base/names.html'>names</a></span><span class='op'>(</span><span class='va'>l2</span><span class='op'>)</span>
@@ -2504,7 +2571,10 @@ $values
 </div>
 </div>
 <h3 id="data-frames-in-r">Data Frames in R</h3>
-<p>A data frame in R is a data structure that corresponds to something like a spreadsheet. A data frame is a special type of list object. You can think of a data frame as a cross between a list and a matrix. Here is how you ceate a data frame:</p>
+<p>A data frame in R is a data structure that corresponds to something
+like a spreadsheet. A data frame is a special type of list object. You
+can think of a data frame as a cross between a list and a matrix. Here
+is how you ceate a data frame:</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
 <pre class="sourceCode r"><code class="sourceCode r"><span class='op'>(</span><span class='va'>my_data</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span><span class='op'>(</span>course<span class='op'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"MATH 114"</span>,<span class='st'>"MATH 221"</span>,<span class='st'>"MATH 222"</span>,<span class='st'>"MATH 351"</span>, <span class='st'>"MATH 341"</span><span class='op'>)</span>,
@@ -2519,7 +2589,11 @@ $values
 4 MATH 351            5     S
 5 MATH 341            7     T</code></pre>
 </div>
-<p>Note that a data frame contains rows and columns, every column is a vector (either numeric or character), and every column has the same number of entries. The columns of a data frame all have names. We can also use the <code>names</code> function to determine the column names of a data frame. For example,</p>
+<p>Note that a data frame contains rows and columns, every column is a
+vector (either numeric or character), and every column has the same
+number of entries. The columns of a data frame all have names. We can
+also use the <code>names</code> function to determine the column names
+of a data frame. For example,</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
 <pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://rdrr.io/r/base/names.html'>names</a></span><span class='op'>(</span><span class='va'>my_data</span><span class='op'>)</span>
@@ -2527,7 +2601,9 @@ $values
 </div>
 <pre><code>[1] &quot;course&quot;       &quot;num_students&quot; &quot;level&quot;       </code></pre>
 </div>
-<p>Typically we do not create a data frame by hand, but data is often read in as a data frame. The principal use of data frames in R is that they are the best way to provide data to plotting functions.</p>
+<p>Typically we do not create a data frame by hand, but data is often
+read in as a data frame. The principal use of data frames in R is that
+they are the best way to provide data to plotting functions.</p>
 <p>Here is a helpful video on R data frames:</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="vembedr" align="center">
@@ -2537,9 +2613,15 @@ $values
 </div>
 </div>
 <h2 id="linear-algebra-in-r">Linear Algebra in R</h2>
-<p>Linear algebra plays a central role in solving problem in biomathematics. This section demonstrates some linear algebra computations that will be used frequently in <em>Topics in Biomathematics</em> performed in R.</p>
+<p>Linear algebra plays a central role in solving problem in
+biomathematics. This section demonstrates some linear algebra
+computations that will be used frequently in <em>Topics in
+Biomathematics</em> performed in R.</p>
 <h3 id="matrix-arithmetic">Matrix Arithmetic</h3>
-<p>If <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> are matrices of the same size then we can add them. Matrix addition is computed elementwise. We demonstrate this in R.</p>
+<p>If <span class="math inline">\(A\)</span> and <span
+class="math inline">\(B\)</span> are matrices of the same size then we
+can add them. Matrix addition is computed elementwise. We demonstrate
+this in R.</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
 <pre class="sourceCode r"><code class="sourceCode r"><span class='op'>(</span><span class='va'>A</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/matrix.html'>matrix</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>1</span>,<span class='fl'>2</span>,<span class='op'>-</span><span class='fl'>1</span>,<span class='fl'>3</span>,<span class='fl'>1</span>,<span class='fl'>0</span>,<span class='fl'>2</span>,<span class='op'>-</span><span class='fl'>1</span>,<span class='fl'>2</span><span class='op'>)</span>,<span class='fl'>3</span>,<span class='fl'>3</span>,byrow <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span><span class='op'>)</span>
@@ -2566,7 +2648,8 @@ $values
 [2,]    5    2   -1
 [3,]    4   -4    3</code></pre>
 </div>
-<p>We can also multiply a matrix by a number (scalar multiplication). In R</p>
+<p>We can also multiply a matrix by a number (scalar multiplication). In
+R</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
 <pre class="sourceCode r"><code class="sourceCode r"><span class='fl'>3</span> <span class='op'>*</span> <span class='va'>A</span>
@@ -2577,7 +2660,14 @@ $values
 [2,]    9    3    0
 [3,]    6   -3    6</code></pre>
 </div>
-<p>Recall that if <span class="math inline">\(A\)</span> is an <span class="math inline">\(m\times n\)</span> matrix and <span class="math inline">\(B\)</span> is an <span class="math inline">\(n \times p\)</span> matrix, then we can form the <a href="https://en.wikipedia.org/wiki/Matrix_multiplication">matrix product</a> <span class="math inline">\(AB\)</span> which will be a matrix of size <span class="math inline">\(m\times p\)</span>. We demonstrate this in R.</p>
+<p>Recall that if <span class="math inline">\(A\)</span> is an <span
+class="math inline">\(m\times n\)</span> matrix and <span
+class="math inline">\(B\)</span> is an <span class="math inline">\(n
+\times p\)</span> matrix, then we can form the <a
+href="https://en.wikipedia.org/wiki/Matrix_multiplication">matrix
+product</a> <span class="math inline">\(AB\)</span> which will be a
+matrix of size <span class="math inline">\(m\times p\)</span>. We
+demonstrate this in R.</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
 <pre class="sourceCode r"><code class="sourceCode r"><span class='op'>(</span><span class='va'>A</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/matrix.html'>matrix</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>1</span>,<span class='fl'>2</span>,<span class='op'>-</span><span class='fl'>1</span>,<span class='fl'>3</span>,<span class='fl'>1</span>,<span class='fl'>0</span>,<span class='fl'>2</span>,<span class='op'>-</span><span class='fl'>1</span>,<span class='fl'>2</span><span class='op'>)</span>,<span class='fl'>3</span>,<span class='fl'>3</span>,byrow <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span><span class='op'>)</span>
@@ -2604,7 +2694,8 @@ $values
 [2,]    8    8
 [3,]    9    0</code></pre>
 </div>
-<p>A special case of matrix multiplication is matrix-vector multiplication. For example,</p>
+<p>A special case of matrix multiplication is matrix-vector
+multiplication. For example,</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
 <pre class="sourceCode r"><code class="sourceCode r"><span class='op'>(</span><span class='va'>v</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>1</span>,<span class='op'>-</span><span class='fl'>1</span>,<span class='fl'>1</span><span class='op'>)</span><span class='op'>)</span>
@@ -2620,7 +2711,8 @@ $values
 [2,]    2
 [3,]    5</code></pre>
 </div>
-<h3 id="matrix-transpose-and-determinant">Matrix Transpose and Determinant</h3>
+<h3 id="matrix-transpose-and-determinant">Matrix Transpose and
+Determinant</h3>
 <p>In R, the transpose of a matrix is obtained as follows:</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
@@ -2640,7 +2732,13 @@ $values
 <pre><code>[1] -5</code></pre>
 </div>
 <h3 id="eigenvalues-and-eigenvectors">Eigenvalues and Eigenvectors</h3>
-<p>Recall that if <span class="math inline">\(A\)</span> is a square matrix (<span class="math inline">\(n\times n\)</span>), then an eigenvalue-eigenvector pair is a number <span class="math inline">\(\lambda\)</span> and a non-zero vector <span class="math inline">\(v\)</span> satisfying <span class="math inline">\(Av=\lambda v\)</span>. In R, we can compute the eigenvalues and eigenvectors for a square matrix as</p>
+<p>Recall that if <span class="math inline">\(A\)</span> is a square
+matrix (<span class="math inline">\(n\times n\)</span>), then an
+eigenvalue-eigenvector pair is a number <span
+class="math inline">\(\lambda\)</span> and a non-zero vector <span
+class="math inline">\(v\)</span> satisfying <span
+class="math inline">\(Av=\lambda v\)</span>. In R, we can compute the
+eigenvalues and eigenvectors for a square matrix as</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
 <pre class="sourceCode r"><code class="sourceCode r"><span class='op'>(</span><span class='va'>evals_evects</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/eigen.html'>eigen</a></span><span class='op'>(</span><span class='va'>A</span><span class='op'>)</span><span class='op'>)</span>
@@ -2661,7 +2759,9 @@ $vectors
 <li><p>a vector that contains the eigenvalues, and</p></li>
 <li><p>a matrix, the columns of which are the eigenvectors.</p></li>
 </ol>
-<p>It is a fact from linear algebra that the determinant of a square matrix is the product of its eigenvalues. Let’s confirm this with our example matrix:</p>
+<p>It is a fact from linear algebra that the determinant of a square
+matrix is the product of its eigenvalues. Let’s confirm this with our
+example matrix:</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
 <pre class="sourceCode r"><code class="sourceCode r"><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/det.html'>det</a></span><span class='op'>(</span><span class='va'>A</span><span class='op'>)</span><span class='op'>)</span>
@@ -2674,7 +2774,9 @@ $vectors
 </div>
 <pre><code>[1] -5</code></pre>
 </div>
-<p>Let’s also confirm that <span class="math inline">\(Av=\lambda v\)</span> for the first eigenvalue-eigenvector pair we just computed.</p>
+<p>Let’s also confirm that <span class="math inline">\(Av=\lambda
+v\)</span> for the first eigenvalue-eigenvector pair we just
+computed.</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
 <pre class="sourceCode r"><code class="sourceCode r"><span class='op'>(</span><span class='va'>A</span> <span class='op'><a href='https://rdrr.io/r/base/matmult.html'>%*%</a></span> <span class='va'>evals_evects</span><span class='op'>$</span><span class='va'>vectors</span><span class='op'>[</span> ,<span class='fl'>1</span><span class='op'>]</span><span class='op'>)</span>
@@ -2691,7 +2793,16 @@ $vectors
 <pre><code>[1] -1.8043114 -2.4618891 -0.9566547</code></pre>
 </div>
 <h2 id="functions-in-r">Functions in R</h2>
-<p>A function is a programming construct that takes some number of inputs (possibly zero), performs some operations, and returns a value (which may be null). Writing functions is useful in general because it saves from having to rewrite the same code over and over again, makes code easier to read, and facilitates reproducibility. Additionally, code to compute numerical solutions to differential equations requires us to write a function specifying the differential equation. Thus, we are motivated to learn a little about writing functions in R. Suppose we want to create a function that inputs a number, multiplies that number by 2, and returns the result. Here is how you do this:</p>
+<p>A function is a programming construct that takes some number of
+inputs (possibly zero), performs some operations, and returns a value
+(which may be null). Writing functions is useful in general because it
+saves from having to rewrite the same code over and over again, makes
+code easier to read, and facilitates reproducibility. Additionally, code
+to compute numerical solutions to differential equations requires us to
+write a function specifying the differential equation. Thus, we are
+motivated to learn a little about writing functions in R. Suppose we
+want to create a function that inputs a number, multiplies that number
+by 2, and returns the result. Here is how you do this:</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
 <pre class="sourceCode r"><code class="sourceCode r"><span class='va'>mult_by_two</span> <span class='op'>&lt;-</span> <span class='kw'>function</span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span><span class='op'>{</span>
@@ -2717,7 +2828,8 @@ $vectors
 </div>
 <pre><code>[1] 6</code></pre>
 </div>
-<p>What if we want to multiply by an arbitrary number? One way to do this is as follows:</p>
+<p>What if we want to multiply by an arbitrary number? One way to do
+this is as follows:</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
 <pre class="sourceCode r"><code class="sourceCode r"><span class='va'>mult_by_a</span> <span class='op'>&lt;-</span> <span class='kw'>function</span><span class='op'>(</span><span class='va'>x</span>,<span class='va'>a</span><span class='op'>=</span><span class='fl'>2</span><span class='op'>)</span><span class='op'>{</span>
@@ -2726,7 +2838,10 @@ $vectors
 </code></pre>
 </div>
 </div>
-<p>In the function <code>mult_by_a</code> we have an optional argument with a default value. If <code>a</code> is not specified, we multiply by 2, if a value for <code>a</code> is given then it is used. For example:</p>
+<p>In the function <code>mult_by_a</code> we have an optional argument
+with a default value. If <code>a</code> is not specified, we multiply by
+2, if a value for <code>a</code> is given then it is used. For
+example:</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
 <pre class="sourceCode r"><code class="sourceCode r"><span class='op'>(</span><span class='fu'>mult_by_a</span><span class='op'>(</span><span class='fl'>3</span><span class='op'>)</span><span class='op'>)</span>
@@ -2751,7 +2866,10 @@ $vectors
 </div>
 <pre><code>[1] 24</code></pre>
 </div>
-<p>Let’s try something a little more interesting. Suppose we want to compute the value of an arbitrary polynomial function. Since the coefficients uniquely determine the polynomial and since R can perform vectorized operations, we can do the following:</p>
+<p>Let’s try something a little more interesting. Suppose we want to
+compute the value of an arbitrary polynomial function. Since the
+coefficients uniquely determine the polynomial and since R can perform
+vectorized operations, we can do the following:</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
 <pre class="sourceCode r"><code class="sourceCode r"><span class='va'>poly_func</span> <span class='op'>&lt;-</span> <span class='kw'>function</span><span class='op'>(</span><span class='va'>x</span>,<span class='va'>coeff_vect</span><span class='op'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>1</span><span class='op'>)</span><span class='op'>)</span><span class='op'>{</span>
@@ -2791,7 +2909,9 @@ $vectors
 </div>
 <pre><code>[1] 17</code></pre>
 </div>
-<p>Later we will see more examples of functions in R. In you want to learn more before then, here is a helpful video on writing functions in R:</p>
+<p>Later we will see more examples of functions in R. In you want to
+learn more before then, here is a helpful video on writing functions in
+R:</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="vembedr" align="center">
 <div>
@@ -2800,15 +2920,30 @@ $vectors
 </div>
 </div>
 <h2 id="r-packages">R Packages</h2>
-<p>R packages extend the functionality of R by implementing functions for various tasks. Packages must be installed before they can be used. Installing packages is easy to do. Either use the <code>install.packages</code> function or in RStudio use the Install icon on the Packages tab.</p>
-<p>Once you have installed the package or packages you want to use, you can load them with the <code>library</code> function. For <em>Topics in Biomathematics</em> we will make heavy use of the plotting packages <a href="https://ggplot2.tidyverse.org/"><code>ggplot2</code></a> and <a href="http://www.mosaic-web.org/ggformula/"><code>ggformula</code></a>, and the packages <a href="https://desolve.r-forge.r-project.org/"><code>deSolve</code></a> and <a href="https://www.rdocumentation.org/packages/phaseR/versions/2.1.3"><code>phaseR</code></a> for working with differential equations. To install these packages one can use</p>
+<p>R packages extend the functionality of R by implementing functions
+for various tasks. Packages must be installed before they can be used.
+Installing packages is easy to do. Either use the
+<code>install.packages</code> function or in RStudio use the Install
+icon on the Packages tab.</p>
+<p>Once you have installed the package or packages you want to use, you
+can load them with the <code>library</code> function. For <em>Topics in
+Biomathematics</em> we will make heavy use of the plotting packages <a
+href="https://ggplot2.tidyverse.org/"><code>ggplot2</code></a> and <a
+href="http://www.mosaic-web.org/ggformula/"><code>ggformula</code></a>,
+and the packages <a
+href="https://desolve.r-forge.r-project.org/"><code>deSolve</code></a>
+and <a
+href="https://www.rdocumentation.org/packages/phaseR/versions/2.1.3"><code>phaseR</code></a>
+for working with differential equations. To install these packages one
+can use</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
 <pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://rdrr.io/r/utils/install.packages.html'>install.packages</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"ggplot2"</span>,<span class='st'>"ggformula"</span>,<span class='st'>"deSolve"</span>,<span class='st'>"phaseR"</span><span class='op'>)</span><span class='op'>)</span>
 </code></pre>
 </div>
 </div>
-<p>You only ever have to install a package once. To load these packages, you run</p>
+<p>You only ever have to install a package once. To load these packages,
+you run</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
 <pre class="sourceCode r"><code class="sourceCode r"><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://ggplot2.tidyverse.org'>ggplot2</a></span><span class='op'>)</span>
@@ -2820,10 +2955,22 @@ $vectors
 </div>
 <p>Packages must be loaded every time you begin a new R session.</p>
 <h2 id="visualization-in-r">Visualization in R</h2>
-<p>When you present your work you should use figures and plots to clearly convey your results. As mentioned, the two packages <a href="https://ggplot2.tidyverse.org/"><code>ggplot2</code></a> and <a href="http://www.mosaic-web.org/ggformula/"><code>ggformula</code></a> make it possible to create high-quality plots in R. These packages are powerful and extensive so we will not be able to cover their full functionality here. Hopefully what is included here is enough to get you started, at least for the purposes of <em>Topics in Biomathematics</em>. It should be noted that <code>ggformula</code> is built on top of <code>ggplot2</code>.</p>
+<p>When you present your work you should use figures and plots to
+clearly convey your results. As mentioned, the two packages <a
+href="https://ggplot2.tidyverse.org/"><code>ggplot2</code></a> and <a
+href="http://www.mosaic-web.org/ggformula/"><code>ggformula</code></a>
+make it possible to create high-quality plots in R. These packages are
+powerful and extensive so we will not be able to cover their full
+functionality here. Hopefully what is included here is enough to get you
+started, at least for the purposes of <em>Topics in Biomathematics</em>.
+It should be noted that <code>ggformula</code> is built on top of
+<code>ggplot2</code>.</p>
 <h3 id="plotting-a-function">Plotting a Function</h3>
-<p>Here are two ways to plot a simple mathematical function of the form <span class="math inline">\(y=f(x)\)</span> in R:</p>
-<p>Suppose we want to plot <span class="math inline">\(f(x) = x\cos(x)\)</span> over <span class="math inline">\([0,4\pi]\)</span>. Then we can do</p>
+<p>Here are two ways to plot a simple mathematical function of the form
+<span class="math inline">\(y=f(x)\)</span> in R:</p>
+<p>Suppose we want to plot <span class="math inline">\(f(x) =
+x\cos(x)\)</span> over <span class="math inline">\([0,4\pi]\)</span>.
+Then we can do</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
 <pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://rdrr.io/pkg/ggformula/man/gf_function.html'>gf_function</a></span><span class='op'>(</span>fun <span class='op'>=</span> <span class='kw'>function</span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span><span class='op'>{</span><span class='va'>x</span><span class='op'>*</span><span class='fu'><a href='https://rdrr.io/r/base/Trig.html'>cos</a></span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span><span class='op'>}</span>,xlim<span class='op'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>0</span>,<span class='fl'>4</span><span class='op'>*</span><span class='va'>pi</span><span class='op'>)</span><span class='op'>)</span>
@@ -2858,7 +3005,14 @@ $vectors
 <p><img src="r_for_biomath_files/figure-html5/function_plot_ggplot2_mod-1.png" width="624" /></p>
 </div>
 <h3 id="more-on-plots">More on Plots</h3>
-<p>It is possible to create a variety of different types of plots using <a href="https://ggplot2.tidyverse.org/"><code>ggplot2</code></a> and <a href="http://www.mosaic-web.org/ggformula/"><code>ggformula</code></a>, and plots creating using these packages can be highly customized. As we go through the <em>Topics in Biomathematics</em> course we will learn a little more about the utility of these packages. For now, we refer anyone interested to learn more to this helpful video on <code>ggplot2</code>:</p>
+<p>It is possible to create a variety of different types of plots using
+<a href="https://ggplot2.tidyverse.org/"><code>ggplot2</code></a> and <a
+href="http://www.mosaic-web.org/ggformula/"><code>ggformula</code></a>,
+and plots creating using these packages can be highly customized. As we
+go through the <em>Topics in Biomathematics</em> course we will learn a
+little more about the utility of these packages. For now, we refer
+anyone interested to learn more to this helpful video on
+<code>ggplot2</code>:</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="vembedr" align="center">
 <div>
@@ -2866,28 +3020,58 @@ $vectors
 </div>
 </div>
 </div>
-<p><a href="https://stat2labs.sites.grinnell.edu/Handouts/rtutorials/IntroToggformula.html">This article</a> provides more information on <code>ggformula</code>.</p>
-<h2 id="numerical-solution-of-differential-equations-in-r">Numerical Solution of Differential Equations in R</h2>
-<p>A problem that we will often encounter is to obtain a numerical solution to an initial value problem (IVP) for an ordinary differential equation (ODE) or a system of ordinary differential equations (ODEs). An IVP for an ODE or ODEs typically takes the form</p>
-<p><span class="math inline">\(\frac{d{\bf x}}{dt} = {\bf F}({\bf x}(t),t)\)</span>,</p>
-<p><span class="math inline">\({\bf x}(t_{0}) = {\bf x}_{0}\)</span>.</p>
-<p>Here <span class="math inline">\({\bf x}\)</span> is the unknown function of time and <span class="math inline">\({\bf F}\)</span> is the right hand side function. These may be scalars (in case of a single ODE) or vectors (in case of a system of ODEs). First, we will focus on the case of solving a single scalar ODE, then we will examine systems on ODEs.</p>
+<p><a
+href="https://stat2labs.sites.grinnell.edu/Handouts/rtutorials/IntroToggformula.html">This
+article</a> provides more information on <code>ggformula</code>.</p>
+<h2 id="numerical-solution-of-differential-equations-in-r">Numerical
+Solution of Differential Equations in R</h2>
+<p>A problem that we will often encounter is to obtain a numerical
+solution to an initial value problem (IVP) for an ordinary differential
+equation (ODE) or a system of ordinary differential equations (ODEs). An
+IVP for an ODE or ODEs typically takes the form</p>
+<p><span class="math inline">\(\frac{d{\bf x}}{dt} = {\bf F}({\bf
+x}(t),t)\)</span>,</p>
+<p><span class="math inline">\({\bf x}(t_{0}) = {\bf
+x}_{0}\)</span>.</p>
+<p>Here <span class="math inline">\({\bf x}\)</span> is the unknown
+function of time and <span class="math inline">\({\bf F}\)</span> is the
+right hand side function. These may be scalars (in case of a single ODE)
+or vectors (in case of a system of ODEs). First, we will focus on the
+case of solving a single scalar ODE, then we will examine systems on
+ODEs.</p>
 <p>For example, we might want to obtain a numerical solution to</p>
 <p><span class="math inline">\(\frac{dN}{dt} = r N\)</span>,</p>
 <p><span class="math inline">\(N(0) = 10\)</span>,</p>
-<p>with <span class="math inline">\(r=0.5\)</span> and over the time interval <span class="math inline">\([0, 5]\)</span>.</p>
-<p>In order to obtain a numerical solution to an IVP for ODEs we must provide at minimum the following information to the computer:</p>
+<p>with <span class="math inline">\(r=0.5\)</span> and over the time
+interval <span class="math inline">\([0, 5]\)</span>.</p>
+<p>In order to obtain a numerical solution to an IVP for ODEs we must
+provide at minimum the following information to the computer:</p>
 <ol type="1">
-<li><p>A function that describes the right hand side <span class="math inline">\({\bf F}({\bf x}(t),t)\)</span>. Note that <span class="math inline">\({\bf F}\)</span> may involve parameters whose values will also need to be specified.</p></li>
-<li><p>A time interval, <span class="math inline">\([t_{0},t_{f}]\)</span>, over which to obtain a numerical solution.</p></li>
-<li><p>Initial conditions <span class="math inline">\({\bf x}_{0}\)</span>.</p></li>
+<li><p>A function that describes the right hand side <span
+class="math inline">\({\bf F}({\bf x}(t),t)\)</span>. Note that <span
+class="math inline">\({\bf F}\)</span> may involve parameters whose
+values will also need to be specified.</p></li>
+<li><p>A time interval, <span
+class="math inline">\([t_{0},t_{f}]\)</span>, over which to obtain a
+numerical solution.</p></li>
+<li><p>Initial conditions <span class="math inline">\({\bf
+x}_{0}\)</span>.</p></li>
 </ol>
-<p>Finally, once we have obtained numerical solutions to an IVP for ODEs it is typically desirable to plot these solutions in one way or another. We will also see examples of ways to plot our numerical solutions in R.</p>
+<p>Finally, once we have obtained numerical solutions to an IVP for ODEs
+it is typically desirable to plot these solutions in one way or another.
+We will also see examples of ways to plot our numerical solutions in
+R.</p>
 <h3 id="solving-a-single-ode">Solving a Single ODE</h3>
-<p>To use the methods described in this section you must make sure that the <code>deSolve</code> package is installed and loaded. The main function for obtaining numerical solutions in the <code>deSolve</code> package is the <code>ode</code> function. In order to use it, we must write a function in R syntax that describes the right hand side of our differential equation. Let’s do this for our example problem</p>
+<p>To use the methods described in this section you must make sure that
+the <code>deSolve</code> package is installed and loaded. The main
+function for obtaining numerical solutions in the <code>deSolve</code>
+package is the <code>ode</code> function. In order to use it, we must
+write a function in R syntax that describes the right hand side of our
+differential equation. Let’s do this for our example problem</p>
 <p><span class="math inline">\(\frac{dN}{dt} = r N\)</span>,</p>
 <p><span class="math inline">\(N(0) = 10\)</span>,</p>
-<p>with <span class="math inline">\(r=0.5\)</span> and over the time interval <span class="math inline">\([0, 5]\)</span>.</p>
+<p>with <span class="math inline">\(r=0.5\)</span> and over the time
+interval <span class="math inline">\([0, 5]\)</span>.</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
 <pre class="sourceCode r"><code class="sourceCode r"><span class='va'>My_RHS</span> <span class='op'>&lt;-</span> <span class='kw'>function</span><span class='op'>(</span><span class='va'>t</span>,<span class='va'>state</span>,<span class='va'>parameters</span><span class='op'>)</span><span class='op'>{</span>
@@ -2900,7 +3084,10 @@ $vectors
 </code></pre>
 </div>
 </div>
-<p>In addition to describing the right hand side of the differential equation, we must also specify the times at which to obtain the numerical solution and the initial condition. This is done as follows:</p>
+<p>In addition to describing the right hand side of the differential
+equation, we must also specify the times at which to obtain the
+numerical solution and the initial condition. This is done as
+follows:</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
 <pre class="sourceCode r"><code class="sourceCode r"><span class='va'>state</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span>N<span class='op'>=</span><span class='fl'>10</span><span class='op'>)</span>
@@ -2915,7 +3102,9 @@ $vectors
 </code></pre>
 </div>
 </div>
-<p>Let’s look at what has been returned by our call to the numerical solver, the results of which are stored in the variable <code>solN</code>.</p>
+<p>Let’s look at what has been returned by our call to the numerical
+solver, the results of which are stored in the variable
+<code>solN</code>.</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
 <pre class="sourceCode r"><code class="sourceCode r"><span class='va'>solN</span>
@@ -2974,7 +3163,12 @@ $vectors
 50  4.9 115.88351
 51  5.0 121.82499</code></pre>
 </div>
-<p>The method from the <code>deSolve</code> package returns a <strong>matrix</strong> where the first column contains the time values at which we obtained numerical solution values and another column that contains the solution values corresponding to each of the time points. We can easily plot the solution values versus the time points as follows:</p>
+<p>The method from the <code>deSolve</code> package returns a
+<strong>matrix</strong> where the first column contains the time values
+at which we obtained numerical solution values and another column that
+contains the solution values corresponding to each of the time points.
+We can easily plot the solution values versus the time points as
+follows:</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
 <pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span><span class='op'>(</span><span class='va'>solN</span>,col<span class='op'>=</span><span class='st'>"blue"</span><span class='op'>)</span>
@@ -2998,7 +3192,9 @@ $vectors
 </div>
 <p><img src="r_for_biomath_files/figure-html5/plot_example_ggplot_line-1.png" width="624" /></p>
 </div>
-<p>We can plot the numerical solution together with the analytical solution <span class="math inline">\(N(t) = 10e^{0.5 t}\)</span> as follows:</p>
+<p>We can plot the numerical solution together with the analytical
+solution <span class="math inline">\(N(t) = 10e^{0.5 t}\)</span> as
+follows:</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
 <pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/as.data.frame.html'>as.data.frame</a></span><span class='op'>(</span><span class='va'>solN</span><span class='op'>)</span>,<span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span>x<span class='op'>=</span><span class='va'>time</span>,y<span class='op'>=</span><span class='va'>N</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_point.html'>geom_point</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>+</span> 
@@ -3007,15 +3203,20 @@ $vectors
 </div>
 <p><img src="r_for_biomath_files/figure-html5/example_analtiycal-1.png" width="624" /></p>
 </div>
-<p><strong>Exercise:</strong> Modify what we have done using the <code>deSolve</code> package to obtain and plot a numerical solution to the IVP</p>
+<p><strong>Exercise:</strong> Modify what we have done using the
+<code>deSolve</code> package to obtain and plot a numerical solution to
+the IVP</p>
 <p><span class="math inline">\(\frac{dN}{dt} = r N\)</span>,</p>
 <p><span class="math inline">\(N(0) = 5\)</span>,</p>
-<p>with <span class="math inline">\(r=2.5\)</span> and over the time interval <span class="math inline">\([0, 10]\)</span>.</p>
+<p>with <span class="math inline">\(r=2.5\)</span> and over the time
+interval <span class="math inline">\([0, 10]\)</span>.</p>
 <h3 id="solving-a-system-of-odes">Solving a System of ODEs</h3>
 <p>Consider the following problem:</p>
 <p><span class="math inline">\(\frac{dx}{dt}=-R_{0}xy\)</span></p>
 <p><span class="math inline">\(\frac{dy}{dt}=R_{0}xy - y\)</span></p>
-<p>with <span class="math inline">\(R_{0} = 0.2\)</span> and <span class="math inline">\(x_{0} = 0.95\)</span> and <span class="math inline">\(y_{0} = 0.05\)</span>.</p>
+<p>with <span class="math inline">\(R_{0} = 0.2\)</span> and <span
+class="math inline">\(x_{0} = 0.95\)</span> and <span
+class="math inline">\(y_{0} = 0.05\)</span>.</p>
 <p>We can code this system of ODEs in R as:</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
@@ -3045,7 +3246,11 @@ $vectors
 </code></pre>
 </div>
 </div>
-<p>Again, the method from the <code>deSolve</code> package returns a matrix where the first column contains the time values at which we obtained numerical solution values and another column that contains the solution values corresponding to each of the time points. We can easily plot the solution values versus the time points as follows:</p>
+<p>Again, the method from the <code>deSolve</code> package returns a
+matrix where the first column contains the time values at which we
+obtained numerical solution values and another column that contains the
+solution values corresponding to each of the time points. We can easily
+plot the solution values versus the time points as follows:</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
 <pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span><span class='op'>(</span><span class='va'>SIR_sol</span>,col<span class='op'>=</span><span class='st'>"blue"</span><span class='op'>)</span>
@@ -3053,15 +3258,23 @@ $vectors
 </div>
 <p><img src="r_for_biomath_files/figure-html5/plot_system-1.png" width="624" /></p>
 </div>
-<p><strong>Question:</strong> Again, what happens if we change the value of <span class="math inline">\(R_{0}\)</span> to <span class="math inline">\(R_{0}=1.5\)</span>?</p>
-<p>Often we want to have greater control over our plots and to be able to make high quality figures. The best way to do this in R is to use the capabilities of the <code>ggplot2</code> package. In order to do this, we will first convert the matrix of solutions returned by the <code>ode</code> function from the <code>deSolve</code> package into a data frame. This is basically like an spread sheet format for data.</p>
+<p><strong>Question:</strong> Again, what happens if we change the value
+of <span class="math inline">\(R_{0}\)</span> to <span
+class="math inline">\(R_{0}=1.5\)</span>?</p>
+<p>Often we want to have greater control over our plots and to be able
+to make high quality figures. The best way to do this in R is to use the
+capabilities of the <code>ggplot2</code> package. In order to do this,
+we will first convert the matrix of solutions returned by the
+<code>ode</code> function from the <code>deSolve</code> package into a
+data frame. This is basically like an spread sheet format for data.</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
 <pre class="sourceCode r"><code class="sourceCode r"><span class='va'>SIR_sol_df</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/as.data.frame.html'>as.data.frame</a></span><span class='op'>(</span><span class='va'>SIR_sol</span><span class='op'>)</span>
 </code></pre>
 </div>
 </div>
-<p>We can get a sense of the structure of this data by viewing the first few rows:</p>
+<p>We can get a sense of the structure of this data by viewing the first
+few rows:</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
 <pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span><span class='op'>(</span><span class='va'>SIR_sol_df</span><span class='op'>)</span>
@@ -3075,7 +3288,8 @@ $vectors
 5  0.4 0.9467598 0.03615738
 6  0.5 0.9461024 0.03334179</code></pre>
 </div>
-<p>It is convenient to change the names of the columns to something more meaningful as follows:</p>
+<p>It is convenient to change the names of the columns to something more
+meaningful as follows:</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
 <pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://rdrr.io/r/base/names.html'>names</a></span><span class='op'>(</span><span class='va'>SIR_sol_df</span><span class='op'>)</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"time"</span>,<span class='st'>"susceptible"</span>,<span class='st'>"infected"</span><span class='op'>)</span>
@@ -3129,7 +3343,8 @@ $vectors
 </div>
 <p><img src="r_for_biomath_files/figure-html5/system_plot_e-1.png" width="624" /></p>
 </div>
-<p>We can also plot <span class="math inline">\(x(t)\)</span> and <span class="math inline">\(y(t)\)</span> together as parametric curves:</p>
+<p>We can also plot <span class="math inline">\(x(t)\)</span> and <span
+class="math inline">\(y(t)\)</span> together as parametric curves:</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
 <pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span><span class='op'>(</span><span class='va'>SIR_sol_df</span>,<span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span>x<span class='op'>=</span><span class='va'>susceptible</span>,y<span class='op'>=</span><span class='va'>infected</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_path.html'>geom_path</a></span><span class='op'>(</span>lwd<span class='op'>=</span><span class='fl'>1</span><span class='op'>)</span>
@@ -3137,7 +3352,8 @@ $vectors
 </div>
 <p><img src="r_for_biomath_files/figure-html5/system_plot_f-1.png" width="624" /></p>
 </div>
-<p>Using color to indicate increasing values of time can be interesting:</p>
+<p>Using color to indicate increasing values of time can be
+interesting:</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
 <pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span><span class='op'>(</span><span class='va'>SIR_sol_df</span>,<span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span>x<span class='op'>=</span><span class='va'>susceptible</span>,y<span class='op'>=</span><span class='va'>infected</span>,color<span class='op'>=</span><span class='va'>time</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_path.html'>geom_path</a></span><span class='op'>(</span>lwd<span class='op'>=</span><span class='fl'>1</span><span class='op'>)</span>
@@ -3155,17 +3371,37 @@ $vectors
 </div>
 <p><img src="r_for_biomath_files/figure-html5/system_plot_h-1.png" width="624" /></p>
 </div>
-<p>The book <span class="citation" data-cites="soetaertSolvingDEsR2012">(<a href="#ref-soetaertSolvingDEsR2012" role="doc-biblioref">Soetaert, Cash, and Mazzia 2012</a>)</span> covers much more on numerical computing with differential equations in R.</p>
+<p>The book <span class="citation"
+data-cites="soetaertSolvingDEsR2012">(<a
+href="#ref-soetaertSolvingDEsR2012" role="doc-biblioref">Soetaert, Cash,
+and Mazzia 2012</a>)</span> covers much more on numerical computing with
+differential equations in R.</p>
 <h2 id="phase-plane-methods-in-r">Phase-Plane Methods in R</h2>
-<p>The <code>phaseR</code> package facilitates the mix of qualitative and quantitative methods for the analysis of 1- and 2-dimensional autonomous systems of ODEs. We illustrate its usage.</p>
+<p>The <code>phaseR</code> package facilitates the mix of qualitative
+and quantitative methods for the analysis of 1- and 2-dimensional
+autonomous systems of ODEs. We illustrate its usage.</p>
 <h3 id="phaser-for-scalar-equations">PhaseR for Scalar Equations</h3>
-<p>A first-order autonmous scalar ordinary differential equation is one with the general form</p>
+<p>A first-order autonmous scalar ordinary differential equation is one
+with the general form</p>
 <p><span class="math inline">\(\frac{dx}{dt} = f(x)\)</span>,</p>
-<p>where <span class="math inline">\(f(x)\)</span> is a continuous (usually even differentiable) function that does not depend explicitly on time <span class="math inline">\(t\)</span> (this is the reason for the word autonomous). Most often, we are interested in the case when <span class="math inline">\(f(x)\)</span> is a nonlinear function and we sometimes refer to <span class="math inline">\(\frac{dx}{dt} = f(x)\)</span> as a one-dimensional system.</p>
+<p>where <span class="math inline">\(f(x)\)</span> is a continuous
+(usually even differentiable) function that does not depend explicitly
+on time <span class="math inline">\(t\)</span> (this is the reason for
+the word autonomous). Most often, we are interested in the case when
+<span class="math inline">\(f(x)\)</span> is a nonlinear function and we
+sometimes refer to <span class="math inline">\(\frac{dx}{dt} =
+f(x)\)</span> as a one-dimensional system.</p>
 <p><strong>Example</strong></p>
 <p>Consider as an example the equation</p>
 <p><span class="math inline">\(\frac{dx}{dt} = x(1-x)\)</span>.</p>
-<p>The left hand side is the derivative <span class="math inline">\(\frac{dx}{dt}\)</span> and hence the (local) rate of change of <span class="math inline">\(x\)</span> as a function of time <span class="math inline">\(t\)</span>. Therefore, because of the equal sign, <span class="math inline">\(f(x)\)</span> must also provide information about the (local) rate of change of <span class="math inline">\(x\)</span> but now for various “state” values, that is, values of <span class="math inline">\(x\)</span>.</p>
+<p>The left hand side is the derivative <span
+class="math inline">\(\frac{dx}{dt}\)</span> and hence the (local) rate
+of change of <span class="math inline">\(x\)</span> as a function of
+time <span class="math inline">\(t\)</span>. Therefore, because of the
+equal sign, <span class="math inline">\(f(x)\)</span> must also provide
+information about the (local) rate of change of <span
+class="math inline">\(x\)</span> but now for various “state” values,
+that is, values of <span class="math inline">\(x\)</span>.</p>
 <p>We can use <code>phaseR</code> to analyze this problem.</p>
 <p>First we need to describe the differential equation:</p>
 <div class="layout-chunk" data-layout="l-body">
@@ -3188,8 +3424,12 @@ $vectors
 </div>
 <p><img src="r_for_biomath_files/figure-html5/phase_line-1.png" width="624" /></p>
 </div>
-<p>The arrows here tell us, starting from an initial state value <span class="math inline">\(x\)</span>, whether the solution to the differential equation will increase as a function of time or decrease as a function of time.</p>
-<p>Further, we can use <code>phaseR</code> to obtain some “trajectories” to our ODE:</p>
+<p>The arrows here tell us, starting from an initial state value <span
+class="math inline">\(x\)</span>, whether the solution to the
+differential equation will increase as a function of time or decrease as
+a function of time.</p>
+<p>Further, we can use <code>phaseR</code> to obtain some “trajectories”
+to our ODE:</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
 <pre class="sourceCode r"><code class="sourceCode r"><span class='va'>nondim_logistic_flow</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/phaseR/man/flowField.html'>flowField</a></span><span class='op'>(</span><span class='va'>nondim_logistic</span>,
@@ -3206,21 +3446,34 @@ $vectors
 </div>
 <p><img src="r_for_biomath_files/figure-html5/scalar_trajectories-1.png" width="624" /></p>
 </div>
-<p>There is an general function in <code>phaseR</code> that will carry out a complete qualitative analysis for an autonomous system (either one-dimensional or two-dimensional). For example, call the following function in the R console:</p>
+<p>There is an general function in <code>phaseR</code> that will carry
+out a complete qualitative analysis for an autonomous system (either
+one-dimensional or two-dimensional). For example, call the following
+function in the R console:</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
 <pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://rdrr.io/pkg/phaseR/man/phasePlaneAnalysis.html'>phasePlaneAnalysis</a></span><span class='op'>(</span><span class='va'>nondim_logistic</span>,xlim <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>0</span>,<span class='fl'>10</span><span class='op'>)</span>,ylim <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='op'>-</span><span class='fl'>1.5</span>,<span class='fl'>1.5</span><span class='op'>)</span>,system <span class='op'>=</span> <span class='st'>"one.dim"</span><span class='op'>)</span>
 </code></pre>
 </div>
 </div>
-<h3 id="phaser-for-two-dimensional-systems">PhaseR for Two-Dimensional Systems</h3>
-<p>Let’s use <code>phaseR</code> to explore the dynamics of two-dimensional linear autonomous systems.</p>
+<h3 id="phaser-for-two-dimensional-systems">PhaseR for Two-Dimensional
+Systems</h3>
+<p>Let’s use <code>phaseR</code> to explore the dynamics of
+two-dimensional linear autonomous systems.</p>
 <p>Consider for example:</p>
-<p><span class="math inline">\(\frac{d{\bf x}}{dt} = A {\bf x}\)</span>,</p>
-<p>where <span class="math inline">\(A\)</span> is a <span class="math inline">\(2\times 2\)</span> matrix of the form</p>
-<p><span class="math inline">\(A = \left(\begin{array}{cc} a &amp; 0 \\ 0 &amp; -1 \end{array}\right)\)</span>.</p>
-<p>Let’s examine how various values of <span class="math inline">\(a\)</span> change the dynamics (specifically the phase portraits) of the systems. Observe that as long as <span class="math inline">\(a\neq 0\)</span> there is a unique steady-state <span class="math inline">\({\bf x}^{\ast}={\bf 0}\)</span>.</p>
-<h4 id="phase-portraits-for-varying-a">Phase Portraits for Varying <span class="math inline">\(a\)</span></h4>
+<p><span class="math inline">\(\frac{d{\bf x}}{dt} = A {\bf
+x}\)</span>,</p>
+<p>where <span class="math inline">\(A\)</span> is a <span
+class="math inline">\(2\times 2\)</span> matrix of the form</p>
+<p><span class="math inline">\(A = \left(\begin{array}{cc} a &amp; 0 \\
+0 &amp; -1 \end{array}\right)\)</span>.</p>
+<p>Let’s examine how various values of <span
+class="math inline">\(a\)</span> change the dynamics (specifically the
+phase portraits) of the systems. Observe that as long as <span
+class="math inline">\(a\neq 0\)</span> there is a unique steady-state
+<span class="math inline">\({\bf x}^{\ast}={\bf 0}\)</span>.</p>
+<h4 id="phase-portraits-for-varying-a">Phase Portraits for Varying <span
+class="math inline">\(a\)</span></h4>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
 <pre class="sourceCode r"><code class="sourceCode r"><span class='va'>simple_linear</span> <span class='op'>&lt;-</span> <span class='kw'>function</span><span class='op'>(</span><span class='va'>t</span>,<span class='va'>state</span>,<span class='va'>parameters</span><span class='op'>)</span><span class='op'>{</span>
@@ -3271,7 +3524,8 @@ $vectors
 </div>
 <p><img src="r_for_biomath_files/figure-html5/system_pp_b-1.png" width="624" /></p>
 </div>
-<p>Let’s plot the numerical solutions as a function of time for specific initial conditions:</p>
+<p>Let’s plot the numerical solutions as a function of time for specific
+initial conditions:</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
 <pre class="sourceCode r"><code class="sourceCode r"><span class='va'>state</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span>x<span class='op'>=</span><span class='fl'>1</span>,y<span class='op'>=</span><span class='fl'>1</span><span class='op'>)</span>
@@ -3282,15 +3536,17 @@ $vectors
 </div>
 <p><img src="r_for_biomath_files/figure-html5/linear_system_sol-1.png" width="624" /></p>
 </div>
-<h4 id="two-dimensional-non-linear-autonomous-systems">Two-dimensional Non-Linear Autonomous Systems</h4>
+<h4 id="two-dimensional-non-linear-autonomous-systems">Two-dimensional
+Non-Linear Autonomous Systems</h4>
 <p>Generally, a two-dimensional autonomous system has the form</p>
 <p><span class="math display">\[
 \begin{align*}
 \frac{dx}{dt} &amp;= f(x,y) \\
-\frac{dy}{dt} &amp;= g(x,y), 
+\frac{dy}{dt} &amp;= g(x,y),
 \end{align*}
 \]</span> Such as system is sometimes called a vector field.</p>
-<p>Let’s adapt our code to examine some phase portraits for a nonlinear system.</p>
+<p>Let’s adapt our code to examine some phase portraits for a nonlinear
+system.</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
 <pre class="sourceCode r"><code class="sourceCode r"><span class='va'>non_linear</span> <span class='op'>&lt;-</span> <span class='kw'>function</span><span class='op'>(</span><span class='va'>t</span>,<span class='va'>state</span>,<span class='va'>parameters</span><span class='op'>)</span><span class='op'>{</span>
@@ -3345,7 +3601,9 @@ $vectors
 <p><img src="r_for_biomath_files/figure-html5/nonlinear_pp_c-1.png" width="624" /></p>
 </div>
 <p>Observe that steady-states occur where nullclines intersect.</p>
-<p>Let’s look at the solution curves <span class="math inline">\(x(t)\)</span> and <span class="math inline">\(y(t)\)</span>:</p>
+<p>Let’s look at the solution curves <span
+class="math inline">\(x(t)\)</span> and <span
+class="math inline">\(y(t)\)</span>:</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
 <pre class="sourceCode r"><code class="sourceCode r"><span class='va'>state</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span>x<span class='op'>=</span><span class='op'>-</span><span class='fl'>0.5</span>,y<span class='op'>=</span><span class='fl'>1</span><span class='op'>)</span>
@@ -3356,13 +3614,29 @@ $vectors
 </div>
 <p><img src="r_for_biomath_files/figure-html5/nonlinear_pp_d-1.png" width="624" /></p>
 </div>
-<p>You can learn more about the functionality of <code>phaseR</code> by reading <a href="https://www.rdocumentation.org/packages/phaseR/versions/2.1.3">this page</a> or <a href="https://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.660.3048&amp;rep=rep1&amp;type=pdf">this article</a>.</p>
+<p>You can learn more about the functionality of <code>phaseR</code> by
+reading <a
+href="https://www.rdocumentation.org/packages/phaseR/versions/2.1.3">this
+page</a> or <a
+href="https://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.660.3048&amp;rep=rep1&amp;type=pdf">this
+article</a>.</p>
 <h1 id="conclusion">Conclusion</h1>
-<p>We have very briefly touched on the basics of R that is useful in <em>Topics in Biomathematics</em>. If there are specific topics that interest you or there is a specific type of problem you want to try to use R to solve, we recommend searching the web as there is a plethora of tutorials, documentation, and helpful discussions to be found online.</p>
-<div class="sourceCode" id="cb68"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
-<div id="refs" class="references csl-bib-body hanging-indent" role="doc-bibliography">
-<div id="ref-soetaertSolvingDEsR2012" class="csl-entry" role="doc-biblioentry">
-Soetaert, Karline, Jeff Cash, and Francesca Mazzia. 2012. <em>Solving Differential Equations in <span>R</span></em>. Use r! Springer, New York. <a href="https://doi.org/10.1007/978-3-642-28070-2">https://doi.org/10.1007/978-3-642-28070-2</a>.
+<p>We have very briefly touched on the basics of R that is useful in
+<em>Topics in Biomathematics</em>. If there are specific topics that
+interest you or there is a specific type of problem you want to try to
+use R to solve, we recommend searching the web as there is a plethora of
+tutorials, documentation, and helpful discussions to be found
+online.</p>
+<div class="sourceCode" id="cb68"><pre
+class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
+<div id="refs" class="references csl-bib-body hanging-indent"
+role="doc-bibliography">
+<div id="ref-soetaertSolvingDEsR2012" class="csl-entry"
+role="doc-biblioentry">
+Soetaert, Karline, Jeff Cash, and Francesca Mazzia. 2012. <em>Solving
+Differential Equations in <span>R</span></em>. Use r! Springer, New
+York. <a
+href="https://doi.org/10.1007/978-3-642-28070-2">https://doi.org/10.1007/978-3-642-28070-2</a>.
 </div>
 </div>
 <!--radix_placeholder_article_footer-->
