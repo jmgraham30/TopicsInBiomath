@@ -19,6 +19,8 @@ navbar:
         href: notes003.html
     - text: "R for Biomath"
       href: r_for_biomath.html
+    - text: "Course Blog"
+      href: course_blog.html
     - icon: fa fa-github
       href: https://github.com/jmgraham30
 output: distill::distill_article

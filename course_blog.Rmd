@@ -1,0 +1,4 @@
+---
+title: "Course Blog"
+listing: posts  
+---

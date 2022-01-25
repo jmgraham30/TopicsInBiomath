@@ -1,0 +1,19 @@
+[
+  {
+    "path": "posts/2022-01-25-course-intro/",
+    "title": "Course Blog Intro",
+    "description": "A short post about the course blog for MATH 463 Topics in Biomathematics.",
+    "author": [
+      {
+        "name": "Jason M. Graham",
+        "url": {}
+      }
+    ],
+    "date": "2022-01-25",
+    "categories": [],
+    "contents": "\nIn addition to the other components of the Topics in Biomathematics\nwebsite, one can find links to a series of short blog posts. The\ngoal of these posts is to share small bits of information that come up\nover the span of teaching MATH 463 (beginning in Spring 2022). For\nexample, the posts may include helpful pointers to further information\non topics discussed in the class, or may even contain short\npresentations of material that is slightly beyond the official content\nof the course.\n\n\n\n",
+    "preview": {},
+    "last_modified": "2022-01-25T16:28:04-05:00",
+    "input_file": {}
+  }
+]

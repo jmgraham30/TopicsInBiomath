@@ -1,0 +1,15 @@
+---
+title: "Course Blog Intro"
+description: |
+  A short post about the course blog for MATH 463 Topics in Biomathematics. 
+author:
+  - name: Jason M. Graham
+date: 2022-01-25
+output:
+  distill::distill_article:
+    self_contained: false
+---
+
+In addition to the other components of the [Topics in Biomathematics website](https://topicsinbiomath.netlify.app/), one can find links to a series of short blog posts. The goal of these posts is to share small bits of information that come up over the span of teaching MATH 463 (beginning in Spring 2022). For example, the posts may include helpful pointers to further information on topics discussed in the class, or may even contain short presentations of material that is slightly beyond the official content of the course.  
+
+
