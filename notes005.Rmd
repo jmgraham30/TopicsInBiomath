@@ -158,7 +158,7 @@ $f'(x^{\ast}) > 0$,
 
 then $x^{\ast}$ is not a stable equilibrium. 
 
-This is referred to as **linear stability analysis** and the stated criterion is derived in section 2.4 of [@strogatzNonlinearDynamicsChaos2015]. 
+This is referred to as **linear stability analysis** and the stated criterion is derived in section 2.4 of [@strogatzNonlinearDynamicsChaos2015]. See also the blog post on [linear stability analysis](https://topicsinbiomath.netlify.app/posts/2022-01-28-linear-stability-analysis/).
 
 **Example:**
 
