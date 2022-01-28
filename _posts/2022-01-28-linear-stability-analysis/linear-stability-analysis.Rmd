@@ -16,8 +16,56 @@ output:
 knitr::opts_chunk$set(echo = FALSE)
 ```
 
-Distill is a publication format for scientific and technical writing, native to the web.
+# Overview
 
-Learn more about using Distill at <https://rstudio.github.io/distill>.
+In [section 5](https://topicsinbiomath.netlify.app/notes005.html) of our notes, we discussed an analytic criterion for the stability of a steady-state (or equilibrium) $x^{\ast}$ corresponding to a one-dimensional autonomous system $\frac{dx}{dt}=f(x)$. This states that if $f$ is a continuously differentiable function at $x^{\ast}$, then 
+
+* $f'(x^{\ast}) < 0$ implies $x^{\ast}$ is stable, while
+
+* $f'(x^{\ast}) > 0$ implies $x^{\ast}$ is unstable.
+
+In this post, we provide an explanation for the above stated fact. 
+
+# Linear Stability Analysis 
+
+Consider the effect of a small perturbation to an equilibrium. Let $\xi(t) = x(t) - x^{\ast}$ be a small perturbation away from $x^{\ast}$. Then by taking the derivative with respect to $t$ on both sides of the equality, we see that
+
+\begin{align}
+\frac{d}{dt}\xi &= \frac{d}{dt}(x - x^{\ast}) \\
+&= \frac{d}{dt}x - \frac{d}{dt}x^{\ast} \\
+&= \frac{dx}{dt} - 0 \\
+&= f(x) \\
+&= f(\xi + x^{\ast})
+\end{align}
+
+and therefore
+
+$\frac{d\xi}{dt}=f(\xi + x^{\ast})$
+
+Now [Taylor's formula](https://en.wikipedia.org/wiki/Taylor%27s_theorem) leads to
+
+$f(\xi + x^{\ast}) = f(x^{\ast}) + f'(x^{\ast})\xi + \mathcal{O}(\xi^2)$
+
+and thus
+
+$\frac{d\xi}{dt} \approx f'(x^{\ast})\xi$
+
+where we have used the fact that $f(x^{\ast})=0$.
+
+Recall that a first-order linear system has the form
+
+$\frac{dx}{dt}=ax$
+
+and the general solution to such a linear system is $x(t)=Ce^{at}$, where $C$ is a constant. Thus, we see that a solution to a first-order linear system will asymptotically decay if the coefficient $a$ is negative, but grow if the coefficient $a$ is positive. 
+
+Now, observe that, based on our derivation, the differential equation for a small perturbation $\xi(t)$ such as we have defined it very nearly satisfies a first-order linear system with coefficient $f'(x^{\ast})$. So, we expect that the effect of a perturbation will asymptotically decay if $f'(x^{\ast}) < 0$ but  asymptotically increase if $f'(x^{\ast}) > 0$. This helps to explain our criterion for stability. 
+
+It is important to note that our criterion provides no information when $f'(x^{\ast})=0$. In fact, one can easily construct examples of systems that have a stable equilibrium such that $f'(x^{\ast})=0$ and also systems with an equilibrium satisfying $f'(x^{\ast})=0$ that is not stable. It is instructive to quickly draw the phase lines for each of the following systems:
+
+* $\frac{dx}{dt}=-x^2$, and
+
+* $\frac{dx}{dt}=-x^3$. 
+
+One can conduct a more careful analysis of stability than what we have done here. However, this requires more advanced mathematics than is appropriate in the context of the *Topics in Biomathematics* course.  
 
 

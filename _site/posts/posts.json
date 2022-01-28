@@ -1,5 +1,22 @@
 [
   {
+    "path": "posts/2022-01-28-linear-stability-analysis/",
+    "title": "Linear Stability Analysis",
+    "description": "A short derivation of the linear stability analysis criterion.",
+    "author": [
+      {
+        "name": "Jason M. Graham",
+        "url": {}
+      }
+    ],
+    "date": "2022-01-28",
+    "categories": [],
+    "contents": "\nOverview\nIn section 5\nof our notes, we discussed an analytic criterion for the stability of a\nsteady-state (or equilibrium) \\(x^{\\ast}\\) corresponding to a\none-dimensional autonomous system \\(\\frac{dx}{dt}=f(x)\\). This states that if\n\\(f\\) is a continuously differentiable\nfunction at \\(x^{\\ast}\\), then\n\\(f'(x^{\\ast}) < 0\\)\nimplies \\(x^{\\ast}\\) is stable,\nwhile\n\\(f'(x^{\\ast}) > 0\\)\nimplies \\(x^{\\ast}\\) is\nunstable.\nIn this post, we provide an explanation for the above stated\nfact.\nLinear Stability Analysis\nConsider the effect of a small perturbation to an equilibrium. Let\n\\(\\xi(t) = x(t) - x^{\\ast}\\) be a small\nperturbation away from \\(x^{\\ast}\\).\nThen by taking the derivative with respect to \\(t\\) on both sides of the equality, we see\nthat\n\\[\\begin{align}\n\\frac{d}{dt}\\xi &= \\frac{d}{dt}(x - x^{\\ast}) \\\\\n&= \\frac{d}{dt}x - \\frac{d}{dt}x^{\\ast} \\\\\n&= \\frac{dx}{dt} - 0 \\\\\n&= f(x) \\\\\n&= f(\\xi + x^{\\ast})\n\\end{align}\\]\nand therefore\n\\(\\frac{d\\xi}{dt}=f(\\xi +\nx^{\\ast})\\)\nNow Taylor’s\nformula leads to\n\\(f(\\xi + x^{\\ast}) = f(x^{\\ast}) +\nf'(x^{\\ast})\\xi + \\mathcal{O}(\\xi^2)\\)\nand thus\n\\(\\frac{d\\xi}{dt} \\approx\nf'(x^{\\ast})\\xi\\)\nwhere we have used the fact that \\(f(x^{\\ast})=0\\).\nRecall that a first-order linear system has the form\n\\(\\frac{dx}{dt}=ax\\)\nand the general solution to such a linear system is \\(x(t)=Ce^{at}\\), where \\(C\\) is a constant. Thus, we see that a\nsolution to a first-order linear system will asymptotically decay if the\ncoefficient \\(a\\) is negative, but grow\nif the coefficient \\(a\\) is\npositive.\nNow, observe that, based on our derivation, the differential equation\nfor a small perturbation \\(\\xi(t)\\)\nsuch as we have defined it very nearly satisfies a first-order linear\nsystem with coefficient \\(f'(x^{\\ast})\\). So, we expect that the\neffect of a perturbation will asymptotically decay if \\(f'(x^{\\ast}) < 0\\) but\nasymptotically increase if \\(f'(x^{\\ast})\n> 0\\). This helps to explain our criterion for stability.\nIt is important to note that our criterion provides no information\nwhen \\(f'(x^{\\ast})=0\\). In fact,\none can easily construct examples of systems that have a stable\nequilibrium such that \\(f'(x^{\\ast})=0\\) and also systems with\nan equilibrium satisfying \\(f'(x^{\\ast})=0\\) that is not stable. It\nis instructive to quickly draw the phase lines for each of the following\nsystems:\n\\(\\frac{dx}{dt}=-x^2\\),\nand\n\\(\\frac{dx}{dt}=-x^3\\).\nOne can conduct a more careful analysis of stability than what we\nhave done here. However, this requires more advanced mathematics than is\nappropriate in the context of the Topics in Biomathematics\ncourse.\n\n\n\n",
+    "preview": {},
+    "last_modified": "2022-01-28T17:09:35-05:00",
+    "input_file": {}
+  },
+  {
     "path": "posts/2022-01-25-course-intro/",
     "title": "Course Blog Intro",
     "description": "A short post about the course blog for MATH 463 Topics in Biomathematics.",
