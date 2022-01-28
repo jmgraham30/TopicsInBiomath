@@ -14,10 +14,42 @@ output:
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = FALSE)
+library(tidyverse)
+library(rootSolve)
 ```
 
-Distill is a publication format for scientific and technical writing, native to the web.
+# Overview
 
-Learn more about using Distill at <https://rstudio.github.io/distill>.
+A common problem is the following:
 
+> Given a continuous function $f$ defined on the real numbers, find values such that $f(x)=0$. 
 
+This is called the root finding problem. It comes up, for example, in finding the equilibrium or steady-state solutions for a [one-dimensional autonomous system](https://topicsinbiomath.netlify.app/notes005.html). Note that the roots of a function $y=f(x)$ coincide exactly with the $x$-intercepts of the graph of $y=f(x)$. In general, when $f$ is a nonlinear function, the root finding problem is intractable in terms of finding exact, closed-form solutions. However, algorithms for finding approximate solutions to the root finding problem is a major theme in [numerical analysis](http://www.scholarpedia.org/article/Numerical_analysis#:~:text=Numerical%20analysis%20is%20the%20area,the%20problems%20of%20continuous%20mathematics.&text=These%20problems%20occur%20throughout%20the,medicine%2C%20engineering%2C%20and%20business.). 
+
+In this post, we discuss practical numerical root-finding by way of the R package [rootSolve](https://cran.r-project.org/web/packages/rootSolve/index.html). The documentation for this package is available [here](http://www2.uaem.mx/r-mirror/web/packages/rootSolve/vignettes/rootSolve.pdf). 
+
+# Practical Root-Finding
+
+Suppose we would like to find the equilibria for the one-dimensional autonomous system
+
+$\frac{dx}{dt}=f(x) = x^2 - 1$
+
+While it's obvious what the answer is, let us address the problem computationally for illustrative purposes. We begin by plotting the function $y=f(x)$ in order to check for the existence of roots "by inspection."
+
+```{r}
+ggplot(data.frame(x=c(-1.5,1.5)),aes(x=x)) + 
+  geom_function(fun = function(x){x^2-1},lwd=1) + 
+  geom_hline(yintercept=0,linetype="dashed")
+```
+
+The graph tells us that there are two roots in the interval $[-2,2]$. Let's call the function `uniroot.all` from `rootSolve`:
+
+```{r,echo=TRUE}
+uniroot.all(function(x){x^2-1}, c(-2, 2))
+```
+
+Notice that this in fact returns the roots for $f(x)=x^2-1$. 
+
+What `uniroot.all` attempts to do is to find all of the roots in the specified interval. Thus, this provides a handy tool for finding equillbria for one-dimensional autonomous systems. 
+
+The `rootSolve` package is by no means the only option for numerical root-finding in R. We choose to highlight it as it is developed by the group that developed the `deSolve` package for the numerical approximation for differential equations. 

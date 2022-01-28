@@ -17,6 +17,23 @@
     "input_file": {}
   },
   {
+    "path": "posts/2022-01-28-on-root-finding/",
+    "title": "On Root Finding",
+    "description": "Brief discussion on root finding in R.",
+    "author": [
+      {
+        "name": "Jason M. Graham",
+        "url": {}
+      }
+    ],
+    "date": "2022-01-28",
+    "categories": [],
+    "contents": "\nOverview\nA common problem is the following:\n\nGiven a continuous function \\(f\\)\ndefined on the real numbers, find values such that \\(f(x)=0\\).\n\nThis is called the root finding problem. It comes up, for example, in\nfinding the equilibrium or steady-state solutions for a one-dimensional\nautonomous system. Note that the roots of a function \\(y=f(x)\\) coincide exactly with the \\(x\\)-intercepts of the graph of \\(y=f(x)\\). In general, when \\(f\\) is a nonlinear function, the root\nfinding problem is intractable in terms of finding exact, closed-form\nsolutions. However, algorithms for finding approximate solutions to the\nroot finding problem is a major theme in numerical\nanalysis.\nIn this post, we discuss practical numerical root-finding by way of\nthe R package rootSolve.\nThe documentation for this package is available here.\nPractical Root-Finding\nSuppose we would like to find the equilibria for the one-dimensional\nautonomous system\n\\(\\frac{dx}{dt}=f(x) = x^2 - 1\\)\nWhile it’s obvious what the answer is, let us address the problem\ncomputationally for illustrative purposes. We begin by plotting the\nfunction \\(y=f(x)\\) in order to check\nfor the existence of roots “by inspection.”\n\n\n\nThe graph tells us that there are two roots in the interval \\([-2,2]\\). Let’s call the function\nuniroot.all from rootSolve:\n\n\nuniroot.all(function(x){x^2-1}, c(-2, 2))\n\n\n[1] -1  1\n\nNotice that this in fact returns the roots for \\(f(x)=x^2-1\\).\nWhat uniroot.all attempts to do is to find all of the\nroots in the specified interval. Thus, this provides a handy tool for\nfinding equillbria for one-dimensional autonomous systems.\nThe rootSolve package is by no means the only option for\nnumerical root-finding in R. We choose to highlight it as it is\ndeveloped by the group that developed the deSolve package\nfor the numerical approximation for differential equations.\n\n\n\n",
+    "preview": "posts/2022-01-28-on-root-finding/on-root-finding_files/figure-html5/unnamed-chunk-1-1.png",
+    "last_modified": "2022-01-28T18:23:08-05:00",
+    "input_file": {}
+  },
+  {
     "path": "posts/2022-01-25-course-intro/",
     "title": "Course Blog Intro",
     "description": "A short post about the course blog for MATH 463 Topics in Biomathematics.",
