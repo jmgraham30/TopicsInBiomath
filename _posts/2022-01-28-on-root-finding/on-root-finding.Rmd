@@ -1,7 +1,7 @@
 ---
 title: "On Root Finding"
 description: |
-  A short description of the post.
+  Brief discussion on root finding in R. 
 author:
   - name: Jason M. Graham
     url: {}

@@ -1,7 +1,7 @@
 ---
 title: "Linear Stability Analysis"
 description: |
-  A short description of the post.
+  A short derivation of the linear stability analysis criterion.
 author:
   - name: Jason M. Graham
     url: {}

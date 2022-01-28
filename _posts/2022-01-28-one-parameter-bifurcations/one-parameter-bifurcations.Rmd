@@ -1,7 +1,7 @@
 ---
 title: "One-Parameter Bifurcations"
 description: |
-  A short description of the post.
+  More bifurcation theory for one-dimensional systems.
 author:
   - name: Jason M. Graham
     url: {}
