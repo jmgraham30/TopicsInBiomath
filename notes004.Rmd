@@ -208,7 +208,7 @@ The two previous plots illustrate the following:
 
 2) If $\frac{4h}{Kr}$ is sufficiently large then there are no positive steady-states for a population that obeys the harvesting model and the population will decrease over time. The biological interpretation is that when harvesting is large relative to the carrying capacity and growth rate then the population cannot persist given the removal due to harvesting. 
 
-It should be intuitively obvious that there is a single intermediate stage (occurring when $\frac{4h}{Kr} = 1$) that separates the two situations that we just described. We say that this model exhibits a **bifurcation** that occurs a some critical value for the relationship between the model parameters. Bifurcations are common in biomathematical models and we will spend some time later reviewing those aspects of [bifurcation theory](https://en.wikipedia.org/wiki/Bifurcation_theory) that are most frequently applied in biomathematics. 
+It should be intuitively obvious that there is a single intermediate stage (occurring when $\frac{4h}{Kr} = 1$) that separates the two situations that we just described. We say that this model exhibits a **bifurcation** that occurs at some critical value for the relationship between the model parameters. Bifurcations are common in biomathematical models and we will spend some time later reviewing those aspects of [bifurcation theory](https://en.wikipedia.org/wiki/Bifurcation_theory) that are most frequently applied in biomathematics. 
 
 Before moving on, let's look at some actual solutions to the differential equation
 
