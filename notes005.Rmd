@@ -104,7 +104,7 @@ Given an one-dimensional autonomous system
 
 $\frac{dx}{dt}=f(x),$
 
-one finds the equilibria or steady-states for the system by finding all solutions to the equation $f(x) =  0$. In general this will be a nonlinear equation. Thus, in some applications it is necessary to utilize a [root-finding](https://en.wikipedia.org/wiki/Root-finding_algorithms) algorithm such as [Newton's method](https://en.wikipedia.org/wiki/Newton%27s_method) to find (approximately) the equilibrium values. However, if $y=f(x)$ can be plotted then the equilibria can be studied qualitatively by using the graph. 
+one finds the equilibria or steady-states for the system by finding all solutions to the equation $f(x) =  0$. In general this will be a nonlinear equation. Thus, in some applications it is necessary to utilize a [root-finding](https://en.wikipedia.org/wiki/Root-finding_algorithms) algorithm such as [Newton's method](https://en.wikipedia.org/wiki/Newton%27s_method) to find (approximately) the equilibrium values. (See also [this post](https://topicsinbiomath.netlify.app/posts/2022-01-28-on-root-finding/).) However, if $y=f(x)$ can be plotted then the equilibria can be studied qualitatively by using the graph. 
 
 **Examples:**
 
