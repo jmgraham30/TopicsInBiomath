@@ -21,6 +21,8 @@ navbar:
         href: notes004.html
       - text: "Notes 5"
         href: notes005.html
+      - text: "Notes 6"
+        href: notes006.html
     - text: "R for Biomath"
       href: r_for_biomath.html
     - text: "Course Blog"

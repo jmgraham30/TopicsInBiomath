@@ -193,12 +193,15 @@ $N = \frac{K}{2}\left(1 \pm \sqrt{1 - \frac{4h}{Kr}} \right)$.
 
 It should be clear that if the ratio $\frac{4h}{Kr}$ is too large then $1 - \frac{4h}{Kr} < 0$ which leads to a problem since the expression under the radical will be negative. On the other hand, if $\frac{4h}{Kr}$ is sufficiently small, then there will be two positive steady-states. Let's explore what can happen by graphing $f(N) = r\left(1 - \frac{N}{K}\right)N - h$ in the cases where $\frac{4h}{Kr}$ is "large" versus when $\frac{4h}{Kr}$ is "small". (Later on we will be more explicit about what exactly we mean by large versus small). 
 
-```{r,echo=FALSE}
+```{r,echo=TRUE,code_folding=TRUE}
 F <- function(N,h=0.5){N*(1-N) - h}
 x <- seq(-0.75,1.75,by=0.01)
 df <- tibble(x=x)
-p1 <- ggplot(df,aes(x)) + geom_function(fun=F,args=list(h=0.08)) + geom_hline(yintercept = 0,linetype="dashed") + labs(x="N",y="dN/dt",title=TeX("$\\frac{4h}{Kr}$ small"))
-p2 <- ggplot(df,aes(x)) + geom_function(fun=F,args=list(h=0.3)) + geom_hline(yintercept = 0,linetype="dashed") + labs(x="N",y="dN/dt",title=TeX("$\\frac{4h}{Kr}$ large"))
+p1 <- ggplot(df,aes(x)) + 
+  geom_function(fun=F,args=list(h=0.08)) + 
+  geom_hline(yintercept = 0,linetype="dashed") + labs(x="N",y="dN/dt",title=TeX("$\\frac{4h}{Kr}$ small"))
+p2 <- ggplot(df,aes(x)) + geom_function(fun=F,args=list(h=0.3)) + 
+  geom_hline(yintercept = 0,linetype="dashed") + labs(x="N",y="dN/dt",title=TeX("$\\frac{4h}{Kr}$ large"))
 (p1 | p2)
 ```
 
@@ -216,7 +219,7 @@ $\frac{dN}{dt} = r\left(1 - \frac{N}{K}\right)N - h$.
 
 We will use the [`deSolve` package](http://desolve.r-forge.r-project.org/) that implements [numerical methods for differential equations](https://en.wikipedia.org/wiki/Numerical_methods_for_ordinary_differential_equations) to compute said numerical solutions. Later in the course we will explain in detail how to use the `deSolve` package, for now we just display the results. (You can also learn more about this by reading our [R for Biomath page](https://topicsinbiomath.netlify.app/r_for_biomath.html).)
 
-```{r,echo=FALSE,warning=FALSE,message=FALSE}
+```{r,echo=TRUE,warning=FALSE,message=FALSE,code_folding=TRUE}
 harvest_model <- function(time,N,parms){
   with(as.list(c(N,parms)),{
     dN <- r*N*(1-N/K) - h

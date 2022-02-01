@@ -10,6 +10,7 @@ author:
 date: "`r Sys.Date()`"
 output: 
   distill::distill_article:
+    code_folding: true
     toc: true
     toc_depth: 2
 creative_commons: CC BY-NC
@@ -81,7 +82,7 @@ The point is, if we sketch a graph of $y=f(x)$ then we can easily see, based on 
 
 For example, we plot $f(x)=x(1-x)$. The arrows on the $x$-axis indicate the increasing (right arrows) or decreasing (left arrows) behavior of the function $x$.  
 
-```{r a_phaseline,echo=FALSE}
+```{r a_phaseline,echo=TRUE}
 f <- function(t,x,parameters){list(x*(1-x))}
 a_phaseline <- phasePortrait(f,ylim   = c(-0.5, 1.5),
                                         points = 10,
@@ -131,7 +132,7 @@ from which it is easy to see that if $x_{0}$ is close to 1, then $x(t) \rightarr
 
 As another example, let's study the phase-line for $\frac{dx}{dt}=x^2 - 1$ which is a special case of our example (c) with $\alpha=-1$. Here is the phase-line:
 
-```{r aother_phaseline,echo=FALSE}
+```{r aother_phaseline,echo=TRUE}
 f2 <- function(t,x,parameters){list(x^2-1)}
 a_phaseline <- phasePortrait(f2,ylim   = c(-1.5, 1.5),
                                         points = 10,
@@ -211,7 +212,7 @@ Later in the course we will have cause to analyze the bifurcation behavior of ot
 
 The R package `phaseR` can be used as an aid in the analysis of one-dimensional autonomous systems. For example, the following R code produces the phase-line for $\frac{dx}{dt}=x(1-x)$:
 
-```{r a_phaseline_again,eval=FALSE}
+```{r a_phaseline_again,eval=FALSE,code_folding=FALSE}
 library(phaseR)
 f <- function(t,x,parameters){list(x*(1-x))}
 a_phaseline <- phasePortrait(f,ylim   = c(-0.5, 1.5),

@@ -10,6 +10,7 @@ author:
 date: "`r Sys.Date()`"
 output: 
   distill::distill_article:
+    code_folding: true
     toc: true
     toc_depth: 2
 creative_commons: CC BY-NC
@@ -47,9 +48,9 @@ The use of mathematical models, and differential equations specifically to under
 The basic idea of the SIR model is to divide a population into distinct classes of individuals that are susceptible to infection, individuals that are infected, and individuals that have recovered and become immune to infection. To point 1, in [@kermackContributionMathematicalTheory1927], the authors write
 
 > In the course of time the epidemic may come to an end. One of the most important problems in epidemiology is to ascertain whether this termination occurs only when no susceptible individuals are left, or whether the interplay of the various factors of infectivity, recovery and mortality, may result in termination, whilst many susceptible individuals are still present in the unaffected population.
-Hence, our problem is to understand what proportion of a population becomes infected and how quickly this occurs. Given this knowledge, we can formulate better strategies for combating epidemics. Mathematical models are useful in this regard as well since we can modify the model by incorporating terms that correspond to a mitigation strategy. In the next section, we will introduce the SIR model as a compartment model. 
+Hence, our problem is to understand what proportion of a population becomes infected and how quickly this occurs. Given this knowledge, we can formulate better strategies for combating epidemics. Mathematical models are useful in this regard as well since we can modify the model by incorporating terms that correspond to a mitigation strategy.
 
-Our primary reference for this section of notes is Chapter 6 from [@hadelerTopicsInMathBio2017].
+In the next section, we will introduce the SIR model as a compartment model,  our primary reference is Chapter 6 from [@hadelerTopicsInMathBio2017].
 
 # Initial SIR Model 
 
@@ -57,7 +58,7 @@ We begin by considering an infectious disease like chickenpox or the annual flu 
 
 1) We have a homogeneous population and can reasonably ignore birth and death processes.
 2) The infection does not cause mortality. 
-3) Infection of susceptibles occurs via contact with infecteds. We assume that infected individuals are mixing with other in the population in a random and independent fashion. 
+3) Infection of susceptibles occurs via contact with infecteds. We assume that infected individuals are mixing with others in the population in a random and independent fashion. 
 4) There is no latent period of infection. 
 5) Chances of recovery does not change during the course of infection.
 6) Infectiousness does not change during the course of infection.
@@ -68,7 +69,8 @@ The following compartment diagram corresponds to (aspects of) our model assumpti
 knitr::include_graphics("./Figures/sir.png")
 ```
 
-If we let $\beta$ be the rate of infection of a susceptibles per number of infected, and if we let $\gamma$ be the recovery rate, then the differential equations corresponding to the compartment diagram are:
+If we let $\beta$ be the rate of infection of  susceptibles per number of infected, and if we let $\gamma$ be the recovery rate, then the differential equations corresponding to the compartment diagram are:
+
 \begin{align}
 \frac{dS}{dt} &= -\beta SI, \\
 \frac{dI}{dt} &= \beta SI - \gamma I, \\
@@ -83,11 +85,13 @@ Let's make two notes regarding the model system.
 
 What can we learn from the SIR model? Once we have developed some more mathematical tools we will be able to learn quite a lot from the SIR model equations. For now, let's look at the plot of solutions to the SIR equations under two different scenarios. 
 
+Observe that in the previous equations, the $R$ equation decouples from the $S$ and $I$ equations. Thus, it suffices to remove it from an analysis. 
+
 ## Numerical Simulations
 
 We can obtain numerical solutions to the SIR model equations using the `deSolve` package in R. In a later lecture we will explain in detail how to use the `deSolve` package. In the following results, we display the graphs for the susceptible and infected populations as functions of time. Two different situations are shown. 
 
-```{r,echo=FALSE,fig.width=12,fig.height=6}
+```{r,echo=TRUE,fig.width=12,fig.height=6}
 sir_model <- function(t,state,parameters){
   with(as.list(c(state,parameters)),{
     dx <- -R0*x*y
@@ -111,15 +115,49 @@ p2 <- sim2 %>% rename(susceptible=x,infected=y) %>%
 (p1 | p2)
 ```
 
-In the plot on the left, only a small proportion of susceptible individuals become infected and in the long term, "many susceptible individuals are still present in the unaffected population" as the authors say in [@kermackContributionMathematicalTheory1927]. On the other hand, the right side plot shows the spread of an infection such that little to no susceptible individuals remain uninfected. What is happening that leads to this distinct qualitative (and quantitative)  difference in the outcome for the spread of the infection? After discussing dimensional analysis, we will show that there is a single numerical quantity, the magnitude of which very specifically determines the spread of the infection. This number is called [$R_{0}$](https://en.wikipedia.org/wiki/Basic_reproduction_number). 
+In the plot on the left, only a small proportion of susceptible individuals become infected and in the long term, "many susceptible individuals are still present in the unaffected population" as the authors say in [@kermackContributionMathematicalTheory1927]. On the other hand, the right side plot shows the spread of an infection such that little to no susceptible individuals remain uninfected. 
+
+What is happening that leads to this distinct qualitative (and quantitative)  difference in the outcome for the spread of the infection? After discussing dimensional analysis, we will show that there is a single numerical quantity, the magnitude of which very specifically determines the spread of the infection. This number is called [$R_{0}$](https://en.wikipedia.org/wiki/Basic_reproduction_number). 
 
 There are many common variations on the basic SIR model. Some of these attempt to include the effects such as a latent infection period, age-dependent infection rates, the spatial spread of infections, etc. We will consider some further epidemiological models later in the course. You are also invited to explore the literature on your own perhaps as part of your final project. 
 
 ## Incorporating Vaccination
 
+A key application of SIR-type models is to study epidemic mitigation strategies. Two common strategies for limiting the spread of an infectious disease are vaccination and quarantine. Let's consider how the basic SIR model could be modified to incorporate vaccination. We examine a scenario in which vaccination is implemented at the onset of a disease outbreak. 
+
+What component(s) of the SIR model needs to be changed? Assume that the role of vaccination is to prevent infection of some proportion of susceptible individuals thus "moving" some susceptibles directly to the recovered on removed state. This can be modeled via  a function $\psi$ that depends on the number of susceptible and infected individuals resulting in 
+
+\begin{align}
+\frac{dS}{dt} &= -\beta SI - \psi(S,I), \\
+\frac{dI}{dt} &= \beta SI - \gamma I, \\
+\frac{dR}{dt} &= \gamma I + \psi(S,I). 
+\end{align}
+
+**Reflections:** Why should $\psi$ depend on both the number of susceptible and infected individuals? What do you think will be the impact of vaccination compared with the results fomr our numerical simulations using the base SIR model? 
+
+The questions remains as to exactly is an appropriate expression for the function $\psi$? What would you propose initially? When we discuss functional forms later in the course we will return to a discussion on this question. 
+
 
 ## The Role of Quarantines 
 
+The quarantine strategy differs from the vaccination strategy from a modeling perspective in that it introduces a new compartment into the $S \rightarrow I \rightarrow R$ scheme. At least some infected individuals are placed into quarantine before eventually moving into the recovered state. 
+
+**Exercise:** Draw an appropriate compartment diagram for an SIR-type model that incorporates quarantine.   
+
+If we let the total population be $N=S+I+Q+R$, where $Q$ denotes the number of individuals in quarantine, then one SIR-type model incorporating quarantine is
+
+\begin{align}
+\frac{dS}{dt} &= -\beta \frac{SI}{N-Q}, \\
+\frac{dI}{dt} &= \beta \frac{SI}{N-Q} - \gamma I -\kappa I, \\
+\frac{dQ}{dt} &= \kappa I - \sigma Q, \\
+\frac{dR}{dt} &= \gamma I + \sigma Q. 
+\end{align}
+
+**Question:** Do these model equations correspond to the compartment diagram you came up with? 
+
+**Exercise:** Explain in words the meaning of the terms in the last set of equations. 
+
+We will study the model with quarantine in more detail later in the course. If you want to explore more about infections disease modleing, the following section provides a list of sources to get you started.  
 
 # Further Reading
 
