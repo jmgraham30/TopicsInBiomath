@@ -208,7 +208,7 @@ The previous expression is a linear equation in $\frac{1}{c}$ with slope $\frac{
 
 $-\frac{1}{\frac{dc}{dt}} = \frac{k_{n}}{K_{\text{max}}}\frac{1}{c} + \frac{1}{K_{\text{max}}}$
 
-allows us to  estimate $K_{\text{max}}$ and $k_n$. 
+allows us to  estimate $K_{\text{max}}$ and $k_n$. For more on this, see our post on [fitting a line to data](https://topicsinbiomath.netlify.app/posts/2022-02-04-fitting-a-line/).
 
 
 # The Spruce Budworm Model 
