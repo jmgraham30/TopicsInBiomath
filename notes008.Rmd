@@ -175,7 +175,9 @@ Now define $K_{\text{max}} = k_{2}r$ and $k_{n} = \frac{k_{-1} + k_{2}}{k_{1}}$,
   \frac{dc}{dt} = -\frac{K_{\text{max}}c}{k_{n} + c}, \label{eq:MMratelaw}
 \end{align}
 which is commonly referred to as the **Michaelis-Menten** rate law. What this says is that the consumption rate of the nutrient is proportional to a function of the form
-\[ f(c) = K_{\text{max}}\frac{c}{k_{n} + c}, \]
+
+$$ f(c) = K_{\text{max}}\frac{c}{k_{n} + c}, $$
+
 a Michaelis-Menten function or a Holling Type II functional form.
 
 In order to get a better understanding of the Holling Type II functional response, let's look at the graph of the function $f(x) = \frac{x}{1+x}$. 

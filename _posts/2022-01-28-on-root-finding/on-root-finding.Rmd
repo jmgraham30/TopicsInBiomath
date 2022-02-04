@@ -39,7 +39,8 @@ While it's obvious what the answer is, let us address the problem computationall
 ```{r}
 ggplot(data.frame(x=c(-1.5,1.5)),aes(x=x)) + 
   geom_function(fun = function(x){x^2-1},lwd=1) + 
-  geom_hline(yintercept=0,linetype="dashed")
+  geom_hline(yintercept=0,linetype="dashed") +  
+  theme(text = element_text(size = 15))
 ```
 
 The graph tells us that there are two roots in the interval $[-2,2]$. Let's call the function `uniroot.all` from `rootSolve`:

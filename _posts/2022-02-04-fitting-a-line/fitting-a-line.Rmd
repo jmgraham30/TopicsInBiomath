@@ -1,0 +1,105 @@
+---
+title: "Fitting a Line"
+description: 
+  How to fit a line to data in R. 
+author:
+  - name: Jason M. Graham
+    url: {}
+date: 2022-02-04
+output:
+  distill::distill_article:
+    self_contained: false
+---
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+library(tidyverse)
+```
+
+# Background
+
+In [section 8](https://topicsinbiomath.netlify.app/notes008.html) of the course notes, we derived the [Michaelis-Menten](https://topicsinbiomath.netlify.app/notes008.html#michaelis-menten-form-in-the-chemostat-model) functional form:
+
+$$ f(c) = K_{\text{max}}\frac{c}{k_{n} + c}, $$
+
+and stated that we can estimate the parameters $K_{\text{max}}$ and $k_{n}$ using the linear equation
+
+$$\frac{1}{f(c)} = \frac{k_{n}}{K_{\text{max}}}\frac{1}{c} + \frac{1}{K_{\text{max}}}.$$
+This post discusses the practical aspects of fitting a line to data in R. This is the same as estimating the slope and intercept parameters in an equation for a line given data points that you want the line to "pass through."
+
+
+# Line Fitting
+
+Suppose we have some number $n$ data points $(x_{1},y_{1})$, $(x_{2},y_{2})$, $\ldots$, $(x_{n},y_{n})$. If these data points all lie on the same line, then it is trivial to fit a line through them because any two colinear points uniquely determine a line, and it's equation is found in the usual pre-calculus way using the formula for slope and intercept. 
+
+However, real data never falls exactly on a perfect line even if the underlying relationship is linear. There is always measurement error or noise associated with real data. Suppose our data looks as follows:
+
+```{r linear-data,echo=TRUE,code_folding=TRUE}
+set.seed(1234)
+x <- sort(runif(15,0,4))
+y <- 2*x + 3 + rnorm(15,0.25)
+my_data <- tibble(x=x,y=y)
+my_data %>% 
+  ggplot(aes(x=x,y=y)) + 
+  geom_point() +  
+  theme(text = element_text(size = 15))
+```
+
+It is not unreasonable to try to model this data with a linear relationship. In fact, here is the "best-fit" line for this data:
+
+```{r linear-data-fit,echo=TRUE,code_folding=TRUE}
+my_data %>% 
+  ggplot(aes(x=x,y=y)) + 
+  geom_point() +  
+  geom_smooth(method="lm",se=FALSE) + 
+  theme(text = element_text(size = 15))
+```
+
+What we want to explain is how this line is determined. Every (non-vertical) line in the plan is determined by two parameters, the slope $a_{1}$ and the intercept $a_{0}$. The best-fit line is the one that minimizes the sum of squares errors (SSE)
+
+$$\text{SSE}=\sum_{i=1}^{n}(y_{i}-\hat{y}_{i})^2,$$
+
+where $\hat{y}_{i}=a_{1}x_{i}+a_{0}$. The point is that we can think of the sum of square errors as a function of the two variables $a_0$ and $a_1$. Then, the best-fit line is the one with the slope and intercept values that minimizes the SSE. We can (numerically) solve  a minimization problem in R using the `optim` function in R. 
+
+<aside>
+There are also a number of other functions and packages available for solving optimization problems in R. Which one to use depends on your particular application. We use `optim` because it is the primary option in base R. 
+</aside>
+
+Here is the relevant R code:
+
+```{r solve-lm,echo=TRUE}
+# define function to compute SSE
+SSE <- function(A,data=my_data){
+  y_hat <- A[1] + A[2]*data$x
+  sse <- sum((data$y-y_hat)^2) 
+}
+# call optim to minimize SSE, requires an initial guess
+(parms <- optim(c(1,1),SSE)$par)
+
+```
+
+This tells us that our data is best modeled by a linear equation with slope `r parms[2]` and intercept `r parms[1]`. Let's see this in another plot:
+
+```{r check-fit,echo=FALSE}
+my_data %>% 
+  ggplot(aes(x=x,y=y)) + 
+  geom_point() +  
+  geom_smooth(method="lm",se=FALSE) + 
+  geom_abline(slope = parms[2],intercept = parms[1],linetype="dashed",color="black",lwd=1) + 
+  theme(text = element_text(size = 15))
+```
+
+Here the dashed black line is the line with slope `r parms[2]` and intercept `r parms[1]`. It perfectly matches what we previously stated was the best fit line. 
+
+Another approach to finding the slope and intercept parameters for a best-fit line in R is by using the `lm` (short for linear model) function in R as follows:
+
+```{r lm,echo=TRUE}
+lm(y~x,data=my_data)$coefficients
+```
+
+Notice that we obtain the same answer as before. 
+
+# Parameter Estimation
+
+Our discussion so far provides a very simple example of the general and common problem of parameter estimation. That is, given data and a mathematical model, what are the parameter values for the model that best fit the data. To solve this problem one tries to do the same thing that we have done here with our best-fit line. That is, minimize the error as a function of the parameter values. The problem is that as the mathematical model we are trying to use becomes more complication, say for example a large system of differential equations, the more nonlinear the error becomes as a function of the parameters. Minimizing highly nonlinear functions is difficult because there may be multiple and even many local minimum where the optimization algorithm can get stuck. Thus, parameter estimation in biomathematics is an active area of current research.    
