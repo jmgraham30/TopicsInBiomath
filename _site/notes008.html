@@ -2331,8 +2331,8 @@ successfully transported in the cell body by <span
 class="math inline">\(P\)</span>, then the scenario described above and
 represented in Figure <a href="#fig:transport">2</a> can be written as a chemical
 reaction: <span class="math display">\[\begin{align}
-&amp;\ce{C + X_0 &lt;=&gt;[k_{1}][k_{-1}] X_1}\\
-&amp;\ce{X_1 -&gt;[k_{2}] P + X_0 }
+&amp;C + X_0 \rightleftharpoons X_1\\
+&amp;X_1 \rightarrow P + X_0
 \end{align}\]</span></p>
 <p>Notice that the first reaction is <strong>reversible</strong> while
 the second is <strong>irreversible</strong>. Basically this says that a
@@ -2474,6 +2474,21 @@ functional form.</p>
 functional response, let’s look at the graph of the function <span
 class="math inline">\(f(x) = \frac{x}{1+x}\)</span>.</p>
 <div class="layout-chunk" data-layout="l-body">
+<details>
+<summary>
+Show code
+</summary>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='cn'>F</span> <span class='op'>&lt;-</span> <span class='kw'>function</span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span><span class='op'>{</span><span class='va'>x</span><span class='op'>/</span><span class='op'>(</span><span class='fl'>1</span><span class='op'>+</span><span class='va'>x</span><span class='op'>)</span><span class='op'>}</span>
+<span class='va'>x</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/seq.html'>seq</a></span><span class='op'>(</span><span class='fl'>0</span>,<span class='fl'>3</span>,by<span class='op'>=</span><span class='fl'>0.01</span><span class='op'>)</span>
+<span class='va'>df</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://tibble.tidyverse.org/reference/tibble.html'>tibble</a></span><span class='op'>(</span>x<span class='op'>=</span><span class='va'>x</span><span class='op'>)</span>
+<span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span><span class='op'>(</span><span class='va'>df</span>,<span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span> 
+  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_function.html'>geom_function</a></span><span class='op'>(</span>fun<span class='op'>=</span><span class='cn'>F</span>,lwd<span class='op'>=</span><span class='fl'>1</span><span class='op'>)</span> <span class='op'>+</span> 
+  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/labs.html'>labs</a></span><span class='op'>(</span>x<span class='op'>=</span><span class='st'>"x"</span>,y<span class='op'>=</span><span class='fu'><a href='https://www.stefanom.io/latex2exp/reference/TeX.html'>TeX</a></span><span class='op'>(</span><span class='st'>"$f(x) = \\frac{x}{1+x}$"</span><span class='op'>)</span>,
+       title<span class='op'>=</span><span class='st'>"Shape of the graph of Holling Type II"</span><span class='op'>)</span>
+</code></pre>
+</div>
+</details>
 <p><img src="notes008_files/figure-html5/unnamed-chunk-1-1.png" width="624" /></p>
 </div>
 <p>Note that the graph of any Holling Type II functional form will have
@@ -2546,6 +2561,21 @@ a feature of a Holling Type III response. To see this, let’s graph <span
 class="math inline">\(f(x)=\frac{x^2}{1+x^2}\)</span> which is
 representative in terms of shape of a Holling Type III response.</p>
 <div class="layout-chunk" data-layout="l-body">
+<details>
+<summary>
+Show code
+</summary>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='cn'>F</span> <span class='op'>&lt;-</span> <span class='kw'>function</span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span><span class='op'>{</span><span class='va'>x</span><span class='op'>^</span><span class='fl'>2</span><span class='op'>/</span><span class='op'>(</span><span class='fl'>1</span><span class='op'>+</span><span class='va'>x</span><span class='op'>^</span><span class='fl'>2</span><span class='op'>)</span><span class='op'>}</span>
+<span class='va'>x</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/seq.html'>seq</a></span><span class='op'>(</span><span class='fl'>0</span>,<span class='fl'>3</span>,by<span class='op'>=</span><span class='fl'>0.01</span><span class='op'>)</span>
+<span class='va'>df</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://tibble.tidyverse.org/reference/tibble.html'>tibble</a></span><span class='op'>(</span>x<span class='op'>=</span><span class='va'>x</span><span class='op'>)</span>
+<span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span><span class='op'>(</span><span class='va'>df</span>,<span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span> 
+  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_function.html'>geom_function</a></span><span class='op'>(</span>fun<span class='op'>=</span><span class='cn'>F</span>,lwd<span class='op'>=</span><span class='fl'>1</span><span class='op'>)</span> <span class='op'>+</span> 
+  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/labs.html'>labs</a></span><span class='op'>(</span>x<span class='op'>=</span><span class='st'>"x"</span>,y<span class='op'>=</span><span class='fu'><a href='https://www.stefanom.io/latex2exp/reference/TeX.html'>TeX</a></span><span class='op'>(</span><span class='st'>"$f(x) = \\frac{x^2}{1+x^2}$"</span><span class='op'>)</span>,
+       title<span class='op'>=</span><span class='st'>"Shape of the graph of Holling Type II"</span><span class='op'>)</span>
+</code></pre>
+</div>
+</details>
 <p><img src="notes008_files/figure-html5/unnamed-chunk-2-1.png" width="624" /></p>
 </div>
 <p>Note the change in concavity that occurs near 0.5. (In the homework

@@ -112,8 +112,8 @@ knitr::include_graphics("./Figures/cellTransport.png")
 
 If we denote the external nutrient by $C$, unoccupied receptors by $X_{0}$, an occupied receptor by $X_{1}$, and a nutrient molecule successfully transported in the cell body by $P$, then the scenario described above and represented in Figure \@ref(fig:transport) can be written as a chemical reaction:
 \begin{align}
-&\ce{C + X_0 <=>[k_{1}][k_{-1}] X_1}\\
-&\ce{X_1 ->[k_{2}] P + X_0 }
+&C + X_0 \rightleftharpoons X_1\\
+&X_1 \rightarrow P + X_0 
 \end{align}
 
 
@@ -183,11 +183,14 @@ a Michaelis-Menten function or a Holling Type II functional form.
 In order to get a better understanding of the Holling Type II functional response, let's look at the graph of the function $f(x) = \frac{x}{1+x}$. 
 
 
-```{r,code_folding=TRUE}
+```{r,echo=TRUE,code_folding=TRUE}
 F <- function(x){x/(1+x)}
 x <- seq(0,3,by=0.01)
 df <- tibble(x=x)
-ggplot(df,aes(x)) + geom_function(fun=F,lwd=1) + labs(x="x",y=TeX("$f(x) = \\frac{x}{1+x}$"),title="Shape of the graph of Holling Type II")
+ggplot(df,aes(x)) + 
+  geom_function(fun=F,lwd=1) + 
+  labs(x="x",y=TeX("$f(x) = \\frac{x}{1+x}$"),
+       title="Shape of the graph of Holling Type II")
 ```
 
 
@@ -216,11 +219,14 @@ $\frac{dN}{dt} = rN\left(1 - \frac{N}{K}\right) - p(N),$
 
 where $p(N)$ is the death rate due to predation (mainly by birds) of the insect. It is natural to assume that $p(N)$ saturates because birds can only eat so many budworms. On the other hand, since the relevant birds eat more than just the budworm, they will not expend a great deal of energy to seek out the budworm for predation unless there are sufficiently many budworms available. In other words, of $N$ is very near zero, one expects that $p(N)$ should be relatively small. This is not a feature of a Holling Type II functional response but it is a feature of a Holling Type III response. To see this, let's graph $f(x)=\frac{x^2}{1+x^2}$ which is representative in terms of shape of  a Holling Type III response. 
 
-```{r,code_folding=TRUE}
+```{r,echo=TRUE,code_folding=TRUE}
 F <- function(x){x^2/(1+x^2)}
 x <- seq(0,3,by=0.01)
 df <- tibble(x=x)
-ggplot(df,aes(x)) + geom_function(fun=F,lwd=1) + labs(x="x",y=TeX("$f(x) = \\frac{x^2}{1+x^2}$"),title="Shape of the graph of Holling Type II")
+ggplot(df,aes(x)) + 
+  geom_function(fun=F,lwd=1) + 
+  labs(x="x",y=TeX("$f(x) = \\frac{x^2}{1+x^2}$"),
+       title="Shape of the graph of Holling Type II")
 ```
 
 Note the change in concavity that occurs near 0.5. (In the homework you will be asked to determine the exact location of the inflection point.) 
