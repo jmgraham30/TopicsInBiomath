@@ -2291,9 +2291,6 @@ transport the resulting nutrient/receptor complex through the membrane
 and then finally release the nutrient into the cell body. This is
 necessary since water-soluble molecules are unable to permeate the cell
 membrane. Figure <a href="#fig:membrane">1</a> illustrates the process.</p>
-<p>Nutrient transport at cell membrane (from <a
-href="https://images.app.goo.gl/HFugV2ukjkXzaWVy5">Biology
-LibreTexts</a>)</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="figure"><span style="display:block;" id="fig:membrane"></span>
 <img src="Figures/substrateProtein.png" alt="Nutrient transport at cell membrane (from [Biology LibreTexts](https://images.app.goo.gl/HFugV2ukjkXzaWVy5))." width="50%" />
@@ -2304,7 +2301,7 @@ LibreTexts</a>).
 </p>
 </div>
 </div>
-<p>Now, once the nutrient is released into the cell body, the membrane
+<p>Once the nutrient is released into the cell body, the membrane
 receptor is free again to bind with another nutrient molecule. This
 results in a sort of “conveyor-belt” procedure. However, when a cell is
 “surrounded by” nutrient as is the case in a chemostat, there is usually
@@ -2351,7 +2348,7 @@ proportionality that describe how likely the reactions are to result in
 the specified products.</p>
 <p>To convert the chemical equations into differential equations for the
 rate of change of the concentration of the molecules involved we apply
-the <strong>law of mass action</strong> which states that when two or
+the <strong>law of mass action</strong>. This states that when two or
 more reactants are involved in a reaction step, the rate of reaction is
 proportional to the product of their concentrations. (Note the
 similarity with what we saw in the SIR model.) Following a commonly used
@@ -2419,7 +2416,7 @@ receptors. Thus, we assume that <span
 class="math inline">\(x_{0}\)</span> will very quickly reach zero and
 hence <span class="math inline">\(x_{1}\)</span> will very quickly reach
 a steady-state value <span class="math inline">\(r\)</span>. In other
-words, it is very reasonable to assume that <span
+words, it is reasonable to assume that <span
 class="math inline">\(\frac{dx_{1}}{dt} = 0\)</span>, an assumption
 known as the <strong>quasi-steady-state assumption</strong>, which
 reduces the last two differential equations further to <span
@@ -2467,7 +2464,7 @@ class="math display">\[\begin{align}
 \label{eq:MMratelaw}
 \end{align}\]</span> which is commonly referred to as the
 <strong>Michaelis-Menten</strong> rate law. What this says is that the
-consumption rate of the nutrient is proportional to the function of the
+consumption rate of the nutrient is proportional to a function of the
 form <span class="math display">\[ f(c) = K_{\text{max}}\frac{c}{k_{n} +
 c}, \]</span> a Michaelis-Menten function or a Holling Type II
 functional form.</p>
@@ -2523,7 +2520,7 @@ class="math inline">\(\frac{1}{c}\)</span> with slope <span
 class="math inline">\(\frac{k_{n}}{K_{\text{max}}}\)</span> and <span
 class="math inline">\(y\)</span>-intercept <span
 class="math inline">\(\frac{1}{K_{\text{max}}}\)</span>. The point is,
-if we have date for the rate <span
+if we have data for the rate <span
 class="math inline">\(\frac{dc}{dt}\)</span> and the concentrations
 <span class="math inline">\(c\)</span>, then the relation</p>
 <p><span class="math inline">\(-\frac{1}{\frac{dc}{dt}} =
@@ -2539,8 +2536,9 @@ to increase as a function of its input but with a saturating
 characteristic one might be inclined to try a Holling Type II functional
 response. This is good thinking but there may be additional features at
 play that should be taken into account. There is a well-known problem
-that illustrates the point we are getting at here. The spruce budworm
-model seeks to study the outbreak of an insect known as the <a
+that illustrates the point we are getting at here.</p>
+<p>The spruce budworm model seeks to study the outbreak of an insect
+known as the <a
 href="https://en.wikipedia.org/wiki/Choristoneura">spruce budworm</a>
 that is considered a pest due to the negative impact these insects can
 have on a tree population. The mathematical model attempts to capture
@@ -2554,7 +2552,7 @@ that <span class="math inline">\(p(N)\)</span> saturates because birds
 can only eat so many budworms. On the other hand, since the relevant
 birds eat more than just the budworm, they will not expend a great deal
 of energy to seek out the budworm for predation unless there are
-sufficiently many budworms available. In other words, of <span
+sufficiently many budworms available. In other words, if <span
 class="math inline">\(N\)</span> is very near zero, one expects that
 <span class="math inline">\(p(N)\)</span> should be relatively small.
 This is not a feature of a Holling Type II functional response but it is
@@ -2582,13 +2580,16 @@ Show code
 <p>Note the change in concavity that occurs near 0.5. (In the homework
 you will be asked to determine the exact location of the inflection
 point.)</p>
-<p>Thus, using a Holling Type III functional response for <span
+<p>Using a Holling Type III functional response for <span
 class="math inline">\(p(N)\)</span>, the spruce budworm model
 becomes</p>
 <p><span class="math inline">\(\frac{dN}{dt} = rN\left(1 -
 \frac{N}{K}\right) - \gamma \frac{N^2}{1+N^2}.\)</span></p>
+<p>This demonstrates that one may have to take into account concavity as
+well and increasing/decreasing behavior when choosing an appropriate
+functional form.</p>
 <p>Later we will see that the the spruce budworm exhibits some
-interesting behavior. In particular, the sprice budworm model exhibits a
+interesting behavior. In particular, the spruce budworm model exhibits a
 <a
 href="https://en.wikipedia.org/wiki/Saddle-node_bifurcation#:~:text=In%20the%20mathematical%20area%20of,collide%20and%20annihilate%20each%20other.">saddle-node
 bifurcation</a>.</p>
