@@ -29,6 +29,12 @@ theme_set(theme_light())
 
 # Goals
 
+After reading this section of notes, you should
+
+1) know what a chemostat is, and
+
+2) know the basic mathematical model corresponding to the chemostat. 
+
 
 # Overview
 
