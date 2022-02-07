@@ -1,0 +1,53 @@
+---
+title: "Course Notes 10"
+description: |
+  Dimensional analysis. 
+author:
+  - name: Jason M. Graham 
+    url: https://topicsinbiomath.netlify.app/
+    affiliation: University of Scranton 
+    affiliation_url: https://sites.google.com/site/jasonmgrahamus/
+date: "`r Sys.Date()`"
+output: 
+  distill::distill_article:
+    toc: true
+    toc_depth: 2
+creative_commons: CC BY-NC
+bibliography: topics_in_biomath.bib
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+library(knitr)
+library(kableExtra)
+library(deSolve)
+library(tidyverse)
+library(ggformula)
+library(patchwork)
+library(phaseR)
+library(latex2exp)
+theme_set(theme_light())
+```
+
+# Goals
+
+After reading this section of notes, you should
+
+1) understand the basic principles of dimensional analysis, and
+
+2) know how to non-dimensionalize a mathematical model. 
+
+# Overview
+
+Mathematical models relate various physical quantities through the variables and parameters involved in expressing the model equations. As you probably know well by now, physical quantities are measured in some set of associated units. For example, you may measure the length of an object or the distance traveled in units of feet. Notice that length is the basic physical quantity that is being measured while feet is the chosen set of units.  However, units of feet is not the only valid option, another choice would be to use units of meters (or metres).  Furthermore, sometimes it is convenient to work in a certain set of units. For example, you will often see physicists choose units such that the [speed of light](https://en.wikipedia.org/wiki/Speed_of_light) or [Plank's constant](https://en.wikipedia.org/wiki/Planck_constant) is equal to one. The point is that you are always free to choose the units you work in, but you must make certain that the units balance out in any mathematical expressions that involved physical quantities. You cannot make a mathematical statement that would imply something like a quantity with units corresponding to a length is equal to a quantity with units corresponding to a mass. Additionally, you cannot add (or subtract) two quantities that do not have the same units. It doesn't make sense to add three feet to six minutes. 
+
+[Dimensional analysis](https://en.wikipedia.org/wiki/Dimensional_analysis) involves a systematic analysis of the relationships between the fundamental physical quantities and units of model variables and parameters in order to insure consistency of units. A dimensional analysis often leads to a choice of unit scaling that can help the mathematical modeler to better understand the significance of model parameters or to reduce the number of significant model parameters via the process of [nondimensionalization](https://en.wikipedia.org/wiki/Nondimensionalization#:~:text=Nondimensionalization%20is%20the%20partial%20or,closely%20related%20to%20dimensional%20analysis.). This is important when, for example, studying the bifurcation behavior of a dynamical model as the value of one or more parameters is varied. Non-dimensionalization should be considered a basic and essential step as part of carrying out the basic biomathematical workflow. The moment you encouter or write down a mathematical model, the next thing you should do is conduct a dimensional analysis and then nondimensionalize the model equations.   
+
+Before we discuss dimensional analysis and nondimensionalization in detail, there are two important topics we need to cover. 
+
+1) Unit dimensions and derived units. These concepts make clear the disctinction between fundamental quantities and the units used to measure them.   
+
+2) The "arithmetic" of unit dimensions. 
+
+These ideas together make dimensional analysis and non-dimensionalization relatively straightforward. 
+
