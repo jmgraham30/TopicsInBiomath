@@ -85,6 +85,27 @@ code span.vs { color: #20794d; } /* VerbatimString */
 code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 </style>
 
+<style>
+  div.csl-bib-body { }
+  div.csl-entry {
+    clear: both;
+    }
+  .hanging div.csl-entry {
+    margin-left:2em;
+    text-indent:-2em;
+  }
+  div.csl-left-margin {
+    min-width:2em;
+    float:left;
+  }
+  div.csl-right-inline {
+    margin-left:2em;
+    padding-left:1em;
+  }
+  div.csl-indent {
+    margin-left: 2em;
+  }
+</style>
 
   <!--radix_placeholder_meta_tags-->
   <title>Topics in Biomathematics: Course Notes 10</title>
@@ -112,6 +133,11 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 
   <!--/radix_placeholder_meta_tags-->
   
+  <meta name="citation_reference" content="citation_title=Computational mathematical modeling;citation_publication_date=2013;citation_publisher=Society for Industrial and Applied Mathematics (SIAM), Philadelphia, PA;citation_author=Daniela Calvetti;citation_author=Erkki Somersalo"/>
+  <meta name="citation_reference" content="citation_title=A general framework for modeling tumor-immune system competition and immunotherapy: Mathematical analysis and biomedical inferences;citation_publication_date=2005;citation_volume=208;citation_doi=10.1016/j.physd.2005.06.032;citation_issn=0167-2789;citation_author=Alberto Onofrio"/>
+  <meta name="citation_reference" content="citation_title=Simple models for trail-following behaviour; trunk trails versus individual foragers;citation_publication_date=1994;citation_publisher=Springer;citation_volume=32;citation_author=Leah Edelstein-Keshet"/>
+  <meta name="citation_reference" content="citation_title=General model of inflammation;citation_publication_date=2010;citation_volume=72;citation_doi=10.1007/s11538-009-9468-9;citation_issn=0092-8240;citation_author=Meagan C. Herald"/>
+  <meta name="citation_reference" content="citation_title=Methods of mathematical modelling;citation_publication_date=2015;citation_publisher=Springer;citation_author=Thomas Witelski;citation_author=Mark Bowen"/>
   <!--radix_placeholder_rmarkdown_metadata-->
 
   <script type="text/json" id="radix-rmarkdown-metadata">
@@ -2093,6 +2119,7 @@ Notes
 <a href="notes007.html">Notes 7</a>
 <a href="notes008.html">Notes 8</a>
 <a href="notes009.html">Notes 9</a>
+<a href="notes010.html">Notes 10</a>
 </div>
 </div>
 <a href="r_for_biomath.html">R for Biomath</a>
@@ -2131,6 +2158,27 @@ class="uri">https://sites.google.com/site/jasonmgrahamus/</a>
 <ul>
 <li><a href="#goals">Goals</a></li>
 <li><a href="#overview">Overview</a></li>
+<li><a
+href="#unit-dimensions-derived-units-and-the-arithmetic-of-units">Unit
+Dimensions, Derived Units, and the Arithmetic of Units</a>
+<ul>
+<li><a href="#arithmetic-of-units">Arithmetic of Units</a></li>
+<li><a href="#the-unit-dimensions-of-derivatives">The Unit Dimensions of
+Derivatives</a></li>
+</ul></li>
+<li><a href="#dimensional-analysis">Dimensional Analysis</a></li>
+<li><a href="#non-dimensionalization">Non-dimensionalization</a>
+<ul>
+<li><a href="#dimensional-analysis-and-function-inputs">Dimensional
+Analysis and Function Inputs</a></li>
+<li><a
+href="#application-of-non-dimensionalization-to-the-sir-model">Application
+of Non-dimensionalization to the SIR Model</a></li>
+<li><a href="#generic-rescaling">Generic Rescaling</a></li>
+<li><a href="#buckingham-pi">Buckingham <span
+class="math inline">\(\pi\)</span></a></li>
+</ul></li>
+<li><a href="#further-reading">Further Reading</a></li>
 </ul>
 </nav>
 </div>
@@ -2172,26 +2220,750 @@ analysis often leads to a choice of unit scaling that can help the
 mathematical modeler to better understand the significance of model
 parameters or to reduce the number of significant model parameters via
 the process of <a
-href="https://en.wikipedia.org/wiki/Nondimensionalization#:~:text=Nondimensionalization%20is%20the%20partial%20or,closely%20related%20to%20dimensional%20analysis.">nondimensionalization</a>.
+href="https://en.wikipedia.org/wiki/Nondimensionalization#:~:text=Nondimensionalization%20is%20the%20partial%20or,closely%20related%20to%20dimensional%20analysis.">non-dimensionalization</a>.
 This is important when, for example, studying the bifurcation behavior
 of a dynamical model as the value of one or more parameters is varied.
 Non-dimensionalization should be considered a basic and essential step
 as part of carrying out the basic biomathematical workflow. The moment
 you encouter or write down a mathematical model, the next thing you
-should do is conduct a dimensional analysis and then nondimensionalize
+should do is conduct a dimensional analysis and then non-dimensionalize
 the model equations.</p>
-<p>Before we discuss dimensional analysis and nondimensionalization in
+<p>Before we discuss dimensional analysis and non-dimensionalization in
 detail, there are two important topics we need to cover.</p>
 <ol type="1">
 <li><p>Unit dimensions and derived units. These concepts make clear the
-disctinction between fundamental quantities and the units used to
-measure them.</p></li>
+distinction between fundamental quantities and the units used to measure
+them.</p></li>
 <li><p>The “arithmetic” of unit dimensions.</p></li>
 </ol>
 <p>These ideas together make dimensional analysis and
 non-dimensionalization relatively straightforward.</p>
+<h1 id="unit-dimensions-derived-units-and-the-arithmetic-of-units">Unit
+Dimensions, Derived Units, and the Arithmetic of Units</h1>
+<p><strong>Unit dimensions</strong> are basic physical quantities that
+can be measured. Figure <a href="#fig:tab1">1</a> lists the fundamental unit
+dimensions of some primary quantities along with the notation we use to
+denote them, and their corresponding <a
+href="https://en.wikipedia.org/wiki/International_System_of_Units">SI
+units</a>.</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="figure"><span style="display:block;" id="fig:tab1"></span>
+<img src="Figures/si_units.png" alt="Fundamental Unit Dimensions of Primary Quantities." width="755" />
+<p class="caption">
+Figure 1: Fundamental Unit Dimensions of Primary Quantities.
+</p>
+</div>
+</div>
+<p>Of course, SI units are not the only choice of units. The point is
+that mass, length, etc. are the quantities being measured. Furthermore,
+mass, length, etc. are fundamental in the sense that they can not be
+viewed as being made up of more basic quantities. On the other hand, the
+quantities listed in Figure <a href="#fig:tab2">2</a> are said to be
+<strong>derived</strong> because they can be viewed as being made up of
+more basic quantities. For example, velocity has derived dimensions of
+<span
+class="math inline">\(\frac{\text{length}}{{\text{time}}}\)</span>. In
+order to simplify the language a bit, we will often say the dimensions
+of velocity are <span
+class="math inline">\(\frac{\text{length}}{{\text{time}}}\)</span>, read
+“length per time.”</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="figure"><span style="display:block;" id="fig:tab2"></span>
+<img src="Figures/physical_quantities.png" alt="Examples of Derived Units." width="864" />
+<p class="caption">
+Figure 2: Examples of Derived Units.
+</p>
+</div>
+</div>
+<p><strong>Notation:</strong> If <span class="math inline">\(x\)</span>
+is a quantity, we let <span class="math inline">\([x]\)</span> denote
+the corresponding dimensions for <span class="math inline">\(x\)</span>.
+For example, if <span class="math inline">\(v\)</span> represents a
+velocity, then <span class="math inline">\([v]=\frac{L}{T}\)</span>.</p>
+<p>Observe that a pure numbers (one that does not correspond to a
+physical measurement) like <span class="math inline">\(6\)</span>, <span
+class="math inline">\(0.12\)</span>, or <span
+class="math inline">\(\pi\)</span> are unitless. This is because pure
+numbers are fixed and do not depend on a choice of units. We will say
+that a pure number is <strong>nondimensional</strong>.</p>
+<h2 id="arithmetic-of-units">Arithmetic of Units</h2>
+<p>There is a sort of “arithmetic” of unit dimensions that serves to
+make dimensional analysis an algebraic process. Specifically,</p>
+<ol type="1">
+<li><p>You may only add or subtract quantities with the exact same unit
+dimensions.</p></li>
+<li><p>Multiplying a quantity by a pure number does not change the unit
+dimensions. We can write this in mathematical notation, suppose that
+<span class="math inline">\(A\)</span> is a physical quantity with unit
+dimensions <span class="math inline">\([A]\)</span> and let <span
+class="math inline">\(c\)</span> be a pure number, then <span
+class="math inline">\([cA]=[A]\)</span>.</p></li>
+<li><p>Dimensions multiply and divide. We can write this in mathematical
+notation, suppose that <span class="math inline">\(A\)</span> and <span
+class="math inline">\(B\)</span> are physical quantities with unit
+dimensions <span class="math inline">\([A]\)</span> and <span
+class="math inline">\([B]\)</span> respectively. Then,</p>
+<ol type="a">
+<li><p><span class="math inline">\([AB]=[A][B]\)</span>, and</p></li>
+<li><p><span class="math inline">\(\left[\frac{A}{B}\right] =
+\frac{[A]}{[B]}\)</span>.</p></li>
+</ol></li>
+<li><p>Quantities on both sides of an equality (or inequality for that
+matter) must have the same unit dimensions. You can not compare or
+equate quantities with different units.</p></li>
+</ol>
+<p>Properties 1), 2), and 4) are straightforward. We will illustrate
+property 3) with some examples. Suppose that <span
+class="math inline">\(\alpha\)</span> is a rate parameter that has unit
+dimensions <span class="math inline">\([\alpha]=T^{-1}\)</span>, and
+suppose that <span class="math inline">\(x\)</span> is a physical
+quantity with <span class="math inline">\([x]=L\)</span>, what will be
+the unit dimensions for <span class="math inline">\(\alpha x\)</span>?
+We know that</p>
+<p><span class="math inline">\([\alpha x] = [\alpha][x] = T^{-1}L =
+\frac{L}{T}\)</span></p>
+<p>so <span class="math inline">\([\alpha x]=\frac{L}{T}\)</span> which
+are the same unit dimensions as velocity (or speed). As another example,
+suppose that <span class="math inline">\(A\)</span> and <span
+class="math inline">\(B\)</span> are quantities with <span
+class="math inline">\([A]=\frac{ML}{T^2}\)</span> and <span
+class="math inline">\([B]=\frac{L^2T}{M}\)</span> What are the unit
+dimensions of <span class="math inline">\(\frac{A}{B}\)</span>? We know
+that</p>
+<p><span class="math display">\[
+\begin{align}
+\left[\frac{A}{B} \right] &amp;= \frac{[A]}{[B]} \\
+&amp;= \frac{\frac{ML}{T^2}}{\frac{L^2 T}{M}}\\
+&amp;= \frac{ML}{T^2}\frac{M}{L^2 T} \\
+&amp;= \frac{M^2}{L T^3}
+\end{align}
+\]</span></p>
+<p>Thus, <span class="math inline">\(\left[\frac{A}{B}
+\right]=\frac{M^2}{L T^3}\)</span>. Observe how some units “cancel” when
+there are reciprocals present.</p>
+<p>Note that we do not necessarily need to know the specific unit
+dimensions of a quantity in order to manipulate its unit dimensions. For
+example, suppose that <span class="math inline">\(P\)</span> is some
+physical quantity. The regardless of the specifics of <span
+class="math inline">\([P]\)</span> we can determine that the unit
+dimensions of <span class="math inline">\(P^3\)</span> are <span
+class="math inline">\([P]^3\)</span>. These types of manipulations will
+often come in handy.</p>
+<h2 id="the-unit-dimensions-of-derivatives">The Unit Dimensions of
+Derivatives</h2>
+<p>Since we work a lot with differential equations, let’s take a moment
+to consider the unit dimensions of the derivative of a function.
+Consider a generic function <span class="math inline">\(y=f(x)\)</span>,
+where the variables <span class="math inline">\(x\)</span> and <span
+class="math inline">\(y\)</span> correspond to physical quantities with
+unit dimensions <span class="math inline">\([x]\)</span> and <span
+class="math inline">\([y]\)</span> respectively. By definition,</p>
+<p><span class="math inline">\(f&#39;(x) = \frac{dy}{dx} =
+\lim_{h\rightarrow 0}\frac{f(x+h) - f(x)}{h}\)</span>.</p>
+<p>Since we can only add quantities with the same unit dimensions, we
+must have that <span class="math inline">\([h]=[x]\)</span>. Similarly,
+we must have that <span class="math inline">\([f(x+h)]=[f(x)] =
+[y]\)</span> and hence <span class="math inline">\([f(x+h) - f(x)] =
+[y]\)</span>. Therefore, for any particular value of <span
+class="math inline">\(h\)</span>, we must have</p>
+<p><span class="math inline">\(\left[\frac{f(x+h) - f(x)}{h}\right] =
+\frac{[f(x+h) - f(x)]}{[h]}=\frac{[y]}{[x]}\)</span></p>
+<p>Since the last equation is true for any value of <span
+class="math inline">\(h\)</span>, it must also hold in the limit so
+that</p>
+<p><span class="math inline">\(\left[f&#39;(x) \right] =
+\left[\frac{dy}{dx} \right] = \left[\lim_{h\rightarrow 0}\frac{f(x+h) -
+f(x)}{h} \right] = \frac{[y]}{[x]}\)</span></p>
+<p>As a specific example, suppose that we have a function <span
+class="math inline">\(y(t)\)</span>, where <span
+class="math inline">\([y]=L\)</span> and <span
+class="math inline">\([t]=T\)</span>, then <span
+class="math inline">\(\left[\frac{dy}{dt}\right]=\frac{L}{T}\)</span>.
+Does this remind of anything? If <span
+class="math inline">\(y(t)\)</span>, where <span
+class="math inline">\([y]=L\)</span> and <span
+class="math inline">\([t]=T\)</span> then we can think of <span
+class="math inline">\(y(t)\)</span> as an expression for the position as
+a function of time, the derivative of such a function is the
+instantaneous rate of change with respect to time, also known as
+velocity.</p>
+<p><strong>Exercise:</strong> Suppose that we have a function <span
+class="math inline">\(y(t)\)</span>, where <span
+class="math inline">\([y]=L\)</span> and <span
+class="math inline">\([t]=T\)</span>. What are the unit dimensions for
+<span class="math inline">\(\frac{d^2y}{dt^2}\)</span>? In general, if
+<span class="math inline">\(y=f(x)\)</span> is a function, what would be
+<span class="math inline">\([f&#39;&#39;(x)]\)</span>?</p>
+<h1 id="dimensional-analysis">Dimensional Analysis</h1>
+<p>Suppose that we have an expression <span class="math inline">\(y =
+at^2 + bt + c\)</span> and we know that <span
+class="math inline">\([y]=L\)</span> and <span
+class="math inline">\([t]=T\)</span>. We can use the known facts that
+<span class="math inline">\([y]=L\)</span> and <span
+class="math inline">\([t]=T\)</span> in order to determine the unit
+dimensions for all of the parameters (coefficients) in the equation
+<span class="math inline">\(y = at^2 + bt + c\)</span>. By the fourth
+rule for our arithmetic of unit dimensions, we must have that <span
+class="math inline">\([y] = [at^2 + bt + c]\)</span> and by the first
+rule we must have that <span
+class="math inline">\([at^2]=[bt]=[c]\)</span>. Putting the last two
+observations together tells us that</p>
+<p><span class="math display">\[\begin{align}
+L &amp;= [y] = [at^2] = [a]T^2\\
+L &amp;= [y] = [bt] = [b]T   \\
+L &amp;= [y] = [c]
+\end{align}\]</span></p>
+<p>Thus,</p>
+<ul>
+<li><p>the third equation implies that <span
+class="math inline">\([c]=L\)</span>,</p></li>
+<li><p>the second equation implies that <span
+class="math inline">\([b]=\frac{L}{T}\)</span>, and</p></li>
+<li><p>the first equation implies that <span
+class="math inline">\([a]=\frac{L}{T^2}\)</span>.</p></li>
+</ul>
+<p>We have just illustrated the process of <strong>dimensional
+analysis</strong>. Even if we don’t know the specific details of the
+unit dimensions in an equation, we can still use dimensional analysis to
+determine the relationship between unit dimensions of variables and
+parameters in an equation. For example, consider the differential
+equation</p>
+<p><span class="math inline">\(\frac{dy}{dx} = \alpha y\)</span></p>
+<p>We know that <span class="math inline">\(\left[ \frac{dy}{dx}\right]
+= \frac{[y]}{[x]}\)</span>, therefore we must have <span
+class="math inline">\([\alpha y] = \frac{[y]}{[x]}\)</span>. Since <span
+class="math inline">\([\alpha y] = [\alpha][y]\)</span> our unit
+dimension arithmetic implies that</p>
+<p><span class="math inline">\([\alpha][y] = \frac{[y]}{[x]}\ \
+\Rightarrow [\alpha]=\frac{1}{[x]}\)</span></p>
+<p>You should make sure that you understand what we have just done
+because these types of manipulations and reasoning with abstract unit
+dimensions is something we will do frequently. Moreover, it occurs often
+in the reserach literature, sometimes even without specific mention.</p>
+<p>Let’s look at one more example for now. Recall the logistic growth
+model</p>
+<p><span class="math inline">\(\frac{dN}{dt} =
+rN\left(1-\frac{N}{K}\right)\)</span></p>
+<p>Since we know that <span class="math inline">\(t\)</span> represents
+time it should be clear that <span class="math inline">\([t]=T\)</span>.
+Now <span class="math inline">\(N\)</span> is the size of the population
+(or sometimes population density). Rather than thinking about specific
+unit dimensions for <span class="math inline">\(N\)</span>, let’s just
+work with its unit dimensions abstractly by using our notation <span
+class="math inline">\([N]\)</span>. By the development so far, we
+have</p>
+<p><span class="math inline">\(\left[\frac{dN}{dt}\right] =
+\frac{[N]}{T}\)</span></p>
+<p>which forces</p>
+<p><span class="math inline">\(\left[rN\left(1-\frac{N}{K}\right)
+\right] = \frac{[N]}{T}\)</span></p>
+<p>Now 1 is a pure number and you can not add or subtract a quantity
+with units from a pure number. This means that in order for the
+expression <span class="math inline">\(1-\frac{N}{K}\)</span> to be
+valid, <span class="math inline">\(\frac{N}{K}\)</span> must be
+dimensionless, and the only way that can happen is if <span
+class="math inline">\([K]=[N]\)</span>. Furthermore, since <span
+class="math inline">\(1-\frac{N}{K}\)</span> is dimensionless, we must
+have</p>
+<p><span class="math inline">\(\left[rN\left(1-\frac{N}{K}\right)
+\right] = \left[rN\right] = [r][N]=\frac{[N]}{T}\)</span></p>
+<p>Therefore, <span class="math inline">\([r] = \frac{1}{T}\)</span></p>
+<p>In summary, for the equation</p>
+<p><span class="math inline">\(\frac{dN}{dt} =
+rN\left(1-\frac{N}{K}\right)\)</span></p>
+<p>we must have <span class="math inline">\([K]=[N]\)</span> and <span
+class="math inline">\([r]=\frac{1}{T}\)</span>. We will make use of
+these observations in the next section on non-dimensionalization.</p>
+<h1 id="non-dimensionalization">Non-dimensionalization</h1>
+<p>The goal of non-dimensionalization is to rescale the variables in an
+equation so that all of the variables and parameters become
+dimensionless. There are typically two general steps in the
+non-dimensionalization process:</p>
+<ol type="1">
+<li><p>Rescale all of the variables in the model equation(s) to make
+them dimensionless by making a change of variables that relates the
+dimensionless variables to the original variables and
+parameters.</p></li>
+<li><p>Substitute the change of variables into the original model
+equations to find an analogous equation for the rescaled dimensionless
+variables. This will usually reduce the number of parameters in the
+model equation(s).</p></li>
+</ol>
+<p>We will start with a simple example. Consider again the equation</p>
+<p><span class="math inline">\(y = at^2 + bt + c\)</span></p>
+<p>where <span class="math inline">\([y]=L\)</span> and <span
+class="math inline">\([t]=T\)</span>. Recall that this forces <span
+class="math inline">\([a]=\frac{L}{T^2}\)</span>, <span
+class="math inline">\([b]=\frac{L}{T}\)</span>, and <span
+class="math inline">\([c]=L\)</span>. Now define the change of
+variables</p>
+<p><span class="math inline">\(\xi = \frac{y}{c},\ \ \tau =
+\frac{b}{c}t\)</span></p>
+<p>Let’s confirm that <span class="math inline">\(\xi\)</span> and <span
+class="math inline">\(\tau\)</span> are dimensionless, which is the
+point of the exercise to render variables dimensionless. (We will come
+back and discuss this particular choice of scaling but note that in
+general there isn’t necessarily a unique choice.) Notice</p>
+<p><span class="math inline">\([\xi] = \left[\frac{y}{c}\right] =
+\frac{[y]}{[c]}=\frac{[y]}{[y]}\)</span></p>
+<p>and</p>
+<p><span class="math inline">\([\tau]=\left[
+\frac{b}{c}t\right]=\frac{[b]}{[c]}[t]=\frac{\frac{L}{T}}{L}T =
+\frac{[L][T]}{[L][T]}\)</span></p>
+<p>so all units cancel in both <span
+class="math inline">\([\xi]\)</span> and <span
+class="math inline">\([\tau]\)</span> which means each of <span
+class="math inline">\(\xi\)</span> and <span
+class="math inline">\(\tau\)</span> is dimensionless. This completes
+step 1) of the non-dimensionalization process. For step 2) notice
+that</p>
+<p><span class="math inline">\(y=c\xi = at^2 + bt + c =
+a\left(\frac{c}{b}\tau\right)^2+b\left(\frac{c}{b}\tau\right)+c\)</span></p>
+<p>so</p>
+<p><span
+class="math inline">\(c\xi=a\frac{c^2}{b^2}\tau^2+c\tau+c\)</span></p>
+<p>or equivalently</p>
+<p><span class="math inline">\(\xi = \frac{ac}{b^2}\tau^2 + \tau +
+1\)</span></p>
+<p>We leave it as an exercise for the reader to show that <span
+class="math inline">\(\gamma = \frac{ac}{b^2}\)</span> is a
+dimensionless quantity. We say that <span class="math inline">\(y = at^2
++ bt + c\)</span> has been <em>non-dimensionalized</em> to <span
+class="math inline">\(\xi = \gamma \tau^2 + \tau + 1\)</span>, where
+<span class="math inline">\(\gamma = \frac{ac}{b^2}\)</span>. Notice
+that the process is fully invertible so the two equations</p>
+<p><span class="math inline">\(y = at^2 + bt + c\)</span></p>
+<p>and</p>
+<p><span class="math inline">\(\xi = \gamma \tau^2 + \tau +
+1\)</span></p>
+<p>are mathematically equivalent up to a change of units. The benefit of
+non-dimensionalizing is that <span class="math inline">\(\xi = \gamma
+\tau^2 + \tau + 1\)</span> does not depend on any particular choice of
+units and we have identified that the significance of the parameters is
+encapsulated in the ration <span
+class="math inline">\(\frac{ac}{b^2}\)</span>. (Think about why this is
+true, a hint is to refer to the quadratic formula.)</p>
+<p><strong>Question:</strong> Is <span class="math inline">\(\xi =
+\frac{y}{c}\)</span>, <span class="math inline">\(\tau =
+\frac{b}{c}t\)</span> the only valid choice of scaling in order to
+non-dimensionalize <span class="math inline">\(y = at^2 + bt +
+c\)</span>? The answer is no, in the homework you will be asked to
+verify that <span class="math inline">\(\xi = \frac{x}{c}\)</span> and
+<span class="math inline">\(\tau=\frac{a}{b}t\)</span> is also a valid
+change of variables that can be used to nondimensionalize the equation
+<span class="math inline">\(y = at^2 + bt + c\)</span>.</p>
+<p>Let’s non-dimensionalize a differential equation. Consider again the
+logistic growth model</p>
+<p><span class="math inline">\(\frac{dN}{dt} = rN\left(1 -
+\frac{N}{K}\right)\)</span></p>
+<p>We’ve already determined that <span
+class="math inline">\([K]=[N]\)</span> and <span
+class="math inline">\([r]=\frac{1}{T}\)</span>. Let’s define</p>
+<p><span class="math inline">\(\xi = \frac{N}{K}, \ \ \tau = r
+t\)</span>.</p>
+<p>It’s easy to see that <span class="math inline">\(\xi\)</span> and
+<span class="math inline">\(\tau\)</span> are dimensionless. It should
+be obvious that <span class="math inline">\(\xi\)</span> is
+dimensionless, to see that <span class="math inline">\(\tau\)</span> is
+as well notice that</p>
+<p><span class="math inline">\([\tau] = [rt] =
+[r][t]=\frac{1}{T}T\)</span></p>
+<p>and the units cancel. This completes step 1) of the
+non-dimensionalization process. To complete step 2) we need to find a
+differential equation that is satisfied by <span
+class="math inline">\(\xi(\tau)\)</span>. Let’s proceed by computing the
+derivative <span class="math inline">\(\frac{d\xi}{d\tau}\)</span> of
+<span class="math inline">\(\xi\)</span> with respect to <span
+class="math inline">\(\tau\)</span>. As you will see, the trick is to
+use the <a href="https://en.wikipedia.org/wiki/Chain_rule">chain
+rule</a>.</p>
+<p><span class="math display">\[\begin{align*}
+\frac{d\xi}{d\tau} &amp;= \frac{d\xi}{dt}\frac{dt}{d\tau} \\
+&amp;= \frac{d}{dt}\frac{N}{K}\frac{dt}{d\tau} \\
+&amp;= \frac{1}{K}\frac{dN}{dt}\frac{dt}{d\tau} \\
+&amp;= \frac{1}{K}\frac{dN}{dt}\frac{1}{r} \\
+&amp;= \frac{1}{rK}\frac{dN}{dt} \\
+&amp;= \frac{1}{rK}rN\left(1 - \frac{N}{K}\right) \\
+&amp;= \frac{N}{K}\left(1 - \frac{N}{K}\right) \\
+&amp;= \xi(1-\xi)
+\end{align*}\]</span></p>
+<p>Thus, <span
+class="math inline">\(\frac{d\xi}{d\tau}=\xi(1-\xi)\)</span> is the
+non-dimensionalization of <span class="math inline">\(\frac{dN}{dt} =
+rN\left(1 - \frac{N}{K}\right)\)</span>.</p>
+<p>We can think of <span class="math inline">\(\xi=\frac{N}{K}\)</span>
+as the proportion of the population relative to the carrying capacity.
+Thus, our dimensionless equation <span
+class="math inline">\(\frac{d\xi}{d\tau}=\xi(1-\xi)\)</span>
+<em>normalizes</em> the population relative to the carrying capacity.
+The relation <span class="math inline">\(\tau = r t\)</span> establishes
+the time-scale of the model and the non-dimensionalization essentially
+tells us that the population will always reach the maximum proportion
+(1) of the carrying capacity on the same time-scale regardless of the
+exact values of <span class="math inline">\(r\)</span> and <span
+class="math inline">\(K\)</span>. This is because the rate parameter
+<span class="math inline">\(r\)</span> is eliminated from the equation
+as a result of non-dimensionalization.</p>
+<p>Note that for the logistic growth model there is really only one
+choice of rescaling for non-dimensionalization. This is an exception and
+not typical. In fact, the more parameters involved in a model, the more
+choices there will usually be for rescaling as part of
+non-dimensionalization. However, it is always possible to choose some
+(not necessarily unique) scaling that non-dimensionalizes a model and
+results in at most the same number of parameters (and usually fewer) as
+the original model. This isn’t just some observation or rule or thumb it
+is in fact a rigorous mathematical theorem known as the <a
+href="https://en.wikipedia.org/wiki/Buckingham_%CF%80_theorem">Buckingham
+<span class="math inline">\(\pi\)</span> theorem</a>. We will discuss
+the Buckingham <span class="math inline">\(\pi\)</span> theorem soon.
+First, let’s examine the non-dimensionalization process for a system of
+differential equations.</p>
+<h2 id="dimensional-analysis-and-function-inputs">Dimensional Analysis
+and Function Inputs</h2>
+<p>For functions such as <span class="math inline">\(f(x)=e^x\)</span>,
+<span class="math inline">\(f(x)=\ln(x)\)</span>, <span
+class="math inline">\(f(x)=\sin(x)\)</span>, and <span
+class="math inline">\(f(x)=\cos(x)\)</span> the input value <span
+class="math inline">\(x\)</span> must be unitless. Why is this the case?
+Let’s consider <span class="math inline">\(f(x)=e^x\)</span> for
+example. From calculus II, we know that we can express <span
+class="math inline">\(f(x)=e^x\)</span> as a convergent infinite power
+series:</p>
+<p><span class="math inline">\(f(x) = e^x = 1 + x + \frac{x^2}{2!} +
+\frac{x^3}{3!} + \cdots\)</span></p>
+<p>Now each of the terms <span class="math inline">\(1\)</span>, <span
+class="math inline">\(x\)</span>, <span
+class="math inline">\(\frac{x^2}{2!}\)</span>, etc. must have the same
+unit dimensions otherwise they could not be added together. Furthermore,
+since <span class="math inline">\(1\)</span> is a pure number this
+implies that all of the terms in the series must be unitless and thus
+<span class="math inline">\(x\)</span> in particular must be unitless.
+Similar reasoning leads us to conclude that the other functions <span
+class="math inline">\(f(x)=\ln(x)\)</span>, <span
+class="math inline">\(f(x)=\sin(x)\)</span>, and <span
+class="math inline">\(f(x)=\cos(x)\)</span> can only take pure numbers
+as inputs.</p>
+<p>Sometimes you will see functions like <span
+class="math inline">\(y(t) = \sin(t)\)</span> where the variable <span
+class="math inline">\(t\)</span> is interpreted as time but this is
+incorrect based on what we have just discussed. If you want the
+independent variable in a function like <span
+class="math inline">\(f(x)=e^x\)</span> or <span
+class="math inline">\(f(x)=\sin(x)\)</span> to be a physical quantity,
+they you must include a parameter with appropriate unit dimensions. For
+example, it is okay to use <span class="math inline">\(y(t) =
+\sin(at)\)</span> and have <span class="math inline">\([t]=T\)</span> as
+long as <span class="math inline">\([a]=\frac{1}{T}\)</span> so that
+<span class="math inline">\(at\)</span> taken as the input is
+unitless.</p>
+<p><strong>Question:</strong> What does dimensional analysis suggest
+about the unit dimensions for the output of a function like <span
+class="math inline">\(f(x)=e^x\)</span>, <span
+class="math inline">\(f(x)=\ln(x)\)</span>, <span
+class="math inline">\(f(x)=\sin(x)\)</span>, or <span
+class="math inline">\(f(x)=\cos(x)\)</span>?</p>
+<p>It is a common mistake to use a function to model some process
+without taking care to make sure that the input(s) or output(s) are
+unitless, or at least has the appropriate unit dimensions, watch out for
+this in the literature and don’t make the mistake yourself.</p>
+<h2
+id="application-of-non-dimensionalization-to-the-sir-model">Application
+of Non-dimensionalization to the SIR Model</h2>
+<p>Recall the SIR model for the spread of an infectious disease:</p>
+<p><span class="math display">\[\begin{align}
+\frac{dS}{dt} &amp;= -\beta SI, \\
+\frac{dI}{dt} &amp;= \beta SI - \gamma I, \\
+\frac{dR}{dt} &amp;= \gamma I.
+\end{align}\]</span></p>
+<p>Remember that <span class="math inline">\(S\)</span>, <span
+class="math inline">\(I\)</span>, and <span
+class="math inline">\(R\)</span> denote the population of susceptible,
+infected, and recovered individuals, respectively; and <span
+class="math inline">\(\beta\)</span> is the rate of infection of
+susceptible individuals per number of infected and <span
+class="math inline">\(\gamma\)</span> is the recovery rate.
+Additionally, remember that we observed that <span
+class="math inline">\(S+I+R=N\)</span>, where <span
+class="math inline">\(N\)</span> is the constant total population. By
+dimensional analysis, we must have</p>
+<ol type="1">
+<li><p><span class="math inline">\([S]=[I]=[R]=[N]\)</span>,</p></li>
+<li><p><span class="math inline">\([t]=T\)</span> (since <span
+class="math inline">\(t\)</span> represents time),</p></li>
+<li><p><span class="math inline">\([\beta]=\frac{1}{[N]T}\)</span>,
+and</p></li>
+<li><p><span
+class="math inline">\([\gamma]=\frac{1}{T}\)</span>.</p></li>
+</ol>
+<p>Next, let</p>
+<p><span class="math inline">\(x=\frac{S}{N},\ \ y=\frac{I}{N},\ \
+z=\frac{R}{N}, \ \ \tau=\gamma t\)</span></p>
+<p>and let’s use these rescalings to non-dimensionalize the SIR model
+equations. You should take a moment to convince yourself that <span
+class="math inline">\(x\)</span>, <span
+class="math inline">\(y\)</span>, <span
+class="math inline">\(z\)</span>, and <span
+class="math inline">\(\tau\)</span> are each dimensionless. Applying the
+chain rule we have</p>
+<p><span class="math display">\[
+\begin{align}
+\frac{dx}{d\tau} &amp;= \frac{dx}{dt}\frac{dt}{d\tau} \\
+&amp;= \frac{d}{dt}\frac{S}{N}\frac{dt}{d\tau} \\
+&amp;= \frac{1}{N}\frac{dS}{dt}\frac{1}{\gamma} \\
+&amp;= \frac{1}{\gamma N}\left(-\beta SI \right) \\
+&amp;= -\frac{\beta}{\gamma N}\left(xNyN \right) \\
+&amp;= -\frac{\beta N}{\gamma} xy
+\end{align}
+\]</span></p>
+<p><span class="math display">\[
+\begin{align}
+\frac{dy}{d\tau} &amp;= \frac{dy}{dt}\frac{dt}{d\tau} \\
+&amp;= \frac{d}{dt}\frac{I}{N}\frac{dt}{d\tau} \\
+&amp;= \frac{1}{N}\frac{dI}{dt}\frac{1}{\gamma} \\
+&amp;= \frac{1}{\gamma N}\left(\beta SI - \gamma I \right) \\
+&amp;= \frac{1}{\gamma N}\left(\beta xN yN - \gamma zN \right) \\
+&amp;= \frac{\beta N}{\gamma}xy - z
+\end{align}
+\]</span></p>
+<p><span class="math display">\[
+\begin{align}
+\frac{dz}{d\tau} &amp;= \frac{dz}{dt}\frac{dt}{d\tau} \\
+&amp;= \frac{d}{dt}\frac{R}{N}\frac{dt}{d\tau} \\
+&amp;= \frac{1}{N}\frac{dR}{dt}\frac{1}{\gamma} \\
+&amp;= \frac{1}{\gamma N}\left( \gamma I\right) \\
+&amp;= \frac{1}{\gamma N}\left(\gamma zN \right) \\
+&amp;= z
+\end{align}
+\]</span></p>
+<p>Therefore,</p>
+<p><span class="math display">\[\begin{align*}
+\frac{dx}{d\tau}&amp;= -R_{0}xy \\
+\frac{dy}{d\tau}&amp;= R_{0}xy - z \\
+\frac{dz}{d\tau}&amp;= z
+\end{align*}\]</span></p>
+<p>is the non-dimensionalization of the SIR model equations, where <span
+class="math inline">\(R_{0}=\frac{\beta N}{\gamma}\)</span> (pronounced
+R naught or R zero) is a dimensionless quantity called the <strong>basic
+reproductive ratio</strong>. Observe that <span
+class="math inline">\(R_{0}\)</span> is the ratio of the per-capita
+infection rate and the per-capita recovery rate. We will see later that
+the magnitude of <span class="math inline">\(R_{0}\)</span> determines
+whether the termination of the spread of the infection “occurs only when
+no susceptible individuals are left, or whether the interplay of the
+various factors of infectivity, recovery and mortality, may result in
+termination, whilst many susceptible individuals are still present in
+the unaffected population.” Specifically, if</p>
+<ol type="1">
+<li><p><span class="math inline">\(R_{0} &lt; 1\)</span>, then
+susceptible individuals are predicted to still be present in the
+unaffected population, while if</p></li>
+<li><p><span class="math inline">\(R_{0} &gt; 1\)</span>, then
+termination of the spread of the infection is predicted to occur only
+when no susceptible individuals are left.</p></li>
+</ol>
+<p>We will prove points 1) and 2) later after we have discussed
+phase-plane methods. Notice that dimensional analysis and
+non-dimensionalization have lead is to the conclusion that it is the
+ratio <span class="math inline">\(\frac{\beta N}{\gamma}\)</span> that
+is important.</p>
+<h2 id="generic-rescaling">Generic Rescaling</h2>
+<p>How do you choose an appropriate rescaling for the
+non-dimensionalization process? The answer is that it depends on the
+situation. For example, in a model there may be some parameters that
+have well-established values say from experiment or the literature. In
+such a case, you may want to use known parameter values to set the
+rescaling. In other cases, you might want to set a particular time-scale
+in which case that would play a role in your choice of rescaling.
+Another approach is to start with a generic rescaling and then proceed
+with the non-dimensionalization with the specific relationship between
+the model variables and parameters to be determined after
+non-dimensionalizing. Let’s look at some examples of this idea.</p>
+<p>Reconsider the equation <span
+class="math inline">\(y=at^2+bt+c\)</span>. Assume that <span
+class="math inline">\([y]=L\)</span> and <span
+class="math inline">\([t]=T\)</span>. Let <span
+class="math inline">\(\tilde{L}\)</span> and <span
+class="math inline">\(\tilde{T}\)</span> denote some characteristic
+length and time, respectively. Now set</p>
+<p><span class="math inline">\(\xi = \frac{y}{\tilde{L}}, \ \ \tau =
+\frac{t}{\tilde{T}}\)</span></p>
+<p>Notice that <span class="math inline">\(\xi\)</span> and <span
+class="math inline">\(\tau\)</span> are dimensionless because we have
+defined <span class="math inline">\(\tilde{L}\)</span> and <span
+class="math inline">\(\tilde{T}\)</span> to gave the same unit dimesions
+as <span class="math inline">\(y\)</span> and <span
+class="math inline">\(t\)</span>, respectively. Next, substitute <span
+class="math inline">\(y=\tilde{L}\xi\)</span> and <span
+class="math inline">\(t=\tilde{T}\tau\)</span> into <span
+class="math inline">\(y=at^2+bt+c\)</span>. We get</p>
+<p><span class="math inline">\(\tilde{L}\xi =
+a(\tilde{T}\tau)^2+b(\tilde{T}\tau)+c\)</span></p>
+<p>or equivalently</p>
+<p><span class="math inline">\(\xi =
+\frac{a\tilde{T}^2}{\tilde{L}}\tau^2+\frac{b\tilde{T}}{\tilde{L}}\tau+\frac{c}{\tilde{L}}\)</span></p>
+<p>We can see that there are multiple choices for <span
+class="math inline">\(\tilde{L}\)</span> and <span
+class="math inline">\(\tilde{T}\)</span> that can be made in order to
+non-dimensionalize <span class="math inline">\(y=at^2+bt+c\)</span>. For
+example, suppose we want to work in units such that the constant term in
+<span class="math inline">\(\xi =
+\frac{a\tilde{T}^2}{\tilde{L}}\tau^2+\frac{b\tilde{T}}{\tilde{L}}\tau+\frac{c}{\tilde{L}}\)</span>
+is <span class="math inline">\(1\)</span>. Choosing <span
+class="math inline">\(\tilde{L} = c\)</span> will accomplish that,
+giving</p>
+<p><span class="math inline">\(\xi =
+\frac{a\tilde{T}^2}{c}\tau^2+\frac{b\tilde{T}}{c}\tau+\frac{c}{c}=\frac{a\tilde{T}^2}{c}\tau^2+\frac{b\tilde{T}}{c}\tau+1\)</span></p>
+<p>but now we still need to choose an expression for <span
+class="math inline">\(\tilde{T}\)</span> in terms of the original
+parameters. We see that one option is <span
+class="math inline">\(\tilde{T} = \frac{c}{b}\)</span>, giving</p>
+<p><span class="math inline">\(\xi =
+\frac{a\left(\frac{c}{b}\right)^2}{c}\tau^2+\frac{b\frac{c}{b}}{c}\tau+1=\frac{ac}{b^2}\tau^2+\tau+1\)</span></p>
+<p>which is the same non-dimesionalization we obtained before.
+Non-dimensionalization using a generic rescaling works similarly for
+differential equations and we will see some examples of this in the
+future. While dimensional analysis and non-dimesionalization may seem to
+be a bit of a nuisance or even unnecessary, we can not over emphasize
+how important these techniques are in mathematical modeling.</p>
+<h2 id="buckingham-pi">Buckingham <span
+class="math inline">\(\pi\)</span></h2>
+<p>The Buckingham <span class="math inline">\(\pi\)</span> theorem is a
+theoretical result and is not typically used directly in
+non-dimensionalizing a problem. However, it places dimensional analysis
+on a firm theoretical foundation so we take the time to describe the
+result here. Before stating the theorem we need to establish some
+terminology and notation which we will illustrate in the context of our
+reoccurring example <span class="math inline">\(y=at^2+bt+c\)</span>.
+For this problem, there are</p>
+<ul>
+<li><p>5 <strong>physical quantities</strong> <span
+class="math inline">\(q_{1}=y\)</span>, <span
+class="math inline">\(q_{2}=t\)</span>, <span
+class="math inline">\(q_{3}=a\)</span>, <span
+class="math inline">\(q_{4}=b\)</span>, and <span
+class="math inline">\(q_{5}=c\)</span>; and</p></li>
+<li><p>2 <strong>relevant dimensions</strong> <span
+class="math inline">\(d_{1}=L\)</span> and <span
+class="math inline">\(d_{2}=T\)</span>.</p></li>
+</ul>
+<p>Furthermore, the nondimesionalization of <span
+class="math inline">\(y=at^2+bt+c\)</span> to <span
+class="math inline">\(\xi = \gamma \tau^2 + \tau + 1\)</span>, where
+<span class="math inline">\(\gamma=\frac{ac}{b^2}\)</span> via the
+scaling</p>
+<p><span class="math inline">\(\xi = \frac{y}{c},\ \ \tau =
+\frac{b}{c}t\)</span></p>
+<p>we end up with 3 dimensionless <strong><span
+class="math inline">\(\Pi\)</span>-numbers</strong> (also called
+<em>dimensionless groups</em>) <span
+class="math inline">\(\Pi_1=\xi\)</span>, <span
+class="math inline">\(\Pi_2=\tau\)</span>, and <span
+class="math inline">\(\Pi_3=\gamma\)</span>. Notice that each <span
+class="math inline">\(\Pi\)</span>-number is expressed as a product of
+(rational number) powers of the original physical quantities.
+Specifically,</p>
+<p><span class="math display">\[\begin{align*}
+\Pi_1&amp;= \xi = yc^{-1}, \\
+\Pi_2&amp;= \tau = tbc^{-1}, \\
+\Pi_3&amp;= \gamma = acb^{-2}
+\end{align*}\]</span></p>
+<p>Finally, observe that</p>
+<p><span class="math inline">\(\text{number of $\Pi$-numbers} =
+\text{number of physical quantities} - \text{number of relevant
+dimensions}\)</span></p>
+<p>What the Buckingham <span class="math inline">\(pi\)</span> theorem
+proves is that the relationship between <span
+class="math inline">\(\Pi\)</span>-numbers, physical quantities, and
+relevant dimensions is a general phenomenon. Furthermore, this
+relationship between <span class="math inline">\(\Pi\)</span>-numbers,
+physical quantities, and relevant dimensions does not depend on the
+particular scaling used for nondimensionalization. In fact,</p>
+<p><strong>Buckingham <span class="math inline">\(\pi\)</span></strong>
+If a physical problem is described by <span
+class="math inline">\(n\)</span> variables and parameters with every
+variable or parameter expressed in terms of <span
+class="math inline">\(r\)</span> independent relevant dimensions, then
+the number of different <span class="math inline">\(\Pi\)</span>-numbers
+is at most <span class="math inline">\(n-r\)</span>.</p>
+<p>The practical consequence of the Buckingham <span
+class="math inline">\(\pi\)</span> theorem is that we can predict by how
+much non-dimensionalization will simplify the expression of a model in
+terms of how many non-dimensional variables or parameters will remain
+after non-dimensionalizing. The astute reader with a good background in
+linear algebra may feel a sense of familiarity in the statement of the
+Buckingham <span class="math inline">\(\pi\)</span> theorem, in
+particular regarding the resemblance of the identity</p>
+<p><span class="math inline">\(\text{number of $\Pi$-numbers} =
+\text{number of physical quantities} - \text{number of relevant
+dimensions}\)</span></p>
+<p>with the identity in the <a
+href="https://en.wikipedia.org/wiki/Rank%E2%80%93nullity_theorem">rank-nullity
+theorem</a>. In fact, the Buckingham <span
+class="math inline">\(\pi\)</span> theorem is a consequence of the
+rank-nullity theorem. For the linear algebra based proof of Buckingham
+<span class="math inline">\(\pi\)</span>, see Chapter 4 of <span
+class="citation"
+data-cites="calvettiComputationalMathematicalModeling2013">(<a
+href="#ref-calvettiComputationalMathematicalModeling2013"
+role="doc-biblioref">Calvetti and Somersalo 2013</a>)</span>.</p>
+<h1 id="further-reading">Further Reading</h1>
+<p>Both of the texts <span class="citation"
+data-cites="calvettiComputationalMathematicalModeling2013 witelskiMethodsMathematicalModelling2015">(<a
+href="#ref-calvettiComputationalMathematicalModeling2013"
+role="doc-biblioref">Calvetti and Somersalo 2013</a>; <a
+href="#ref-witelskiMethodsMathematicalModelling2015"
+role="doc-biblioref">Witelski and Bowen 2015</a>)</span> cover
+dimensional analysis in detail including the Buckingham <span
+class="math inline">\(\pi\)</span> theorem.</p>
+<p>An excellent exercise is to attempt to reproduce the
+nondimensionalization found in research articles. As a first try, see if
+you can follow or work out on your own the nondimensionalization from
+one of the following papers: <span class="citation"
+data-cites="donofrioGeneralFrameworkModeling2005 edelstein-keshetSimpleModelsTrailfollowing1994 heraldGeneralModelInflammation2010">(<a
+href="#ref-donofrioGeneralFrameworkModeling2005"
+role="doc-biblioref">d’Onofrio 2005</a>; <a
+href="#ref-edelstein-keshetSimpleModelsTrailfollowing1994"
+role="doc-biblioref">Edelstein-Keshet 1994</a>; <a
+href="#ref-heraldGeneralModelInflammation2010"
+role="doc-biblioref">Herald 2010</a>)</span>.</p>
 <div class="sourceCode" id="cb1"><pre
 class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
+<div id="refs" class="references csl-bib-body hanging-indent"
+role="doc-bibliography">
+<div id="ref-calvettiComputationalMathematicalModeling2013"
+class="csl-entry" role="doc-biblioentry">
+Calvetti, Daniela, and Erkki Somersalo. 2013. <em>Computational
+Mathematical Modeling</em>. Mathematical <span>Modeling</span> and
+<span>Computation</span>. <span>Society for Industrial and Applied
+Mathematics (SIAM), Philadelphia, PA</span>. <a
+href="https://mathscinet.ams.org/mathscinet-getitem?mr=3013353">https://mathscinet.ams.org/mathscinet-getitem?mr=3013353</a>.
+</div>
+<div id="ref-edelstein-keshetSimpleModelsTrailfollowing1994"
+class="csl-entry" role="doc-biblioentry">
+Edelstein-Keshet, Leah. 1994. <span>“Simple Models for Trail-Following
+Behaviour; Trunk Trails Versus Individual Foragers.”</span> <em>Journal
+of Mathematical Biology</em> 32 (4): 303–28.
+</div>
+<div id="ref-heraldGeneralModelInflammation2010" class="csl-entry"
+role="doc-biblioentry">
+Herald, Meagan C. 2010. <span>“General Model of Inflammation.”</span>
+<em>Bulletin of Mathematical Biology</em> 72 (4): 765–79. <a
+href="https://doi.org/10.1007/s11538-009-9468-9">https://doi.org/10.1007/s11538-009-9468-9</a>.
+</div>
+<div id="ref-donofrioGeneralFrameworkModeling2005" class="csl-entry"
+role="doc-biblioentry">
+Onofrio, Alberto d’. 2005. <span>“A General Framework for Modeling
+Tumor-Immune System Competition and Immunotherapy: Mathematical Analysis
+and Biomedical Inferences.”</span> <em>Physica D. Nonlinear
+Phenomena</em> 208 (3-4): 220–35. <a
+href="https://doi.org/10.1016/j.physd.2005.06.032">https://doi.org/10.1016/j.physd.2005.06.032</a>.
+</div>
+<div id="ref-witelskiMethodsMathematicalModelling2015" class="csl-entry"
+role="doc-biblioentry">
+Witelski, Thomas, and Mark Bowen. 2015. <em>Methods of Mathematical
+Modelling</em>. <span>Springer</span>.
+</div>
+</div>
 <!--radix_placeholder_article_footer-->
 <!--/radix_placeholder_article_footer-->
 </div>
@@ -2199,6 +2971,15 @@ class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"><
 <div class="d-appendix">
 </div>
 
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
 
 <!--radix_placeholder_site_after_body-->
 <!--/radix_placeholder_site_after_body-->

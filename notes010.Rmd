@@ -41,13 +41,370 @@ After reading this section of notes, you should
 
 Mathematical models relate various physical quantities through the variables and parameters involved in expressing the model equations. As you probably know well by now, physical quantities are measured in some set of associated units. For example, you may measure the length of an object or the distance traveled in units of feet. Notice that length is the basic physical quantity that is being measured while feet is the chosen set of units.  However, units of feet is not the only valid option, another choice would be to use units of meters (or metres).  Furthermore, sometimes it is convenient to work in a certain set of units. For example, you will often see physicists choose units such that the [speed of light](https://en.wikipedia.org/wiki/Speed_of_light) or [Plank's constant](https://en.wikipedia.org/wiki/Planck_constant) is equal to one. The point is that you are always free to choose the units you work in, but you must make certain that the units balance out in any mathematical expressions that involved physical quantities. You cannot make a mathematical statement that would imply something like a quantity with units corresponding to a length is equal to a quantity with units corresponding to a mass. Additionally, you cannot add (or subtract) two quantities that do not have the same units. It doesn't make sense to add three feet to six minutes. 
 
-[Dimensional analysis](https://en.wikipedia.org/wiki/Dimensional_analysis) involves a systematic analysis of the relationships between the fundamental physical quantities and units of model variables and parameters in order to insure consistency of units. A dimensional analysis often leads to a choice of unit scaling that can help the mathematical modeler to better understand the significance of model parameters or to reduce the number of significant model parameters via the process of [nondimensionalization](https://en.wikipedia.org/wiki/Nondimensionalization#:~:text=Nondimensionalization%20is%20the%20partial%20or,closely%20related%20to%20dimensional%20analysis.). This is important when, for example, studying the bifurcation behavior of a dynamical model as the value of one or more parameters is varied. Non-dimensionalization should be considered a basic and essential step as part of carrying out the basic biomathematical workflow. The moment you encouter or write down a mathematical model, the next thing you should do is conduct a dimensional analysis and then nondimensionalize the model equations.   
+[Dimensional analysis](https://en.wikipedia.org/wiki/Dimensional_analysis) involves a systematic analysis of the relationships between the fundamental physical quantities and units of model variables and parameters in order to insure consistency of units. A dimensional analysis often leads to a choice of unit scaling that can help the mathematical modeler to better understand the significance of model parameters or to reduce the number of significant model parameters via the process of [non-dimensionalization](https://en.wikipedia.org/wiki/Nondimensionalization#:~:text=Nondimensionalization%20is%20the%20partial%20or,closely%20related%20to%20dimensional%20analysis.). This is important when, for example, studying the bifurcation behavior of a dynamical model as the value of one or more parameters is varied. Non-dimensionalization should be considered a basic and essential step as part of carrying out the basic biomathematical workflow. The moment you encouter or write down a mathematical model, the next thing you should do is conduct a dimensional analysis and then non-dimensionalize the model equations.   
 
-Before we discuss dimensional analysis and nondimensionalization in detail, there are two important topics we need to cover. 
+Before we discuss dimensional analysis and non-dimensionalization in detail, there are two important topics we need to cover. 
 
-1) Unit dimensions and derived units. These concepts make clear the disctinction between fundamental quantities and the units used to measure them.   
+1) Unit dimensions and derived units. These concepts make clear the distinction between fundamental quantities and the units used to measure them.   
 
 2) The "arithmetic" of unit dimensions. 
 
 These ideas together make dimensional analysis and non-dimensionalization relatively straightforward. 
+
+# Unit Dimensions, Derived Units, and the Arithmetic of Units
+
+**Unit dimensions** are basic physical quantities that can be measured. Figure \@ref(fig:tab1) lists the fundamental unit dimensions of some primary quantities along with the notation we use to denote them, and their corresponding [SI units](https://en.wikipedia.org/wiki/International_System_of_Units). 
+
+```{r tab1, echo=FALSE, fig.cap="Fundamental Unit Dimensions of Primary Quantities.", fig.height=1}
+knitr::include_graphics("./Figures/si_units.png")
+```
+
+Of course, SI units are not the only choice of units. The point is that mass, length, etc. are the quantities being measured. Furthermore, mass, length, etc. are fundamental in the sense that they can not be viewed as being made up of more basic quantities. On the other hand, the quantities listed in Figure \@ref(fig:tab2) are said to be **derived** because they can be viewed as being made up of more basic quantities. For example, velocity has derived dimensions of $\frac{\text{length}}{{\text{time}}}$. In order to simplify the language a bit, we will often say the dimensions of velocity are $\frac{\text{length}}{{\text{time}}}$, read "length per time." 
+
+```{r tab2, echo=FALSE, fig.cap="Examples of Derived Units.", fig.width=2}
+knitr::include_graphics("./Figures/physical_quantities.png")
+```
+
+**Notation:** If $x$ is a quantity, we let $[x]$ denote the corresponding dimensions for $x$. For example, if $v$ represents a velocity, then $[v]=\frac{L}{T}$.  
+
+Observe that a pure numbers (one that does not correspond to a physical measurement) like $6$, $0.12$, or $\pi$ are unitless. This is because pure numbers are fixed and do not depend on a choice of units. We will say that a pure number is **nondimensional**.   
+
+## Arithmetic of Units
+
+There is a sort of "arithmetic" of unit dimensions that serves to make dimensional analysis an algebraic process. Specifically, 
+
+1) You may only add or subtract quantities with the exact same unit dimensions. 
+
+2) Multiplying a quantity by a pure number does not change the unit dimensions. We can write this in mathematical notation, suppose that $A$ is a physical quantity with unit dimensions $[A]$ and let $c$ be a pure number, then $[cA]=[A]$. 
+
+3) Dimensions multiply and divide. We can write this in mathematical notation, suppose that $A$ and $B$ are physical quantities with unit dimensions $[A]$ and $[B]$ respectively. Then, 
+
+    a) $[AB]=[A][B]$, and 
+
+    b) $\left[\frac{A}{B}\right] = \frac{[A]}{[B]}$. 
+
+4) Quantities on both sides of an equality (or inequality for that matter) must have the same unit dimensions. You can not compare or equate quantities with different units. 
+
+Properties 1), 2), and 4) are straightforward. We will illustrate property 3) with some examples. Suppose that $\alpha$ is a rate parameter that has unit dimensions $[\alpha]=T^{-1}$, and suppose that $x$ is a physical quantity with $[x]=L$, what will be the unit dimensions for $\alpha x$? We know that 
+
+$[\alpha x] = [\alpha][x] = T^{-1}L = \frac{L}{T}$
+
+so $[\alpha x]=\frac{L}{T}$ which are the same unit dimensions as velocity (or speed). As another example, suppose that $A$ and $B$ are quantities with $[A]=\frac{ML}{T^2}$ and $[B]=\frac{L^2T}{M}$ What are the unit dimensions of $\frac{A}{B}$? We know that 
+
+$$
+\begin{align}
+\left[\frac{A}{B} \right] &= \frac{[A]}{[B]} \\
+&= \frac{\frac{ML}{T^2}}{\frac{L^2 T}{M}}\\
+&= \frac{ML}{T^2}\frac{M}{L^2 T} \\
+&= \frac{M^2}{L T^3}
+\end{align}
+$$
+
+Thus, $\left[\frac{A}{B} \right]=\frac{M^2}{L T^3}$. Observe how some units "cancel" when there are reciprocals present. 
+
+Note that we do not necessarily need to know the specific unit dimensions of a quantity in order to manipulate its unit dimensions. For example, suppose that $P$ is some physical quantity. The regardless of the specifics of $[P]$ we can determine that the unit dimensions of $P^3$ are $[P]^3$. These types of manipulations will often come in handy.   
+
+## The Unit Dimensions of Derivatives
+
+Since we work a lot with differential equations, let's take a moment to consider the unit dimensions of the derivative of a function. Consider a generic function $y=f(x)$, where the variables $x$ and $y$ correspond to physical quantities with unit dimensions $[x]$ and $[y]$ respectively. By definition, 
+
+$f'(x) = \frac{dy}{dx} = \lim_{h\rightarrow 0}\frac{f(x+h) - f(x)}{h}$. 
+
+Since we can only add quantities with the same unit dimensions, we must have that $[h]=[x]$. Similarly, we must have that $[f(x+h)]=[f(x)] = [y]$ and hence $[f(x+h) - f(x)] = [y]$. Therefore, for any particular value of $h$, we must have
+
+$\left[\frac{f(x+h) - f(x)}{h}\right] = \frac{[f(x+h) - f(x)]}{[h]}=\frac{[y]}{[x]}$
+
+Since the last equation is true for any value of $h$, it must also hold in the limit so that 
+
+$\left[f'(x) \right] = \left[\frac{dy}{dx} \right] = \left[\lim_{h\rightarrow 0}\frac{f(x+h) - f(x)}{h} \right] = \frac{[y]}{[x]}$
+
+As a specific example, suppose that we have a function $y(t)$, where $[y]=L$ and $[t]=T$, then $\left[\frac{dy}{dt}\right]=\frac{L}{T}$. Does this remind of anything? If $y(t)$, where $[y]=L$ and $[t]=T$ then we can think of $y(t)$ as an expression for the position as a function of time, the derivative of such a function is the instantaneous rate of change with respect to time, also known as velocity.   
+
+**Exercise:** Suppose that we have a function $y(t)$, where $[y]=L$ and $[t]=T$. What are the unit dimensions for $\frac{d^2y}{dt^2}$? In general, if $y=f(x)$ is a function, what would be $[f''(x)]$?
+
+# Dimensional Analysis
+
+Suppose that we have an expression $y = at^2 + bt + c$ and we know that $[y]=L$ and $[t]=T$. We can use the known facts that $[y]=L$ and $[t]=T$ in order to determine the unit dimensions for all of the parameters (coefficients) in the equation $y = at^2 + bt + c$. By the fourth rule for our arithmetic of unit dimensions, we must have that $[y] = [at^2 + bt + c]$ and by the first rule we must have that $[at^2]=[bt]=[c]$. Putting the last two observations together tells us that
+
+\begin{align}
+L &= [y] = [at^2] = [a]T^2\\
+L &= [y] = [bt] = [b]T   \\
+L &= [y] = [c]
+\end{align}
+
+Thus, 
+
+  * the third equation implies that $[c]=L$, 
+  
+  * the second equation implies that $[b]=\frac{L}{T}$, and
+  
+  * the first equation implies that $[a]=\frac{L}{T^2}$.
+  
+ We have just illustrated the process of **dimensional analysis**.  Even if we don't know the specific details of the unit dimensions in an equation, we can still use dimensional analysis to determine the relationship between unit dimensions of variables and parameters in an equation. For example, consider the differential equation
+ 
+ $\frac{dy}{dx} = \alpha y$
+ 
+ We know that $\left[ \frac{dy}{dx}\right] = \frac{[y]}{[x]}$, therefore we must have $[\alpha y] = \frac{[y]}{[x]}$. Since $[\alpha y] = [\alpha][y]$ our unit dimension arithmetic implies that 
+ 
+ $[\alpha][y] = \frac{[y]}{[x]}\ \ \Rightarrow [\alpha]=\frac{1}{[x]}$
+ 
+ You should make sure that you understand what we have just done because these types of manipulations and reasoning with abstract unit dimensions is something we will do frequently. Moreover, it occurs often in the reserach literature, sometimes even without specific mention.  
+ 
+ Let's look at one more example for now. Recall the logistic growth model
+ 
+ $\frac{dN}{dt} = rN\left(1-\frac{N}{K}\right)$
+ 
+ Since we know that $t$ represents time it should be clear that $[t]=T$. Now $N$ is the size of the population (or sometimes population density). Rather than thinking about specific unit dimensions for $N$, let's just work with its unit dimensions abstractly by using our notation $[N]$. By the development so far, we have 
+ 
+ $\left[\frac{dN}{dt}\right] = \frac{[N]}{T}$
+ 
+ which forces
+ 
+ $\left[rN\left(1-\frac{N}{K}\right) \right] = \frac{[N]}{T}$
+ 
+ Now 1 is a pure number and you can not add or subtract a quantity with units from a pure number. This means that in order for the expression $1-\frac{N}{K}$ to be valid, $\frac{N}{K}$ must be dimensionless, and the only way that can happen is if $[K]=[N]$. Furthermore, since $1-\frac{N}{K}$ is dimensionless, we must have
+ 
+ $\left[rN\left(1-\frac{N}{K}\right) \right] = \left[rN\right] = [r][N]=\frac{[N]}{T}$
+ 
+ Therefore, $[r] = \frac{1}{T}$
+ 
+ In summary, for the equation
+ 
+ $\frac{dN}{dt} = rN\left(1-\frac{N}{K}\right)$
+ 
+ we must have $[K]=[N]$ and $[r]=\frac{1}{T}$. We will make use of these observations in the next section on non-dimensionalization. 
+ 
+# Non-dimensionalization 
+
+The goal of non-dimensionalization is to rescale the variables in an equation so that all of the variables and parameters become dimensionless. There are typically two general steps in the non-dimensionalization process:
+ 
+ 1) Rescale all of the variables in the model equation(s) to make them dimensionless by making a change of variables that relates the dimensionless variables to the original variables and parameters. 
+ 
+ 2) Substitute the change of variables into the original model equations to find an analogous equation for the rescaled dimensionless variables. This will usually reduce the number of parameters in the model equation(s). 
+ 
+ We will start with a simple example. Consider again the equation
+ 
+ $y = at^2 + bt + c$
+ 
+ where $[y]=L$ and $[t]=T$. Recall that this forces $[a]=\frac{L}{T^2}$, $[b]=\frac{L}{T}$, and $[c]=L$.  Now define the change of variables
+ 
+ $\xi = \frac{y}{c},\ \ \tau = \frac{b}{c}t$
+ 
+Let's confirm that $\xi$ and $\tau$ are dimensionless, which is the point of the exercise to render variables dimensionless. (We will come back and discuss this particular choice of scaling but note that in general there isn't necessarily a unique choice.) Notice
+
+$[\xi] = \left[\frac{y}{c}\right] = \frac{[y]}{[c]}=\frac{[y]}{[y]}$
+
+and
+
+$[\tau]=\left[ \frac{b}{c}t\right]=\frac{[b]}{[c]}[t]=\frac{\frac{L}{T}}{L}T = \frac{[L][T]}{[L][T]}$
+
+so all units cancel in both $[\xi]$ and $[\tau]$ which means each of $\xi$ and $\tau$ is dimensionless. This completes step 1) of the non-dimensionalization process.  For step 2) notice that 
+
+$y=c\xi = at^2 + bt + c = a\left(\frac{c}{b}\tau\right)^2+b\left(\frac{c}{b}\tau\right)+c$
+
+so 
+
+$c\xi=a\frac{c^2}{b^2}\tau^2+c\tau+c$
+
+or equivalently
+
+$\xi = \frac{ac}{b^2}\tau^2 + \tau + 1$
+
+We leave it as an exercise for the reader to show that $\gamma = \frac{ac}{b^2}$ is a dimensionless quantity. We say that $y = at^2 + bt + c$ has been *non-dimensionalized* to $\xi = \gamma \tau^2 + \tau + 1$, where $\gamma = \frac{ac}{b^2}$. Notice that the process is fully invertible so the two equations
+
+$y = at^2 + bt + c$
+
+and
+
+$\xi = \gamma \tau^2 + \tau + 1$
+
+are mathematically equivalent up to a change of units. The benefit of non-dimensionalizing is that $\xi = \gamma \tau^2 + \tau + 1$ does not depend on any particular choice of units and we have identified that the significance of the parameters is encapsulated in the ration $\frac{ac}{b^2}$. (Think about why this is true, a hint is to refer to the quadratic formula.) 
+
+**Question:** Is $\xi = \frac{y}{c}$, $\tau = \frac{b}{c}t$ the only valid choice of scaling in order to non-dimensionalize $y = at^2 + bt + c$? The answer is no, in the homework you will be asked to verify that $\xi = \frac{x}{c}$ and $\tau=\frac{a}{b}t$ is also a valid change of variables that can be used to nondimensionalize the equation $y = at^2 + bt + c$. 
+
+Let's non-dimensionalize a differential equation. Consider again the logistic growth model
+
+$\frac{dN}{dt} = rN\left(1 - \frac{N}{K}\right)$
+
+We've already determined that $[K]=[N]$ and $[r]=\frac{1}{T}$. Let's define
+
+$\xi = \frac{N}{K}, \ \ \tau = r t$.
+
+It's easy to see that $\xi$ and $\tau$ are dimensionless. It should be obvious that $\xi$ is dimensionless, to see that $\tau$ is as well notice that 
+
+$[\tau] = [rt] = [r][t]=\frac{1}{T}T$
+
+and the units cancel. This completes step 1) of the non-dimensionalization process. To complete step 2) we need to find a differential equation that is satisfied by $\xi(\tau)$. Let's proceed by computing the derivative $\frac{d\xi}{d\tau}$ of $\xi$ with respect to $\tau$. As you will see, the trick is to use the [chain rule](https://en.wikipedia.org/wiki/Chain_rule).
+
+\begin{align*}
+\frac{d\xi}{d\tau} &= \frac{d\xi}{dt}\frac{dt}{d\tau} \\
+&= \frac{d}{dt}\frac{N}{K}\frac{dt}{d\tau} \\
+&= \frac{1}{K}\frac{dN}{dt}\frac{dt}{d\tau} \\
+&= \frac{1}{K}\frac{dN}{dt}\frac{1}{r} \\
+&= \frac{1}{rK}\frac{dN}{dt} \\
+&= \frac{1}{rK}rN\left(1 - \frac{N}{K}\right) \\
+&= \frac{N}{K}\left(1 - \frac{N}{K}\right) \\
+&= \xi(1-\xi)
+\end{align*}
+
+Thus, $\frac{d\xi}{d\tau}=\xi(1-\xi)$ is the non-dimensionalization of $\frac{dN}{dt} = rN\left(1 - \frac{N}{K}\right)$. 
+
+We can think of $\xi=\frac{N}{K}$ as the proportion of the population relative to the carrying capacity. Thus, our dimensionless equation $\frac{d\xi}{d\tau}=\xi(1-\xi)$ *normalizes* the population relative to the carrying capacity. The relation $\tau = r t$ establishes the time-scale of the model and the non-dimensionalization essentially tells us that the population will always reach the maximum proportion (1) of the carrying capacity on the same time-scale regardless of the exact values of $r$ and $K$. This is because the rate parameter $r$ is eliminated from the equation as a result of non-dimensionalization. 
+
+Note that for the logistic growth model there is really only one choice of rescaling for non-dimensionalization. This is an exception and not typical. In fact, the more parameters involved in a model, the more choices there will usually be for rescaling as part of non-dimensionalization. However, it is always possible to choose some (not necessarily unique) scaling that non-dimensionalizes a model and results in at most the same number of parameters (and usually fewer) as the original model. This isn't just some observation or rule or thumb it is in fact a rigorous mathematical theorem known as the [Buckingham $\pi$ theorem](https://en.wikipedia.org/wiki/Buckingham_%CF%80_theorem). We will discuss the Buckingham $\pi$ theorem soon. First, let's examine the non-dimensionalization process for a system of differential equations. 
+
+## Dimensional Analysis and Function Inputs
+
+For functions such as $f(x)=e^x$, $f(x)=\ln(x)$, $f(x)=\sin(x)$, and $f(x)=\cos(x)$ the input value $x$ must be unitless. Why is this the case? Let's consider $f(x)=e^x$ for example. From calculus II, we know that we can express  $f(x)=e^x$ as a convergent infinite power series:
+
+$f(x) = e^x = 1 + x + \frac{x^2}{2!} + \frac{x^3}{3!} + \cdots$
+
+Now each of the terms $1$, $x$, $\frac{x^2}{2!}$, etc. must have the same unit dimensions otherwise they could not be added together. Furthermore, since $1$ is a pure number this implies that all of the terms in the series must be unitless and thus $x$ in particular must be unitless. Similar reasoning leads us to conclude that the other functions  $f(x)=\ln(x)$, $f(x)=\sin(x)$, and $f(x)=\cos(x)$ can only take pure numbers as inputs. 
+
+Sometimes you will see functions like $y(t) = \sin(t)$ where the variable $t$ is interpreted as time but this is incorrect based on what we have just discussed. If you want the independent variable in a function like $f(x)=e^x$ or $f(x)=\sin(x)$ to be a physical quantity, they you must include a parameter with appropriate unit dimensions. For example, it is okay to use $y(t) = \sin(at)$ and have $[t]=T$ as long as $[a]=\frac{1}{T}$ so that $at$ taken as the input is unitless. 
+
+**Question:** What does dimensional analysis suggest about the unit dimensions for the output of a function like $f(x)=e^x$, $f(x)=\ln(x)$, $f(x)=\sin(x)$, or $f(x)=\cos(x)$?
+
+It is a common mistake to use a function to model some process without taking care to make sure that the input(s) or output(s) are unitless, or at least has the appropriate unit dimensions, watch out for this in the literature and don't make the mistake yourself. 
+
+## Application of Non-dimensionalization to the SIR Model 
+
+Recall the SIR model for the spread of an infectious disease:
+
+\begin{align}
+\frac{dS}{dt} &= -\beta SI, \\
+\frac{dI}{dt} &= \beta SI - \gamma I, \\
+\frac{dR}{dt} &= \gamma I. 
+\end{align}
+
+Remember that $S$, $I$, and $R$ denote the population of  susceptible, infected, and recovered individuals, respectively; and $\beta$ is the rate of infection of susceptible individuals per number of infected and $\gamma$ is the recovery rate. Additionally, remember that we observed that $S+I+R=N$, where $N$ is the constant total population. By dimensional analysis, we must have
+
+1) $[S]=[I]=[R]=[N]$, 
+
+2) $[t]=T$ (since $t$ represents time), 
+
+3) $[\beta]=\frac{1}{[N]T}$, and
+
+4) $[\gamma]=\frac{1}{T}$.
+
+Next, let 
+
+$x=\frac{S}{N},\ \ y=\frac{I}{N},\ \ z=\frac{R}{N}, \ \ \tau=\gamma t$
+
+and let's use these rescalings to non-dimensionalize the SIR model equations. You should take a moment to convince yourself that $x$, $y$, $z$, and $\tau$ are each dimensionless. Applying the chain rule we have
+
+$$
+\begin{align}
+\frac{dx}{d\tau} &= \frac{dx}{dt}\frac{dt}{d\tau} \\
+&= \frac{d}{dt}\frac{S}{N}\frac{dt}{d\tau} \\
+&= \frac{1}{N}\frac{dS}{dt}\frac{1}{\gamma} \\
+&= \frac{1}{\gamma N}\left(-\beta SI \right) \\
+&= -\frac{\beta}{\gamma N}\left(xNyN \right) \\
+&= -\frac{\beta N}{\gamma} xy
+\end{align}
+$$
+
+$$
+\begin{align}
+\frac{dy}{d\tau} &= \frac{dy}{dt}\frac{dt}{d\tau} \\
+&= \frac{d}{dt}\frac{I}{N}\frac{dt}{d\tau} \\
+&= \frac{1}{N}\frac{dI}{dt}\frac{1}{\gamma} \\
+&= \frac{1}{\gamma N}\left(\beta SI - \gamma I \right) \\
+&= \frac{1}{\gamma N}\left(\beta xN yN - \gamma zN \right) \\
+&= \frac{\beta N}{\gamma}xy - z
+\end{align}
+$$
+
+$$
+\begin{align}
+\frac{dz}{d\tau} &= \frac{dz}{dt}\frac{dt}{d\tau} \\
+&= \frac{d}{dt}\frac{R}{N}\frac{dt}{d\tau} \\
+&= \frac{1}{N}\frac{dR}{dt}\frac{1}{\gamma} \\
+&= \frac{1}{\gamma N}\left( \gamma I\right) \\
+&= \frac{1}{\gamma N}\left(\gamma zN \right) \\
+&= z
+\end{align}
+$$
+
+Therefore, 
+
+\begin{align*}
+\frac{dx}{d\tau}&= -R_{0}xy \\
+\frac{dy}{d\tau}&= R_{0}xy - z \\
+\frac{dz}{d\tau}&= z
+\end{align*}
+
+is the non-dimensionalization of the SIR model equations, where $R_{0}=\frac{\beta N}{\gamma}$ (pronounced R naught or R zero) is a dimensionless quantity called the **basic reproductive ratio**. Observe that $R_{0}$ is the ratio of the per-capita infection rate and the per-capita recovery rate. We will see later that the magnitude of $R_{0}$ determines whether the termination of the spread of the infection "occurs only when no susceptible individuals are left, or whether the interplay of the various factors of infectivity, recovery and mortality, may result in termination, whilst many susceptible individuals are still present in the unaffected population." Specifically, if 
+
+1) $R_{0} < 1$, then susceptible individuals are predicted to still be present in the unaffected population, while if
+
+2) $R_{0} > 1$, then termination of the spread of the infection is predicted to occur only when no susceptible individuals are left.
+
+We will prove points 1) and 2) later after we have discussed phase-plane methods. Notice that dimensional analysis and non-dimensionalization have lead is to the conclusion that it is the ratio $\frac{\beta N}{\gamma}$ that is important. 
+
+## Generic Rescaling
+
+How do you choose an appropriate rescaling for the non-dimensionalization process? The answer is that it depends on the situation. For example, in a model there may be some parameters that have well-established values say from experiment or the literature. In such a case, you may want to use known parameter values to set the rescaling. In other cases, you might want to set a particular time-scale in which case that would play a role in your choice of rescaling. Another approach is to start with a generic rescaling and then proceed with the non-dimensionalization with the specific relationship between the model variables and parameters to be determined after non-dimensionalizing. Let's look at some examples of this idea. 
+
+Reconsider the equation $y=at^2+bt+c$. Assume that $[y]=L$ and $[t]=T$. Let $\tilde{L}$ and $\tilde{T}$ denote some characteristic length and time, respectively. Now set
+
+$\xi = \frac{y}{\tilde{L}}, \ \ \tau = \frac{t}{\tilde{T}}$
+
+Notice that $\xi$ and $\tau$ are dimensionless because we have defined $\tilde{L}$ and $\tilde{T}$ to gave the same unit dimesions as $y$ and $t$, respectively. Next, substitute $y=\tilde{L}\xi$ and $t=\tilde{T}\tau$ into $y=at^2+bt+c$. We get
+
+$\tilde{L}\xi = a(\tilde{T}\tau)^2+b(\tilde{T}\tau)+c$
+
+or equivalently
+
+$\xi = \frac{a\tilde{T}^2}{\tilde{L}}\tau^2+\frac{b\tilde{T}}{\tilde{L}}\tau+\frac{c}{\tilde{L}}$
+
+We can see that there are multiple choices for $\tilde{L}$ and $\tilde{T}$ that can be made in order to non-dimensionalize $y=at^2+bt+c$. For example, suppose we want to  work in units such that the constant term in $\xi = \frac{a\tilde{T}^2}{\tilde{L}}\tau^2+\frac{b\tilde{T}}{\tilde{L}}\tau+\frac{c}{\tilde{L}}$ is $1$. Choosing $\tilde{L} = c$ will accomplish that, giving
+
+$\xi = \frac{a\tilde{T}^2}{c}\tau^2+\frac{b\tilde{T}}{c}\tau+\frac{c}{c}=\frac{a\tilde{T}^2}{c}\tau^2+\frac{b\tilde{T}}{c}\tau+1$
+
+but now we still need to choose an expression for $\tilde{T}$ in terms of the original parameters. We see that one option is $\tilde{T} = \frac{c}{b}$, giving
+
+$\xi = \frac{a\left(\frac{c}{b}\right)^2}{c}\tau^2+\frac{b\frac{c}{b}}{c}\tau+1=\frac{ac}{b^2}\tau^2+\tau+1$
+
+which is the same non-dimesionalization we obtained before. Non-dimensionalization using a generic rescaling works similarly for differential equations and we will see some examples of this in the future. While dimensional analysis and non-dimesionalization may seem to be a bit of a nuisance or even unnecessary, we can not over emphasize how important these techniques are in mathematical modeling. 
+
+## Buckingham $\pi$
+
+The Buckingham $\pi$ theorem is a theoretical result and is not typically used directly in non-dimensionalizing a problem. However, it places dimensional analysis on a firm theoretical foundation so we take the time to describe the result here. Before stating the theorem we need to establish some terminology and notation which we will illustrate in the context of our reoccurring example $y=at^2+bt+c$. For this problem, there are
+
+* 5 **physical quantities** $q_{1}=y$, $q_{2}=t$, $q_{3}=a$, $q_{4}=b$, and $q_{5}=c$; and 
+
+* 2 **relevant dimensions** $d_{1}=L$ and $d_{2}=T$. 
+
+Furthermore, the nondimesionalization of $y=at^2+bt+c$ to $\xi = \gamma \tau^2 + \tau + 1$, where $\gamma=\frac{ac}{b^2}$ via the scaling 
+
+$\xi = \frac{y}{c},\ \ \tau = \frac{b}{c}t$
+
+we end up with 3 dimensionless **$\Pi$-numbers** (also called *dimensionless groups*) $\Pi_1=\xi$, $\Pi_2=\tau$, and $\Pi_3=\gamma$. Notice that each $\Pi$-number is expressed as a product of (rational number) powers of the original physical quantities. Specifically, 
+
+\begin{align*}
+\Pi_1&= \xi = yc^{-1}, \\
+\Pi_2&= \tau = tbc^{-1}, \\
+\Pi_3&= \gamma = acb^{-2}
+\end{align*}
+
+Finally, observe that 
+
+$\text{number of $\Pi$-numbers} = \text{number of physical quantities} - \text{number of relevant dimensions}$
+
+What the Buckingham $pi$ theorem proves is that the relationship between $\Pi$-numbers, physical quantities, and relevant dimensions is a general phenomenon. Furthermore, this relationship between $\Pi$-numbers, physical quantities, and relevant dimensions does not depend on the particular scaling used for nondimensionalization.  In fact, 
+
+**Buckingham $\pi$** If a physical problem is described by $n$ variables and parameters with every variable or parameter expressed in terms of $r$ independent relevant dimensions, then the number of different $\Pi$-numbers is at most $n-r$. 
+
+The practical consequence of the Buckingham $\pi$ theorem is that we can predict by how much non-dimensionalization will simplify the expression of a model in terms of how many non-dimensional variables or parameters will remain after non-dimensionalizing. The astute reader with a good background in linear algebra may feel a sense of familiarity in the statement of the Buckingham $\pi$ theorem, in particular regarding the resemblance of the identity
+
+$\text{number of $\Pi$-numbers} = \text{number of physical quantities} - \text{number of relevant dimensions}$
+
+with the identity in the [rank-nullity theorem](https://en.wikipedia.org/wiki/Rank%E2%80%93nullity_theorem). In fact, the Buckingham $\pi$ theorem is a consequence of the rank-nullity theorem. For the linear algebra based proof of Buckingham $\pi$, see Chapter 4 of [@calvettiComputationalMathematicalModeling2013]. 
+
+# Further Reading 
+
+Both of the texts [@calvettiComputationalMathematicalModeling2013; @witelskiMethodsMathematicalModelling2015] cover dimensional analysis in detail including the Buckingham $\pi$ theorem. 
+
+An excellent exercise is to attempt to reproduce the nondimensionalization found in research articles. As a first try, see if you can follow or work out on your own the nondimensionalization from one of the following papers: [@donofrioGeneralFrameworkModeling2005; @edelstein-keshetSimpleModelsTrailfollowing1994; @heraldGeneralModelInflammation2010]. 
 
