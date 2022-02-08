@@ -53,16 +53,30 @@ These ideas together make dimensional analysis and non-dimensionalization relati
 
 # Unit Dimensions, Derived Units, and the Arithmetic of Units
 
-**Unit dimensions** are basic physical quantities that can be measured. Figure \@ref(fig:tab1) lists the fundamental unit dimensions of some primary quantities along with the notation we use to denote them, and their corresponding [SI units](https://en.wikipedia.org/wiki/International_System_of_Units). 
+**Unit dimensions** are basic physical quantities that can be measured. Table \@ref(tab:tab1) lists the fundamental unit dimensions of some primary quantities along with the notation we use to denote them, and their corresponding [SI units](https://en.wikipedia.org/wiki/International_System_of_Units). 
 
-```{r tab1, echo=FALSE, fig.cap="Fundamental Unit Dimensions of Primary Quantities.", fig.height=1}
-knitr::include_graphics("./Figures/si_units.png")
+```{r,echo=FALSE}
+df1 <- tibble(`Unit Dimension`=c("mass, $M$","length, $L$","time, $T$","temperature, $\\Theta$","amount of a substance, $A$"),
+             `SI Unit`=c("kilogram, kg","metre, m","second, s","Kelvin, K", "mole, mol"))
 ```
 
-Of course, SI units are not the only choice of units. The point is that mass, length, etc. are the quantities being measured. Furthermore, mass, length, etc. are fundamental in the sense that they can not be viewed as being made up of more basic quantities. On the other hand, the quantities listed in Figure \@ref(fig:tab2) are said to be **derived** because they can be viewed as being made up of more basic quantities. For example, velocity has derived dimensions of $\frac{\text{length}}{{\text{time}}}$. In order to simplify the language a bit, we will often say the dimensions of velocity are $\frac{\text{length}}{{\text{time}}}$, read "length per time." 
+```{r tab1,echo=FALSE}
+kbl(df1, booktabs=TRUE, align = "c",caption = 'Fundamental Unit Dimensions of Primary Quantities', escape = FALSE) %>%
+kable_styling(latex_options = "striped",position = "center")
+```
 
-```{r tab2, echo=FALSE, fig.cap="Examples of Derived Units.", fig.width=2}
-knitr::include_graphics("./Figures/physical_quantities.png")
+
+Of course, SI units are not the only choice of units. The point is that mass, length, etc. are the quantities being measured. Furthermore, mass, length, etc. are fundamental in the sense that they can not be viewed as being made up of more basic quantities. On the other hand, the quantities listed in table \@ref(tab:tab2) are said to be **derived** because they can be viewed as being made up of more basic quantities. For example, velocity has derived dimensions of $\frac{\text{length}}{{\text{time}}}$. In order to simplify the language a bit, we will often say the dimensions of velocity are $\frac{\text{length}}{{\text{time}}}$, read "length per time." 
+
+```{r,echo=FALSE}
+df2 <- tibble(`Physical Quantity`=c("density, $\\rho$","velocity, $v$","acceleration, $a$","force, $F$", "pressure, $p$", "energy, $E$"),
+             `Derived Dimensions`=c("$\\frac{M}{L^3}$","$\\frac{L}{T}$","$\\frac{L}{T^2}$","$\\frac{ML}{T^2}$","$\\frac{M}{LT^2}$","$\\frac{ML^2}{T^2}$"),
+             `SI Units`=c("kg $\\text{m}^{-3}$","m $\\text{s}^{-1}$","m $\\text{s}^{-2}$","Newtons N $=$ kg m $\\text{s}^{-2}$","Pascal Pa $=$ kg $\\text{m}^{-1}$ $\\text{s}^{-2}$","Joule J $=$ kg $\\text{m}^2$ $\\text{s}^{-2}$"))
+```
+
+```{r tab2,echo=FALSE}
+kbl(df2, booktabs=TRUE, align = "c",caption = 'Examples of Derived Units', escape = FALSE) %>%
+kable_styling(latex_options = "striped",position = "center")
 ```
 
 **Notation:** If $x$ is a quantity, we let $[x]$ denote the corresponding dimensions for $x$. For example, if $v$ represents a velocity, then $[v]=\frac{L}{T}$.  
