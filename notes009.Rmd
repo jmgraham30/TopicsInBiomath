@@ -55,13 +55,16 @@ $$
 
 for the rates of change in the concentrations of the relevant chemical species. 
 
-In this section, we want to explain in more detail the process of translating a set of chemical reactions into differential equations that will form (perhaps just part of) a mathematical model. Specifically, this section spells out the law of mass action and some of its applications in more detail. We note that this section sets up a sort of template for some modeling approaches that are common in the field of [systems biology](https://en.wikipedia.org/wiki/Systems_biology). Excellent mathematical treatments of system biology may be found in the online lecture notes of [Sontag](https://www.math.rutgers.edu/docman-lister/math-main/academics/undergraduate/interdisciplinary-majors/biomathematics-interdisciplinary-major/2198-lecture-notes-on-mathematical-systems-biology/file) or [Ingalls](https://www.math.uwaterloo.ca/~bingalls/MMSB/Notes.pdf). 
+In this section, we want to explain in more detail the process of translating a set of chemical reactions into differential equations that will form (perhaps just part of) a mathematical model. Specifically, this section spells out the law of mass action and some of its applications in more detail. 
+
+We note that this section sets up a sort of template for some modeling approaches that are common in the field of [systems biology](https://en.wikipedia.org/wiki/Systems_biology). Excellent mathematical treatments of systems biology may be found in the online lecture notes of [Sontag](https://www.math.rutgers.edu/docman-lister/math-main/academics/undergraduate/interdisciplinary-majors/biomathematics-interdisciplinary-major/2198-lecture-notes-on-mathematical-systems-biology/file) or [Ingalls](https://www.math.uwaterloo.ca/~bingalls/MMSB/Notes.pdf). 
 
 # Chemical Reaction Kinetics
 
 The law of mass action is:
 
 > Reaction rates are proportional to products of concentrations.
+
 The law of mass action assumes conditions that include constant temperature. Furthermore, if the medium is not "well-mixed" or if there are only a small number of molecules involved then mass-action kinetics may not be accurate. 
 
 This section describes how to apply the law of mass action to derive rate equations for a few common simple reactions that have the general form
