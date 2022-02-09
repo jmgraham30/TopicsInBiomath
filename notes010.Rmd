@@ -66,7 +66,7 @@ kable_styling(latex_options = "striped",position = "center")
 ```
 
 
-Of course, SI units are not the only choice of units. The point is that mass, length, etc. are the quantities being measured. Furthermore, mass, length, etc. are fundamental in the sense that they can not be viewed as being made up of more basic quantities. On the other hand, the quantities listed in table \@ref(tab:tab2) are said to be **derived** because they can be viewed as being made up of more basic quantities. For example, velocity has derived dimensions of $\frac{\text{length}}{{\text{time}}}$. In order to simplify the language a bit, we will often say the dimensions of velocity are $\frac{\text{length}}{{\text{time}}}$, read "length per time." 
+Of course, SI units are not the only choice of units. The point is that mass, length, etc. are the quantities being measured. Furthermore, mass, length, etc. are fundamental in the sense that they cannot be viewed as being made up of more basic quantities. On the other hand, the quantities listed in table \@ref(tab:tab2) are said to be **derived** because they can be viewed as being made up of more basic quantities. For example, velocity has derived dimensions of $\frac{\text{length}}{{\text{time}}}$. In order to simplify the language a bit, we will often say the dimensions of velocity are $\frac{\text{length}}{{\text{time}}}$, read "length per time." 
 
 ```{r,echo=FALSE}
 df2 <- tibble(`Physical Quantity`=c("density, $\\rho$","velocity, $v$","acceleration, $a$","force, $F$", "pressure, $p$", "energy, $E$"),
@@ -81,7 +81,7 @@ kable_styling(latex_options = "striped",position = "center")
 
 **Notation:** If $x$ is a quantity, we let $[x]$ denote the corresponding dimensions for $x$. For example, if $v$ represents a velocity, then $[v]=\frac{L}{T}$.  
 
-Observe that a pure numbers (one that does not correspond to a physical measurement) like $6$, $0.12$, or $\pi$ are unitless. This is because pure numbers are fixed and do not depend on a choice of units. We will say that a pure number is **nondimensional**.   
+Observe that pure numbers (one that does not correspond to a physical measurement) like $6$, $0.12$, or $\pi$ are unitless. This is because pure numbers are fixed and do not depend on a choice of units. We will say that a pure number is **non-dimensional**.   
 
 ## Arithmetic of Units
 
@@ -97,7 +97,7 @@ There is a sort of "arithmetic" of unit dimensions that serves to make dimension
 
     b) $\left[\frac{A}{B}\right] = \frac{[A]}{[B]}$. 
 
-4) Quantities on both sides of an equality (or inequality for that matter) must have the same unit dimensions. You can not compare or equate quantities with different units. 
+4) Quantities on both sides of an equality (or inequality for that matter) must have the same unit dimensions. You cannot compare or equate quantities with different units. 
 
 Properties 1), 2), and 4) are straightforward. We will illustrate property 3) with some examples. Suppose that $\alpha$ is a rate parameter that has unit dimensions $[\alpha]=T^{-1}$, and suppose that $x$ is a physical quantity with $[x]=L$, what will be the unit dimensions for $\alpha x$? We know that 
 
@@ -134,7 +134,7 @@ $\left[f'(x) \right] = \left[\frac{dy}{dx} \right] = \left[\lim_{h\rightarrow 0}
 
 As a specific example, suppose that we have a function $y(t)$, where $[y]=L$ and $[t]=T$, then $\left[\frac{dy}{dt}\right]=\frac{L}{T}$. Does this remind of anything? If $y(t)$, where $[y]=L$ and $[t]=T$ then we can think of $y(t)$ as an expression for the position as a function of time, the derivative of such a function is the instantaneous rate of change with respect to time, also known as velocity.   
 
-**Exercise:** Suppose that we have a function $y(t)$, where $[y]=L$ and $[t]=T$. What are the unit dimensions for $\frac{d^2y}{dt^2}$? In general, if $y=f(x)$ is a function, what would be $[f''(x)]$?
+**Exercise:** Suppose that we have a function $y(t)$, where $[y]=L$ and $[t]=T$. What are the unit dimensions for $\frac{d^2y}{dt^2}$? In general, if $y=f(x)$ is a function, what would be $[f^{(n)}(x)]$?
 
 # Dimensional Analysis
 
@@ -232,7 +232,7 @@ and
 
 $\xi = \gamma \tau^2 + \tau + 1$
 
-are mathematically equivalent up to a change of units. The benefit of non-dimensionalizing is that $\xi = \gamma \tau^2 + \tau + 1$ does not depend on any particular choice of units and we have identified that the significance of the parameters is encapsulated in the ration $\frac{ac}{b^2}$. (Think about why this is true, a hint is to refer to the quadratic formula.) 
+are mathematically equivalent, all we have done is made a change of units. The benefit of non-dimensionalizing is that the expression $\xi = \gamma \tau^2 + \tau + 1$ has fewer parameters, and we have identified that the significance of the parameters is encapsulated in the ratio $\frac{ac}{b^2}$. (Think about why this is true, a hint is to refer to the quadratic formula.) 
 
 **Question:** Is $\xi = \frac{y}{c}$, $\tau = \frac{b}{c}t$ the only valid choice of scaling in order to non-dimensionalize $y = at^2 + bt + c$? The answer is no, in the homework you will be asked to verify that $\xi = \frac{x}{c}$ and $\tau=\frac{a}{b}t$ is also a valid change of variables that can be used to nondimensionalize the equation $y = at^2 + bt + c$. 
 
@@ -248,7 +248,7 @@ It's easy to see that $\xi$ and $\tau$ are dimensionless. It should be obvious t
 
 $[\tau] = [rt] = [r][t]=\frac{1}{T}T$
 
-and the units cancel. This completes step 1) of the non-dimensionalization process. To complete step 2) we need to find a differential equation that is satisfied by $\xi(\tau)$. Let's proceed by computing the derivative $\frac{d\xi}{d\tau}$ of $\xi$ with respect to $\tau$. As you will see, the trick is to use the [chain rule](https://en.wikipedia.org/wiki/Chain_rule).
+and the units cancel. This completes step 1) of the non-dimensionalization process. To complete step 2) we need to find a differential equation that is satisfied by $\xi(\tau)$. Let's proceed by computing the derivative $\frac{d\xi}{d\tau}$ of $\xi$ with respect to $\tau$. As you will see, the technique is to use the [chain rule](https://en.wikipedia.org/wiki/Chain_rule).
 
 \begin{align*}
 \frac{d\xi}{d\tau} &= \frac{d\xi}{dt}\frac{dt}{d\tau} \\
@@ -265,11 +265,11 @@ Thus, $\frac{d\xi}{d\tau}=\xi(1-\xi)$ is the non-dimensionalization of $\frac{dN
 
 We can think of $\xi=\frac{N}{K}$ as the proportion of the population relative to the carrying capacity. Thus, our dimensionless equation $\frac{d\xi}{d\tau}=\xi(1-\xi)$ *normalizes* the population relative to the carrying capacity. The relation $\tau = r t$ establishes the time-scale of the model and the non-dimensionalization essentially tells us that the population will always reach the maximum proportion (1) of the carrying capacity on the same time-scale regardless of the exact values of $r$ and $K$. This is because the rate parameter $r$ is eliminated from the equation as a result of non-dimensionalization. 
 
-Note that for the logistic growth model there is really only one choice of rescaling for non-dimensionalization. This is an exception and not typical. In fact, the more parameters involved in a model, the more choices there will usually be for rescaling as part of non-dimensionalization. However, it is always possible to choose some (not necessarily unique) scaling that non-dimensionalizes a model and results in at most the same number of parameters (and usually fewer) as the original model. This isn't just some observation or rule or thumb it is in fact a rigorous mathematical theorem known as the [Buckingham $\pi$ theorem](https://en.wikipedia.org/wiki/Buckingham_%CF%80_theorem). We will discuss the Buckingham $\pi$ theorem soon. First, let's examine the non-dimensionalization process for a system of differential equations. 
+Note that for the logistic growth model there is really only one choice of rescaling for non-dimensionalization. This is an exception and not typical. In fact, the more parameters involved in a model, the more choices there will usually be for rescaling as part of non-dimensionalization. However, it is always possible to choose some (not necessarily unique) scaling that non-dimensionalizes a model and results in at most the same number of parameters (and usually fewer) as the original model. This isn't just some observation or rule or thumb it is in fact a rigorous mathematical theorem known as the [Buckingham $\pi$ theorem](https://en.wikipedia.org/wiki/Buckingham_%CF%80_theorem). We will discuss the Buckingham $\pi$ theorem soon. 
 
 ## Dimensional Analysis and Function Inputs
 
-For functions such as $f(x)=e^x$, $f(x)=\ln(x)$, $f(x)=\sin(x)$, and $f(x)=\cos(x)$ the input value $x$ must be unitless. Why is this the case? Let's consider $f(x)=e^x$ for example. From calculus II, we know that we can express  $f(x)=e^x$ as a convergent infinite power series:
+For functions such as $f(x)=e^x$, $f(x)=\ln(x)$, $f(x)=\sin(x)$, and $f(x)=\cos(x)$ the input value $x$ must be unitless. Why is this the case? Let's consider $f(x)=e^x$ for example. From calculus II, we know that we can express  $f(x)=e^x$ as a convergent power series:
 
 $f(x) = e^x = 1 + x + \frac{x^2}{2!} + \frac{x^3}{3!} + \cdots$
 
@@ -348,23 +348,25 @@ Therefore,
 \frac{dz}{d\tau}&= z
 \end{align*}
 
-is the non-dimensionalization of the SIR model equations, where $R_{0}=\frac{\beta N}{\gamma}$ (pronounced R naught or R zero) is a dimensionless quantity called the **basic reproductive ratio**. Observe that $R_{0}$ is the ratio of the per-capita infection rate and the per-capita recovery rate. We will see later that the magnitude of $R_{0}$ determines whether the termination of the spread of the infection "occurs only when no susceptible individuals are left, or whether the interplay of the various factors of infectivity, recovery and mortality, may result in termination, whilst many susceptible individuals are still present in the unaffected population." Specifically, if 
+where $R_{0}=\frac{\beta N}{\gamma}$, is the non-dimensionalization of the SIR model equations. The number $R_{0}$  (pronounced R naught or R zero) is a dimensionless quantity called the **basic reproductive ratio**. Observe that $R_{0}$ is the ratio of the per-capita infection rate and the per-capita recovery rate. We will see later that the magnitude of $R_{0}$ determines whether the termination of the spread of the infection "occurs only when no susceptible individuals are left, or whether the interplay of the various factors of infectivity, recovery and mortality, may result in termination, whilst many susceptible individuals are still present in the unaffected population." Specifically, if 
 
 1) $R_{0} < 1$, then susceptible individuals are predicted to still be present in the unaffected population, while if
 
 2) $R_{0} > 1$, then termination of the spread of the infection is predicted to occur only when no susceptible individuals are left.
 
-We will prove points 1) and 2) later after we have discussed phase-plane methods. Notice that dimensional analysis and non-dimensionalization have lead is to the conclusion that it is the ratio $\frac{\beta N}{\gamma}$ that is important. 
+We will prove points 1) and 2) later after we have discussed phase-plane methods. Notice that dimensional analysis and non-dimensionalization have lead us to the conclusion that it is the ratio $\frac{\beta N}{\gamma}$ that is important. 
 
 ## Generic Rescaling
 
-How do you choose an appropriate rescaling for the non-dimensionalization process? The answer is that it depends on the situation. For example, in a model there may be some parameters that have well-established values say from experiment or the literature. In such a case, you may want to use known parameter values to set the rescaling. In other cases, you might want to set a particular time-scale in which case that would play a role in your choice of rescaling. Another approach is to start with a generic rescaling and then proceed with the non-dimensionalization with the specific relationship between the model variables and parameters to be determined after non-dimensionalizing. Let's look at some examples of this idea. 
+How do you choose an appropriate rescaling for the non-dimensionalization process? The answer is that it depends on the situation. For example, in a model there may be some parameters that have well-established values say from experiment or the literature. In such a case, you may want to use known parameter values to set the rescaling. In other cases, you might want to set a particular time-scale in which case that would play a role in your choice of rescaling. 
+
+Another approach is to start with a generic rescaling and then proceed with the non-dimensionalization with the specific relationship between the model variables and parameters to be determined after non-dimensionalizing. Let's look at some examples of this idea. 
 
 Reconsider the equation $y=at^2+bt+c$. Assume that $[y]=L$ and $[t]=T$. Let $\tilde{L}$ and $\tilde{T}$ denote some characteristic length and time, respectively. Now set
 
 $\xi = \frac{y}{\tilde{L}}, \ \ \tau = \frac{t}{\tilde{T}}$
 
-Notice that $\xi$ and $\tau$ are dimensionless because we have defined $\tilde{L}$ and $\tilde{T}$ to gave the same unit dimesions as $y$ and $t$, respectively. Next, substitute $y=\tilde{L}\xi$ and $t=\tilde{T}\tau$ into $y=at^2+bt+c$. We get
+Notice that $\xi$ and $\tau$ are dimensionless because we have defined $\tilde{L}$ and $\tilde{T}$ to have the same unit dimesions as $y$ and $t$, respectively. Next, substitute $y=\tilde{L}\xi$ and $t=\tilde{T}\tau$ into $y=at^2+bt+c$. We get
 
 $\tilde{L}\xi = a(\tilde{T}\tau)^2+b(\tilde{T}\tau)+c$
 
@@ -380,7 +382,9 @@ but now we still need to choose an expression for $\tilde{T}$ in terms of the or
 
 $\xi = \frac{a\left(\frac{c}{b}\right)^2}{c}\tau^2+\frac{b\frac{c}{b}}{c}\tau+1=\frac{ac}{b^2}\tau^2+\tau+1$
 
-which is the same non-dimesionalization we obtained before. Non-dimensionalization using a generic rescaling works similarly for differential equations and we will see some examples of this in the future. While dimensional analysis and non-dimesionalization may seem to be a bit of a nuisance or even unnecessary, we can not over emphasize how important these techniques are in mathematical modeling. 
+which is the same non-dimesionalization we obtained before. 
+
+Non-dimensionalization using a generic rescaling works similarly for differential equations and we will see some examples of this in the future. While dimensional analysis and non-dimesionalization may seem to be a bit of a nuisance or even unnecessary, we can not over emphasize how important these techniques are in mathematical modeling. 
 
 ## Buckingham $\pi$
 
@@ -406,7 +410,7 @@ Finally, observe that
 
 $\text{number of $\Pi$-numbers} = \text{number of physical quantities} - \text{number of relevant dimensions}$
 
-What the Buckingham $pi$ theorem proves is that the relationship between $\Pi$-numbers, physical quantities, and relevant dimensions is a general phenomenon. Furthermore, this relationship between $\Pi$-numbers, physical quantities, and relevant dimensions does not depend on the particular scaling used for nondimensionalization.  In fact, 
+What the Buckingham $\pi$ theorem proves is that the relationship between $\Pi$-numbers, physical quantities, and relevant dimensions is a general phenomenon. Furthermore, this relationship between $\Pi$-numbers, physical quantities, and relevant dimensions does not depend on the particular scaling used for non-dimensionalization.  In fact, 
 
 **Buckingham $\pi$** If a physical problem is described by $n$ variables and parameters with every variable or parameter expressed in terms of $r$ independent relevant dimensions, then the number of different $\Pi$-numbers is at most $n-r$. 
 
@@ -420,5 +424,5 @@ with the identity in the [rank-nullity theorem](https://en.wikipedia.org/wiki/Ra
 
 Both of the texts [@calvettiComputationalMathematicalModeling2013; @witelskiMethodsMathematicalModelling2015] cover dimensional analysis in detail including the Buckingham $\pi$ theorem. 
 
-An excellent exercise is to attempt to reproduce the nondimensionalization found in research articles. As a first try, see if you can follow or work out on your own the nondimensionalization from one of the following papers: [@donofrioGeneralFrameworkModeling2005; @edelstein-keshetSimpleModelsTrailfollowing1994; @heraldGeneralModelInflammation2010]. 
+An excellent exercise is to attempt to reproduce the non-dimensionalization found in research articles. As a first try, see if you can follow or work out on your own the non-dimensionalization from one of the following papers: [@donofrioGeneralFrameworkModeling2005; @edelstein-keshetSimpleModelsTrailfollowing1994; @heraldGeneralModelInflammation2010]. 
 
