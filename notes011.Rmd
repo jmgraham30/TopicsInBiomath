@@ -140,12 +140,12 @@ This is summarized graphically in Figure \@ref(fig:tracedetplane):
 This figure is linked from [Pruffle](http://pruffle.mit.edu/3.016-2005/Lecture_25_web/node2.html).
 </aside>
 
-```{r tracedetplane, echo=FALSE,fig.cap="Trace-determinant plane classification of two-dimensional linear systems. Image from [Pruffle](http://pruffle.mit.edu/3.016-2005/Lecture_25_web/node2.html)."}
-knitr::include_graphics("http://pruffle.mit.edu/3.016-2005/figures/phase-plane-regions.png")
+```{r tracedetplane, echo=FALSE, layout="l-body-outset", fig.width=2, fig.height=2, fig.cap="Trace-determinant plane classification of two-dimensional linear systems. Image from [Pruffle](http://pruffle.mit.edu/3.016-2005/Lecture_25_web/node2.html)."}
+knitr::include_graphics("./Figures/phase-plane-regions.png")
 ```
 
 
-Thus, the values of the trace $\tau$ and determinant $\delta$ completely specify the qualitative behavior of the dynamics for a two-dimensional linear system. Let us examine some examples. In each case, we use R to compute the trace, determinant, and eigenvalues of the $2\times 2$ martix; and we use `phaseR` to plot the corresponding phase portrait. 
+Thus, the values of the trace $\tau$ and determinant $\delta$ completely specify the qualitative behavior of the dynamics for a two-dimensional linear system. Let us examine some examples. In each case, we use R to compute the trace, determinant, and eigenvalues of the $2\times 2$ matrix; and we use `phaseR` to plot the corresponding phase portrait. 
 
 ## Examples
 
