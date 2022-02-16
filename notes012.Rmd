@@ -87,4 +87,136 @@ $$
 \end{align*}
 $$
 
-has two equilibria, $(0,0)$ and $(4,\frac{3}{2})$.   
+has two equilibria, $(0,0)$ and $(4,\frac{3}{2})$.  
+
+If $(x^{\ast},y^{\ast})$ is an equilibrium point for a two-dimensional nonlinear autonomous system, then we call the matrix
+
+$$
+J_{(x^{\ast},y^{\ast})} = \left(\begin{array}{cc} f_{x}(x^{\ast},y^{\ast}) & f_{y}(x^{\ast},y^{\ast}) \\ g_{x}(x^{\ast},y^{\ast}) & g_{y}(x^{\ast},y^{\ast}) \end{array} \right)
+$$
+
+**the linearization** of the system at the equilibrium $(x^{\ast},y^{\ast})$. It turns out that in some cases, the linearization can be used to determine the stability of the equilibrium $(x^{\ast},y^{\ast})$. Specifically, if the eigenvalues of $J_{(x^{\ast},y^{\ast})}$ have **nonzero real part**, then near the equilibrium, the system behaves exactly as the corresponding linear system $\frac{d}{dt}{\bf x}= J_{(x^{\ast},y^{\ast})}{\bf x}$ behaves. This is a result known as the [Hartman-Grobman](https://en.wikipedia.org/wiki/Hartman%E2%80%93Grobman_theorem) theorem.
+
+Consider again the example system
+
+$$
+\begin{align*}
+\frac{dx}{dt} &= 2x - 3xy \\
+\frac{dy}{dt} &= xy - 4y
+\end{align*}
+$$
+
+which possesses equilibria $(0,0)$ and $(4,\frac{3}{2})$. Then 
+
+$$
+J(0,0) = \left(\begin{array}{cc} 2 & 0 \\ 0 & -4 \end{array} \right), \ \ \ J(4,\frac{3}{2}) = \left(\begin{array}{cc} 0 & -12 \\ \frac{3}{2} & 0 \end{array} \right)
+$$
+For the linearization $J(0,0)$, the eigenvalues are $2$ and $-4$. Thus, we conclude that there is a saddle at $(0,0)$. On the other hand, the eigenvalues of $J(4,\frac{3}{2})$ are $\pm i 3\sqrt{2}$ which have zero real part and thus are pure imaginary. The Hartman-Grobman theorem does no apply and does not allow us to conclude  the dynamics near $(4,\frac{3}{2})$.
+
+## Phase-Portaits
+
+It is possible to study two-dimensional autonomous systems geometrically analogous to what we did with one-dimesional autonomous systems. But in this case, we draw a phase-plane instead of a phase-line. To understand this, first note that a solution to the system 
+
+$$
+\begin{align*}
+\frac{dx}{dt} &= f(x,y) \\
+\frac{dy}{dt} &= g(x,y)
+\end{align*}
+$$
+with initial condition $(x_{0},y_{0})$ will be a parametric curve in the plane passing through the point $(x_{0},y_{0})$. We refer to such as curve as a **trajectory** of the system, The right hand side of the system determines a vector field and these vectors are tangent to trajectories. Thus, if we plot the vector field, then we can see all of the trajectories by following vectors tangentially. 
+
+For example, the following plot shows the vector field for
+
+$$
+\begin{align*}
+\frac{dx}{dt} &= 2x - 3xy \\
+\frac{dy}{dt} &= xy - 4y
+\end{align*}
+$$
+```{r vfieldexamp,echo=TRUE,code_folding=TRUE}
+nonlinear_example <- function(t,state,parameters){
+  with(as.list(c(state,parameters)),{
+    
+    dx <- 2*state[1] - 3*state[1]*state[2]
+    dy <- state[1]*state[2] - 4*state[2]
+    
+    list(c(dx,dy))
+  })
+}
+
+nonlinear_flowfield  <- flowField(nonlinear_example,
+                                       xlim       = c(-0.5, 4.5),
+                                       ylim       = c(-0.5, 3),
+                                       parameters = NULL,
+                                       points     = 17,
+                                       add = FALSE)
+```
+
+It is easy to see that there is a saddle point at $(0,0)$. Furthermore, from the vector field it appears that there are rotations around $(4,\frac{3}{2})$ which suggests either a sprial or perhaps a nonlinear center. We will explore this further soon. First, reacll that if 
+$$
+\begin{align*}
+\frac{dx}{dt} &= f(x,y) \\
+\frac{dy}{dt} &= g(x,y)
+\end{align*}
+$$
+
+is a nonlinear system, the setting each component of the vector field to zero determines curves. Thus there are $f(x,y)=0$ curves and $g(x,y)=0$ curves. Such curves are called **nullclines**. This is due to the fact that along a $f(x,y)=0$ curve, we have that $\frac{dx}{dt}=0$ and hence there is no change in the $x$ direction. On the other hand, along  a $g(x,y)=0$ curve, we have that $\frac{dy}{dt}=0$ and hence there is no change in the $y$ direction. Note that equilibria points are exactly intersectoin points of distinct nullclines. The following plot shows the nullclines for the example system
+
+$$
+\begin{align*}
+\frac{dx}{dt} &= 2x - 3xy \\
+\frac{dy}{dt} &= xy - 4y
+\end{align*}
+$$
+
+```{r examplenulls,echo=TRUE,code_folding=TRUE,warning=FALSE,message=FALSE}
+nonlinear_flowfield  <- flowField(nonlinear_example,
+                                       xlim       = c(-0.5, 4.5),
+                                       ylim       = c(-0.5, 3),
+                                       parameters = NULL,
+                                       points     = 17,
+                                       add = FALSE)
+nonlinear_nullclines  <- nullclines(nonlinear_example,
+                                       xlim       = c(-0.5, 4.5),
+                                       ylim       = c(-0.5, 3),
+                                       points=100,add.legend=FALSE)
+eq1 <- findEquilibrium(nonlinear_example, y0 = c(0,0),
+  plot.it = TRUE,summary=FALSE)
+eq2 <- findEquilibrium(nonlinear_example, y0 = c(4,3/2),
+  plot.it = TRUE,summary=FALSE)
+```
+
+We can see the equilibrium points at the intersection of distinct nullclines. Let's plot several trajectories to obtain a phase-portrait. 
+
+```{r pplane,echo=TRUE,code_folding=TRUE}
+nonlinear_flowfield  <- flowField(nonlinear_example,
+                                       xlim       = c(-0.5, 4.5),
+                                       ylim       = c(-0.5, 3),
+                                       parameters = NULL,
+                                       points     = 17,
+                                       add = FALSE)
+nonlinear_nullclines  <- nullclines(nonlinear_example,
+                                       xlim       = c(-0.5, 4.5),
+                                       ylim       = c(-0.5, 3),
+                                       points=100,add.legend=FALSE)
+eq1 <- findEquilibrium(nonlinear_example, y0 = c(0,0),
+  plot.it = TRUE,summary=FALSE)
+eq2 <- findEquilibrium(nonlinear_example, y0 = c(4,3/2),
+  plot.it = TRUE,summary=FALSE)
+state <- matrix(c(0.2,0.2,0.5,0.5,0,3,0,-1,0.01,0,-0.01,0,4,1.25),7,2,byrow = TRUE)
+nonlinear_trajs <- trajectory(nonlinear_example,
+                                        y0         = state,
+                                        tlim       = c(0, 10),
+                                        parameters = NULL,add=TRUE)
+```
+
+Notice that this system has trajectories that are closed curves in the plane. Thus, this system possesses periodic solutions. To confirm this, let's plot the time-series for one of the trajectories that appears to correspond to a periodic solution. Namely, let's plot the solution corresponding to initical condition $(4,1.25)$.
+
+```{r, echo=TRUE,code_folding=TRUE}
+num_sol <- numericalSolution(nonlinear_example,y0=c(4,1.25),tlim=c(0,10))
+```
+
+
+We will return to the topic of periodic solutions to nonlinear systems later. For now, note that linearization cannot typically be used to detect the existence of periodic solutions. 
+
+## A Gallery of Two-Dimensional Systems
