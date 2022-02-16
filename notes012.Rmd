@@ -1,0 +1,90 @@
+---
+title: "Course Notes 12"
+description: |
+  Review of nonlinear systems. 
+author:
+  - name: Jason M. Graham 
+    url: https://topicsinbiomath.netlify.app/
+    affiliation: University of Scranton 
+    affiliation_url: https://sites.google.com/site/jasonmgrahamus/
+date: "`r Sys.Date()`"
+output: 
+  distill::distill_article:
+    toc: true
+    toc_depth: 2
+creative_commons: CC BY-NC
+bibliography: topics_in_biomath.bib
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+library(knitr)
+library(kableExtra)
+library(deSolve)
+library(tidyverse)
+library(ggformula)
+library(patchwork)
+library(phaseR)
+library(latex2exp)
+theme_set(theme_light())
+```
+
+
+
+# Goals
+
+After reading this section of notes, you should
+
+1) be able to conduct a linear stability analysis for a nonlinear autonomous system, 
+
+2) know how to use `phaseR` to obtain phase-portraits for two-dimensional nonlinear systems, and
+
+3) know how to compute numerical solutions for initial value problems for nonlinear systems using `deSolve`.
+
+
+# Background
+
+Previously, we have reviewed mathematical techniques for the analysis of one-dimensional autonomous systems and linear systems. In this section, we consider the analogous techniques for nonlinear autonomous systems of the form
+
+$$
+\frac{d}{dt}{\bf x} = {\bf F}({\bf x})
+$$
+
+where ${\bf x} \in \mathbb{R}^n$ and ${\bf F}:\mathbb{R}^n \rightarrow \mathbb{R}^n$. Such a system is sometimes called a **nonlinear vector field**. 
+
+We have already encountered some nonlinear autonomous systems as mathematical models. For example, the predator-prey model, SIR model, and chemostat model are all nonlinear autonomous systems. 
+
+## Equilibria for Nonlinear Systems
+
+If $\frac{d}{dt}{\bf x} = {\bf F}({\bf x})$ is a nonlinear autonomous system, then we say that a vector ${\bf x}^{\ast}$ is an **equilibrium** if it satisfies ${\bf F}({\bf x}^{\ast}) = {\bf 0}$. A typical problem is to determine the stability properties of equilibria for nonlinear systems. In general this can be a difficult problem. However, in some cases when can use linearization to say something about the stability of equilibria. We begin by reviewing this technique in the two-dimensional case. 
+
+# Two-Dimensional Case
+
+We can write a two-dimensional nonlinear autonomous system as
+
+$$
+\begin{align*}
+\frac{dx}{dt} &= f(x,y) \\
+\frac{dy}{dt} &= g(x,y)
+\end{align*}
+$$
+
+Then an equilibrium is a point $(x^{\ast},y^{\ast})$ satisfying the simultaneous system
+
+$$
+\begin{align*}
+f(x^{\ast},y^{\ast}) &= 0 \\
+g(x^{\ast},y^{\ast}) &= 0 
+\end{align*}
+$$
+
+For example, the system
+
+$$
+\begin{align*}
+\frac{dx}{dt} &= 2x - 3xy \\
+\frac{dy}{dt} &= xy - 4y
+\end{align*}
+$$
+
+has two equilibria, $(0,0)$ and $(4,\frac{3}{2})$.   

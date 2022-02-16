@@ -184,6 +184,20 @@
       "last_modified": "2022-02-11T15:03:47-05:00"
     },
     {
+      "path": "notes012.html",
+      "title": "Course Notes 12",
+      "description": "Review of nonlinear systems. \n",
+      "author": [
+        {
+          "name": "Jason M. Graham",
+          "url": "https://topicsinbiomath.netlify.app/"
+        }
+      ],
+      "date": "`r Sys.Date()`",
+      "contents": "\n\nContents\nGoals\nBackground\nEquilibria for Nonlinear\nSystems\n\nTwo-Dimensional Case\n\nGoals\nAfter reading this section of notes, you should\nbe able to conduct a linear stability analysis for a nonlinear\nautonomous system,\nknow how to use phaseR to obtain phase-portraits for\ntwo-dimensional nonlinear systems, and\nknow how to compute numerical solutions for initial value\nproblems for nonlinear systems using deSolve.\nBackground\nPreviously, we have reviewed mathematical techniques for the analysis\nof one-dimensional autonomous systems and linear systems. In this\nsection, we consider the analogous techniques for nonlinear autonomous\nsystems of the form\n\\[\n\\frac{d}{dt}{\\bf x} = {\\bf F}({\\bf x})\n\\]\nwhere \\({\\bf x} \\in \\mathbb{R}^n\\)\nand \\({\\bf F}:\\mathbb{R}^n \\rightarrow\n\\mathbb{R}^n\\). Such a system is sometimes called a\nnonlinear vector field.\nWe have already encountered some nonlinear autonomous systems as\nmathematical models. For example, the predator-prey model, SIR model,\nand chemostat model are all nonlinear autonomous systems.\nEquilibria for Nonlinear\nSystems\nIf \\(\\frac{d}{dt}{\\bf x} = {\\bf F}({\\bf\nx})\\) is a nonlinear autonomous system, then we say that a vector\n\\({\\bf x}^{\\ast}\\) is an\nequilibrium if it satisfies \\({\\bf F}({\\bf x}^{\\ast}) = {\\bf 0}\\). A\ntypical problem is to determine the stability properties of equilibria\nfor nonlinear systems. In general this can be a difficult problem.\nHowever, in some cases when can use linearization to say something about\nthe stability of equilibria. We begin by reviewing this technique in the\ntwo-dimensional case.\nTwo-Dimensional Case\nWe can write a two-dimensional nonlinear autonomous system as\n\\[\n\\begin{align*}\n\\frac{dx}{dt} &= f(x,y) \\\\\n\\frac{dy}{dt} &= g(x,y)\n\\end{align*}\n\\]\nThen an equilibrium is a point \\((x^{\\ast},y^{\\ast})\\) satisfying the\nsimultaneous system\n\\[\n\\begin{align*}\nf(x^{\\ast},y^{\\ast}) &= 0 \\\\\ng(x^{\\ast},y^{\\ast}) &= 0\n\\end{align*}\n\\]\nFor example, the system\n\\[\n\\begin{align*}\n\\frac{dx}{dt} &= 2x - 3xy \\\\\n\\frac{dy}{dt} &= xy - 4y\n\\end{align*}\n\\]\nhas equilibria \\((0,0)\\) and \\((4,\\frac{3}{2})\\).\n\n\n\n",
+      "last_modified": "2022-02-16T10:34:38-05:00"
+    },
+    {
       "path": "r_for_biomath.html",
       "title": "R for Biomathematics",
       "description": "An Introduction to R for Biomathematics\n",
