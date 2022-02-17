@@ -356,10 +356,97 @@ nonlinear_trajs <- trajectory(gallery_example_3,
 
 # Higher Dimensional Systems
 
-As the dimension of a nonlinear system increases so does the difficulty in analyzing the equilibria and their stability properties. Once the dimension is three or greater, geometric analysis is very difficult to impossible. Thus, in *Topics in Biomathematics* we will resign ourselves to handling large nonlinear systems with numerical computing using the  `deSolve` package.      
+As the dimension of a nonlinear system increases so does the difficulty in analyzing the equilibria and their stability properties. Once the dimension is three or greater, geometric analysis ranges from very difficult to impossible. Thus, in *Topics in Biomathematics* we will resign ourselves to handling larger nonlinear systems with numerical computing using the  `deSolve` package. We illustrate this with an example. 
 
 
+## Hodgkin-Huxley Model 
+
+Neuronal dynamics is concerned with the dynamical behavior of components of the nervous system and forms the basis for computational neuroscience. The starting point for this field of research is the [Hodgkin-Huxley](https://en.wikipedia.org/wiki/Hodgkin%E2%80%93Huxley_model) model for the neuron action potential. We will discuss this model in detail later. For now, we write down the equations mostly to note that the model is made up of a system of four nonlinear differential equations:
+
+$$
+\begin{align*}
+C \frac{d}{dt}v &= g_{\text{na}} m^3 h (v_{\text{na}} - v) + g_{\text{k}} n^4 (v_{\text{k}} - v) + g_{\text{l}} (v_{\text{l}} - v) + i_{\text{ext}} \\
+\frac{d}{dt}h &= \frac{h_{\text{inf}} - h}{\tau_{h}} \\
+\frac{d}{dt}m &= \frac{m_{\text{inf}} - m}{\tau_{m}} \\
+\frac{d}{dt}n &= \frac{n_{\text{inf}} - n}{\tau_{n}} 
+\end{align*}
+$$
+The first equation is the equation for the neuron action potential and the other equations are called gating variables. The gating variables relate to probabilities for various ions (electrically charged molecules) to pass through the neuronal cell membrane. Here, we solve these equations numerically just to illustrate how this can be done with `deSolve`.  
+
+```{r hh,echo=TRUE,code_folding=TRUE}
+source("./R/gatingVariables.R")
+
+# parameters
+parameters <- list(C=1,gk=36,gna=120,gl=0.3,vk=-82,vna=45,vl=-59,iext=10)
+
+# initial conditions
+v0 <- -50
+m0 <- alpha_m(v0)/(alpha_m(v0)+beta_m(v0));
+
+yini <- c(v=v0, h=1, m=m0, n=0.4)
+
+
+t_initial <- 0
+t_final <- 75
+times <- seq(from = t_initial, to = t_final, by = 0.08)
+
+
+# define function to be in the format that `ode` uses
+HH <- function (t, y, parameters) {
+   with(as.list(c(y,parameters)),{
+    # variables
+    v <- y[1]
+    h <- y[2]
+    m <- y[3]
+    n <- y[4]
+    # functional forms
+    h_inf <- alpha_h(v)/(alpha_h(v) + beta_h(v))
+    m_inf <- alpha_m(v)/(alpha_m(v) + beta_m(v))
+    n_inf <- alpha_n(v)/(alpha_n(v) + beta_n(v))
+    
+    tau_h <- 1/(alpha_h(v) + beta_h(v))
+    tau_m <- 1/(alpha_m(v) + beta_m(v))
+    tau_n <- 1/(alpha_n(v) + beta_n(v))
+  
+    dv <- (gna*m^3*h*(vna - v) + gk*n^4*(vk - v) + gl*(vl - v) + iext)/C
+    dh <- (h_inf - h)/tau_h
+    dm <- (m_inf - m)/tau_m
+    dn <- (n_inf - n)/tau_n
+    
+    return(list(c(dv, dh, dm, dn)))
+  })
+}
+
+out <- ode(y = yini, times = times, func = HH,
+           parms = parameters,method = "ode45")
+```
+
+
+```{r hhplot,echo=TRUE,code_folding=TRUE,fig.width=12,fig.height=7}
+HHsol <- data.frame(t=out[,"time"],v=out[,"v"],h=out[,"h"],m=out[,"m"],n=out[,"n"])
+
+
+p1 <- HHsol %>%
+  ggplot(aes(x = t, y = v)) +
+  geom_line(aes(x = t, y = v),lwd=1) +
+  labs(x="time [ms]",y = "v [mV]") +
+  theme_bw() + theme(text=element_text(size=20))
+
+p2 <- HHsol %>%
+  gather(Column, Value, -t,-v) %>%
+  ggplot(aes(x = t, y = Value, color = Column)) +
+  geom_line(aes(x = t, y = Value),lwd=1) +
+  labs(x="time [ms]",y = " ") +
+  guides(color=guide_legend(title="Gating variable")) + 
+  theme_bw() + theme(text=element_text(size=20))
+
+(p1 + p2)
+```
+
+A distinct feature of the dynamics is the periodic nonlinear oscillations. We will have more to say about this later. From now on, anytime you encounter a model that is made up of large system of equations in *Topics in Biomathematics*, you should try to explore the model behavior by producing numerical solutions as we have done here with the [Hodgkin-Huxley](https://en.wikipedia.org/wiki/Hodgkin%E2%80%93Huxley_model) model.
 
 # Further Reading
 
 For more information on the dynamics of nonlinear systems, we recommend the following sources [@allenIntroductionMathematicalBiology2007], [@barnesMathematicalModellingCase2015], [@brittonEssentialMathematicalBiology2003], [@devriesCourseMathematicalBiology2006], [@edelstein-keshetMathematicalModelsBiology2005], [@hirschDifferentialEquations1974], [@jonesDifferentialEquationsMathematical2010], [@strogatzNonlinearDynamicsChaos2015]. 
+
+A good reference for the Hodgkin-Huxley model is [@borgersIntroductionModelingNeuronal2017].

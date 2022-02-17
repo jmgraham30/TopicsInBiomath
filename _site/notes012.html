@@ -135,6 +135,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   
   <meta name="citation_reference" content="citation_title=Introduction to mathematical biology;citation_publication_date=2007;citation_publisher=Pearson/Prentice Hall;citation_author=Linda J. S. Allen"/>
   <meta name="citation_reference" content="citation_title=Mathematical modelling with case studies;citation_publication_date=2015;citation_publisher=CRC Press, Boca Raton, FL;citation_author=B. Barnes;citation_author=G. R. Fulford"/>
+  <meta name="citation_reference" content="citation_title=An introduction to modeling neuronal dynamics;citation_publication_date=2017;citation_publisher=Springer, Cham;citation_volume=66;citation_doi=10.1007/978-3-319-51171-9;citation_author=Christoph Börgers"/>
   <meta name="citation_reference" content="citation_title=Essential mathematical biology;citation_publication_date=2003;citation_publisher=Springer-Verlag London, Ltd., London;citation_doi=10.1007/978-1-4471-0049-2;citation_author=Nicholas F. Britton"/>
   <meta name="citation_reference" content="citation_title=A course in mathematical biology;citation_publication_date=2006;citation_publisher=Society for Industrial and Applied Mathematics (SIAM), Philadelphia, PA;citation_volume=12;citation_doi=10.1137/1.9780898718256;citation_author=Gerda Vries;citation_author=Thomas Hillen;citation_author=Mark Lewis;citation_author=Johannes Müller;citation_author=Birgitt Schönfisch"/>
   <meta name="citation_reference" content="citation_title=Mathematical models in biology;citation_publication_date=2005;citation_publisher=Society for Industrial and Applied Mathematics (SIAM), Philadelphia, PA;citation_volume=46;citation_doi=10.1137/1.9780898719147;citation_author=Leah Edelstein-Keshet"/>
@@ -2124,6 +2125,7 @@ Notes
 <a href="notes009.html">Notes 9</a>
 <a href="notes010.html">Notes 10</a>
 <a href="notes011.html">Notes 11</a>
+<a href="notes012.html">Notes 12</a>
 </div>
 </div>
 <a href="r_for_biomath.html">R for Biomath</a>
@@ -2172,8 +2174,10 @@ Systems</a></li>
 <li><a href="#a-gallery-of-two-dimensional-systems">A Gallery of
 Two-Dimensional Systems</a></li>
 </ul></li>
-<li><a href="#higher-dimensional-systems">Higher Dimensional
-Systems</a></li>
+<li><a href="#higher-dimensional-systems">Higher Dimensional Systems</a>
+<ul>
+<li><a href="#hodgkin-huxley-model">Hodgkin-Huxley Model</a></li>
+</ul></li>
 <li><a href="#further-reading">Further Reading</a></li>
 </ul>
 </nav>
@@ -2615,10 +2619,127 @@ Show code
 <h1 id="higher-dimensional-systems">Higher Dimensional Systems</h1>
 <p>As the dimension of a nonlinear system increases so does the
 difficulty in analyzing the equilibria and their stability properties.
-Once the dimension is three or greater, geometric analysis is very
-difficult to impossible. Thus, in <em>Topics in Biomathematics</em> we
-will resign ourselves to handling large nonlinear systems with numerical
-computing using the <code>deSolve</code> package.</p>
+Once the dimension is three or greater, geometric analysis ranges from
+very difficult to impossible. Thus, in <em>Topics in Biomathematics</em>
+we will resign ourselves to handling larger nonlinear systems with
+numerical computing using the <code>deSolve</code> package. We
+illustrate this with an example.</p>
+<h2 id="hodgkin-huxley-model">Hodgkin-Huxley Model</h2>
+<p>Neuronal dynamics is concerned with the dynamical behavior of
+components of the nervous system and forms the basis for computational
+neuroscience. The starting point for this field of research is the <a
+href="https://en.wikipedia.org/wiki/Hodgkin%E2%80%93Huxley_model">Hodgkin-Huxley</a>
+model for the neuron action potential. We will discuss this model in
+detail later. For now, we write down the equations mostly to note that
+the model is made up of a system of four nonlinear differential
+equations:</p>
+<p><span class="math display">\[
+\begin{align*}
+C \frac{d}{dt}v &amp;= g_{\text{na}} m^3 h (v_{\text{na}} - v) +
+g_{\text{k}} n^4 (v_{\text{k}} - v) + g_{\text{l}} (v_{\text{l}} - v) +
+i_{\text{ext}} \\
+\frac{d}{dt}h &amp;= \frac{h_{\text{inf}} - h}{\tau_{h}} \\
+\frac{d}{dt}m &amp;= \frac{m_{\text{inf}} - m}{\tau_{m}} \\
+\frac{d}{dt}n &amp;= \frac{n_{\text{inf}} - n}{\tau_{n}}
+\end{align*}
+\]</span> The first equation is the equation for the neuron action
+potential and the other equations are called gating variables. The
+gating variables relate to probabilities for various ions (electrically
+charged molecules) to pass through the neuronal cell membrane. Here, we
+solve these equations numerically just to illustrate how this can be
+done with <code>deSolve</code>.</p>
+<div class="layout-chunk" data-layout="l-body">
+<details>
+<summary>
+Show code
+</summary>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='kw'><a href='https://rdrr.io/r/base/source.html'>source</a></span><span class='op'>(</span><span class='st'>"./R/gatingVariables.R"</span><span class='op'>)</span>
+
+<span class='co'># parameters</span>
+<span class='va'>parameters</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span>C<span class='op'>=</span><span class='fl'>1</span>,gk<span class='op'>=</span><span class='fl'>36</span>,gna<span class='op'>=</span><span class='fl'>120</span>,gl<span class='op'>=</span><span class='fl'>0.3</span>,vk<span class='op'>=</span><span class='op'>-</span><span class='fl'>82</span>,vna<span class='op'>=</span><span class='fl'>45</span>,vl<span class='op'>=</span><span class='op'>-</span><span class='fl'>59</span>,iext<span class='op'>=</span><span class='fl'>10</span><span class='op'>)</span>
+
+<span class='co'># initial conditions</span>
+<span class='va'>v0</span> <span class='op'>&lt;-</span> <span class='op'>-</span><span class='fl'>50</span>
+<span class='va'>m0</span> <span class='op'>&lt;-</span> <span class='fu'>alpha_m</span><span class='op'>(</span><span class='va'>v0</span><span class='op'>)</span><span class='op'>/</span><span class='op'>(</span><span class='fu'>alpha_m</span><span class='op'>(</span><span class='va'>v0</span><span class='op'>)</span><span class='op'>+</span><span class='fu'>beta_m</span><span class='op'>(</span><span class='va'>v0</span><span class='op'>)</span><span class='op'>)</span>;
+
+<span class='va'>yini</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span>v<span class='op'>=</span><span class='va'>v0</span>, h<span class='op'>=</span><span class='fl'>1</span>, m<span class='op'>=</span><span class='va'>m0</span>, n<span class='op'>=</span><span class='fl'>0.4</span><span class='op'>)</span>
+
+
+<span class='va'>t_initial</span> <span class='op'>&lt;-</span> <span class='fl'>0</span>
+<span class='va'>t_final</span> <span class='op'>&lt;-</span> <span class='fl'>75</span>
+<span class='va'>times</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/seq.html'>seq</a></span><span class='op'>(</span>from <span class='op'>=</span> <span class='va'>t_initial</span>, to <span class='op'>=</span> <span class='va'>t_final</span>, by <span class='op'>=</span> <span class='fl'>0.08</span><span class='op'>)</span>
+
+
+<span class='co'># define function to be in the format that `ode` uses</span>
+<span class='va'>HH</span> <span class='op'>&lt;-</span> <span class='kw'>function</span> <span class='op'>(</span><span class='va'>t</span>, <span class='va'>y</span>, <span class='va'>parameters</span><span class='op'>)</span> <span class='op'>{</span>
+   <span class='fu'><a href='https://rdrr.io/r/base/with.html'>with</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/list.html'>as.list</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='va'>y</span>,<span class='va'>parameters</span><span class='op'>)</span><span class='op'>)</span>,<span class='op'>{</span>
+    <span class='co'># variables</span>
+    <span class='va'>v</span> <span class='op'>&lt;-</span> <span class='va'>y</span><span class='op'>[</span><span class='fl'>1</span><span class='op'>]</span>
+    <span class='va'>h</span> <span class='op'>&lt;-</span> <span class='va'>y</span><span class='op'>[</span><span class='fl'>2</span><span class='op'>]</span>
+    <span class='va'>m</span> <span class='op'>&lt;-</span> <span class='va'>y</span><span class='op'>[</span><span class='fl'>3</span><span class='op'>]</span>
+    <span class='va'>n</span> <span class='op'>&lt;-</span> <span class='va'>y</span><span class='op'>[</span><span class='fl'>4</span><span class='op'>]</span>
+    <span class='co'># functional forms</span>
+    <span class='va'>h_inf</span> <span class='op'>&lt;-</span> <span class='fu'>alpha_h</span><span class='op'>(</span><span class='va'>v</span><span class='op'>)</span><span class='op'>/</span><span class='op'>(</span><span class='fu'>alpha_h</span><span class='op'>(</span><span class='va'>v</span><span class='op'>)</span> <span class='op'>+</span> <span class='fu'>beta_h</span><span class='op'>(</span><span class='va'>v</span><span class='op'>)</span><span class='op'>)</span>
+    <span class='va'>m_inf</span> <span class='op'>&lt;-</span> <span class='fu'>alpha_m</span><span class='op'>(</span><span class='va'>v</span><span class='op'>)</span><span class='op'>/</span><span class='op'>(</span><span class='fu'>alpha_m</span><span class='op'>(</span><span class='va'>v</span><span class='op'>)</span> <span class='op'>+</span> <span class='fu'>beta_m</span><span class='op'>(</span><span class='va'>v</span><span class='op'>)</span><span class='op'>)</span>
+    <span class='va'>n_inf</span> <span class='op'>&lt;-</span> <span class='fu'>alpha_n</span><span class='op'>(</span><span class='va'>v</span><span class='op'>)</span><span class='op'>/</span><span class='op'>(</span><span class='fu'>alpha_n</span><span class='op'>(</span><span class='va'>v</span><span class='op'>)</span> <span class='op'>+</span> <span class='fu'>beta_n</span><span class='op'>(</span><span class='va'>v</span><span class='op'>)</span><span class='op'>)</span>
+    
+    <span class='va'>tau_h</span> <span class='op'>&lt;-</span> <span class='fl'>1</span><span class='op'>/</span><span class='op'>(</span><span class='fu'>alpha_h</span><span class='op'>(</span><span class='va'>v</span><span class='op'>)</span> <span class='op'>+</span> <span class='fu'>beta_h</span><span class='op'>(</span><span class='va'>v</span><span class='op'>)</span><span class='op'>)</span>
+    <span class='va'>tau_m</span> <span class='op'>&lt;-</span> <span class='fl'>1</span><span class='op'>/</span><span class='op'>(</span><span class='fu'>alpha_m</span><span class='op'>(</span><span class='va'>v</span><span class='op'>)</span> <span class='op'>+</span> <span class='fu'>beta_m</span><span class='op'>(</span><span class='va'>v</span><span class='op'>)</span><span class='op'>)</span>
+    <span class='va'>tau_n</span> <span class='op'>&lt;-</span> <span class='fl'>1</span><span class='op'>/</span><span class='op'>(</span><span class='fu'>alpha_n</span><span class='op'>(</span><span class='va'>v</span><span class='op'>)</span> <span class='op'>+</span> <span class='fu'>beta_n</span><span class='op'>(</span><span class='va'>v</span><span class='op'>)</span><span class='op'>)</span>
+  
+    <span class='va'>dv</span> <span class='op'>&lt;-</span> <span class='op'>(</span><span class='va'>gna</span><span class='op'>*</span><span class='va'>m</span><span class='op'>^</span><span class='fl'>3</span><span class='op'>*</span><span class='va'>h</span><span class='op'>*</span><span class='op'>(</span><span class='va'>vna</span> <span class='op'>-</span> <span class='va'>v</span><span class='op'>)</span> <span class='op'>+</span> <span class='va'>gk</span><span class='op'>*</span><span class='va'>n</span><span class='op'>^</span><span class='fl'>4</span><span class='op'>*</span><span class='op'>(</span><span class='va'>vk</span> <span class='op'>-</span> <span class='va'>v</span><span class='op'>)</span> <span class='op'>+</span> <span class='va'>gl</span><span class='op'>*</span><span class='op'>(</span><span class='va'>vl</span> <span class='op'>-</span> <span class='va'>v</span><span class='op'>)</span> <span class='op'>+</span> <span class='va'>iext</span><span class='op'>)</span><span class='op'>/</span><span class='va'>C</span>
+    <span class='va'>dh</span> <span class='op'>&lt;-</span> <span class='op'>(</span><span class='va'>h_inf</span> <span class='op'>-</span> <span class='va'>h</span><span class='op'>)</span><span class='op'>/</span><span class='va'>tau_h</span>
+    <span class='va'>dm</span> <span class='op'>&lt;-</span> <span class='op'>(</span><span class='va'>m_inf</span> <span class='op'>-</span> <span class='va'>m</span><span class='op'>)</span><span class='op'>/</span><span class='va'>tau_m</span>
+    <span class='va'>dn</span> <span class='op'>&lt;-</span> <span class='op'>(</span><span class='va'>n_inf</span> <span class='op'>-</span> <span class='va'>n</span><span class='op'>)</span><span class='op'>/</span><span class='va'>tau_n</span>
+    
+    <span class='kw'><a href='https://rdrr.io/r/base/function.html'>return</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='va'>dv</span>, <span class='va'>dh</span>, <span class='va'>dm</span>, <span class='va'>dn</span><span class='op'>)</span><span class='op'>)</span><span class='op'>)</span>
+  <span class='op'>}</span><span class='op'>)</span>
+<span class='op'>}</span>
+
+<span class='va'>out</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/deSolve/man/ode.html'>ode</a></span><span class='op'>(</span>y <span class='op'>=</span> <span class='va'>yini</span>, times <span class='op'>=</span> <span class='va'>times</span>, func <span class='op'>=</span> <span class='va'>HH</span>,
+           parms <span class='op'>=</span> <span class='va'>parameters</span>,method <span class='op'>=</span> <span class='st'>"ode45"</span><span class='op'>)</span>
+</code></pre>
+</div>
+</details>
+</div>
+<div class="layout-chunk" data-layout="l-body">
+<details>
+<summary>
+Show code
+</summary>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>HHsol</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span><span class='op'>(</span>t<span class='op'>=</span><span class='va'>out</span><span class='op'>[</span>,<span class='st'>"time"</span><span class='op'>]</span>,v<span class='op'>=</span><span class='va'>out</span><span class='op'>[</span>,<span class='st'>"v"</span><span class='op'>]</span>,h<span class='op'>=</span><span class='va'>out</span><span class='op'>[</span>,<span class='st'>"h"</span><span class='op'>]</span>,m<span class='op'>=</span><span class='va'>out</span><span class='op'>[</span>,<span class='st'>"m"</span><span class='op'>]</span>,n<span class='op'>=</span><span class='va'>out</span><span class='op'>[</span>,<span class='st'>"n"</span><span class='op'>]</span><span class='op'>)</span>
+
+
+<span class='va'>p1</span> <span class='op'>&lt;-</span> <span class='va'>HHsol</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span>
+  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span><span class='op'>(</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span>x <span class='op'>=</span> <span class='va'>t</span>, y <span class='op'>=</span> <span class='va'>v</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_path.html'>geom_line</a></span><span class='op'>(</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span>x <span class='op'>=</span> <span class='va'>t</span>, y <span class='op'>=</span> <span class='va'>v</span><span class='op'>)</span>,lwd<span class='op'>=</span><span class='fl'>1</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/labs.html'>labs</a></span><span class='op'>(</span>x<span class='op'>=</span><span class='st'>"time [ms]"</span>,y <span class='op'>=</span> <span class='st'>"v [mV]"</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggtheme.html'>theme_bw</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>+</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/theme.html'>theme</a></span><span class='op'>(</span>text<span class='op'>=</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/element.html'>element_text</a></span><span class='op'>(</span>size<span class='op'>=</span><span class='fl'>20</span><span class='op'>)</span><span class='op'>)</span>
+
+<span class='va'>p2</span> <span class='op'>&lt;-</span> <span class='va'>HHsol</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span>
+  <span class='fu'><a href='https://tidyr.tidyverse.org/reference/gather.html'>gather</a></span><span class='op'>(</span><span class='va'>Column</span>, <span class='va'>Value</span>, <span class='op'>-</span><span class='va'>t</span>,<span class='op'>-</span><span class='va'>v</span><span class='op'>)</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span>
+  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span><span class='op'>(</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span>x <span class='op'>=</span> <span class='va'>t</span>, y <span class='op'>=</span> <span class='va'>Value</span>, color <span class='op'>=</span> <span class='va'>Column</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_path.html'>geom_line</a></span><span class='op'>(</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span>x <span class='op'>=</span> <span class='va'>t</span>, y <span class='op'>=</span> <span class='va'>Value</span><span class='op'>)</span>,lwd<span class='op'>=</span><span class='fl'>1</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/labs.html'>labs</a></span><span class='op'>(</span>x<span class='op'>=</span><span class='st'>"time [ms]"</span>,y <span class='op'>=</span> <span class='st'>" "</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/guides.html'>guides</a></span><span class='op'>(</span>color<span class='op'>=</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/guide_legend.html'>guide_legend</a></span><span class='op'>(</span>title<span class='op'>=</span><span class='st'>"Gating variable"</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span> 
+  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggtheme.html'>theme_bw</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>+</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/theme.html'>theme</a></span><span class='op'>(</span>text<span class='op'>=</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/element.html'>element_text</a></span><span class='op'>(</span>size<span class='op'>=</span><span class='fl'>20</span><span class='op'>)</span><span class='op'>)</span>
+
+<span class='op'>(</span><span class='va'>p1</span> <span class='op'>+</span> <span class='va'>p2</span><span class='op'>)</span>
+</code></pre>
+</div>
+</details>
+<p><img src="notes012_files/figure-html5/hhplot-1.png" width="1152" /></p>
+</div>
+<p>A distinct feature of the dynamics is the periodic nonlinear
+oscillations. We will have more to say about this later. From now on,
+anytime you encounter a model that is made up of large system of
+equations in <em>Topics in Biomathematics</em>, you should try to
+explore the model behavior by producing numerical solutions as we have
+done here with the <a
+href="https://en.wikipedia.org/wiki/Hodgkin%E2%80%93Huxley_model">Hodgkin-Huxley</a>
+model.</p>
 <h1 id="further-reading">Further Reading</h1>
 <p>For more information on the dynamics of nonlinear systems, we
 recommend the following sources <span class="citation"
@@ -2647,6 +2768,11 @@ role="doc-biblioref">Jones, Plank, and Sleeman 2010</a>)</span>, <span
 class="citation" data-cites="strogatzNonlinearDynamicsChaos2015">(<a
 href="#ref-strogatzNonlinearDynamicsChaos2015"
 role="doc-biblioref">Strogatz 2015</a>)</span>.</p>
+<p>A good reference for the Hodgkin-Huxley model is <span
+class="citation"
+data-cites="borgersIntroductionModelingNeuronal2017">(<a
+href="#ref-borgersIntroductionModelingNeuronal2017"
+role="doc-biblioref">Börgers 2017</a>)</span>.</p>
 <div class="sourceCode" id="cb1"><pre
 class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
 <div id="refs" class="references csl-bib-body hanging-indent"
@@ -2663,6 +2789,13 @@ Barnes, B., and G. R. Fulford. 2015. <em>Mathematical Modelling with
 Case Studies</em>. Third. Textbooks in <span>Mathematics</span>.
 <span>CRC Press, Boca Raton, FL</span>. <a
 href="https://mathscinet.ams.org/mathscinet-getitem?mr=3288754">https://mathscinet.ams.org/mathscinet-getitem?mr=3288754</a>.
+</div>
+<div id="ref-borgersIntroductionModelingNeuronal2017" class="csl-entry"
+role="doc-biblioentry">
+Börgers, Christoph. 2017. <em>An Introduction to Modeling Neuronal
+Dynamics</em>. Vol. 66. Texts in <span>Applied Mathematics</span>.
+<span>Springer, Cham</span>. <a
+href="https://doi.org/10.1007/978-3-319-51171-9">https://doi.org/10.1007/978-3-319-51171-9</a>.
 </div>
 <div id="ref-brittonEssentialMathematicalBiology2003" class="csl-entry"
 role="doc-biblioentry">
