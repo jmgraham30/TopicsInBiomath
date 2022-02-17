@@ -220,3 +220,146 @@ num_sol <- numericalSolution(nonlinear_example,y0=c(4,1.25),tlim=c(0,10))
 We will return to the topic of periodic solutions to nonlinear systems later. For now, note that linearization cannot typically be used to detect the existence of periodic solutions. 
 
 ## A Gallery of Two-Dimensional Systems
+
+
+What follows is a sequence of examples of using `phaseR` to produce a phase portrait for a two-dimensional nonlinear autonomous system. As an exercise, you should attempt to determine the equilibria and their stability properties for each system. 
+
+(a)
+
+$$
+\begin{align*}
+\frac{dx}{dt} &= x\left(1 - \frac{x}{2} - y \right) \\
+\frac{dy}{dt} &= y\left(x - 1 - \frac{y}{2} \right)
+\end{align*}
+$$
+```{r  gall1,echo=TRUE,code_folding=TRUE}
+gallery_example_1 <- function(t,state,parameters){
+  with(as.list(c(state,parameters)),{
+    
+    dx <- state[1]*(1 - 0.5*state[1] - state[2])
+    dy <- state[2]*(state[1] - 1 - 0.5*state[2])
+    
+    list(c(dx,dy))
+  })
+}
+
+nonlinear_flowfield  <- flowField(gallery_example_1,
+                                       xlim       = c(-3, 3),
+                                       ylim       = c(-3, 3),
+                                       parameters = NULL,
+                                       points     = 17,
+                                       add = FALSE)
+nonlinear_nullclines  <- nullclines(gallery_example_1,
+                                       xlim       = c(-3, 3),
+                                       ylim       = c(-3, 3),
+                                       points=100,add.legend=FALSE)
+eq1 <- findEquilibrium(gallery_example_1, y0 = c(0,0),
+  plot.it = TRUE,summary=FALSE)
+eq2 <- findEquilibrium(gallery_example_1, y0 = c(2,0),
+  plot.it = TRUE,summary=FALSE)
+eq3 <- findEquilibrium(gallery_example_1, y0 = c(0,-2),
+  plot.it = TRUE,summary=FALSE)
+eq4 <- findEquilibrium(gallery_example_1, y0 = c(6/5,2/5),
+  plot.it = TRUE,summary=FALSE)
+state <- matrix(c(-0.1,-1,-0.1,2,
+                  0.01,-1,0.01,2,
+                  0.1,-1,0.1,2,-0.05,-2,
+                  0.5,1,0.05,-2,0.5,2,
+                  2,1,2,2,-1,2),13,2,byrow = TRUE)
+nonlinear_trajs <- trajectory(gallery_example_1,
+                                        y0         = state,
+                                        tlim       = c(0, 10),
+                                        parameters = NULL,add=TRUE)
+```
+
+(b)
+
+$$
+\begin{align*}
+\frac{dx}{dt} &= y \\
+\frac{dy}{dt} &= x(1-x^2) + y
+\end{align*}
+$$
+```{r  gall2,echo=TRUE,code_folding=TRUE}
+gallery_example_2 <- function(t,state,parameters){
+  with(as.list(c(state,parameters)),{
+    
+    dx <- state[2]
+    dy <- state[1]*(1 - state[1]^2) + state[2]
+    
+    list(c(dx,dy))
+  })
+}
+
+nonlinear_flowfield  <- flowField(gallery_example_2,
+                                       xlim       = c(-3, 3),
+                                       ylim       = c(-3, 3),
+                                       parameters = NULL,
+                                       points     = 17,
+                                       add = FALSE)
+nonlinear_nullclines  <- nullclines(gallery_example_2,
+                                       xlim       = c(-3, 3),
+                                       ylim       = c(-3, 3),
+                                       points=100,add.legend=FALSE)
+eq1 <- findEquilibrium(gallery_example_2, y0 = c(0,0),
+  plot.it = TRUE,summary=FALSE)
+eq2 <- findEquilibrium(gallery_example_2, y0 = c(1,0),
+  plot.it = TRUE,summary=FALSE)
+eq3 <- findEquilibrium(gallery_example_2, y0 = c(-1,0),
+  plot.it = TRUE,summary=FALSE)
+state <- matrix(c(0.01,0.01,0.01,-0.01,-0.01,0.01,-0.01,-0.01,
+                  -0.5,0.0,0.5,0.0,
+                  -1,-0.1,-1,0.1,1,-0.1,1,0.1),10,2,byrow = TRUE)
+nonlinear_trajs <- trajectory(gallery_example_2,
+                                        y0         = state,
+                                        tlim       = c(0, 10),
+                                        parameters = NULL,add=TRUE)
+```
+
+(c)
+
+$$
+\begin{align*}
+\frac{dx}{dt} &= y \\
+\frac{dy}{dt} &= -x - (x^2 - 1)y
+\end{align*}
+$$
+```{r  gall3,echo=TRUE,code_folding=TRUE}
+gallery_example_3 <- function(t,state,parameters){
+  with(as.list(c(state,parameters)),{
+    
+    dx <- state[2]
+    dy <- -state[1] + (1 - state[1]^2) * state[2]
+    
+    list(c(dx,dy))
+  })
+}
+
+nonlinear_flowfield  <- flowField(gallery_example_3,
+                                       xlim       = c(-3, 3),
+                                       ylim       = c(-3, 3),
+                                       parameters = NULL,
+                                       points     = 17,
+                                       add = FALSE)
+nonlinear_nullclines  <- nullclines(gallery_example_3,
+                                       xlim       = c(-3, 3),
+                                       ylim       = c(-3, 3),
+                                       points=100,add.legend=FALSE)
+eq1 <- findEquilibrium(gallery_example_3, y0 = c(0,0),
+  plot.it = TRUE,summary=FALSE)
+state <- matrix(c(0.01,0.01,0,2.5,2.5,-2.5),3,2,byrow = TRUE)
+nonlinear_trajs <- trajectory(gallery_example_3,
+                                        y0         = state,
+                                        tlim       = c(0, 50),
+                                        parameters = NULL,add=TRUE)
+```
+
+# Higher Dimensional Systems
+
+As the dimension of a nonlinear system increases so does the difficulty in analyzing the equilibria and their stability properties. Once the dimension is three or greater, geometric analysis is very difficult to impossible. Thus, in *Topics in Biomathematics* we will resign ourselves to handling large nonlinear systems with numerical computing using the  `deSolve` package.      
+
+
+
+# Further Reading
+
+For more information on the dynamics of nonlinear systems, we recommend the following sources [@allenIntroductionMathematicalBiology2007], [@barnesMathematicalModellingCase2015], [@brittonEssentialMathematicalBiology2003], [@devriesCourseMathematicalBiology2006], [@edelstein-keshetMathematicalModelsBiology2005], [@hirschDifferentialEquations1974], [@jonesDifferentialEquationsMathematical2010], [@strogatzNonlinearDynamicsChaos2015]. 
