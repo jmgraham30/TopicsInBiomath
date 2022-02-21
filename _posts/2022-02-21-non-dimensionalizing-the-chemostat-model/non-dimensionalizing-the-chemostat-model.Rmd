@@ -1,0 +1,147 @@
+---
+title: "Non-Dimensionalizing the Chemostat Model"
+description: |
+  We apply our techniques of dimensional analysis to non-dimesionalize the chemostat model equations.
+author:
+  - name: Jason M. Graham
+    url: {}
+date: 2022-02-21
+output:
+  distill::distill_article:
+    self_contained: false
+---
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+# Background
+
+We will work with the chemostat model derived in [notes 7](https://topicsinbiomath.netlify.app/notes007.html):
+
+$$
+\begin{align}
+\frac{dN}{dt} &=  G(C)N - \frac{F}{V}N \\
+\frac{dC}{dt} &= -\alpha G(C)N - \frac{F}{V}C + \frac{F}{V}C_{0}
+\end{align}
+$$
+
+Observe the following, in terms of unit dimensions, we must have
+
+* $\left[G(C) \right] = \frac{1}{T}$, 
+
+* $\left[\frac{F}{V} \right] = \frac{1}{T}$, 
+
+* $[\alpha] = \frac{[C]}{[N]}$, and
+
+* $[C_{0}] = [C]$
+
+Consider the case where we choose a Michaelis-Menten rate law for $G(C)$ as in [notes 8](https://topicsinbiomath.netlify.app/notes008.html). That is, take
+
+$G(C) = \frac{K_{\text{max}}C}{k_{n} + C}$
+
+Note that this requires
+
+* $[K_{\text{max}}] = \frac{1}{T}$, and
+
+* $[k_{n}] = [C]$
+
+
+Thus, our model equations are
+
+$$
+\begin{align}
+\frac{dN}{dt} &=  \frac{K_{\text{max}}C}{k_{n} + C}N - \frac{F}{V}N \\
+\frac{dC}{dt} &= -\alpha \frac{K_{\text{max}}C}{k_{n} + C}  N - \frac{F}{V}C + \frac{F}{V}C_{0}
+\end{align}
+$$
+and these are the equations we will non-dimensionalize. 
+
+# Non-Dimensionalization 
+
+We will carry out a generic non-dimensionalization as described in [notes 10](https://topicsinbiomath.netlify.app/notes010.html). Let $N^{\ast}$ and $C^{\ast}$ be characteristic scales for concentrations and let $t^{\ast}$ be a characteristic time scale. Then, define $x=\frac{N}{N^{\ast}}$, $y=\frac{C}{C^{\ast}}$, and $\tau=\frac{t}{t^{\ast}}$. Explicit expressions for the scales $N^{\ast}$, $C^{\ast}$, and $t^{\ast}$ will be determined later. 
+
+By the chain rule we have
+
+$$
+\begin{align}
+\frac{dx}{d\tau} &= \frac{dx}{dt}\frac{dt}{d\tau} = t^{\ast}\frac{d}{dt}\frac{N}{N^{\ast}}\\
+\frac{dy}{d\tau} &= \frac{dy}{dt}\frac{dt}{d\tau} = t^{\ast}\frac{d}{dt}\frac{C}{C^{\ast}}
+\end{align}
+$$
+which implies that
+
+$$
+\begin{align}
+\frac{dx}{d\tau} &= \frac{t^{\ast}}{N^{\ast}}\left( \frac{K_{\text{max}}C}{k_{n} + C}N - \frac{F}{V}N\right)\\
+\frac{dy}{d\tau} &= \frac{t^{\ast}}{C^{\ast}}\left(-\alpha \frac{K_{\text{max}}C}{k_{n} + C}  N - \frac{F}{V}C + \frac{F}{V}C_{0} \right)
+\end{align}
+$$
+or equivalently
+
+$$
+\begin{align}
+\frac{dx}{d\tau} &= t^{\ast} \frac{K_{\text{max}}C^{\ast}y}{k_{n} + C^{\ast}y} x - t^{\ast} \frac{F}{V} x \\
+\frac{dy}{d\tau} &= -\alpha \frac{t^{\ast}}{C^{\ast}} \frac{K_{\text{max}}C^{\ast}y}{k_{n} + C^{\ast}y}  N^{\ast}x - t^{\ast}\frac{F}{V}y + \frac{t^{\ast}}{C^{\ast}} \frac{F}{V}C_{0}
+\end{align}
+$$
+
+Now we need to choose expressions for the scale factors $N^{\ast}$, $C^{\ast}$, and $t^{\ast}$. Based on our earlier dimensional analysis, it is reasonable to choose
+
+* $t^{\ast}=\frac{V}{F}$, and
+
+* $C^{\ast}=k_{n}$. 
+
+Doing so leads to 
+
+$$
+\begin{align}
+\frac{dx}{d\tau} &= \frac{V}{F} \frac{K_{\text{max}}k_{n}y}{k_{n} + k_{n}y} x - \frac{V}{F} \frac{F}{V} x \\
+\frac{dy}{d\tau} &= -\alpha \frac{\frac{V}{F}}{k_{n}} \frac{K_{\text{max}}k_{n}y}{k_{n} + k_{n}y}  N^{\ast}x - \frac{V}{F}\frac{F}{V}y + \frac{\frac{V}{F}}{k_{n}} \frac{F}{V}C_{0}
+\end{align}
+$$
+
+or equivalently, 
+
+$$
+\begin{align}
+\frac{dx}{d\tau} &= \frac{V K_{\text{max}}}{F} \frac{y}{1 + y} x -  x \\
+\frac{dy}{d\tau} &= - \frac{\alpha V K_{\text{max}}}{F k_{n}} N^{\ast} \frac{y}{1 + y} x - y + \frac{C_{0}}{k_{n}}
+\end{align}
+$$
+It remains to choose an expression for $N^{\ast}$. To do this, we examine the unit dimensions for $\frac{\alpha V K_{\text{max}}}{F k_{n}}$. We have
+
+$$
+\left[\frac{\alpha V K_{\text{max}}}{F k_{n}} \right] = \left[\alpha \right]\left[\frac{V}{F} \right]\left[\frac{K_{\text{max}}}{k_{n}} \right] = \frac{[C]}{[N]} T \frac{\frac{1}{T}}{[C]} = \frac{1}{[N]}
+$$
+
+Thus, we may take
+
+$$
+N^{\ast} = \frac{F k_{n}}{\alpha V K_{\text{max}}}
+$$
+
+which gives
+
+$$
+\begin{align}
+\frac{dx}{d\tau} &= a_{1} \frac{y}{1 + y} x -  x \\
+\frac{dy}{d\tau} &= - \frac{y}{1 + y} x - y + a_{2}
+\end{align}
+$$
+
+where $a_{1} = \frac{V K_{\text{max}}}{F}$ and $a_{2} = \frac{C_{0}}{k_{n}}$ are dimensionless quantities. 
+
+# Conclusion
+
+A non-dimensional version of the chemostat model equations is
+
+$$
+\begin{align}
+\frac{dx}{d\tau} &= a_{1} \frac{y}{1 + y} x -  x \\
+\frac{dy}{d\tau} &= - \frac{y}{1 + y} x - y + a_{2}
+\end{align}
+$$
+
+with $a_{1} = \frac{V K_{\text{max}}}{F}$ and $a_{2} = \frac{C_{0}}{k_{n}}$. Notice that we have reduced a model expression involving six parameters to an equivalent expression with only two parameters.  
