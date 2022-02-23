@@ -371,7 +371,7 @@ C \frac{d}{dt}v &= g_{\text{na}} m^3 h (v_{\text{na}} - v) + g_{\text{k}} n^4 (v
 \frac{d}{dt}n &= \frac{n_{\text{inf}} - n}{\tau_{n}} 
 \end{align*}
 $$
-The first equation is the equation for the neuron action potential and the other equations are called gating variables. The gating variables relate to probabilities for various ions (electrically charged molecules) to pass through the neuronal cell membrane. Here, we solve these equations numerically just to illustrate how this can be done with `deSolve`.  
+The first equation is for the neuron action potential and the other equations are called gating variables. The gating variables relate to probabilities for various ions (electrically charged molecules) to pass through the neuronal cell membrane. Here, we solve these equations numerically just to illustrate how this can be done with `deSolve`.  
 
 ```{r hh,echo=TRUE,code_folding=TRUE}
 source("./R/gatingVariables.R")
@@ -421,6 +421,7 @@ out <- ode(y = yini, times = times, func = HH,
            parms = parameters,method = "ode45")
 ```
 
+In order to run the code above, you need an R script `gatingVariables.R` which is available [here](https://www.dropbox.com/s/cbm1k9dlfdrq5pt/gatingVariables.R?dl=0). Let's plot our results:
 
 ```{r hhplot,echo=TRUE,code_folding=TRUE,fig.width=12,fig.height=7}
 HHsol <- data.frame(t=out[,"time"],v=out[,"v"],h=out[,"h"],m=out[,"m"],n=out[,"n"])
