@@ -384,7 +384,7 @@ $\xi = \frac{a\left(\frac{c}{b}\right)^2}{c}\tau^2+\frac{b\frac{c}{b}}{c}\tau+1=
 
 which is the same non-dimesionalization we obtained before. 
 
-Non-dimensionalization using a generic rescaling works similarly for differential equations and we will see some examples of this in the future. While dimensional analysis and non-dimesionalization may seem to be a bit of a nuisance or even unnecessary, we can not over emphasize how important these techniques are in mathematical modeling. 
+Non-dimensionalization using a generic rescaling works similarly for differential equations. A detailed example of this may be seen in the blog post on [non-dimensionalization the chemostat model](https://topicsinbiomath.netlify.app/posts/2022-02-21-non-dimensionalizing-the-chemostat-model/). Note that this example is very much along the lines of what you will do in research.  While dimensional analysis and non-dimesionalization may seem to be a bit of a nuisance or even unnecessary, we can not over emphasize how important these techniques are in mathematical modeling. 
 
 ## Buckingham $\pi$
 
