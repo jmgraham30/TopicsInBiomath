@@ -35,6 +35,10 @@ navbar:
         href: notes011.html
       - text: "Notes 12"
         href: notes012.html
+    - text: "Case Studies"
+      menu: 
+      - text: "Case Study 1"
+        href: case_study_01.html
     - text: "R for Biomath"
       href: r_for_biomath.html
     - text: "Course Blog"
