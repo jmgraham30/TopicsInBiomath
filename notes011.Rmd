@@ -137,10 +137,10 @@ From a course in differential equations, we recall that for a two-dimensional sy
 This is summarized graphically in Figure \@ref(fig:tracedetplane):
 
 <aside>
-This figure is linked from [Pruffle](http://pruffle.mit.edu/3.016-2005/Lecture_25_web/node2.html).
+This figure is linked from [Pruffle](http://pruffle.mit.edu/3.016-2005/Lecture_25_web/node2.html). **Note:** There is a typo, in the upper left quadrant it should be **stable** spiral. 
 </aside>
 
-```{r tracedetplane, echo=FALSE, layout="l-body-outset", fig.width=1.5, fig.height=1.5, fig.cap="Trace-determinant plane classification of two-dimensional linear systems. Image from [Pruffle](http://pruffle.mit.edu/3.016-2005/Lecture_25_web/node2.html)."}
+```{r tracedetplane, echo=FALSE, layout="l-body-outset", fig.width=1.5, fig.height=1.5, fig.cap="Trace-determinant plane classification of two-dimensional linear systems. Image from [Pruffle](http://pruffle.mit.edu/3.016-2005/Lecture_25_web/node2.html). **Note:** There is a typo, in the upper left quadrant it should be **stable** spiral."}
 knitr::include_graphics("./Figures/phase-plane-regions.png")
 ```
 
@@ -182,7 +182,7 @@ print("eigenvalues")
 (eigen(A)$values)
 ```
 
-Thus, we predict a stable spiral. Let's see the phase portrait:
+Thus, we predict a stable node. Let's see the phase portrait:
 
 ```{r,echo=TRUE,code_folding=TRUE}
 parms_mat <- list(A=A)
