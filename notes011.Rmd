@@ -174,8 +174,11 @@ We compute the trace, determinant, and eigenvalues as
 
 ```{r,echo=TRUE,code_folding=TRUE}
 A <- matrix(c(-2,-1,2,-5),2,2,byrow=TRUE)
+print("trace")
 (sum(diag(A)))
+print("determinant")
 (det(A))
+print("eigenvalues")
 (eigen(A)$values)
 ```
 
@@ -212,8 +215,11 @@ We compute the trace, determinant, and eigenvalues as
 
 ```{r,echo=TRUE,code_folding=TRUE}
 A <- matrix(c(2,3,1,0),2,2,byrow=TRUE)
+print("trace")
 (sum(diag(A)))
+print("determinant")
 (det(A))
+print("eigenvalues")
 (eigen(A)$values)
 ```
 
@@ -253,8 +259,11 @@ We compute the trace, determinant, and eigenvalues as
 
 ```{r,echo=TRUE,code_folding=TRUE}
 A <- matrix(c(-2,-3,3,-2),2,2,byrow=TRUE)
+print("trace")
 (sum(diag(A)))
+print("determinant")
 (det(A))
+print("eigenvalues")
 (eigen(A)$values)
 ```
 
@@ -290,8 +299,11 @@ We compute the trace, determinant, and eigenvalues as
 
 ```{r,echo=TRUE,code_folding=TRUE}
 A <- matrix(c(-3,10,-1,3),2,2,byrow=TRUE)
+print("trace")
 (sum(diag(A)))
+print("determinant")
 (det(A))
+print("eigenvalues")
 (eigen(A)$values)
 ```
 
