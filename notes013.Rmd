@@ -1,0 +1,248 @@
+---
+title: "Course Notes 13"
+description: |
+  Some applications of phase-plane methods. 
+author:
+  - name: Jason M. Graham 
+    url: https://topicsinbiomath.netlify.app/
+    affiliation: University of Scranton 
+    affiliation_url: https://sites.google.com/site/jasonmgrahamus/
+date: "`r Sys.Date()`"
+output: 
+  distill::distill_article:
+    toc: true
+    toc_depth: 2
+creative_commons: CC BY-NC
+bibliography: topics_in_biomath.bib
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+library(knitr)
+library(kableExtra)
+library(deSolve)
+library(tidyverse)
+library(ggformula)
+library(patchwork)
+library(phaseR)
+library(latex2exp)
+theme_set(theme_light())
+```
+
+# Goals
+
+After reading this section of notes, you should
+
+1) have a greater appreciation for the use of the phase-plane methods covered in [notes 11](https://topicsinbiomath.netlify.app/notes011.html) and [notes 12](https://topicsinbiomath.netlify.app/notes012.html) in biomathematics.
+
+# Background
+
+Mathematical models for biological systems often involve interacting variables. Such models take the form of a coupled system of nonlinear (typically autonomous) differential equations. When the system is of size two, phase-plane methods can be exploited to obtain information about the biological system being modeled. Even for higher-dimensional systems, phase-plane methods may still be useful and make it easier for us to understand what goes on in fairly complicated mathematical models.
+
+In this section of notes, we will apply our phase-plane methods to analyze three models. We begin with a simple model for the populations of interacting species, then consider a variation on the general competition model we briefly introduced in our discussion of [compartment models](https://topicsinbiomath.netlify.app/notes004.html). Finally, we analyze the [chemostat model](https://topicsinbiomath.netlify.app/notes007.html) for the nutrient limited growth of a bacterial cell population.
+
+# A Simple Two-Species Population Model
+
+Consider the system
+
+$$
+\begin{align}
+\frac{dx}{dt} &= (3-x)x - 2xy = x(3-x-2y)\\
+\frac{dy}{dt} &= (2-y)y - xy = y(2-x-y)
+\end{align}
+$$
+We can view this as a population model for the interacting species with populations $x$ and $y$. Basically what this model says is that both species follow logistic growth in the absence of the other species, but then there is competition that results in a death rate that is proportional to the population of the other species. This example is taken from section 6.4 of [@strogatzNonlinearDynamicsChaos2015].
+
+### Equilibrium points
+
+Equilibrium points for the system satisfy
+
+$$
+\begin{align}
+0 &= x(3-x-2y)\\
+0 &= y(2-x-y)
+\end{align}
+$$
+from which we can easily see that 
+
+* $(x^{\ast},y^{\ast})=(0,0)$
+
+* $(x^{\ast},y^{\ast})=(0,2)$
+
+* $(x^{\ast},y^{\ast})=(3,0)$
+
+* $(x^{\ast},y^{\ast})=(1,1)$
+
+are equilibrium points. In the context of the population model, the equilibrium point $(1,1)$ is called the **coexistence** steady-state because in all of the other three equilibrium points at least one species dies out. 
+
+Let's confirm our equilibrium values by plotting the nullclines for the system.
+
+```{r,echo=TRUE,code_folding=TRUE}
+simple_pop <- function(t,state,parameters){
+  with(as.list(c(state,parameters)),{
+    
+    dx <- state[1]*(3-state[1]-2*state[2])
+    dy <- state[2]*(2-state[1]-state[2])
+    
+    list(c(dx,dy))
+  })
+}
+
+nonlinear_flowfield  <- flowField(simple_pop ,
+                                       xlim       = c(-0.25, 4),
+                                       ylim       = c(-0.25, 4),
+                                       parameters = NULL,
+                                       points     = 17,
+                                       add = FALSE)
+nonlinear_nullclines  <- nullclines(simple_pop,
+                                       xlim       = c(-0.25, 4),
+                                       ylim       = c(-0.25, 4),
+                                       points=100,add.legend=FALSE)
+eq1 <- findEquilibrium(simple_pop, y0 = c(0,0),
+  plot.it = TRUE,summary=FALSE)
+eq2 <- findEquilibrium(simple_pop, y0 = c(0,2),
+  plot.it = TRUE,summary=FALSE)
+eq3 <- findEquilibrium(simple_pop, y0 = c(3,0),
+  plot.it = TRUE,summary=FALSE)
+eq4 <- findEquilibrium(simple_pop, y0 = c(1,1),
+  plot.it = TRUE,summary=FALSE)
+```
+
+We do in fact see the four equilibrium values that we calculated. Further, we can see the nullclines and since they do not intersect in more than four points, we conclude that we have found all of the equilibrium values. 
+
+### Linear stability analysis
+
+In general we have that
+
+$$
+J_{(x,y)} = \left(\begin{array}{cc} 3-2x-2y & -2x \\ -y  & 2-x-2y  \end{array}\right)
+$$
+
+and thus
+
+(a) $J_{(0,0)} = \left(\begin{array}{cc} 3 & 0 \\ 0  & 2  \end{array}\right)$, which has $\tau=5$, $\delta=6$, and $\delta < \frac{1}{4}\tau^2$.
+
+(b) $J_{(0,2)} = \left(\begin{array}{cc} -1 & 0 \\ -2  & -2  \end{array}\right)$, which has $\tau=-3$, $\delta=2$, and $\delta < \frac{1}{4}\tau^2$.
+
+(c) $J_{(3,0)} = \left(\begin{array}{cc} -3 & -6 \\ 0  & -1  \end{array}\right)$, which has $\tau=-4$, $\delta=3$, and $\delta < \frac{1}{4}\tau^2$.
+
+(d) $J_{(1,1)} = \left(\begin{array}{cc} -1 & -2 \\ -1  & -1  \end{array}\right)$, which has $\tau=-2$ and $\delta=-1$.
+
+Thus, using the [trace-determinant plane](https://topicsinbiomath.netlify.app/notes011.html) implies that the results of our linear stability analysis are:
+
+(a) $(0,0)$ is an unstable node, 
+
+(b) $(0,2)$ is a stable node, 
+
+(c) $(3,0)$ is a stable node, and
+
+(d) $(1,1)$ is a saddle. 
+
+### Phase portrait
+
+We can easily obtain the phase portrait for the system
+
+$$
+\begin{align}
+\frac{dx}{dt} &= x(3-x-2y)\\
+\frac{dy}{dt} &= y(2-x-y)
+\end{align}
+$$
+
+using `phaseR`:
+
+```{r}
+nonlinear_flowfield  <- flowField(simple_pop ,
+                                       xlim       = c(-0.25, 3),
+                                       ylim       = c(-0.25, 3),
+                                       parameters = NULL,
+                                       points     = 17,
+                                       add = FALSE)
+
+state <- matrix(c(0.0,0.01,0.01,0.0,0.1,0.1,2,
+                  0.01,2,2,2,1,0.1,0.5,2,1.5,
+                  0.7,0.7,1.3,1.3,0.25,0.3,0.3,0.3,
+                  0.3,0.5,0.2,0.5),14,2,byrow = TRUE)
+
+nonlinear_trajs <- trajectory(simple_pop,
+                                        y0         = state,
+                                        tlim       = c(0, 10),
+                                        parameters = NULL,add=TRUE)
+```
+
+### Conclusions
+
+For the model system, 
+
+$$
+\begin{align}
+\frac{dx}{dt} &= x(3-x-2y)\\
+\frac{dy}{dt} &= y(2-x-y)
+\end{align}
+$$
+we conclude the following: Co-existence of the two species is theoretically possible. However, it is very delicate in the sense that the starting values for the two populations that will lead to co-existence is very limited. Most initial populations are such that one population out-competes the other. Which population wins out in competition depends solely on the relative starting size of the two species. 
+
+An obvious question is, are there competition models in which there is a robust co-existence equilibrium? Consideration of this question is taken up in the next section. 
+
+# A More General Competition Model
+
+
+
+# Chemostat Model 
+
+As our first example, consider the [chemostat model](https://topicsinbiomath.netlify.app/notes007.html) with [non-dimensional form](https://topicsinbiomath.netlify.app/posts/2022-02-21-non-dimensionalizing-the-chemostat-model/) 
+
+$$
+\begin{align}
+\frac{dx}{d\tau} &= a_{1} \frac{y}{1 + y} x -  x \\
+\frac{dy}{d\tau} &= - \frac{y}{1 + y} x - y + a_{2}
+\end{align}
+$$
+
+Here, $a_{1}$ and $a_{2}$ are positive constants.
+
+### Equilibrium points
+
+Equilibrium points are determined by solutions to the system
+
+$$
+\begin{align}
+0 &= a_{1} \frac{y}{1 + y} x -  x = x\left(a_{1}\frac{y}{1+y} - 1 \right)  \\
+0 &= - \frac{y}{1 + y} x - y + a_{2}
+\end{align}
+$$
+From the first equation, we see that we must have either $x=0$ or $a_{1}\frac{y}{1+y} - 1=0$. In case $x=0$, equation the second equation implies that $y=a_{2}$. Thus, one equilibrium value is 
+
+1) $(x^{\ast},y^{\ast})=(0,a_{2})$.
+
+On the other have, if $a_{1}\frac{y}{1+y} - 1=0$, then $y = \frac{1}{a_{1} - 1}$. Solving the second equation for $x$ gives
+
+$$
+\begin{align}
+x &= \frac{1+y}{y}(a_{2}-y) \\
+&= \frac{1+\frac{1}{a_{1} - 1}}{\frac{1}{a_{1} - 1}}\left(a_{2} - \frac{1}{a_{1} - 1} \right) \\
+&= (a_{1} - 1 + 1)\left(a_{2} - \frac{1}{a_{1} - 1} \right) \\
+&= a_{1}\left( \frac{a_{2}(a_{1}-1) - 1}{a_{1} - 1} \right)
+\end{align}
+$$
+Thus, we have a second equilibrium value
+
+2) $(x^{\ast},y^{\ast})=\left(\frac{1}{a_{1} - 1}, a_{1}\left( \frac{a_{2}(a_{1}-1) - 1}{a_{1} - 1} \right)\right)$
+
+In the context of the biological system, only non-negative equilibrium values are relevant. Therefore, we only consider the second equilibrium whenever
+
+* $a_{1} > 1$, and
+
+* $a_{2}(a_{1}-1) > 1$
+
+### Linear stability analysis
+
+Let's consider the linearization of the chemostat model at the equilibrium points. First, note that
+
+$$
+J_{(x,y)} = \left(\begin{array}{cc}a_{1}\frac{y}{1+y}-1 & a_{1}x\frac{1}{(1+y)^2} \\
+-\frac{y}{1+y} & -x\frac{1}{(1+y)^{2}} - 1
+\end{array}\right)
+$$
+
+
