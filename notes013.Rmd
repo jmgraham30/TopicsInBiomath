@@ -353,7 +353,7 @@ occupy the same ecological niche if $\alpha \beta = 1$. If they coexist, then $\
 
 # Chemostat Model 
 
-As our first example, consider the [chemostat model](https://topicsinbiomath.netlify.app/notes007.html) with [non-dimensional form](https://topicsinbiomath.netlify.app/posts/2022-02-21-non-dimensionalizing-the-chemostat-model/) 
+For our final example, consider the [chemostat model](https://topicsinbiomath.netlify.app/notes007.html) with [non-dimensional form](https://topicsinbiomath.netlify.app/posts/2022-02-21-non-dimensionalizing-the-chemostat-model/) 
 
 $$
 \begin{align}
@@ -362,7 +362,7 @@ $$
 \end{align}
 $$
 
-Here, $a_{1}$ and $a_{2}$ are positive constants.
+Here, $a_{1}$ and $a_{2}$ are positive constants. The following analysis roughly follows that found in section 4.10 of [@edelstein-keshetMathematicalModelsBiology2005]. 
 
 ### Equilibrium points
 
@@ -390,7 +390,7 @@ x &= \frac{1+y}{y}(a_{2}-y) \\
 $$
 Thus, we have a second equilibrium value
 
-2) $(x^{\ast},y^{\ast})=\left(\frac{1}{a_{1} - 1}, a_{1}\left( \frac{a_{2}(a_{1}-1) - 1}{a_{1} - 1} \right)\right)$
+2) $(x^{\ast},y^{\ast})=\left(a_{1}\left( \frac{a_{2}(a_{1}-1) - 1}{a_{1} - 1}\right),\frac{1}{a_{1} - 1} \right)$
 
 In the context of the biological system, only non-negative equilibrium values are relevant. Therefore, we only consider the second equilibrium whenever
 
@@ -407,5 +407,84 @@ J_{(x,y)} = \left(\begin{array}{cc}a_{1}\frac{y}{1+y}-1 & a_{1}x\frac{1}{(1+y)^2
 -\frac{y}{1+y} & -x\frac{1}{(1+y)^{2}} - 1
 \end{array}\right)
 $$
+Now observe that if $y=\frac{1}{a_{1}-1}$, then
+
+$\frac{y}{1+y} = \frac{1}{a_{1}}$
+
+and 
+
+$\frac{1}{(1+y)^2}=\left(\frac{a_{1}-1}{a_{1}} \right)^2$
+
+Therefore, 
+
+$$
+J_{\left(a_{1}\left( \frac{a_{2}(a_{1}-1) - 1}{a_{1} - 1}\right),\frac{1}{a_{1} - 1} \right)} = \left(\begin{array}{cc} 0 & (a_{1}-1)(a_{2}(a_{1} -1 ) - 1) \\
+-\frac{1}{a_{1}} & -(a_{2}(a_{1}-1) - 1)\left(\frac{a_{1}-1}{a_{1}}\right) - 1
+\end{array}\right)
+$$
+
+Now, this matrix has 
+
+* trace  $\tau = -(a_{2}(a_{1}-1) - 1)\left(\frac{a_{1}-1}{a_{1}}\right) - 1 < 0$, and
+
+* determinant  $\delta = \frac{(a_{1}-1)(a_{2}(a_{1} -1 ) - 1)}{a_{1}} > 0$
+
+from which we can conclude that $\left(a_{1}\left( \frac{a_{2}(a_{1}-1) - 1}{a_{1} - 1}\right),\frac{1}{a_{1} - 1} \right)$ is a stable equilibrium (provided it exists as a positive equilibrium).  
+
+Finally, define $A = \frac{(a_{1}-1)(a_{2}(a_{1} -1) - 1)}{a_{1}}$, then we can write $\tau=-A-1$ and $\delta = A$, then
+
+$\tau^2 - 4\delta = (A+1)^2-4A = A^{2} + 2A + 1 - 4A = A^2 - 2A + 1 = (A-1)^2 > 0$
+
+from which we conclude that $\left(a_{1}\left( \frac{a_{2}(a_{1}-1) - 1}{a_{1} - 1}\right),\frac{1}{a_{1} - 1} \right)$ is a **stable node**. 
+
+### Example phase portrait
+
+```{r,echo=TRUE,code_folding=TRUE}
+chemostat_example <- function(t,state,parameters){
+  with(as.list(c(state,parameters)),{
+    
+    dx <- state[1]*(a1*state[2]/(1+state[2]) - 1)
+    dy <- -state[1]*state[2]/(1+state[2]) - state[2] + a2
+    
+    list(c(dx,dy))
+  })
+}
+
+nonlinear_flowfield  <- flowField(chemostat_example ,
+                                       xlim       = c(-0.25, 2.5),
+                                       ylim       = c(-0.25, 2.5),
+                                       parameters = c(a1=2.5,a2=1.5),
+                                       points     = 17,
+                                       add = FALSE)
+state <- matrix(c(0.1,0.1,0.5,0.1,0.1,0.5,0.5,0.5,
+                  0.5,0.75,0.75,0.5,1.0,1.0,0.75,
+                  1.0,1.5,0.5,2.5,1.0,2.0,2.0,2.5,0.25,1.5,1.5),13,2,byrow = TRUE)
+nonlinear_trajs <- trajectory(chemostat_example ,
+                                        y0         = state,
+                                        tlim       = c(0, 10),
+                                        parameters = c(a1=2.5,a2=1.5),add=TRUE)
+```
+
+We see that there is in fact an equilibrium point that is a stable node. 
+
+### Conclusions
+
+We have shown that there are conditions that result in long-term positive values for both a bacteria cell population and nutrient concentration. These are $a_{1} > 1$ and $a_{2}(a_{1}-1) > 1$. Recall that in our [non-dimensionalization](https://topicsinbiomath.netlify.app/posts/2022-02-21-non-dimensionalizing-the-chemostat-model/) we determined
+
+$a_{1} = \frac{K_{\text{max}}V}{F}$
+
+and
+
+$a_{2}=\frac{C_{0}}{k_{n}}$
+
+Thus, we must have
+
+$K_{\text{max}} < \frac{F}{V}$
+
+and
+
+$\frac{F}{V}\frac{k_{n}}{K_{\text{max}} - \frac{F}{V}} < C_{0}$
+
+in order to get a stable positive steady-state solution to the chemostat model. 
 
 

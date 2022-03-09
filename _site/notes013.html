@@ -134,6 +134,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   <!--/radix_placeholder_meta_tags-->
   
   <meta name="citation_reference" content="citation_title=Essential mathematical biology;citation_publication_date=2003;citation_publisher=Springer-Verlag London, Ltd., London;citation_doi=10.1007/978-1-4471-0049-2;citation_author=Nicholas F. Britton"/>
+  <meta name="citation_reference" content="citation_title=Mathematical models in biology;citation_publication_date=2005;citation_publisher=Society for Industrial and Applied Mathematics (SIAM), Philadelphia, PA;citation_volume=46;citation_doi=10.1137/1.9780898719147;citation_author=Leah Edelstein-Keshet"/>
   <meta name="citation_reference" content="citation_title=Nonlinear dynamics and chaos;citation_publication_date=2015;citation_publisher=Westview Press, Boulder, CO;citation_author=Steven H. Strogatz"/>
   <!--radix_placeholder_rmarkdown_metadata-->
 
@@ -2119,6 +2120,7 @@ Notes
 <a href="notes010.html">Notes 10</a>
 <a href="notes011.html">Notes 11</a>
 <a href="notes012.html">Notes 12</a>
+<a href="notes013.html">Notes 13</a>
 </div>
 </div>
 <div class="nav-dropdown">
@@ -2558,7 +2560,7 @@ the so-called <a
 href="https://en.wikipedia.org/wiki/Competitive_exclusion_principle">principle
 of competitive exclusion</a>.</p>
 <h1 id="chemostat-model">Chemostat Model</h1>
-<p>As our first example, consider the <a
+<p>For our final example, consider the <a
 href="https://topicsinbiomath.netlify.app/notes007.html">chemostat
 model</a> with <a
 href="https://topicsinbiomath.netlify.app/posts/2022-02-21-non-dimensionalizing-the-chemostat-model/">non-dimensional
@@ -2570,7 +2572,12 @@ form</a></p>
 \end{align}
 \]</span></p>
 <p>Here, <span class="math inline">\(a_{1}\)</span> and <span
-class="math inline">\(a_{2}\)</span> are positive constants.</p>
+class="math inline">\(a_{2}\)</span> are positive constants. The
+following analysis roughly follows that found in section 4.10 of <span
+class="citation"
+data-cites="edelstein-keshetMathematicalModelsBiology2005">(<a
+href="#ref-edelstein-keshetMathematicalModelsBiology2005"
+role="doc-biblioref">Edelstein-Keshet 2005</a>)</span>.</p>
 <h3 id="equilibrium-points-2">Equilibrium points</h3>
 <p>Equilibrium points are determined by solutions to the system</p>
 <p><span class="math display">\[
@@ -2603,9 +2610,9 @@ x &amp;= \frac{1+y}{y}(a_{2}-y) \\
 \end{align}
 \]</span> Thus, we have a second equilibrium value</p>
 <ol start="2" type="1">
-<li><span class="math inline">\((x^{\ast},y^{\ast})=\left(\frac{1}{a_{1}
-- 1}, a_{1}\left( \frac{a_{2}(a_{1}-1) - 1}{a_{1} - 1}
-\right)\right)\)</span></li>
+<li><span class="math inline">\((x^{\ast},y^{\ast})=\left(a_{1}\left(
+\frac{a_{2}(a_{1}-1) - 1}{a_{1} - 1}\right),\frac{1}{a_{1} - 1}
+\right)\)</span></li>
 </ol>
 <p>In the context of the biological system, only non-negative
 equilibrium values are relevant. Therefore, we only consider the second
@@ -2623,7 +2630,101 @@ J_{(x,y)} = \left(\begin{array}{cc}a_{1}\frac{y}{1+y}-1 &amp;
 a_{1}x\frac{1}{(1+y)^2} \\
 -\frac{y}{1+y} &amp; -x\frac{1}{(1+y)^{2}} - 1
 \end{array}\right)
+\]</span> Now observe that if <span
+class="math inline">\(y=\frac{1}{a_{1}-1}\)</span>, then</p>
+<p><span class="math inline">\(\frac{y}{1+y} =
+\frac{1}{a_{1}}\)</span></p>
+<p>and</p>
+<p><span
+class="math inline">\(\frac{1}{(1+y)^2}=\left(\frac{a_{1}-1}{a_{1}}
+\right)^2\)</span></p>
+<p>Therefore,</p>
+<p><span class="math display">\[
+J_{\left(a_{1}\left( \frac{a_{2}(a_{1}-1) - 1}{a_{1} -
+1}\right),\frac{1}{a_{1} - 1} \right)} = \left(\begin{array}{cc} 0 &amp;
+(a_{1}-1)(a_{2}(a_{1} -1 ) - 1) \\
+-\frac{1}{a_{1}} &amp; -(a_{2}(a_{1}-1) -
+1)\left(\frac{a_{1}-1}{a_{1}}\right) - 1
+\end{array}\right)
 \]</span></p>
+<p>Now, this matrix has</p>
+<ul>
+<li><p>trace <span class="math inline">\(\tau = -(a_{2}(a_{1}-1) -
+1)\left(\frac{a_{1}-1}{a_{1}}\right) - 1 &lt; 0\)</span>, and</p></li>
+<li><p>determinant <span class="math inline">\(\delta =
+\frac{(a_{1}-1)(a_{2}(a_{1} -1 ) - 1)}{a_{1}} &gt; 0\)</span></p></li>
+</ul>
+<p>from which we can conclude that <span
+class="math inline">\(\left(a_{1}\left( \frac{a_{2}(a_{1}-1) - 1}{a_{1}
+- 1}\right),\frac{1}{a_{1} - 1} \right)\)</span> is a stable equilibrium
+(provided it exists as a positive equilibrium).</p>
+<p>Finally, define <span class="math inline">\(A =
+\frac{(a_{1}-1)(a_{2}(a_{1} -1) - 1)}{a_{1}}\)</span>, then we can write
+<span class="math inline">\(\tau=-A-1\)</span> and <span
+class="math inline">\(\delta = A\)</span>, then</p>
+<p><span class="math inline">\(\tau^2 - 4\delta = (A+1)^2-4A = A^{2} +
+2A + 1 - 4A = A^2 - 2A + 1 = (A-1)^2 &gt; 0\)</span></p>
+<p>from which we conclude that <span
+class="math inline">\(\left(a_{1}\left( \frac{a_{2}(a_{1}-1) - 1}{a_{1}
+- 1}\right),\frac{1}{a_{1} - 1} \right)\)</span> is a <strong>stable
+node</strong>.</p>
+<h3 id="example-phase-portrait-1">Example phase portrait</h3>
+<div class="layout-chunk" data-layout="l-body">
+<details>
+<summary>
+Show code
+</summary>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>chemostat_example</span> <span class='op'>&lt;-</span> <span class='kw'>function</span><span class='op'>(</span><span class='va'>t</span>,<span class='va'>state</span>,<span class='va'>parameters</span><span class='op'>)</span><span class='op'>{</span>
+  <span class='fu'><a href='https://rdrr.io/r/base/with.html'>with</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/list.html'>as.list</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='va'>state</span>,<span class='va'>parameters</span><span class='op'>)</span><span class='op'>)</span>,<span class='op'>{</span>
+    
+    <span class='va'>dx</span> <span class='op'>&lt;-</span> <span class='va'>state</span><span class='op'>[</span><span class='fl'>1</span><span class='op'>]</span><span class='op'>*</span><span class='op'>(</span><span class='va'>a1</span><span class='op'>*</span><span class='va'>state</span><span class='op'>[</span><span class='fl'>2</span><span class='op'>]</span><span class='op'>/</span><span class='op'>(</span><span class='fl'>1</span><span class='op'>+</span><span class='va'>state</span><span class='op'>[</span><span class='fl'>2</span><span class='op'>]</span><span class='op'>)</span> <span class='op'>-</span> <span class='fl'>1</span><span class='op'>)</span>
+    <span class='va'>dy</span> <span class='op'>&lt;-</span> <span class='op'>-</span><span class='va'>state</span><span class='op'>[</span><span class='fl'>1</span><span class='op'>]</span><span class='op'>*</span><span class='va'>state</span><span class='op'>[</span><span class='fl'>2</span><span class='op'>]</span><span class='op'>/</span><span class='op'>(</span><span class='fl'>1</span><span class='op'>+</span><span class='va'>state</span><span class='op'>[</span><span class='fl'>2</span><span class='op'>]</span><span class='op'>)</span> <span class='op'>-</span> <span class='va'>state</span><span class='op'>[</span><span class='fl'>2</span><span class='op'>]</span> <span class='op'>+</span> <span class='va'>a2</span>
+    
+    <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='va'>dx</span>,<span class='va'>dy</span><span class='op'>)</span><span class='op'>)</span>
+  <span class='op'>}</span><span class='op'>)</span>
+<span class='op'>}</span>
+
+<span class='va'>nonlinear_flowfield</span>  <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/phaseR/man/flowField.html'>flowField</a></span><span class='op'>(</span><span class='va'>chemostat_example</span> ,
+                                       xlim       <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='op'>-</span><span class='fl'>0.25</span>, <span class='fl'>2.5</span><span class='op'>)</span>,
+                                       ylim       <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='op'>-</span><span class='fl'>0.25</span>, <span class='fl'>2.5</span><span class='op'>)</span>,
+                                       parameters <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span>a1<span class='op'>=</span><span class='fl'>2.5</span>,a2<span class='op'>=</span><span class='fl'>1.5</span><span class='op'>)</span>,
+                                       points     <span class='op'>=</span> <span class='fl'>17</span>,
+                                       add <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span>
+<span class='va'>state</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/matrix.html'>matrix</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>0.1</span>,<span class='fl'>0.1</span>,<span class='fl'>0.5</span>,<span class='fl'>0.1</span>,<span class='fl'>0.1</span>,<span class='fl'>0.5</span>,<span class='fl'>0.5</span>,<span class='fl'>0.5</span>,
+                  <span class='fl'>0.5</span>,<span class='fl'>0.75</span>,<span class='fl'>0.75</span>,<span class='fl'>0.5</span>,<span class='fl'>1.0</span>,<span class='fl'>1.0</span>,<span class='fl'>0.75</span>,
+                  <span class='fl'>1.0</span>,<span class='fl'>1.5</span>,<span class='fl'>0.5</span>,<span class='fl'>2.5</span>,<span class='fl'>1.0</span>,<span class='fl'>2.0</span>,<span class='fl'>2.0</span>,<span class='fl'>2.5</span>,<span class='fl'>0.25</span>,<span class='fl'>1.5</span>,<span class='fl'>1.5</span><span class='op'>)</span>,<span class='fl'>13</span>,<span class='fl'>2</span>,byrow <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
+<span class='va'>nonlinear_trajs</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/phaseR/man/trajectory.html'>trajectory</a></span><span class='op'>(</span><span class='va'>chemostat_example</span> ,
+                                        y0         <span class='op'>=</span> <span class='va'>state</span>,
+                                        tlim       <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>0</span>, <span class='fl'>10</span><span class='op'>)</span>,
+                                        parameters <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span>a1<span class='op'>=</span><span class='fl'>2.5</span>,a2<span class='op'>=</span><span class='fl'>1.5</span><span class='op'>)</span>,add<span class='op'>=</span><span class='cn'>TRUE</span><span class='op'>)</span>
+</code></pre>
+</div>
+</details>
+<p><img src="notes013_files/figure-html5/unnamed-chunk-4-1.png" width="624" /></p>
+</div>
+<p>We see that there is in fact an equilibrium point that is a stable
+node.</p>
+<h3 id="conclusions-2">Conclusions</h3>
+<p>We have shown that there are conditions that result in long-term
+positive values for both a bacteria cell population and nutrient
+concentration. These are <span class="math inline">\(a_{1} &gt;
+1\)</span> and <span class="math inline">\(a_{2}(a_{1}-1) &gt;
+1\)</span>. Recall that in our <a
+href="https://topicsinbiomath.netlify.app/posts/2022-02-21-non-dimensionalizing-the-chemostat-model/">non-dimensionalization</a>
+we determined</p>
+<p><span class="math inline">\(a_{1} =
+\frac{K_{\text{max}}V}{F}\)</span></p>
+<p>and</p>
+<p><span class="math inline">\(a_{2}=\frac{C_{0}}{k_{n}}\)</span></p>
+<p>Thus, we must have</p>
+<p><span class="math inline">\(K_{\text{max}} &lt;
+\frac{F}{V}\)</span></p>
+<p>and</p>
+<p><span class="math inline">\(\frac{F}{V}\frac{k_{n}}{K_{\text{max}} -
+\frac{F}{V}} &lt; C_{0}\)</span></p>
+<p>in order to get a stable positive steady-state solution to the
+chemostat model.</p>
 <div class="sourceCode" id="cb1"><pre
 class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
 <div id="refs" class="references csl-bib-body hanging-indent"
@@ -2634,6 +2735,13 @@ Britton, Nicholas F. 2003. <em>Essential Mathematical Biology</em>.
 Springer <span>Undergraduate Mathematics Series</span>.
 <span>Springer-Verlag London, Ltd., London</span>. <a
 href="https://doi.org/10.1007/978-1-4471-0049-2">https://doi.org/10.1007/978-1-4471-0049-2</a>.
+</div>
+<div id="ref-edelstein-keshetMathematicalModelsBiology2005"
+class="csl-entry" role="doc-biblioentry">
+Edelstein-Keshet, Leah. 2005. <em>Mathematical Models in Biology</em>.
+Vol. 46. Classics in <span>Applied Mathematics</span>. <span>Society for
+Industrial and Applied Mathematics (SIAM), Philadelphia, PA</span>. <a
+href="https://doi.org/10.1137/1.9780898719147">https://doi.org/10.1137/1.9780898719147</a>.
 </div>
 <div id="ref-strogatzNonlinearDynamicsChaos2015" class="csl-entry"
 role="doc-biblioentry">
