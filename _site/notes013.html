@@ -2479,7 +2479,84 @@ and <span class="math inline">\(b&lt;1\)</span>. Thus,</p>
 class="math inline">\(a&lt;1\)</span> and <span
 class="math inline">\(b&lt;1\)</span>.</p>
 </blockquote>
+<p>What does this mean in the context of the original model</p>
+<p><span class="math display">\[
+\begin{align}
+\frac{du}{dt} &amp;= r_{1}u\left(1 - \frac{u+\alpha v}{K_{1}} \right) \\
+\frac{dv}{dt} &amp;= r_{2}v\left(1 - \frac{v+\beta u}{K_{2}} \right)
+\end{align}
+\]</span></p>
+<p>Recall that <span
+class="math inline">\(a=\alpha\frac{K_{2}}{K_{1}}\)</span> and <span
+class="math inline">\(b=\beta\frac{K_{1}}{K_{2}}\)</span>. Notice that
+if <span class="math inline">\(a&lt;1\)</span> and <span
+class="math inline">\(b&lt;1\)</span>, then</p>
+<p><span class="math inline">\(1 &gt; ab = \alpha\frac{K_{2}}{K_{1}}
+\beta\frac{K_{1}}{K_{2}} = \alpha \beta\)</span>.</p>
+<p>Thus, when we have a stable coexistence steady-state we have <span
+class="math inline">\(\alpha \beta &lt; 1\)</span>.</p>
 <h3 id="example-phase-portrait">Example phase portrait</h3>
+<p>Here is an example phase portrait for a system of the form</p>
+<p><span class="math display">\[
+\begin{align}
+\frac{dx}{d\tau} &amp;= x(1 - x - ay) \\
+\frac{dy}{d\tau} &amp;= cy(1 - bx - y)
+\end{align}
+\]</span></p>
+<p>with <span class="math inline">\(a&lt;1\)</span> and <span
+class="math inline">\(b&lt;1\)</span>.</p>
+<div class="layout-chunk" data-layout="l-body">
+<details>
+<summary>
+Show code
+</summary>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>nonlinear_example</span> <span class='op'>&lt;-</span> <span class='kw'>function</span><span class='op'>(</span><span class='va'>t</span>,<span class='va'>state</span>,<span class='va'>parameters</span><span class='op'>)</span><span class='op'>{</span>
+  <span class='fu'><a href='https://rdrr.io/r/base/with.html'>with</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/list.html'>as.list</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='va'>state</span>,<span class='va'>parameters</span><span class='op'>)</span><span class='op'>)</span>,<span class='op'>{</span>
+    
+    <span class='va'>dx</span> <span class='op'>&lt;-</span> <span class='va'>state</span><span class='op'>[</span><span class='fl'>1</span><span class='op'>]</span><span class='op'>*</span><span class='op'>(</span><span class='fl'>1</span><span class='op'>-</span><span class='va'>state</span><span class='op'>[</span><span class='fl'>1</span><span class='op'>]</span><span class='op'>-</span><span class='va'>a</span><span class='op'>*</span><span class='va'>state</span><span class='op'>[</span><span class='fl'>2</span><span class='op'>]</span><span class='op'>)</span>
+    <span class='va'>dy</span> <span class='op'>&lt;-</span> <span class='va'>c</span><span class='op'>*</span><span class='va'>state</span><span class='op'>[</span><span class='fl'>2</span><span class='op'>]</span><span class='op'>*</span><span class='op'>(</span><span class='fl'>1</span><span class='op'>-</span><span class='va'>b</span><span class='op'>*</span><span class='va'>state</span><span class='op'>[</span><span class='fl'>1</span><span class='op'>]</span><span class='op'>-</span><span class='va'>state</span><span class='op'>[</span><span class='fl'>2</span><span class='op'>]</span><span class='op'>)</span>
+    
+    <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='va'>dx</span>,<span class='va'>dy</span><span class='op'>)</span><span class='op'>)</span>
+  <span class='op'>}</span><span class='op'>)</span>
+<span class='op'>}</span>
+
+<span class='va'>nonlinear_flowfield</span>  <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/phaseR/man/flowField.html'>flowField</a></span><span class='op'>(</span><span class='va'>nonlinear_example</span>,
+                                       xlim       <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='op'>-</span><span class='fl'>0.25</span>, <span class='fl'>1.5</span><span class='op'>)</span>,
+                                       ylim       <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='op'>-</span><span class='fl'>0.25</span>, <span class='fl'>1.5</span><span class='op'>)</span>,
+                                       parameters <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span>a<span class='op'>=</span><span class='fl'>0.25</span>,b<span class='op'>=</span><span class='fl'>0.75</span>,c<span class='op'>=</span><span class='fl'>1.0</span><span class='op'>)</span>,
+                                       points     <span class='op'>=</span> <span class='fl'>17</span>,
+                                       add <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span>
+<span class='va'>state</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/matrix.html'>matrix</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>0.1</span>,<span class='fl'>0.1</span>,<span class='fl'>0.5</span>,<span class='fl'>0.1</span>,<span class='fl'>0.1</span>,<span class='fl'>0.5</span>,<span class='fl'>0.5</span>,<span class='fl'>0.5</span>,
+                  <span class='fl'>0.5</span>,<span class='fl'>0.75</span>,<span class='fl'>0.75</span>,<span class='fl'>0.5</span>,<span class='fl'>1.0</span>,<span class='fl'>1.0</span>,<span class='fl'>0.75</span>,<span class='fl'>1.0</span>,<span class='fl'>1.5</span>,<span class='fl'>0.5</span><span class='op'>)</span>,<span class='fl'>9</span>,<span class='fl'>2</span>,byrow <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
+<span class='va'>nonlinear_trajs</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/phaseR/man/trajectory.html'>trajectory</a></span><span class='op'>(</span><span class='va'>nonlinear_example</span>,
+                                        y0         <span class='op'>=</span> <span class='va'>state</span>,
+                                        tlim       <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>0</span>, <span class='fl'>10</span><span class='op'>)</span>,
+                                        parameters <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span>a<span class='op'>=</span><span class='fl'>0.25</span>,b<span class='op'>=</span><span class='fl'>0.75</span>,c<span class='op'>=</span><span class='fl'>1.0</span><span class='op'>)</span>,add<span class='op'>=</span><span class='cn'>TRUE</span><span class='op'>)</span>
+</code></pre>
+</div>
+</details>
+<p><img src="notes013_files/figure-html5/unnamed-chunk-3-1.png" width="624" /></p>
+</div>
+<p>It is clear that there is a stable equilibrium point with both
+components being positive values.</p>
+<h3 id="conclusions-1">Conclusions</h3>
+<p>We have derived a condition for the existence of a stable coexistence
+steady-state. There is a further consequence of this analysis.
+Generally, two species with populations that obey</p>
+<p><span class="math display">\[
+\begin{align}
+\frac{du}{dt} &amp;= r_{1}u\left(1 - \frac{u+\alpha v}{K_{1}} \right) \\
+\frac{dv}{dt} &amp;= r_{2}v\left(1 - \frac{v+\beta u}{K_{2}} \right)
+\end{align}
+\]</span></p>
+<p>occupy the same ecological niche if <span
+class="math inline">\(\alpha \beta = 1\)</span>. If they coexist, then
+<span class="math inline">\(\alpha \beta &lt; 1\)</span>. Therefore,
+competitors can not occupy the same ecological niche. This is a proof of
+the so-called <a
+href="https://en.wikipedia.org/wiki/Competitive_exclusion_principle">principle
+of competitive exclusion</a>.</p>
 <h1 id="chemostat-model">Chemostat Model</h1>
 <p>As our first example, consider the <a
 href="https://topicsinbiomath.netlify.app/notes007.html">chemostat

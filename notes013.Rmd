@@ -283,9 +283,73 @@ This will be positive if $a<1$ and $b<1$. Thus,
 
 > The coexistence steady-state exists and is stable if $a<1$ and $b<1$.
 
+What does this mean in the context of the original model
+
+$$
+\begin{align}
+\frac{du}{dt} &= r_{1}u\left(1 - \frac{u+\alpha v}{K_{1}} \right) \\
+\frac{dv}{dt} &= r_{2}v\left(1 - \frac{v+\beta u}{K_{2}} \right)
+\end{align}
+$$
+
+Recall that $a=\alpha\frac{K_{2}}{K_{1}}$ and $b=\beta\frac{K_{1}}{K_{2}}$. Notice that if $a<1$ and $b<1$, then
+
+$1 > ab = \alpha\frac{K_{2}}{K_{1}} \beta\frac{K_{1}}{K_{2}} = \alpha \beta$. 
+
+Thus, when we have a stable coexistence steady-state we have $\alpha \beta < 1$. 
+
 ### Example phase portrait
 
+Here is an example phase portrait for a system of the form
 
+$$
+\begin{align}
+\frac{dx}{d\tau} &= x(1 - x - ay) \\
+\frac{dy}{d\tau} &= cy(1 - bx - y)
+\end{align}
+$$
+
+with $a<1$ and $b<1$. 
+
+```{r,echo=TRUE,code_folding=TRUE}
+nonlinear_example <- function(t,state,parameters){
+  with(as.list(c(state,parameters)),{
+    
+    dx <- state[1]*(1-state[1]-a*state[2])
+    dy <- c*state[2]*(1-b*state[1]-state[2])
+    
+    list(c(dx,dy))
+  })
+}
+
+nonlinear_flowfield  <- flowField(nonlinear_example,
+                                       xlim       = c(-0.25, 1.5),
+                                       ylim       = c(-0.25, 1.5),
+                                       parameters = c(a=0.25,b=0.75,c=1.0),
+                                       points     = 17,
+                                       add = FALSE)
+state <- matrix(c(0.1,0.1,0.5,0.1,0.1,0.5,0.5,0.5,
+                  0.5,0.75,0.75,0.5,1.0,1.0,0.75,1.0,1.5,0.5),9,2,byrow = TRUE)
+nonlinear_trajs <- trajectory(nonlinear_example,
+                                        y0         = state,
+                                        tlim       = c(0, 10),
+                                        parameters = c(a=0.25,b=0.75,c=1.0),add=TRUE)
+```
+
+It is clear that there is a stable equilibrium point with both components being positive values. 
+
+### Conclusions
+
+We have derived a condition for the existence of a stable coexistence steady-state. There is a further consequence of this analysis. Generally, two species with populations that obey
+
+$$
+\begin{align}
+\frac{du}{dt} &= r_{1}u\left(1 - \frac{u+\alpha v}{K_{1}} \right) \\
+\frac{dv}{dt} &= r_{2}v\left(1 - \frac{v+\beta u}{K_{2}} \right)
+\end{align}
+$$
+
+occupy the same ecological niche if $\alpha \beta = 1$. If they coexist, then $\alpha \beta < 1$. Therefore, competitors can not occupy the same ecological niche. This is a proof of the so-called [principle of competitive exclusion](https://en.wikipedia.org/wiki/Competitive_exclusion_principle). 
 
 # Chemostat Model 
 
