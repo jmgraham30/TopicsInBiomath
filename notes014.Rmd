@@ -1,0 +1,82 @@
+---
+title: "Course Notes 14"
+description: |
+  An introduction to linear difference equations. 
+author:
+  - name: Jason M. Graham 
+    url: https://topicsinbiomath.netlify.app/
+    affiliation: University of Scranton 
+    affiliation_url: https://sites.google.com/site/jasonmgrahamus/
+date: "`r Sys.Date()`"
+output: 
+  distill::distill_article:
+    toc: true
+    toc_depth: 2
+creative_commons: CC BY-NC
+bibliography: topics_in_biomath.bib
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+library(knitr)
+library(kableExtra)
+library(deSolve)
+library(tidyverse)
+library(ggformula)
+library(patchwork)
+library(phaseR)
+library(latex2exp)
+theme_set(theme_light())
+```
+
+
+# Goals
+
+After reading this section of notes, you should
+
+1) know what is a discrete-time model, 
+
+2) know what is a linear difference equation, 
+
+3) know how to use linear algebra techniques to analyze a linear difference equation, and
+
+4) be aware of some biomathematical applications of linear difference equations. 
+
+# Background
+
+Let $N(t)$ denote the number of a single isolated and homogeneous population at time $t$. A common question is how does the population change over time? Early on, we argued that a general model for this is 
+
+$N(t+\Delta t) = N(t) + G(N(t),\Delta t)$
+
+which essentially states that the change (increase or decrease) in the population from $t$ to $t+\Delta t$ is determined by the current population $N(t)$ incremented by some "growth" function $G(N(t),\Delta t)$ which could be positive or negative. A first order approximation for $G$ is 
+
+$G(N(t),\Delta t) = r \Delta t N(t)$
+
+where we do not make any assumptions about the sign of $r$. This leads to 
+
+$N(t+\Delta t) = N(t) + r \Delta t N(t)$
+
+Previously, we rewrote the last expression as
+
+$\frac{N(t+\Delta t) - N(t)}{\Delta t} = r N(t)$
+
+and took the limit as $\Delta t \rightarrow 0$ which lead to the exponential growth model. This involves making an assumption. Specifically, we assume that time $t$ can be reasonably treated as a continuous variable. There are many situations where this an appropriate assumption. On the other hand, there are situations in which it is more reasonable to view time as a discrete variable. Let's now make this assumption in the context of our population growth model. To denote this distinction mathematically, we write $N(t)=N_{t}$, then our simple first-order population growth model becomes
+
+$N_{t+\Delta t} = (1+r\Delta t)N_{t}$
+
+If we increment over a fixed-size time step for $\Delta t$, then we can write the previous equation as
+
+$N_{t+1} = \lambda N_{t}$
+
+This is an example of a discrete time model. In general, a discrete time model is a sequence $x_{0}$, $x_{1}$, $\ldots$, $x_{n}$, $x_{n+1}$, $\ldots$, where
+
+$x_{i}\in \mathbb{R}^{p}$ for all $i=0,1,\ldots$ and for some $p\in \mathbb{Z}^{+}$, and
+
+$x_{i+1}=f(x_{i},x_{i-1},x_{i-2},\ldots,x_{i-k})$ for all $i=1,2,\ldots$ and some fixed $k\geq 0$.
+
+If $k=0$, then we have
+
+$x_{i+1}=f(x_{i})$
+
+and the discrete time model is said to be **first-order**. 
+

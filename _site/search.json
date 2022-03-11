@@ -226,6 +226,20 @@
       "last_modified": "2022-03-09T13:46:04-05:00"
     },
     {
+      "path": "notes014.html",
+      "title": "Course Notes 14",
+      "description": "An introduction to linear difference equations. \n",
+      "author": [
+        {
+          "name": "Jason M. Graham",
+          "url": "https://topicsinbiomath.netlify.app/"
+        }
+      ],
+      "date": "`r Sys.Date()`",
+      "contents": "\n\nContents\nGoals\nBackground\n\nGoals\nAfter reading this section of notes, you should\nknow what is a discrete-time model,\nknow what is a linear difference equation,\nknow how to use linear algebra techniques to analyze a linear\ndifference equation, and\nbe aware of some biomathematical applications of linear\ndifference equations.\nBackground\nLet \\(N(t)\\) denote the number of a\nsingle isolated and homogeneous population at time \\(t\\). A common question is how does the\npopulation change over time? Early on, we argued that a general model\nfor this is\n\\(N(t+\\Delta t) = N(t) + G(N(t),\\Delta\nt)\\)\nwhich essentially states that the change (increase or decrease) in\nthe population from \\(t\\) to \\(t+\\Delta t\\) is determined by the current\npopulation \\(N(t)\\) incremented by some\n“growth” function \\(G(N(t),\\Delta t)\\)\nwhich could be positive or negative. A first order approximation for\n\\(G\\) is\n\\(G(N(t),\\Delta t) = r \\Delta t\nN(t)\\)\nwhere we do not make any assumptions about the sign of \\(r\\). This leads to\n\\(N(t+\\Delta t) = N(t) + r \\Delta t\nN(t)\\)\nPreviously, we rewrote the last expression as\n\\(\\frac{N(t+\\Delta t) - N(t)}{\\Delta t} = r\nN(t)\\)\nand took the limit as \\(\\Delta t\n\\rightarrow 0\\) which lead to the exponential growth model. This\ninvolves making an assumption. Specifically, we assume that time \\(t\\) can be reasonably treated as a\ncontinuous variable. There are many situations where this an appropriate\nassumption. On the other hand, there are situations in which it is more\nreasonable to view time as a discrete variable. Let’s now make this\nassumption in the context of our population growth model. To denote this\ndistinction mathematically, we write \\(N(t)=N_{t}\\), then our simple first-order\npopulation growth model becomes\n\\(N_{t+\\Delta t} = (1+r\\Delta\nt)N_{t}\\)\nIf we increment over a fixed-size time step for \\(\\Delta t\\), then we can write the previous\nequation as\n\\(N_{t+1} = \\lambda N_{t}\\)\nThis is an example of a discrete time model. In general, a discrete\ntime model is a sequence \\(x_{0}\\),\n\\(x_{1}\\), \\(\\ldots\\), \\(x_{n}\\), \\(x_{n+1}\\), \\(\\ldots\\), where\n\\(x_{i}\\in \\mathbb{R}^{p}\\) for all\n\\(i=0,1,\\ldots\\) and for some \\(p\\in \\mathbb{Z}^{+}\\), and\n\\(x_{i+1}=f(x_{i},x_{i-1},x_{i-2},\\ldots,x_{i-k})\\)\nfor all \\(i=1,2,\\ldots\\) and some fixed\n\\(k\\geq 0\\).\nIf \\(k=0\\), then we have\n\\(x_{i+1}=f(x_{i})\\)\nand the discrete time model is said to be\nfirst-order.\n\n\n\n",
+      "last_modified": "2022-03-11T08:41:07-05:00"
+    },
+    {
       "path": "r_for_biomath.html",
       "title": "R for Biomathematics",
       "description": "An Introduction to R for Biomathematics\n",
