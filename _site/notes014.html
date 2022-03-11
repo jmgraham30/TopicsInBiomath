@@ -2145,6 +2145,13 @@ class="uri">https://sites.google.com/site/jasonmgrahamus/</a>
 <ul>
 <li><a href="#goals">Goals</a></li>
 <li><a href="#background">Background</a></li>
+<li><a href="#analysis-of-linear-difference-equations">Analysis of
+Linear Difference Equations</a>
+<ul>
+<li><a
+href="#eigenvalue-analysis-of-linear-difference-equations">Eigenvalue
+Analysis of Linear Difference Equations</a></li>
+</ul></li>
 </ul>
 </nav>
 </div>
@@ -2213,11 +2220,244 @@ class="math inline">\(p\in \mathbb{Z}^{+}\)</span>, and</p>
 class="math inline">\(x_{i+1}=f(x_{i},x_{i-1},x_{i-2},\ldots,x_{i-k})\)</span>
 for all <span class="math inline">\(i=1,2,\ldots\)</span> and some fixed
 <span class="math inline">\(k\geq 0\)</span>.</p>
+<p>Typically, we treat the <span class="math inline">\(x_{i}\)</span> as
+unknowns and refer to the expression <span
+class="math inline">\(x_{i+1}=f(x_{i},x_{i-1},x_{i-2},\ldots,x_{i-k})\)</span>
+as a <strong>difference equation</strong>. A <strong>solution</strong>
+of the difference equation is any sequence <span
+class="math inline">\(x_{0},x_{1},\ldots\)</span> that satisfies the
+recurrence defined by the difference equation.</p>
 <p>If <span class="math inline">\(k=0\)</span>, then we have</p>
 <p><span class="math inline">\(x_{i+1}=f(x_{i})\)</span></p>
 <p>and the discrete time model is said to be
 <strong>first-order</strong>.</p>
-<div class="sourceCode" id="cb1"><pre
+<p>In our example model <span class="math inline">\(N_{t+1} = \lambda
+N_{t}\)</span> we have <span class="math inline">\(f(N_{t})=\lambda
+N_{t}\)</span> with <span class="math inline">\(\lambda\)</span> a
+constant. It is obviously a first-order model. Moreover, it is linear.
+In general, if a discrete time model can be written as</p>
+<p><span class="math inline">\(x_{t+1}= A x_{t}\)</span></p>
+<p>where <span class="math inline">\(x_{t}\in \mathbb{R}^{n}\)</span>
+for all <span class="math inline">\(t\)</span> and <span
+class="math inline">\(A\)</span> is an <span
+class="math inline">\(n\times n\)</span> matrix then we say it is a
+<strong>linear difference equation</strong>.</p>
+<h1 id="analysis-of-linear-difference-equations">Analysis of Linear
+Difference Equations</h1>
+<p>Suppose we have a linear difference equation</p>
+<p><span class="math inline">\(x_{t+1}= A x_{t}\)</span></p>
+<p>where <span class="math inline">\(x_{t}\in \mathbb{R}^{n}\)</span>
+for all <span class="math inline">\(t\)</span> and <span
+class="math inline">\(A\)</span> is an <span
+class="math inline">\(n\times n\)</span> matrix, and let <span
+class="math inline">\(x_{0}\)</span> be some given initial vector.
+Then,</p>
+<p><span class="math inline">\(x_{1} = Ax_{0},\)</span></p>
+<p><span class="math display">\[
+\begin{align}
+x_{2} &amp;= Ax_{1} \\
+&amp;= A(Ax_{0}) \\
+&amp;= A^2x_{0}
+\end{align}
+\]</span></p>
+<p>and generally,</p>
+<p><span class="math display">\[
+\begin{align}
+x_{i+1} &amp;= Ax_{i} \\
+&amp;= A(Ax_{i-1}) = A^2x_{i-1} \\
+&amp;= A(A(Ax_{i-2})) = A^3x_{i-2} \\
+&amp;= \ldots \\
+&amp;= A^{k+1}x_{i-k} \\
+&amp;= \ldots \\
+&amp;= A^{i+1}x_{0}
+\end{align}
+\]</span></p>
+<p>Thus, the solution to a linear difference equation <span
+class="math inline">\(x_{t+1}=Ax_{t}\)</span> is a sequence <span
+class="math inline">\(x_{0}\)</span>, <span
+class="math inline">\(x_{1}=Ax_{0}\)</span>, <span
+class="math inline">\(x_{2}=A^2x_{0}\)</span>, <span
+class="math inline">\(\ldots\)</span>, <span
+class="math inline">\(x_{n}=A^{n}x_{0}\)</span>, <span
+class="math inline">\(\ldots\)</span>. Notice that to compute each term
+in the sequence, we must compute the <span
+class="math inline">\(n\)</span>-fold matrix power <span
+class="math inline">\(A^n\)</span>. Typically, this is not convenient to
+compute. Our goal is to show that there is another approach that can be
+taken.</p>
+<h2 id="eigenvalue-analysis-of-linear-difference-equations">Eigenvalue
+Analysis of Linear Difference Equations</h2>
+<p>Let <span class="math inline">\(A\)</span> be an <span
+class="math inline">\(n\times n\)</span> matrix and suppose that <span
+class="math inline">\(A\)</span> has a complete set of eigenvectors.
+That is, suppose that <span class="math inline">\(A\)</span> has <span
+class="math inline">\(n\)</span> linearly independent eigenvectors <span
+class="math inline">\(v_{1},v_{2},\ldots, v_{n}\)</span> with
+corresponding eigenvalues <span
+class="math inline">\(\lambda_{1},\lambda_{2}\ldots,\lambda_{n}\)</span>.
+Now, let <span class="math inline">\(x_0\)</span> be a vector in <span
+class="math inline">\(\mathbb{R}^{n}\)</span>. We may write</p>
+<p><span class="math inline">\(x_{0}=c_{1}v_{1}+c_{2}v_{2}+\cdots
++c_{n}v_{n}\)</span></p>
+<p>where the <span class="math inline">\(c_{i}\)</span> are uniquely
+determined scalars. Further, if <span
+class="math inline">\(\lambda\)</span>, <span
+class="math inline">\(v\)</span> is an eigenvalue-eigenvector pair for
+<span class="math inline">\(A\)</span>, then</p>
+<p><span class="math inline">\(A^n v = \lambda^n v,\)</span></p>
+<p>an identity you may derive as an exercise. Using this, we see
+that</p>
+<p><span class="math inline">\(x_{i} = A^{i}x_{0}=c_{1}\lambda_{1}^i
+v_{1} + c_{2}\lambda_{2}^i v_{2} + \cdots + c_{n}\lambda_{n}^i
+v_{n}\)</span></p>
+<p>and this provides another way to express a solution to a linear
+difference equation. The benefit is that this does not require us to
+compute matrix powers, only powers of scalars.</p>
+<h3 id="example">Example</h3>
+<p>Consider the linear difference equation <span
+class="math inline">\(x_{t+1}=Ax_{t}\)</span> with</p>
+<p><span class="math inline">\(A = \left(\begin{array}{cc} 2 &amp; 3 \\
+2 &amp; 1 \end{array}\right),\)</span></p>
+<p>the eigenvalues of <span class="math inline">\(A\)</span> are</p>
+<div class="layout-chunk" data-layout="l-body">
+<details>
+<summary>
+Show code
+</summary>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>A</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/matrix.html'>matrix</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>2</span>,<span class='fl'>3</span>,<span class='fl'>2</span>,<span class='fl'>1</span><span class='op'>)</span>,<span class='fl'>2</span>,<span class='fl'>2</span>,byrow<span class='op'>=</span><span class='cn'>TRUE</span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/r/base/eigen.html'>eigen</a></span><span class='op'>(</span><span class='va'>A</span><span class='op'>)</span><span class='op'>$</span><span class='va'>values</span>
+</code></pre>
+</div>
+</details>
+<pre><code>[1]  4 -1</code></pre>
+</div>
+<p>One can also see that if <span
+class="math inline">\(\lambda_{1}=4\)</span> and <span
+class="math inline">\(\lambda_{2}=-1\)</span>, then <span
+class="math inline">\(v_{1}=(3,2)^{T}\)</span> and <span
+class="math inline">\(v_{2}=(1,-1)^{T}\)</span> are corresponding
+eigenvectors. Thus, the general solution to this example linear
+difference equation is</p>
+<p><span class="math inline">\(x_{i} =
+c_{1}(4)^{i}\left(\begin{array}{c} 3 \\2 \end{array} \right) +
+c_{2}(-1)^i\left(\begin{array}{c} 1 \\ -1 \end{array}
+\right)\)</span></p>
+<p>Suppose for example that <span
+class="math inline">\(x_{0}=(1,1)^{T}\)</span>. To find the solution
+with this particular initial condition we must find scalars <span
+class="math inline">\(c_{1}\)</span> and <span
+class="math inline">\(c_{2}\)</span> so that</p>
+<p><span class="math inline">\(\left(\begin{array}{c} 1 \\1 \end{array}
+\right) = c_{1}\left(\begin{array}{c} 3 \\ 2 \end{array} \right) +
+c_{2}\left(\begin{array}{c} 1 \\ -1 \end{array} \right)\)</span></p>
+<p>this can be done by solving the linear system</p>
+<p><span class="math inline">\(\left(\begin{array}{cc} 3 &amp; 1 \\ 2
+&amp; -1 \end{array}\right)\left(\begin{array}{c} c_{1} \\ c_{2}
+\end{array} \right) = \left(\begin{array}{c} 1 \\1 \end{array}
+\right)\)</span></p>
+<p>which is</p>
+<div class="layout-chunk" data-layout="l-body">
+<details>
+<summary>
+Show code
+</summary>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>V</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/matrix.html'>matrix</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>3</span>,<span class='fl'>1</span>,<span class='fl'>2</span>,<span class='op'>-</span><span class='fl'>1</span><span class='op'>)</span>,<span class='fl'>2</span>,<span class='fl'>2</span>,byrow <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
+<span class='va'>b</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>1</span>,<span class='fl'>1</span><span class='op'>)</span>
+<span class='op'>(</span><span class='va'>x</span><span class='op'>&lt;-</span><span class='fu'><a href='https://rdrr.io/r/base/solve.html'>solve</a></span><span class='op'>(</span><span class='va'>V</span>,<span class='va'>b</span><span class='op'>)</span><span class='op'>)</span>
+</code></pre>
+</div>
+</details>
+<pre><code>[1]  0.4 -0.2</code></pre>
+</div>
+<p>So, the solution to <span
+class="math inline">\(x_{t+1}=Ax_{t}\)</span> with</p>
+<p><span class="math inline">\(A = \left(\begin{array}{cc} 2 &amp; 3 \\
+2 &amp; 1 \end{array}\right),\)</span></p>
+<p>and <span class="math inline">\(x_{0}=(1,1)^{T}\)</span> is</p>
+<p><span class="math inline">\(x_{t}=\frac{2}{5}(4)^t
+\left(\begin{array}{c} 3 \\ 2 \end{array} \right) - \frac{1}{5}(-1)^t
+\left(\begin{array}{c} 1 \\ -1 \end{array} \right) = (4)^t
+\left(\begin{array}{c} \frac{6}{5} \\ \frac{4}{5} \end{array} \right) +
+(-1)^t \left(\begin{array}{c} -\frac{1}{5} \\ \frac{1}{5} \end{array}
+\right)\)</span></p>
+<p>An interesting question about the dynamics of discrete time models
+is, what happens to the system as <span
+class="math inline">\(t\rightarrow \infty\)</span>. Note that in the
+expression</p>
+<p><span class="math inline">\(x_{i} = c_{1}\lambda_{1}^i v_{1} +
+c_{2}\lambda_{2}^i v_{2} + \cdots + c_{n}\lambda_{n}^i
+v_{n}\)</span></p>
+<p>if all of the eigenvalues satisfy <span
+class="math inline">\(|\lambda_{i}|&lt;1\)</span>, then <span
+class="math inline">\(x_{i} \rightarrow 0\)</span> as <span
+class="math inline">\(i \rightarrow \infty\)</span>. Thus, if <span
+class="math inline">\(x_{t+1}=Ax_{t}\)</span> is a linear difference
+equation, we expect <span class="math inline">\(x_{t} \rightarrow
+0\)</span> in the long-term whenever all of the eigenvalues of <span
+class="math inline">\(A\)</span> have absolute value less than 1.</p>
+<p>We can apply the result we just derived to our simple population
+growth model <span class="math inline">\(N_{t+1}=\lambda N_{t}\)</span>
+by observing that it is a one-dimensional linear difference equation.
+Therefore, the general solution is <span
+class="math inline">\(N_{t}=c\lambda^t N_{0}\)</span> and then the
+population will die out if <span class="math inline">\(|\lambda| &lt;
+1\)</span>. On the other hand, what will happen if <span
+class="math inline">\(|\lambda| &gt; 1\)</span>? In the one-dimensional
+case it is pretty clear, the magnitude of the population will grow
+without bound. What happens in the general case <span
+class="math inline">\(x_{t+1}=Ax_{t}\)</span> whenever <span
+class="math inline">\(A\)</span> is an <span
+class="math inline">\(n\times n\)</span> matrix?</p>
+<p>To answer this question, suppose that our eigenvalues are ordered so
+that <span class="math inline">\(|\lambda_1| &gt; |\lambda_2| &gt;
+\cdots &gt; |\lambda_{n}|\)</span> and then rewrite</p>
+<p><span class="math display">\[
+\begin{align}
+x_{t} &amp;= c_{1}(\lambda_{1})^tv_{1} + c_{2}(\lambda_{2})^tv_{2} +
+\cdots + c_{n}(\lambda_{n})^tv_{n} \\
+&amp;= \lambda_{1}^t\left(c_{1} v_{1} +
+c_{2}\left(\frac{\lambda_{2}}{\lambda_{1}}\right)^t v_{2} + \cdots +
+c_{n}\left( \frac{\lambda_{n}}{\lambda_{1}}\right)^t v_{n}\right)
+\end{align}
+\]</span></p>
+<p>Now, for <span class="math inline">\(j=2,\ldots n\)</span> we have
+that <span class="math inline">\(\left|
+\frac{\lambda_{j}}{\lambda_{1}}\right| &lt; 1\)</span>. So, we expect
+that as <span class="math inline">\(t\rightarrow \infty\)</span> each of
+these terms will go to zero and <span
+class="math inline">\(x_{t}\)</span> will asymptotically approach the
+line determined by the vector <span
+class="math inline">\(v_{1}\)</span>. For a matrix <span
+class="math inline">\(A\)</span>, we call the eigenvalue of <span
+class="math inline">\(A\)</span> that is largest in absolute value the
+<strong>dominant eigenvalue</strong>. Thus, the dominant eigenvalue and
+corresponding eigenvector determine the long-term dynamics of a discrete
+dynamical system determined by a linear difference equation.</p>
+<h3 id="example-1">Example</h3>
+<p>Consider again the linear difference equation <span
+class="math inline">\(x_{t+1}=Ax_{t}\)</span> with</p>
+<p><span class="math inline">\(A = \left(\begin{array}{cc} 2 &amp; 3 \\
+2 &amp; 1 \end{array}\right)\)</span></p>
+<p>This matrix has dominant eigenvalue <span
+class="math inline">\(\lambda_{1}=4\)</span> with corresponding
+eigenvector <span class="math inline">\(v_{1}=(3,2)^{T}\)</span>. The
+following figure shows the points <span
+class="math inline">\(x_{t}\)</span> in the plane determined by the
+sequence <span class="math inline">\(x_{t}=A^{t}x_{0}\)</span> together
+with the line through the vector <span
+class="math inline">\(v_{1}\)</span>.</p>
+<div class="layout-chunk" data-layout="l-body">
+<p><img src="notes014_files/figure-html5/unnamed-chunk-3-1.png" width="624" /></p>
+</div>
+<p>Note that we have plotted on the log scale because there is
+exponential growth in the magnitude of points in the sequence of vectors
+<span class="math inline">\(x_{t}\)</span>. This plot clearly shows how
+the asymptotic dynamics of the discrete time model “follows” the
+direction of the eigenvector corresponding with the dominant
+eigenvalue.</p>
+<div class="sourceCode" id="cb3"><pre
 class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
 <!--radix_placeholder_article_footer-->
 <!--/radix_placeholder_article_footer-->
