@@ -26,6 +26,7 @@ library(ggformula)
 library(patchwork)
 library(phaseR)
 library(latex2exp)
+library(DiagrammeR)
 theme_set(theme_light())
 ```
 
@@ -228,5 +229,46 @@ lde_df %>% ggplot() + geom_point(aes(x=log10(x),y=log10(y))) +
 ```
 
 Note that we have plotted on the log scale because there is exponential growth in the magnitude of points in the sequence of vectors $x_{t}$. This plot clearly shows how the asymptotic dynamics of the discrete time model "follows" the direction of the eigenvector corresponding with the dominant eigenvalue. 
+
+# Application: Age-Structured Models
+
+An important application of linear difference equations as a discrete time model for population growth is provided by the so-called [Leslie matrix model](https://en.wikipedia.org/wiki/Leslie_matrix). The utility of this model is that it allows us to incorporate additional biologically interesting structure into a population model. By "structure" we mean a feature or features that  subsets of a population may or may not have but that plays a distinguishing role in the ecology of the species whose population growth we want to model. 
+
+For example, many insects progress through distinct, discrete developmental stages such as egg, larva, pupa, adult. The reproductive behavior and survival rate is different within each of these different developmental stages. Thus, there is a clear age-structure involved in the growth of such species. How does one incorporate such additional structure into a mathematical model for the growth of a population? It is clear that age is temporal phenomenon but aging may occur on a different time-scale than the overall change in the size of a population. This makes it challenging to incorporate age-structure into a continuous-time model although this can be done. On the other hand, it is fairly simple to develop discrete time models that include age-structure or other similar population structures. This is done classically using the Leslie matrix model. 
+
+Here is the general idea. To start with the simplest case we assume that we have a single population that is closed to migration and we only model females. The population is divided up into discrete groups, say for example into $N$ groups. Denote by $(x_{i})_{t}$ the number of individuals in group $i$ at time $t$. We assume that group 1 corresponds to offspring. Thus, new individuals are "born into" group 1. For each of the groups $i=1,2,\ldots, N$, there is a chance of progressing from group $i$ to group $i+1$ determined by a value $s_{i}$. Further, for $i=1,2,\ldots, N$ we let $b_{i}\geq 0$ denote the average number of newborn females produced by one female in the $i$-th age group that survive through the time interval in which they were born. Then, 
+
+$(x_{1})_{t+1} = b_{1}(x_{1})_{t} + b_{2}(x_{2})_{t} + \cdots + b_{N}(x_{N})_{t}$
+
+$(x_{i+1})_{t+1} = s_{i}(x_{i})_{t}$, for $i=1,\ldots,N-1$
+
+We can rewrite this in matrix-vector notation as
+
+$$
+X_{t+1} = \left(\begin{array}{c} (x_{1})_{t+1}\\ (x_{2})_{t+1} \\ (x_{3})_{t+1} \\ \vdots \\ (x_{N})_{t+1}\end{array}\right) = \left(\begin{array}{ccccc} b_{1} & b_{2} & \cdots & b_{N-1} & b_{N} \\ s_{1} & 0 & \cdots & 0 & 0 \\ 0 & s_{2} & \cdots & 0 & 0 \\ \vdots & \vdots & \ddots & \vdots & \vdots \\ 0 & 0 & \cdots & s_{N-1} & 0 \end{array}\right)\left(\begin{array}{c} (x_{1})_{t}\\ (x_{2})_{t} \\ (x_{3})_{t} \\ \vdots \\ (x_{N})_{t} \end{array}\right) = LX_{t}
+$$
+
+where we call the matrix $L$ the Leslie matrix. Here is a diagram that illustrates the Leslie matrix model idea in the case where $N=4$:
+
+```{r,echo=TRUE,code_folding=TRUE}
+a_graph <-
+  create_graph() %>%
+  add_n_nodes(n=4,label = c("1","2","3","4"),
+              node_aes = node_aes(shape="circle",color = "black")) %>%
+  add_edges_w_string(edges = "1->2 2->3 3->4 4->1 3->1 2->1 1->1") %>%
+  select_edges_by_edge_id(edges = 1:7) %>%
+  set_edge_attrs_ws(
+    edge_attr = color,
+    value = "black")
+
+
+render_graph(a_graph, layout = "circle")
+```
+
+This diagram shows the relationships among the (four in the example) different age groups. 
+
+Before we proceed to consider the analysis of the dynamics of a Leslie matrix model, note that for any Leslie matrix $L$, all of the entries will be **nonnegative**.  
+
+## Analyzing the Leslie Matrix Model
 
 

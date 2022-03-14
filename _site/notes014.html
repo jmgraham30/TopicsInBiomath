@@ -94,8 +94,8 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   <link rel="license" href="https://creativecommons.org/licenses/by-nc/4.0/"/>
 
   <!--  https://schema.org/Article -->
-  <meta property="article:published" itemprop="datePublished" content="2022-03-11"/>
-  <meta property="article:created" itemprop="dateCreated" content="2022-03-11"/>
+  <meta property="article:published" itemprop="datePublished" content="2022-03-14"/>
+  <meta property="article:created" itemprop="dateCreated" content="2022-03-14"/>
   <meta name="article:author" content="Jason M. Graham"/>
 
   <!--  https://developers.facebook.com/docs/sharing/webmasters#markup -->
@@ -115,7 +115,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   <!--radix_placeholder_rmarkdown_metadata-->
 
   <script type="text/json" id="radix-rmarkdown-metadata">
-  {"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["title","description","author","date","output","creative_commons","bibliography"]}},"value":[{"type":"character","attributes":{},"value":["Course Notes 14"]},{"type":"character","attributes":{},"value":["An introduction to linear difference equations. \n"]},{"type":"list","attributes":{},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","url","affiliation","affiliation_url"]}},"value":[{"type":"character","attributes":{},"value":["Jason M. Graham"]},{"type":"character","attributes":{},"value":["https://topicsinbiomath.netlify.app/"]},{"type":"character","attributes":{},"value":["University of Scranton"]},{"type":"character","attributes":{},"value":["https://sites.google.com/site/jasonmgrahamus/"]}]}]},{"type":"character","attributes":{},"value":["2022-03-11"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["distill::distill_article"]}},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["toc","toc_depth"]}},"value":[{"type":"logical","attributes":{},"value":[true]},{"type":"integer","attributes":{},"value":[2]}]}]},{"type":"character","attributes":{},"value":["CC BY-NC"]},{"type":"character","attributes":{},"value":["topics_in_biomath.bib"]}]}
+  {"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["title","description","author","date","output","creative_commons","bibliography"]}},"value":[{"type":"character","attributes":{},"value":["Course Notes 14"]},{"type":"character","attributes":{},"value":["An introduction to linear difference equations. \n"]},{"type":"list","attributes":{},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","url","affiliation","affiliation_url"]}},"value":[{"type":"character","attributes":{},"value":["Jason M. Graham"]},{"type":"character","attributes":{},"value":["https://topicsinbiomath.netlify.app/"]},{"type":"character","attributes":{},"value":["University of Scranton"]},{"type":"character","attributes":{},"value":["https://sites.google.com/site/jasonmgrahamus/"]}]}]},{"type":"character","attributes":{},"value":["2022-03-14"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["distill::distill_article"]}},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["toc","toc_depth"]}},"value":[{"type":"logical","attributes":{},"value":[true]},{"type":"integer","attributes":{},"value":[2]}]}]},{"type":"character","attributes":{},"value":["CC BY-NC"]},{"type":"character","attributes":{},"value":["topics_in_biomath.bib"]}]}
   </script>
   <!--/radix_placeholder_rmarkdown_metadata-->
   <!--radix_placeholder_navigation_in_header-->
@@ -2044,6 +2044,10 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 
   <!--/radix_placeholder_distill-->
   <script src="site_libs/header-attrs-2.13/header-attrs.js"></script>
+  <script src="site_libs/htmlwidgets-1.5.4/htmlwidgets.js"></script>
+  <script src="site_libs/viz-1.8.2/viz.js"></script>
+  <link href="site_libs/DiagrammeR-styles-0.2/styles.css" rel="stylesheet" />
+  <script src="site_libs/grViz-binding-1.0.9/grViz.js"></script>
   <script src="site_libs/popper-2.6.0/popper.min.js"></script>
   <link href="site_libs/tippy-6.2.7/tippy.css" rel="stylesheet" />
   <link href="site_libs/tippy-6.2.7/tippy-light-border.css" rel="stylesheet" />
@@ -2063,7 +2067,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <!--radix_placeholder_front_matter-->
 
 <script id="distill-front-matter" type="text/json">
-{"title":"Course Notes 14","description":"An introduction to linear difference equations.","authors":[{"author":"Jason M. Graham","authorURL":"https://topicsinbiomath.netlify.app/","affiliation":"University of Scranton","affiliationURL":"https://sites.google.com/site/jasonmgrahamus/","orcidID":""}],"publishedDate":"2022-03-11T00:00:00.000-05:00","citationText":"Graham, 2022"}
+{"title":"Course Notes 14","description":"An introduction to linear difference equations.","authors":[{"author":"Jason M. Graham","authorURL":"https://topicsinbiomath.netlify.app/","affiliation":"University of Scranton","affiliationURL":"https://sites.google.com/site/jasonmgrahamus/","orcidID":""}],"publishedDate":"2022-03-14T00:00:00.000-04:00","citationText":"Graham, 2022"}
 </script>
 
 <!--/radix_placeholder_front_matter-->
@@ -2135,7 +2139,7 @@ class="uri">https://topicsinbiomath.netlify.app/</a> (University of
 Scranton)<a href="https://sites.google.com/site/jasonmgrahamus/"
 class="uri">https://sites.google.com/site/jasonmgrahamus/</a>
   
-<br/>2022-03-11
+<br/>2022-03-14
 </div>
 
 <div class="d-article">
@@ -2151,6 +2155,12 @@ Linear Difference Equations</a>
 <li><a
 href="#eigenvalue-analysis-of-linear-difference-equations">Eigenvalue
 Analysis of Linear Difference Equations</a></li>
+</ul></li>
+<li><a href="#application-age-structured-models">Application:
+Age-Structured Models</a>
+<ul>
+<li><a href="#analyzing-the-leslie-matrix-model">Analyzing the Leslie
+Matrix Model</a></li>
 </ul></li>
 </ul>
 </nav>
@@ -2457,6 +2467,99 @@ exponential growth in the magnitude of points in the sequence of vectors
 the asymptotic dynamics of the discrete time model “follows” the
 direction of the eigenvector corresponding with the dominant
 eigenvalue.</p>
+<h1 id="application-age-structured-models">Application: Age-Structured
+Models</h1>
+<p>An important application of linear difference equations as a discrete
+time model for population growth is provided by the so-called <a
+href="https://en.wikipedia.org/wiki/Leslie_matrix">Leslie matrix
+model</a>. The utility of this model is that it allows us to incorporate
+additional biologically interesting structure into a population model.
+By “structure” we mean a feature or features that subsets of a
+population may or may not have but that plays a distinguishing role in
+the ecology of the species whose population growth we want to model.</p>
+<p>For example, many insects progress through distinct, discrete
+developmental stages such as egg, larva, pupa, adult. The reproductive
+behavior and survival rate is different within each of these different
+developmental stages. Thus, there is a clear age-structure involved in
+the growth of such species. How does one incorporate such additional
+structure into a mathematical model for the growth of a population? It
+is clear that age is temporal phenomenon but aging may occur on a
+different time-scale than the overall change in the size of a
+population. This makes it challenging to incorporate age-structure into
+a continuous-time model although this can be done. On the other hand, it
+is fairly simple to develop discrete time models that include
+age-structure or other similar population structures. This is done
+classically using the Leslie matrix model.</p>
+<p>Here is the general idea. To start with the simplest case we assume
+that we have a single population that is closed to migration and we only
+model females. The population is divided up into discrete groups, say
+for example into <span class="math inline">\(N\)</span> groups. Denote
+by <span class="math inline">\((x_{i})_{t}\)</span> the number of
+individuals in group <span class="math inline">\(i\)</span> at time
+<span class="math inline">\(t\)</span>. We assume that group 1
+corresponds to offspring. Thus, new individuals are “born into” group 1.
+For each of the groups <span class="math inline">\(i=1,2,\ldots,
+N\)</span>, there is a chance of progressing from group <span
+class="math inline">\(i\)</span> to group <span
+class="math inline">\(i+1\)</span> determined by a value <span
+class="math inline">\(s_{i}\)</span>. Further, for <span
+class="math inline">\(i=1,2,\ldots, N\)</span> we let <span
+class="math inline">\(b_{i}\geq 0\)</span> denote the average number of
+newborn females produced by one female in the <span
+class="math inline">\(i\)</span>-th age group that survive through the
+time interval in which they were born. Then,</p>
+<p><span class="math inline">\((x_{1})_{t+1} = b_{1}(x_{1})_{t} +
+b_{2}(x_{2})_{t} + \cdots + b_{N}(x_{N})_{t}\)</span></p>
+<p><span class="math inline">\((x_{i+1})_{t+1} =
+s_{i}(x_{i})_{t}\)</span>, for <span
+class="math inline">\(i=1,\ldots,N-1\)</span></p>
+<p>We can rewrite this in matrix-vector notation as</p>
+<p><span class="math display">\[
+X_{t+1} = \left(\begin{array}{c} (x_{1})_{t+1}\\ (x_{2})_{t+1} \\
+(x_{3})_{t+1} \\ \vdots \\ (x_{N})_{t+1}\end{array}\right) =
+\left(\begin{array}{ccccc} b_{1} &amp; b_{2} &amp; \cdots &amp; b_{N-1}
+&amp; b_{N} \\ s_{1} &amp; 0 &amp; \cdots &amp; 0 &amp; 0 \\ 0 &amp;
+s_{2} &amp; \cdots &amp; 0 &amp; 0 \\ \vdots &amp; \vdots &amp; \ddots
+&amp; \vdots &amp; \vdots \\ 0 &amp; 0 &amp; \cdots &amp; s_{N-1} &amp;
+0 \end{array}\right)\left(\begin{array}{c} (x_{1})_{t}\\ (x_{2})_{t} \\
+(x_{3})_{t} \\ \vdots \\ (x_{N})_{t} \end{array}\right) = LX_{t}
+\]</span></p>
+<p>where we call the matrix <span class="math inline">\(L\)</span> the
+Leslie matrix. Here is a diagram that illustrates the Leslie matrix
+model idea in the case where <span
+class="math inline">\(N=4\)</span>:</p>
+<div class="layout-chunk" data-layout="l-body">
+<details>
+<summary>
+Show code
+</summary>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>a_graph</span> <span class='op'>&lt;-</span>
+  <span class='fu'><a href='https://rdrr.io/pkg/DiagrammeR/man/create_graph.html'>create_graph</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span>
+  <span class='fu'><a href='https://rdrr.io/pkg/DiagrammeR/man/add_n_nodes.html'>add_n_nodes</a></span><span class='op'>(</span>n<span class='op'>=</span><span class='fl'>4</span>,label <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"1"</span>,<span class='st'>"2"</span>,<span class='st'>"3"</span>,<span class='st'>"4"</span><span class='op'>)</span>,
+              node_aes <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/pkg/DiagrammeR/man/node_aes.html'>node_aes</a></span><span class='op'>(</span>shape<span class='op'>=</span><span class='st'>"circle"</span>,color <span class='op'>=</span> <span class='st'>"black"</span><span class='op'>)</span><span class='op'>)</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span>
+  <span class='fu'><a href='https://rdrr.io/pkg/DiagrammeR/man/add_edges_w_string.html'>add_edges_w_string</a></span><span class='op'>(</span>edges <span class='op'>=</span> <span class='st'>"1-&gt;2 2-&gt;3 3-&gt;4 4-&gt;1 3-&gt;1 2-&gt;1 1-&gt;1"</span><span class='op'>)</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span>
+  <span class='fu'><a href='https://rdrr.io/pkg/DiagrammeR/man/select_edges_by_edge_id.html'>select_edges_by_edge_id</a></span><span class='op'>(</span>edges <span class='op'>=</span> <span class='fl'>1</span><span class='op'>:</span><span class='fl'>7</span><span class='op'>)</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span>
+  <span class='fu'><a href='https://rdrr.io/pkg/DiagrammeR/man/set_edge_attrs_ws.html'>set_edge_attrs_ws</a></span><span class='op'>(</span>
+    edge_attr <span class='op'>=</span> <span class='va'>color</span>,
+    value <span class='op'>=</span> <span class='st'>"black"</span><span class='op'>)</span>
+
+
+<span class='fu'><a href='https://rdrr.io/pkg/DiagrammeR/man/render_graph.html'>render_graph</a></span><span class='op'>(</span><span class='va'>a_graph</span>, layout <span class='op'>=</span> <span class='st'>"circle"</span><span class='op'>)</span>
+</code></pre>
+</div>
+</details>
+<div id="htmlwidget-a433a1a74ae01644d37b" style="width:624px;height:384px;" class="grViz html-widget"></div>
+<script type="application/json" data-for="htmlwidget-a433a1a74ae01644d37b">{"x":{"diagram":"digraph {\n\ngraph [layout = \"neato\",\n       outputorder = \"edgesfirst\",\n       bgcolor = \"white\"]\n\nnode [fontname = \"Helvetica\",\n      fontsize = \"10\",\n      shape = \"circle\",\n      fixedsize = \"true\",\n      width = \"0.5\",\n      style = \"filled\",\n      fillcolor = \"aliceblue\",\n      color = \"gray70\",\n      fontcolor = \"gray50\"]\n\nedge [fontname = \"Helvetica\",\n     fontsize = \"8\",\n     len = \"1.5\",\n     color = \"gray80\",\n     arrowsize = \"0.5\"]\n\n  \"1\" [label = \"1\", shape = \"circle\", color = \"black\", fillcolor = \"#F0F8FF\", fontcolor = \"#000000\", pos = \"1.25,0!\"] \n  \"2\" [label = \"2\", shape = \"circle\", color = \"black\", fillcolor = \"#F0F8FF\", fontcolor = \"#000000\", pos = \"7.65404249467096e-17,1.25!\"] \n  \"3\" [label = \"3\", shape = \"circle\", color = \"black\", fillcolor = \"#F0F8FF\", fontcolor = \"#000000\", pos = \"-1.25,1.53080849893419e-16!\"] \n  \"4\" [label = \"4\", shape = \"circle\", color = \"black\", fillcolor = \"#F0F8FF\", fontcolor = \"#000000\", pos = \"-2.29621274840129e-16,-1.25!\"] \n\"1\"->\"2\" [color = \"black\"] \n\"2\"->\"3\" [color = \"black\"] \n\"3\"->\"4\" [color = \"black\"] \n\"4\"->\"1\" [color = \"black\"] \n\"3\"->\"1\" [color = \"black\"] \n\"2\"->\"1\" [color = \"black\"] \n\"1\"->\"1\" [color = \"black\"] \n}","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
+</div>
+<p>This diagram shows the relationships among the (four in the example)
+different age groups.</p>
+<p>Before we proceed to consider the analysis of the dynamics of a
+Leslie matrix model, note that for any Leslie matrix <span
+class="math inline">\(L\)</span>, all of the entries will be
+<strong>nonnegative</strong>.</p>
+<h2 id="analyzing-the-leslie-matrix-model">Analyzing the Leslie Matrix
+Model</h2>
 <div class="sourceCode" id="cb3"><pre
 class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
 <!--radix_placeholder_article_footer-->
