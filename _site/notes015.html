@@ -2147,7 +2147,10 @@ class="uri">https://sites.google.com/site/jasonmgrahamus/</a>
 <li><a href="#goals">Goals</a></li>
 <li><a href="#introduction">Introduction</a></li>
 <li><a href="#analyzing-nonlinear-difference-equations">Analyzing
-Nonlinear Difference Equations</a></li>
+Nonlinear Difference Equations</a>
+<ul>
+<li><a href="#fixed-point-stability">Fixed Point Stability</a></li>
+</ul></li>
 </ul>
 </nav>
 </div>
@@ -2303,6 +2306,26 @@ Show code
 </details>
 <p><img src="notes015_files/figure-html5/unnamed-chunk-1-1.png" width="624" /></p>
 </div>
+<h2 id="fixed-point-stability">Fixed Point Stability</h2>
+<p>Suppose that <span class="math inline">\(\xi\)</span> is a fixed
+point for the difference equation <span
+class="math inline">\(x_{t+1}=f(x_{t})\)</span>. We say that <span
+class="math inline">\(\xi\)</span> is <strong>stable</strong> if
+whenever <span class="math inline">\(x_{0}\)</span> is sufficiently
+close but not equal to <span class="math inline">\(\xi\)</span> we have
+that the sequence determined by <span
+class="math inline">\(x_{t+t}=f(x_{t})\)</span> converges to <span
+class="math inline">\(\xi\)</span>.</p>
+<p>We will make use of the following fact which is analogous to linear
+stability analysis for continuous autonomous systems:</p>
+<ul>
+<li><p>If <span class="math inline">\(|f&#39;(\xi)| &lt; 1\)</span>,
+then <span class="math inline">\(\xi\)</span> is stable.</p></li>
+<li><p>If <span class="math inline">\(|f&#39;(\xi)| &gt; 1\)</span>,
+then <span class="math inline">\(\xi\)</span> is unstable.</p></li>
+<li><p>If <span class="math inline">\(|f&#39;(\xi)|=1\)</span> then we
+can not draw any conclusions.</p></li>
+</ul>
 <div class="sourceCode" id="cb1"><pre
 class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
 <!--radix_placeholder_article_footer-->
