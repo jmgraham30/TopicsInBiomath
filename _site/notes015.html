@@ -85,32 +85,11 @@ code span.vs { color: #20794d; } /* VerbatimString */
 code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 </style>
 
-<style>
-  div.csl-bib-body { }
-  div.csl-entry {
-    clear: both;
-    }
-  .hanging div.csl-entry {
-    margin-left:2em;
-    text-indent:-2em;
-  }
-  div.csl-left-margin {
-    min-width:2em;
-    float:left;
-  }
-  div.csl-right-inline {
-    margin-left:2em;
-    padding-left:1em;
-  }
-  div.csl-indent {
-    margin-left: 2em;
-  }
-</style>
 
   <!--radix_placeholder_meta_tags-->
-  <title>Topics in Biomathematics: Course Notes 2</title>
+  <title>Topics in Biomathematics: Course Notes 15</title>
 
-  <meta property="description" itemprop="description" content="Basic Biomathematical Work Flow"/>
+  <meta property="description" itemprop="description" content="An introduction to nonlinear difference equations."/>
 
   <link rel="license" href="https://creativecommons.org/licenses/by-nc/4.0/"/>
 
@@ -120,32 +99,23 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   <meta name="article:author" content="Jason M. Graham"/>
 
   <!--  https://developers.facebook.com/docs/sharing/webmasters#markup -->
-  <meta property="og:title" content="Topics in Biomathematics: Course Notes 2"/>
+  <meta property="og:title" content="Topics in Biomathematics: Course Notes 15"/>
   <meta property="og:type" content="article"/>
-  <meta property="og:description" content="Basic Biomathematical Work Flow"/>
+  <meta property="og:description" content="An introduction to nonlinear difference equations."/>
   <meta property="og:locale" content="en_US"/>
   <meta property="og:site_name" content="Topics in Biomathematics"/>
 
   <!--  https://dev.twitter.com/cards/types/summary -->
   <meta property="twitter:card" content="summary"/>
-  <meta property="twitter:title" content="Topics in Biomathematics: Course Notes 2"/>
-  <meta property="twitter:description" content="Basic Biomathematical Work Flow"/>
+  <meta property="twitter:title" content="Topics in Biomathematics: Course Notes 15"/>
+  <meta property="twitter:description" content="An introduction to nonlinear difference equations."/>
 
   <!--/radix_placeholder_meta_tags-->
   
-  <meta name="citation_reference" content="citation_title=Introduction to mathematical biology;citation_publication_date=2007;citation_publisher=Pearson/Prentice Hall;citation_author=Linda J. S. Allen"/>
-  <meta name="citation_reference" content="citation_title=Essential mathematical biology;citation_publication_date=2003;citation_publisher=Springer-Verlag London, Ltd., London;citation_doi=10.1007/978-1-4471-0049-2;citation_author=Nicholas F. Britton"/>
-  <meta name="citation_reference" content="citation_title=A reduced mathematical model of the acute inflammatory response. II. Capturing scenarios of repeated endotoxin administration;citation_publication_date=2006;citation_volume=242;citation_doi=10.1016/j.jtbi.2006.02.015;citation_issn=0022-5193;citation_author=Judy Day;citation_author=Jonathan Rubin;citation_author=Yoram Vodovotz;citation_author=Carson C. Chow;citation_author=Angela Reynolds;citation_author=Gilles Clermont"/>
-  <meta name="citation_reference" content="citation_title=Mathematical models in biology;citation_publication_date=2005;citation_publisher=Society for Industrial and Applied Mathematics (SIAM), Philadelphia, PA;citation_volume=46;citation_doi=10.1137/1.9780898719147;citation_author=Leah Edelstein-Keshet"/>
-  <meta name="citation_reference" content="citation_title=The Model Muddle: In Search of Tumor Growth Laws;citation_publication_date=2013;citation_publisher=American Association for Cancer Research;citation_volume=73;citation_doi=10.1158/0008-5472.CAN-12-4355;citation_issn=0008-5472, 1538-7445;citation_author=Philip Gerlee"/>
-  <meta name="citation_reference" content="citation_title=General model of inflammation;citation_publication_date=2010;citation_volume=72;citation_doi=10.1007/s11538-009-9468-9;citation_issn=0092-8240;citation_author=Meagan C. Herald"/>
-  <meta name="citation_reference" content="citation_title=Elements of mathematical ecology;citation_publication_date=2001;citation_publisher=Cambridge University Press, Cambridge;citation_doi=10.1017/CBO9780511608520;citation_author=Mark Kot"/>
-  <meta name="citation_reference" content="citation_title=A reduced mathematical model of the acute inflammatory response. I. Derivation of model and analysis of anti-inflammation;citation_publication_date=2006;citation_volume=242;citation_doi=10.1016/j.jtbi.2006.02.016;citation_issn=0022-5193;citation_author=Angela Reynolds;citation_author=Jonathan Rubin;citation_author=Gilles Clermont;citation_author=Judy Day;citation_author=Yoram Vodovotz;citation_author=G. Bard Ermentrout"/>
-  <meta name="citation_reference" content="citation_title=A comparison and catalog of intrinsic tumor growth models;citation_publication_date=2014;citation_volume=76;citation_doi=10.1007/s11538-014-9986-y;citation_issn=0092-8240;citation_author=E. A. Sarapata;citation_author=L. G. Pillis"/>
   <!--radix_placeholder_rmarkdown_metadata-->
 
   <script type="text/json" id="radix-rmarkdown-metadata">
-  {"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["title","description","author","date","output","creative_commons","bibliography"]}},"value":[{"type":"character","attributes":{},"value":["Course Notes 2"]},{"type":"character","attributes":{},"value":["Basic Biomathematical Work Flow\n"]},{"type":"list","attributes":{},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","url","affiliation","affiliation_url"]}},"value":[{"type":"character","attributes":{},"value":["Jason M. Graham"]},{"type":"character","attributes":{},"value":["https://topicsinbiomath.netlify.app/"]},{"type":"character","attributes":{},"value":["University of Scranton"]},{"type":"character","attributes":{},"value":["https://sites.google.com/site/jasonmgrahamus/"]}]}]},{"type":"character","attributes":{},"value":["2022-03-16"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["distill::distill_article"]}},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["toc","toc_depth"]}},"value":[{"type":"logical","attributes":{},"value":[true]},{"type":"integer","attributes":{},"value":[2]}]}]},{"type":"character","attributes":{},"value":["CC BY-NC"]},{"type":"character","attributes":{},"value":["topics_in_biomath.bib"]}]}
+  {"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["title","description","author","date","output","creative_commons","bibliography"]}},"value":[{"type":"character","attributes":{},"value":["Course Notes 15"]},{"type":"character","attributes":{},"value":["An introduction to nonlinear difference equations. \n"]},{"type":"list","attributes":{},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","url","affiliation","affiliation_url"]}},"value":[{"type":"character","attributes":{},"value":["Jason M. Graham"]},{"type":"character","attributes":{},"value":["https://topicsinbiomath.netlify.app/"]},{"type":"character","attributes":{},"value":["University of Scranton"]},{"type":"character","attributes":{},"value":["https://sites.google.com/site/jasonmgrahamus/"]}]}]},{"type":"character","attributes":{},"value":["2022-03-16"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["distill::distill_article"]}},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["toc","toc_depth"]}},"value":[{"type":"logical","attributes":{},"value":[true]},{"type":"integer","attributes":{},"value":[2]}]}]},{"type":"character","attributes":{},"value":["CC BY-NC"]},{"type":"character","attributes":{},"value":["topics_in_biomath.bib"]}]}
   </script>
   <!--/radix_placeholder_rmarkdown_metadata-->
   <!--radix_placeholder_navigation_in_header-->
@@ -2093,7 +2063,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <!--radix_placeholder_front_matter-->
 
 <script id="distill-front-matter" type="text/json">
-{"title":"Course Notes 2","description":"Basic Biomathematical Work Flow","authors":[{"author":"Jason M. Graham","authorURL":"https://topicsinbiomath.netlify.app/","affiliation":"University of Scranton","affiliationURL":"https://sites.google.com/site/jasonmgrahamus/","orcidID":""}],"publishedDate":"2022-03-16T00:00:00.000-04:00","citationText":"Graham, 2022"}
+{"title":"Course Notes 15","description":"An introduction to nonlinear difference equations.","authors":[{"author":"Jason M. Graham","authorURL":"https://topicsinbiomath.netlify.app/","affiliation":"University of Scranton","affiliationURL":"https://sites.google.com/site/jasonmgrahamus/","orcidID":""}],"publishedDate":"2022-03-16T00:00:00.000-04:00","citationText":"Graham, 2022"}
 </script>
 
 <!--/radix_placeholder_front_matter-->
@@ -2154,10 +2124,10 @@ Case Studies
 <!--/radix_placeholder_site_before_body-->
 
 <div class="d-title">
-<h1>Course Notes 2</h1>
+<h1>Course Notes 15</h1>
 <!--radix_placeholder_categories-->
 <!--/radix_placeholder_categories-->
-<p><p>Basic Biomathematical Work Flow</p></p>
+<p><p>An introduction to nonlinear difference equations.</p></p>
 </div>
 
 <div class="d-byline">
@@ -2175,381 +2145,24 @@ class="uri">https://sites.google.com/site/jasonmgrahamus/</a>
 <h3>Contents</h3>
 <ul>
 <li><a href="#goals">Goals</a></li>
-<li><a href="#overview">Overview</a></li>
-<li><a href="#simple-population-growth">Simple Population
-Growth</a></li>
-<li><a href="#general-model-of-inflammation">General Model of
-Inflammation</a></li>
-<li><a href="#further-reading">Further Reading</a>
-<ul>
-<li><a href="#mathematical-models-for-population-growth">Mathematical
-Models for Population Growth</a></li>
-<li><a href="#mathematical-models-of-inflammation">Mathematical Models
-of Inflammation</a></li>
-</ul></li>
+<li><a href="#introduction">Introduction</a></li>
 </ul>
 </nav>
 </div>
 <h1 id="goals">Goals</h1>
 <p>After reading this section of notes, you should</p>
 <ol type="1">
-<li><p>have developed a greater appreciation for the basic work flow of
-biomathematics,</p></li>
-<li><p>know the meaning of “per capita rate of change” as it relates to
-population growth,</p></li>
-<li><p>know the basic “exponential growth” model <span
-class="math inline">\(\frac{dN}{dt} = rN\)</span>.</p></li>
+<li><p>know what is a first-order nonlinear difference
+equation,</p></li>
+<li><p>know the procedure for determining fixed-points for first-order
+nonlinear difference equations, and</p></li>
+<li><p>know how to use both graphical and analytical techniques for
+examining the stability properties of fixed-points for first-order
+nonlinear difference equations.</p></li>
 </ol>
-<h1 id="overview">Overview</h1>
-<p>In the previous lecture, we introduced the basic work flow of
-biomathematics:</p>
-<ol type="1">
-<li>Start with some real world phenomenon of interest from the life
-sciences.</li>
-<li>By making some set of simplifying assumptions, abstract from the
-real world in order to highlight essential features for the purposes of
-answering some specific question or solving some particular
-problem.</li>
-<li>Represent your abstraction from step 2 as a mathematical model.</li>
-<li>Use techniques from applied mathematics or scientific computing in
-order to understand the mathematical representation in step 3 with the
-goal of solving a problem or answering a question.</li>
-<li>Place your results from step 4 in the context of the original real
-world biological phenomenon.</li>
-</ol>
-<p>In this lecture, we will illustrate these steps by way of two
-examples. One is an extremely simple example about population growth,
-while the other is an example from a paper concerned with understanding
-general features of the inflammatory process <span class="citation"
-data-cites="heraldGeneralModelInflammation2010">(<a
-href="#ref-heraldGeneralModelInflammation2010"
-role="doc-biblioref">Herald 2010</a>)</span>.</p>
-<h1 id="simple-population-growth">Simple Population Growth</h1>
-<p>Individual organisms typically belong to a population. Understanding
-the growth of a population is important for understanding the ecology
-and evolution of organisms. In particular, one may want to know about
-factors that lead to the extinction of a species. Of course, a
-population of organisms belongs to an ecosystem in which it interacts
-with its environment and other species. Before we get carried away and
-try to understand an entire ecosystem, it is useful to theorize about
-how a single-species population may change as a function of time.</p>
-<p>Consider a simple isolated and homogeneous population. Let <span
-class="math inline">\(N(t)\)</span> denote the number (or sometimes
-density) of individuals in the population at time <span
-class="math inline">\(t\)</span>. For simplicity we will assume that
-<span class="math inline">\(N\)</span> is a continuous and
-differentiable function of the continuous variable <span
-class="math inline">\(t\)</span>. Later we will reflect on these
-assumptions and discuss modifications that could be made if necessary.
-We define</p>
-<p><span class="math inline">\(\text{per capita rate of change} =
-\frac{1}{N}\frac{dN}{dt}\)</span></p>
-<p>noting that this quantity has units of <span
-class="math inline">\(\frac{1}{\text{time}}\)</span>. The point is that
-we can arrive at a mathematical model for the growth of a population by
-specifying a formula for the per capita rate of change. Let’s begin with
-the simplest assumption that we can possibly make, suppose that the per
-capita rate of change is constant. That is, suppose</p>
-<p><span class="math inline">\(\frac{1}{N}\frac{dN}{dt} =
-r\)</span>.</p>
-<p>Then,</p>
-<p><span class="math inline">\(\frac{dN}{dt} = rN\)</span>.</p>
-<p>Let’s make two observations about this last equation:</p>
-<ol type="1">
-<li>If <span class="math inline">\(r &gt; 0\)</span>, then <span
-class="math inline">\(rN &gt;0\)</span> (populations are always positive
-so we assume implicitly that <span class="math inline">\(N &gt;
-0\)</span>) and thus <span class="math inline">\(\frac{dN}{dt} &gt;
-0\)</span>. Therefore, if the constant rate <span
-class="math inline">\(r &gt; 0\)</span>, then the population will always
-be increasing. On the other hand, if <span class="math inline">\(r &lt;
-0\)</span>, then the population will always be decreasing.</li>
-</ol>
-<p><strong>Reflection:</strong> Sketch the graph of a function that is
-always positive and always increasing. Sketch the graph of a function
-that is always positive and always decreasing.</p>
-<ol start="2" type="1">
-<li>Given an initial value of the population <span
-class="math inline">\(N(0) = N_0\)</span>, <span
-class="math inline">\(N(t) = N_{0}e^{rt}\)</span> satisfies the
-differential equation <span class="math inline">\(\frac{dN}{dt} =
-rN\)</span>.</li>
-</ol>
-<p><strong>Reflection:</strong> Take a moment to verify this by
-substituting <span class="math inline">\(N(t) = N_{0}e^{rt}\)</span>
-into both sides of the equation. In the homework you will be asked to
-derive this solution using the <a
-href="https://en.wikipedia.org/wiki/Separation_of_variables">method of
-separation</a>. (Chances are that you have done this before.)</p>
-<p>Let’s look at the graph of <span class="math inline">\(N(t) =
-N_{0}e^{rt}\)</span>:</p>
-<div class="layout-chunk" data-layout="l-body">
-<div class="figure"><span style="display:block;" id="fig:fig1"></span>
-<img src="notes002_files/figure-html5/fig1-1.png" alt="\label{fig:fig1} Exponential growth model results." width="75%" />
-<p class="caption">
-Figure 1:  Exponential growth model results.
-</p>
-</div>
-</div>
-<p>(<strong>Note:</strong> It is worth the effort to remember forever
-and all time that the solution of the differential equation</p>
-<p><span class="math inline">\(\frac{dx}{dt} = ax\)</span>,</p>
-<p>with initial condition <span class="math inline">\(x(0)=x_0\)</span>
-is <span class="math inline">\(x(t) = x_{0}e^{at}\)</span>.)</p>
-<p>Based on our observations, we see that a population that obeys the
-model <span class="math inline">\(\frac{dN}{dt}=rN\)</span> will grow
-(if <span class="math inline">\(r &gt; 0\)</span>) or decay (if <span
-class="math inline">\(r &lt; 0\)</span>) in an exponential fashion.</p>
-<p>An obvious question is, what determines if <span
-class="math inline">\(r\)</span> is positive or negative? One way to
-make sense of this is to think of <span class="math inline">\(r\)</span>
-as the difference between the per capita birth rate <span
-class="math inline">\(b\)</span> and the per capita death rate <span
-class="math inline">\(d\)</span> so that <span
-class="math inline">\(r=b-d\)</span>. Then <span class="math inline">\(r
-&gt; 0\)</span> if <span class="math inline">\(b &gt; d\)</span> and
-<span class="math inline">\(r &lt; 0\)</span> if <span
-class="math inline">\(b &lt; d\)</span>. Thus, a population is predicted
-to go extinct (in the long run as <span class="math inline">\(t
-\rightarrow \infty\)</span>) if the per capita death rate is greater
-than the per capita birth rate.</p>
-<p>One problem with the model is that long term exponential growth is
-unrealistic. The survival of a real population depends on resources such
-as food and water. An exponentially growing population would soon
-deplete all available resources. On the other hand, it is not
-unrealistic for a population to initially grow exponentially when the
-population numbers are very small relative to the availability of
-resources. Later on we will discuss ways to adjust the model so that
-growth is exponential when the population is small but slows as the
-population increases.</p>
-<p>Notice how we hit each step of the biomathematics work flow during
-the course of our discussion on population growth. We began with a real
-world phenomenon, abstracted to an isolated homogeneous population,
-wrote down a mathematical model, derived information from the model and
-cast that information in the context of the original real world
-phenomenon. Let’s look at another example of how the biomathematics work
-flow plays out in the context of more recent research.</p>
-<h1 id="general-model-of-inflammation">General Model of
-Inflammation</h1>
-<p><a
-href="https://en.wikipedia.org/wiki/Inflammation#:~:text=Inflammation%20(from%20Latin%3A%20inflammatio),blood%20vessels%2C%20and%20molecular%20mediators.">Inflammation</a>
-is a normal part of the <a
-href="https://en.wikipedia.org/wiki/Immune_response">immune response</a>
-for defense against invasion by foreign cells or molecules. However,
-inflammation may become chronic and lead to disease, <a
-href="https://en.wikipedia.org/wiki/Sepsis">sepsis</a>, and even death.
-For the purposes of both treatment and prevention of disease, it is
-important to understand the conditions that lead to chronic
-inflammation.</p>
-<p>Without going into the biological and chemical details, we know that
-inflammation is controlled and mediated by immune cells (<a
-href="https://en.wikipedia.org/wiki/Macrophage">the macrophage</a>)
-whose behavior is regulated by signaling molecules known as <a
-href="https://en.wikipedia.org/wiki/Cytokine">cytokines</a>. Thus, it is
-reasonable for the purposes of abstraction to encapsulate the immune
-response by the activities of macrophage cells, cytokines, and an
-invading body such as a bacteria cell. This is exactly what is done in
-the paper <span class="citation"
-data-cites="heraldGeneralModelInflammation2010">(<a
-href="#ref-heraldGeneralModelInflammation2010"
-role="doc-biblioref">Herald 2010</a>)</span>.</p>
-<p>Figure 2 shows a schematic corresponding to our abstraction of the
-immune response. The macrophage cell population responds to bacterial
-invasion and produces cytokines that mediate the immune response. The
-exact details of the interactions are governed by model parameters and
-mathematical relationships between the interacting cell populations and
-cytokines.</p>
-<div class="layout-chunk" data-layout="l-body">
-<div class="figure"><span style="display:block;" id="fig:fig2"></span>
-<img src="Figures/inflammationDiagram.png" alt="\label{fig:fig2} Schematic of inflammation model. This corresponds roughly to Figure 1 in [@heraldGeneralModelInflammation2010]." width="100%" />
-<p class="caption">
-Figure 2:  Schematic of inflammation model. This corresponds roughly to
-Figure 1 in <span class="citation"
-data-cites="heraldGeneralModelInflammation2010">(<a
-href="#ref-heraldGeneralModelInflammation2010"
-role="doc-biblioref">Herald 2010</a>)</span>.
-</p>
-</div>
-</div>
-<p>In <span class="citation"
-data-cites="heraldGeneralModelInflammation2010">(<a
-href="#ref-heraldGeneralModelInflammation2010"
-role="doc-biblioref">Herald 2010</a>)</span>, the author converts the
-model diagram into a mathematical model in the form of a coupled system
-of nonlinear differential equations shown here:</p>
-<p><span class="math display">\[\begin{align}
-\frac{dM}{dt} &amp;= s + \frac{r C}{1 + k_{1} C} - m_{d} M, \\
-\frac{dC}{dt} &amp;=  p_{c} B M + M \frac{a C}{(1 + k_{2} C)}\frac{1}{(1
-+ k_{3} A)} - c_{d} C,\\
-\frac{dA}{dt} &amp;=  p_{a} C M - a_{d} A, \\
-\frac{dB}{dt} &amp;= g B - b_{d} M B.
-\end{align}\]</span></p>
-<p>Later on in the course we will study this model in more detail. For
-now, note that</p>
-<ul>
-<li><span class="math inline">\(M\)</span> - macrophage cell
-population</li>
-<li><span class="math inline">\(C\)</span> - inflammatory cytokine
-concentration</li>
-<li><span class="math inline">\(A\)</span> - anti-inflammatory cytokine
-concentration</li>
-<li><span class="math inline">\(B\)</span> - bacteria cell
-population</li>
-</ul>
-<p>In the paper, the author uses the model equations to show that under
-a certain set of circumstances a bacterial pathogen will not provide a
-sufficient trigger to cause chronic inflammation. On the other hand, if
-conditions are right, even a minor bacterial infection can lead to
-chronic inflammation. We leave the details of the analysis for later in
-the course. Notice that this example contains all of the components of
-the basic biomathematics work flow.</p>
-<ol type="1">
-<li>The real world phenomenon of interest from the life sciences is
-inflammation.</li>
-<li>Figure 2 corresponds to an abstraction of the biochemical details of
-the immune system highlighting what is thought to be the essential
-features of the inflammatory response.</li>
-<li>Clearly there is a mathematical model. A major portion of this
-course is devoted to understanding how one might come up with such a
-system of equations. These were not simply pulled out of thin air.</li>
-<li>In <span class="citation"
-data-cites="heraldGeneralModelInflammation2010">(<a
-href="#ref-heraldGeneralModelInflammation2010"
-role="doc-biblioref">Herald 2010</a>)</span>, the author uses techniques
-from <a
-href="https://en.wikipedia.org/wiki/Dynamical_systems_theory">dynamical
-systems</a> and <a
-href="https://en.wikipedia.org/wiki/Bifurcation_theory">bifurcation
-theory</a> in order to derive useful information from the model
-equations.</li>
-<li>The author’s analysis of the model system explains some aspects of
-inflammation and pinpoints conditions that lead to chronic inflammation.
-The authors work also explains why certain therapies for chronic
-inflammation are not successful.</li>
-</ol>
-<p>There are still many questions about inflammation to be addressed
-beyond what is done in <span class="citation"
-data-cites="heraldGeneralModelInflammation2010">(<a
-href="#ref-heraldGeneralModelInflammation2010"
-role="doc-biblioref">Herald 2010</a>)</span>. However, in order to make
-progress more details of the immune response may need to be included.
-This will involve either modifying the system of equations displayed in
-this section, or using a different mathematical model altogether. For
-now, the point to take away is that, often times, this is how work in
-biomathematics proceeds. In the next lecture, we will start to learn
-some essential principles of mathematical modeling that will help us to
-see where equations such as the ones presented in this section come
-from.</p>
-<h1 id="further-reading">Further Reading</h1>
-<p>For those that want to learn more about the topics discussed in this
-lecture, we provide here some relevant references.</p>
-<h2 id="mathematical-models-for-population-growth">Mathematical Models
-for Population Growth</h2>
-<p>Introductions to mathematical models for population growth may be
-found in most of the standard texts in biomathematics. Good places to
-start are <span class="citation"
-data-cites="allenIntroductionMathematicalBiology2007 brittonEssentialMathematicalBiology2003 edelstein-keshetMathematicalModelsBiology2005">(<a
-href="#ref-allenIntroductionMathematicalBiology2007"
-role="doc-biblioref">Allen 2007</a>; <a
-href="#ref-brittonEssentialMathematicalBiology2003"
-role="doc-biblioref">Britton 2003</a>; <a
-href="#ref-edelstein-keshetMathematicalModelsBiology2005"
-role="doc-biblioref">Edelstein-Keshet 2005</a>)</span>. The textbook
-<span class="citation"
-data-cites="kotElementsMathematicalEcology2001">(<a
-href="#ref-kotElementsMathematicalEcology2001" role="doc-biblioref">Kot
-2001</a>)</span> is entirely devoted to population models. An important
-application of population growth models is to cancer biology where one
-is interested to understand the growth of tumor cell populations. Two
-papers that examine population growth models in the context of tumor
-cell growth are <span class="citation"
-data-cites="gerleeModelMuddleSearch2013 sarapataComparisonCatalogIntrinsic2014">(<a
-href="#ref-gerleeModelMuddleSearch2013" role="doc-biblioref">Gerlee
-2013</a>; <a href="#ref-sarapataComparisonCatalogIntrinsic2014"
-role="doc-biblioref">Sarapata and de Pillis 2014</a>)</span>.</p>
-<h2 id="mathematical-models-of-inflammation">Mathematical Models of
-Inflammation</h2>
-<p>Mathematical modeling of inflammation is an area of current research.
-In addition to the paper already referenced, <span class="citation"
-data-cites="heraldGeneralModelInflammation2010">(<a
-href="#ref-heraldGeneralModelInflammation2010"
-role="doc-biblioref">Herald 2010</a>)</span>, we also recommend <span
-class="citation"
-data-cites="dayReducedMathematicalModel2006 reynoldsReducedMathematicalModel2006">(<a
-href="#ref-dayReducedMathematicalModel2006" role="doc-biblioref">Day et
-al. 2006</a>; <a href="#ref-reynoldsReducedMathematicalModel2006"
-role="doc-biblioref">Reynolds et al. 2006</a>)</span>.</p>
+<h1 id="introduction">Introduction</h1>
 <div class="sourceCode" id="cb1"><pre
 class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
-<div id="refs" class="references csl-bib-body hanging-indent"
-role="doc-bibliography">
-<div id="ref-allenIntroductionMathematicalBiology2007" class="csl-entry"
-role="doc-biblioentry">
-Allen, Linda J. S. 2007. <em>Introduction to Mathematical Biology</em>.
-<span>Pearson/Prentice Hall</span>. <a
-href="https://agris.fao.org/agris-search/search.do?recordID=US201300115181">https://agris.fao.org/agris-search/search.do?recordID=US201300115181</a>.
-</div>
-<div id="ref-brittonEssentialMathematicalBiology2003" class="csl-entry"
-role="doc-biblioentry">
-Britton, Nicholas F. 2003. <em>Essential Mathematical Biology</em>.
-Springer <span>Undergraduate Mathematics Series</span>.
-<span>Springer-Verlag London, Ltd., London</span>. <a
-href="https://doi.org/10.1007/978-1-4471-0049-2">https://doi.org/10.1007/978-1-4471-0049-2</a>.
-</div>
-<div id="ref-dayReducedMathematicalModel2006" class="csl-entry"
-role="doc-biblioentry">
-Day, Judy, Jonathan Rubin, Yoram Vodovotz, Carson C. Chow, Angela
-Reynolds, and Gilles Clermont. 2006. <span>“A Reduced Mathematical Model
-of the Acute Inflammatory Response. <span>II</span>.
-<span>Capturing</span> Scenarios of Repeated Endotoxin
-Administration.”</span> <em>Journal of Theoretical Biology</em> 242 (1):
-237–56. <a
-href="https://doi.org/10.1016/j.jtbi.2006.02.015">https://doi.org/10.1016/j.jtbi.2006.02.015</a>.
-</div>
-<div id="ref-edelstein-keshetMathematicalModelsBiology2005"
-class="csl-entry" role="doc-biblioentry">
-Edelstein-Keshet, Leah. 2005. <em>Mathematical Models in Biology</em>.
-Vol. 46. Classics in <span>Applied Mathematics</span>. <span>Society for
-Industrial and Applied Mathematics (SIAM), Philadelphia, PA</span>. <a
-href="https://doi.org/10.1137/1.9780898719147">https://doi.org/10.1137/1.9780898719147</a>.
-</div>
-<div id="ref-gerleeModelMuddleSearch2013" class="csl-entry"
-role="doc-biblioentry">
-Gerlee, Philip. 2013. <span>“The <span>Model Muddle</span>: <span>In
-Search</span> of <span>Tumor Growth Laws</span>.”</span> <em>Cancer
-Research</em> 73 (8): 2407–11. <a
-href="https://doi.org/10.1158/0008-5472.CAN-12-4355">https://doi.org/10.1158/0008-5472.CAN-12-4355</a>.
-</div>
-<div id="ref-heraldGeneralModelInflammation2010" class="csl-entry"
-role="doc-biblioentry">
-Herald, Meagan C. 2010. <span>“General Model of Inflammation.”</span>
-<em>Bulletin of Mathematical Biology</em> 72 (4): 765–79. <a
-href="https://doi.org/10.1007/s11538-009-9468-9">https://doi.org/10.1007/s11538-009-9468-9</a>.
-</div>
-<div id="ref-kotElementsMathematicalEcology2001" class="csl-entry"
-role="doc-biblioentry">
-Kot, Mark. 2001. <em>Elements of Mathematical Ecology</em>.
-<span>Cambridge University Press, Cambridge</span>. <a
-href="https://doi.org/10.1017/CBO9780511608520">https://doi.org/10.1017/CBO9780511608520</a>.
-</div>
-<div id="ref-reynoldsReducedMathematicalModel2006" class="csl-entry"
-role="doc-biblioentry">
-Reynolds, Angela, Jonathan Rubin, Gilles Clermont, Judy Day, Yoram
-Vodovotz, and G. Bard Ermentrout. 2006. <span>“A Reduced Mathematical
-Model of the Acute Inflammatory Response. <span>I</span>.
-<span>Derivation</span> of Model and Analysis of
-Anti-Inflammation.”</span> <em>Journal of Theoretical Biology</em> 242
-(1): 220–36. <a
-href="https://doi.org/10.1016/j.jtbi.2006.02.016">https://doi.org/10.1016/j.jtbi.2006.02.016</a>.
-</div>
-<div id="ref-sarapataComparisonCatalogIntrinsic2014" class="csl-entry"
-role="doc-biblioentry">
-Sarapata, E. A., and L. G. de Pillis. 2014. <span>“A Comparison and
-Catalog of Intrinsic Tumor Growth Models.”</span> <em>Bulletin of
-Mathematical Biology</em> 76 (8): 2010–24. <a
-href="https://doi.org/10.1007/s11538-014-9986-y">https://doi.org/10.1007/s11538-014-9986-y</a>.
-</div>
-</div>
 <!--radix_placeholder_article_footer-->
 <!--/radix_placeholder_article_footer-->
 </div>
@@ -2557,15 +2170,6 @@ href="https://doi.org/10.1007/s11538-014-9986-y">https://doi.org/10.1007/s11538-
 <div class="d-appendix">
 </div>
 
-<!-- dynamically load mathjax for compatibility with self-contained -->
-<script>
-  (function () {
-    var script = document.createElement("script");
-    script.type = "text/javascript";
-    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
-    document.getElementsByTagName("head")[0].appendChild(script);
-  })();
-</script>
 
 <!--radix_placeholder_site_after_body-->
 <!--/radix_placeholder_site_after_body-->

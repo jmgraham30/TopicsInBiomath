@@ -1,0 +1,45 @@
+---
+title: "Course Notes 15"
+description: |
+  An introduction to nonlinear difference equations. 
+author:
+  - name: Jason M. Graham 
+    url: https://topicsinbiomath.netlify.app/
+    affiliation: University of Scranton 
+    affiliation_url: https://sites.google.com/site/jasonmgrahamus/
+date: "`r Sys.Date()`"
+output: 
+  distill::distill_article:
+    toc: true
+    toc_depth: 2
+creative_commons: CC BY-NC
+bibliography: topics_in_biomath.bib
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+library(knitr)
+library(kableExtra)
+library(deSolve)
+library(tidyverse)
+library(ggformula)
+library(patchwork)
+library(phaseR)
+library(latex2exp)
+library(DiagrammeR)
+theme_set(theme_light())
+```
+
+
+# Goals
+
+After reading this section of notes, you should
+
+1) know what is a first-order nonlinear difference equation, 
+
+2) know the procedure for determining fixed-points for first-order nonlinear difference equations, and
+
+3) know how to use both graphical and analytical techniques for examining the stability properties of fixed-points for first-order nonlinear difference equations.
+
+# Introduction
+
