@@ -384,3 +384,7 @@ These vectors are obviously nearly parallel.
 
 We've introduced linear difference equations as an example of discrete time systems and derived the role that the eigenvalues and eigenvectors play in analyzing the dynamics of such systems. Notice that much of this analysis closely parallels the analysis of continuous-time linear autonomous systems. An important example of linear difference equations in biomathematics is the Leslie matrix model approach to representing the populatio dynamics for a structured population. Next, we will study another class of discrete time systems by looking at first-order nonlinear difference equations. As we will see, even very simple nonlinear difference equations can exihibit very complex dynamics. 
 
+# Further Reading
+
+For more on discrete time models and linear difference equations in particular, see chapter 1 from either [@allenIntroductionMathematicalBiology2007] or [@devriesCourseMathematicalBiology2006]. Both of these books also contain references to further reading on the topics of difference equations and their applications within biomathematics. 
+

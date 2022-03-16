@@ -85,6 +85,27 @@ code span.vs { color: #20794d; } /* VerbatimString */
 code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 </style>
 
+<style>
+  div.csl-bib-body { }
+  div.csl-entry {
+    clear: both;
+    }
+  .hanging div.csl-entry {
+    margin-left:2em;
+    text-indent:-2em;
+  }
+  div.csl-left-margin {
+    min-width:2em;
+    float:left;
+  }
+  div.csl-right-inline {
+    margin-left:2em;
+    padding-left:1em;
+  }
+  div.csl-indent {
+    margin-left: 2em;
+  }
+</style>
 
   <!--radix_placeholder_meta_tags-->
   <title>Topics in Biomathematics: Course Notes 15</title>
@@ -112,6 +133,8 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 
   <!--/radix_placeholder_meta_tags-->
   
+  <meta name="citation_reference" content="citation_title=Introduction to mathematical biology;citation_publication_date=2007;citation_publisher=Pearson/Prentice Hall;citation_author=Linda J. S. Allen"/>
+  <meta name="citation_reference" content="citation_title=A course in mathematical biology;citation_publication_date=2006;citation_publisher=Society for Industrial and Applied Mathematics (SIAM), Philadelphia, PA;citation_volume=12;citation_doi=10.1137/1.9780898718256;citation_author=Gerda Vries;citation_author=Thomas Hillen;citation_author=Mark Lewis;citation_author=Johannes Müller;citation_author=Birgitt Schönfisch"/>
   <!--radix_placeholder_rmarkdown_metadata-->
 
   <script type="text/json" id="radix-rmarkdown-metadata">
@@ -2150,7 +2173,9 @@ class="uri">https://sites.google.com/site/jasonmgrahamus/</a>
 Nonlinear Difference Equations</a>
 <ul>
 <li><a href="#fixed-point-stability">Fixed Point Stability</a></li>
+<li><a href="#cobweb-diagrams">Cobweb Diagrams</a></li>
 </ul></li>
+<li><a href="#further-reading">Further Reading</a></li>
 </ul>
 </nav>
 </div>
@@ -2326,8 +2351,100 @@ then <span class="math inline">\(\xi\)</span> is unstable.</p></li>
 <li><p>If <span class="math inline">\(|f&#39;(\xi)|=1\)</span> then we
 can not draw any conclusions.</p></li>
 </ul>
+<h3 id="example-1">Example</h3>
+<p>Let’s apply the stated linear stability analysis for nonlinear
+difference equations to the discrete logistic model <span
+class="math inline">\(x_{t+1}=f(x_{t})=rx_{t}(1-x_{t})\)</span>. We have
+that <span class="math inline">\(f&#39;(x)=r-2rx_{t}\)</span> and
+thus</p>
+<ul>
+<li><p><span class="math inline">\(|f&#39;(0)| = r\)</span>,
+and</p></li>
+<li><p><span
+class="math inline">\(|f&#39;\left(\frac{r-1}{r}\right)|=\left|2-r
+\right|\)</span>.</p></li>
+</ul>
+<p>From this, we can see that <span class="math inline">\(\xi=0\)</span>
+is stable if <span class="math inline">\(r&lt;1\)</span> and unstable if
+<span class="math inline">\(r &gt; 1\)</span>. Note that if <span
+class="math inline">\(r&lt;1\)</span>, then <span
+class="math inline">\(\xi=\frac{r-1}{r}\)</span> does not make sense
+biologically.</p>
+<p>Now, whenever <span class="math inline">\(3 &gt; r &gt; 1\)</span> we
+can see that <span class="math inline">\(\xi=\frac{r-1}{r}\)</span> will
+be stable since then we will have <span class="math inline">\(|2-r| &lt;
+1\)</span>. Further, if <span class="math inline">\(r &gt; 3\)</span>,
+then <span class="math inline">\(\xi=\frac{r-1}{r}\)</span> will be
+unstable. In order to know what happens when <span
+class="math inline">\(r=1\)</span> or <span
+class="math inline">\(r=3\)</span> we will need to rely on graphical
+techniques.</p>
+<h2 id="cobweb-diagrams">Cobweb Diagrams</h2>
+<p>There is a graphical method for analyzing the dynamics and in
+particular the stability of first order nonlinear difference equations.
+This method is called cobwebbing and is carried out by constructing a
+so-called <a href="https://en.wikipedia.org/wiki/Cobweb_plot">cobweb
+plot</a>.</p>
+<p>Suppose that we have a difference equation <span
+class="math inline">\(x_{t+1}=f(x_{t})\)</span>. We begin by plotting
+the graphs of <span class="math inline">\(y=x\)</span> and <span
+class="math inline">\(y=f(x)\)</span> on the same axes. This makes it
+possible to see the fixed points. Then, starting with an initial
+condition, <span class="math inline">\(x_{0}\)</span>, plot the series
+of points consecutively while connecting the points with a straight line
+at each step:</p>
+<p>$$ <span class="math display">\[\begin{align}
+&amp;(x_{0},0) \\
+&amp;(x_{0},x_{1}=f(x_{0})) \\
+&amp;(x_{1},x_{1}) \\
+&amp;(x_{1},x_{2}=f(x_{1})) \\
+&amp;\ldots \\
+&amp;(x_{k},x_{k}) \\
+&amp;(x_{k},x_{k+1}=f(x_{k})) \\
+&amp; \text{so on}
+
+\end{align}\]</span> $$</p>
+<p>If the points <span
+class="math inline">\((x_{k},x_{k+1}=f(x_{k}))\)</span> become
+increasingly close to <span class="math inline">\((\xi,\xi)\)</span>
+then the fixed point is stable, otherwise the fixed point is
+unstable.</p>
+<h3 id="cobweb-for-discrete-logistic">Cobweb for Discrete Logistic</h3>
+<p>To see and interact with the cobweb diagram for the discrete logistic
+model, check out <a
+href="https://jmgraham30rs.shinyapps.io/discrete_logistic/">this shiny
+web app</a>.</p>
+<h1 id="further-reading">Further Reading</h1>
+<p>For more on discrete time models and linear difference equations in
+particular, see chapter 2 of <span class="citation"
+data-cites="allenIntroductionMathematicalBiology2007">(<a
+href="#ref-allenIntroductionMathematicalBiology2007"
+role="doc-biblioref">Allen 2007</a>)</span> or chapter 1 of <span
+class="citation" data-cites="devriesCourseMathematicalBiology2006">(<a
+href="#ref-devriesCourseMathematicalBiology2006" role="doc-biblioref">de
+Vries et al. 2006</a>)</span>. Both of these books also contain
+references to further reading on the topics of difference equations and
+their applications within biomathematics.</p>
 <div class="sourceCode" id="cb1"><pre
 class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
+<div id="refs" class="references csl-bib-body hanging-indent"
+role="doc-bibliography">
+<div id="ref-allenIntroductionMathematicalBiology2007" class="csl-entry"
+role="doc-biblioentry">
+Allen, Linda J. S. 2007. <em>Introduction to Mathematical Biology</em>.
+<span>Pearson/Prentice Hall</span>. <a
+href="https://agris.fao.org/agris-search/search.do?recordID=US201300115181">https://agris.fao.org/agris-search/search.do?recordID=US201300115181</a>.
+</div>
+<div id="ref-devriesCourseMathematicalBiology2006" class="csl-entry"
+role="doc-biblioentry">
+Vries, Gerda de, Thomas Hillen, Mark Lewis, Johannes Müller, and Birgitt
+Schönfisch. 2006. <em>A Course in Mathematical Biology</em>. Vol. 12.
+Mathematical <span>Modeling</span> and <span>Computation</span>.
+<span>Society for Industrial and Applied Mathematics (SIAM),
+Philadelphia, PA</span>. <a
+href="https://doi.org/10.1137/1.9780898718256">https://doi.org/10.1137/1.9780898718256</a>.
+</div>
+</div>
 <!--radix_placeholder_article_footer-->
 <!--/radix_placeholder_article_footer-->
 </div>
