@@ -271,4 +271,69 @@ Before we proceed to consider the analysis of the dynamics of a Leslie matrix mo
 
 ## Analyzing the Leslie Matrix Model
 
+Given an $n\times n$ Leslie matrix $L$, a typical problem is to determine if its coefficients are such that $L$ has a **strictly dominant eigenvalue** $\lambda_{1}$. That is, a unique eigenvalue $\lambda_{1}$ such that $|\lambda_{1}| > |\lambda_{j}|$ for $j=2,3,\ldots, n$. As we have seen in a previous section, if this is the case then $\lambda_{1}$ and its corresponding eigenvector $v_{1}$ determine the long-term dynamics of the Leslie model. In the context of Leslie models, an eigenvector $v_{1}$ associated with a strictly dominant eigenvalue $\lambda_{1}$ is called **stable age distribution**. 
+
+We suspect from our previous analysis of linear difference equations that if $\lambda_{1}$ is a strictly dominant eigenvalue, then
+
+* if $|\lambda_{1}| < 1$, then the overall population size will decrease over time, and
+
+* if $|\lambda_{1}| > 1$, then the population increases over time in the direction of the stable age distribution $v_{1}$. 
+
+Note that if $L$ is a Leslie matrix with a strictly dominant eigenvalue $\lambda_{1}$, then the entries of the stable age distribution $v_{1}$ will be positive.  
+
+Much theory has been developed for a general analysis of Leslie  matrix models, see section 1.7 of [@allenIntroductionMathematicalBiology2007] for the details. Here we will simply consider some examples. 
+
+### Example 1
+
+Suppose that we have a population with two age groups where only one of the two ages is reproducing. Then the Leslie matrix model has
+
+$L = \left(\begin{array}{cc} 0 & b_{2} \\ s_{1} & 0  \end{array} \right)$
+
+where $b_{2}$ and $s_{1}$ are positive real values. The eigenvalues for this $L$ are obtained by solving the quadratic polynomial
+
+$\lambda^{2} - 0 \lambda + (-b_{2}s_{1}) = 0$
+
+and thus are $\lambda_{1,2}=\pm\sqrt{b_{2}s_{1}}$
+
+In this case, there is no strictly dominant eigenvalue because $|\lambda_{1,2}|=\sqrt{b_{2}s_{1}}$ and there is not a unique eigenvalue with the largest magnitude. 
+
+### Example 2
+
+Suppose that we have a population with two age groups where both are reproducing. Then the Leslie matrix model has
+
+$L = \left(\begin{array}{cc} b_{1} & b_{2} \\ s_{1} & 0  \end{array} \right)$
+
+where $b_{1}$, $b_{2}$, and $s_{1}$ are positive real values. The eigenvalues for this $L$ are obtained by solving the quadratic polynomial
+
+$\lambda^{2} - b_{1} \lambda + (-b_{2}s_{1}) = 0$
+
+and thus are 
+
+$\lambda_{1,2}=\frac{b_{1} \pm \sqrt{b_{1}^2 + 4b_{2}s_{1}}}{2}$
+
+Thus, there is a strictly dominant eigenvalue $\lambda_{1} = \frac{b_{1} + \sqrt{b_{1}^2 + 4b_{2}s_{1}}}{2}$ and we have that $\lambda_{1} > 0$. Furthermore, 
+
+$\lambda_{1} = \frac{b_{1} + \sqrt{b_{1}^2 + 4b_{2}s_{1}}}{2} > \frac{b_{1} + \sqrt{b_{1}^2}}{2} = b_{1}$
+
+from which we see that if $b_{1} > 1$, then $\lambda_{1} > 1$. Note however that this is not the only situation in which we can have $\lambda_{1} > 1$. 
+
+Let's find the eigenvalue $v_{1}$ corresponding to $\lambda_{1} = \frac{b_{1} + \sqrt{b_{1}^2 + 4b_{2}s_{1}}}{2}$. Such a vector will satisfy 
+
+$$ 
+(L-\lambda_{1} I)v_{1} = \left(\begin{array}{cc} \frac{b_{1}-\sqrt{b_{1}^2+4b_{2}s_{1}}}{2}  & b_{2}  \\ s_{1}  &  \frac{-b_{1}-\sqrt{b_{1}^2+4b_{2}s_{1}}}{2} \end{array} \right)\left(\begin{array}{c} x \\ y \end{array} \right) = \left(\begin{array}{c} 0 \\ 0 \end{array}\right)
+$$
+
+and you can show (for homework) that 
+
+$v_{1} = \left(\begin{array}{c} 1 \\ \frac{s_{1}}{\lambda_{1}} \end{array}\right) = \left(\begin{array}{c} 1 \\ \frac{2s_{1}}{b_{1} + \sqrt{b_{1}^2 + 4b_{2}s_{1}}} \end{array}\right)$
+
+satisfies the above equation. Thus,
+
+$L = \left(\begin{array}{cc} b_{1} & b_{2} \\ s_{1} & 0  \end{array} \right)$
+
+has strictly dominant eigenvalue $\lambda_{1} = \frac{b_{1} + \sqrt{b_{1}^2 + 4b_{2}s_{1}}}{2}$ with stable age structure
+
+$v_{1} = \left(\begin{array}{c} 1 \\ \frac{s_{1}}{\lambda_{1}} \end{array}\right) = \left(\begin{array}{c} 1 \\ \frac{2s_{1}}{b_{1} + \sqrt{b_{1}^2 + 4b_{2}s_{1}}} \end{array}\right)$
+
+
 
