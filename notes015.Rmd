@@ -43,3 +43,93 @@ After reading this section of notes, you should
 
 # Introduction
 
+Let's return again to our general population model
+
+$N(t+\Delta t) = N(t) + G(N(t),\Delta t)$
+
+where $N(t)$ denote the number of a single isolated and homogeneous population at time $t$, and $G(N(t),\Delta t)$ is a growth function which could be positive or negative. Further, let's assume from the start that we are treating time as a discrete variable and therefore may write the model as
+
+$N_{t+1} = N_{t} + G(N_{t})$
+
+Previous, we took $G$ to be a linear function of $N_{t}$ and ended up with a model of the form $N_{t+1}=\lambda N_{t}$. We noted that for $N_{t+1}=\lambda N_{t}$ with $\lambda > 0$ we obtain the discrete analog of exponential growth. As in the continuous time setting, exponential growth is unrealistic. Thus, we ask the question is there a nonlinear function $G$ that may serve to "slow down"  population growth as the population approaches a carrying capacity. One option is to take
+
+$G(N_{t}) = \rho (K - N_{t})N_{t}$
+
+You should take a moment to think about the properties of this particular $G$ and how they relate to growth of the population. Now, with $G(N_{t}) = \rho (C - N_{t})N_{t}$ we have
+
+$N_{t+1} = N_{t} + \rho (C - N_{t})N_{t}$
+
+This expression may be simplified as follows:
+
+$$
+\begin{align}
+N_{t+1} &= N_{t} + \rho (C - N_{t})N_{t} \\
+& = N_{t} + \rho C N_{t} - \rho N_{t}^{2} \\
+&= (1+\rho C) N_{t} - \rho N_{t}^{2} \\
+&= (1+\rho C)\left(N_{t} - \frac{N_{t}^2}{\frac{1 + \rho C}{\rho}}\right) \\
+&= (1+\rho C)N_{t}\left(1 - \frac{N_{t}}{\frac{1 + \rho C}{\rho}}\right)  \\
+&= rN_{t}\left(1 - \frac{N_{t}}{K} \right)
+\end{align}
+$$
+
+where $r= 1+\rho C$ and $K= \frac{1 + \rho C}{\rho}$. Thus, 
+
+$N_{t+1}=rN_{t}\left(1 - \frac{N_{t}}{K} \right)$
+
+is the **discrete time logistic** model. We can simplify this even further by non-dimensionalization. Let $x_{t}=\frac{N_{t}}{K}$, then
+
+$$
+\begin{align}
+x_{t+1} &= \frac{N_{t+1}}{K} \\
+&= \frac{1}{K}\left(rN_{t} \left(1 - \frac{N_{t}}{K} \right) \right) \\ 
+&= rx_{t}(1-x_{t})
+\end{align}
+$$
+
+The non-dimensional discrete logistic model $x_{t+1}=rx_{t}(1-x_{t})$ is an example of a **first-order nonlinear difference equation**. In general, first-order nonlinear difference equations take the form
+
+$x_{t+1} = f(x_{t})$
+
+where $f$ is a nonlinear function. Moreover, first-order nonlinear difference equations provide another class of examples of discrete time systems. 
+
+There is already an important difference between the continuous logistic growth model
+
+$\frac{dN}{dt}=rN\left(1 - \frac{N}{K} \right)$
+
+and the discrete logistic growth model
+
+$N_{t+1} = rN_{t}\left(1 - \frac{N_{t}}{K} \right)$
+
+The continuous model non-dimensionalizes to $\frac{dx}{dt}=x(1-x)$ while the discrete model non-dimensionalizes to $x_{t+1}=rx_{t}(1-x_{t})$. In particular, we can not eliminate the parameter $r$ from the discrete time model. Thus, we must be able to assess what are the dynamics of the discrete logistic model and how are they affected by the value of $r$. We will see that $x_{t+1}=rx_{t}(1-x_{t})$ possesses much richer dynamics than its continuous time counterpart.  
+
+# Analyzing Nonlinear Difference Equations
+
+Let $x_{t+1}=f(x_{t})$ be a first-order nonlinear difference equation. We say that a value $\xi$ is a **fixed point** for the system if it satisfies
+
+$\xi = f(\xi)$
+
+Note that a fixed point $\xi$ for a difference equation $x_{t+1}=f(x_{t})$ is a constant solution to the equation in a similar way as to how an equilibrium value is a constant solution to continuous autonomous system. 
+
+Given a difference equation $x_{t+1}=f(x_{t})$, we can find its fixed points by solving the equation
+
+$x=f(x) \Leftrightarrow x-f(x) = 0$
+
+for the unknown $x$. 
+
+Graphically, fixed points for a difference equation $x_{t+1}=f(x_{t})$ correspond ot points where the line $y=x$ intersects the graph of $y=f(x)$.  
+
+### Example
+
+Let's determine the fixed points for the (non-dimensional) discrete logistic equation $x_{t+1}=rx_{t}(1-x_{t})$. In order to do this, we must solve
+
+$x=rx(1-x) \Leftrightarrow x-rx(1-x) = 0 \Leftrightarrow x(1-r+rx)=0$
+
+which has solutions $x=0$ and $x=\frac{r-1}{r}$. Note that the second fixed point is only biologically reasonable if $r \geq 1$. 
+
+The following plot shows the intersection of $y=x$ and $y=rx(1-x)$ in the case where $r=3$. 
+
+```{r,echo=TRUE,code_folding=TRUE}
+
+```
+
+

@@ -2161,6 +2161,64 @@ examining the stability properties of fixed-points for first-order
 nonlinear difference equations.</p></li>
 </ol>
 <h1 id="introduction">Introduction</h1>
+<p>Let’s return again to our general population model</p>
+<p><span class="math inline">\(N(t+\Delta t) = N(t) + G(N(t),\Delta
+t)\)</span></p>
+<p>where <span class="math inline">\(N(t)\)</span> denote the number of
+a single isolated and homogeneous population at time <span
+class="math inline">\(t\)</span>, and <span
+class="math inline">\(G(N(t),\Delta t)\)</span> is a growth function
+which could be positive or negative. Further, let’s assume from the
+start that we are treating time as a discrete variable and therefore may
+write the model as</p>
+<p><span class="math inline">\(N_{t+1} = N_{t} + G(N_{t})\)</span></p>
+<p>Previous, we took <span class="math inline">\(G\)</span> to be a
+linear function of <span class="math inline">\(N_{t}\)</span> and ended
+up with a model of the form <span class="math inline">\(N_{t+1}=\lambda
+N_{t}\)</span>. We noted that for <span
+class="math inline">\(N_{t+1}=\lambda N_{t}\)</span> with <span
+class="math inline">\(\lambda &gt; 0\)</span> we obtain the discrete
+analog of exponential growth. As in the continuous time setting,
+exponential growth is unrealistic. Thus, we ask the question is there a
+nonlinear function <span class="math inline">\(G\)</span> that may serve
+to “slow down” population growth as the population approaches a carrying
+capacity. One option is to take</p>
+<p><span class="math inline">\(G(N_{t}) = \rho (K -
+N_{t})N_{t}\)</span></p>
+<p>You should take a moment to think about the properties of this
+particular <span class="math inline">\(G\)</span> and how they relate to
+growth of the population. Now, with <span class="math inline">\(G(N_{t})
+= \rho (C - N_{t})N_{t}\)</span> we have</p>
+<p><span class="math inline">\(N_{t+1} = N_{t} + \rho (C -
+N_{t})N_{t}\)</span></p>
+<p>This expression may be simplified as follows:</p>
+<p><span class="math display">\[
+\begin{align}
+N_{t+1} &amp;= N_{t} + \rho (C - N_{t})N_{t} \\
+&amp; = N_{t} + \rho C N_{t} - \rho N_{t}^{2} \\
+&amp;= (1+\rho C) N_{t} - \rho N_{t}^{2} \\
+&amp;= (1+\rho C)\left(N_{t} - \frac{N_{t}^2}{\frac{1 + \rho
+C}{\rho}}\right) \\
+&amp;= (1+\rho C)N_{t}\left(1 - \frac{N_{t}}{\frac{1 + \rho
+C}{\rho}}\right)  \\
+&amp;= rN_{t}\left(1 - \frac{N_{t}}{K} \right)
+\end{align}
+\]</span></p>
+<p>where <span class="math inline">\(r= 1+\rho C\)</span> and <span
+class="math inline">\(K= \frac{1 + \rho C}{\rho}\)</span>. Thus,</p>
+<p><span class="math inline">\(N_{t+1}=rN_{t}\left(1 - \frac{N_{t}}{K}
+\right)\)</span></p>
+<p>is the <strong>discrete time logistic</strong> model. We can simplify
+this even further by non-dimensionalization. Let <span
+class="math inline">\(x_{t}=\frac{N_{t}}{K}\)</span>, then</p>
+<p><span class="math display">\[
+\begin{align}
+x_{t+1} &amp;= \frac{N_{t+1}}{K} \\
+&amp;= \frac{1}{K}\left(rN_{t} \left(1 - \frac{N_{t}}{K} \right) \right)
+\\
+&amp;= rx_{t}(1-x_{t})
+\end{align}
+\]</span></p>
 <div class="sourceCode" id="cb1"><pre
 class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
 <!--radix_placeholder_article_footer-->
@@ -2170,6 +2228,15 @@ class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"><
 <div class="d-appendix">
 </div>
 
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
 
 <!--radix_placeholder_site_after_body-->
 <!--/radix_placeholder_site_after_body-->
