@@ -129,7 +129,17 @@ which has solutions $x=0$ and $x=\frac{r-1}{r}$. Note that the second fixed poin
 The following plot shows the intersection of $y=x$ and $y=rx(1-x)$ in the case where $r=3$. 
 
 ```{r,echo=TRUE,code_folding=TRUE}
-
+ggplot(data=tibble(x=c(-0.1,1)),aes(x=x)) + 
+    geom_function(fun=function(x) 3.0*x*(1-x)) + 
+    geom_abline(slope = 1.0,intercept=0.0) + 
+    geom_point(x=c(0,2/3),y=c(0,2/3),color="lightgreen",size=2) + 
+    ylim(c(-0.1,1.2)) + 
+    xlab("x") + 
+    theme_light() + 
+    theme(text = element_text(size = 18))
 ```
+
+## Fixed Point Stability 
+
 
 
