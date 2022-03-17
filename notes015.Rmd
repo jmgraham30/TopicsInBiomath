@@ -51,7 +51,7 @@ where $N(t)$ denote the number of a single isolated and homogeneous population a
 
 $N_{t+1} = N_{t} + G(N_{t})$
 
-Previous, we took $G$ to be a linear function of $N_{t}$ and ended up with a model of the form $N_{t+1}=\lambda N_{t}$. We noted that for $N_{t+1}=\lambda N_{t}$ with $\lambda > 0$ we obtain the discrete analog of exponential growth. As in the continuous time setting, exponential growth is unrealistic. Thus, we ask the question is there a nonlinear function $G$ that may serve to "slow down"  population growth as the population approaches a carrying capacity. One option is to take
+Previous, we took $G$ to be a linear function of $N_{t}$ and ended up with a model of the form $N_{t+1}=\lambda N_{t}$. We noted that for $N_{t+1}=\lambda N_{t}$ with $\lambda > 1$ we obtain the discrete analog of exponential growth. As in the continuous time setting, exponential growth is unrealistic from an ecological perspective. Thus, we ask the question is there a nonlinear function $G$ that may serve to "slow down"  population growth as the population approaches a carrying capacity. One option is to take
 
 $G(N_{t}) = \rho (K - N_{t})N_{t}$
 
