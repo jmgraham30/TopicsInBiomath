@@ -189,8 +189,19 @@ If the points $(x_{k},x_{k+1}=f(x_{k}))$ become increasingly close to $(\xi,\xi)
 
 To see and interact with the cobweb diagram for the discrete logistic model, check out  [this shiny web app]( https://jmgraham30rs.shinyapps.io/discrete_logistic/).
 
+```{r,echo=TRUE,code_folding=TRUE}
+library(map1d)
+plotOrbitDiagram(function(x, r) r * x*sin(1-x), 1, 4, 400, 200, 100)
+title("Orbit diagram of discrete logistic model")
+```
 
+Let's zoom in a bit and take a closer look at what is happening after $r$ gets to 3. 
 
+```{r,echo=TRUE,code_folding=TRUE}
+library(map1d)
+plotOrbitDiagram(function(x, r) r * x*sin(1-x), 3, 4, 400, 200, 100)
+title("Zoomed in orbit diagram of discrete logistic model")
+```
 
 # Further Reading
 
