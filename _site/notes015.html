@@ -135,6 +135,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   
   <meta name="citation_reference" content="citation_title=Introduction to mathematical biology;citation_publication_date=2007;citation_publisher=Pearson/Prentice Hall;citation_author=Linda J. S. Allen"/>
   <meta name="citation_reference" content="citation_title=A course in mathematical biology;citation_publication_date=2006;citation_publisher=Society for Industrial and Applied Mathematics (SIAM), Philadelphia, PA;citation_volume=12;citation_doi=10.1137/1.9780898718256;citation_author=Gerda Vries;citation_author=Thomas Hillen;citation_author=Mark Lewis;citation_author=Johannes Müller;citation_author=Birgitt Schönfisch"/>
+  <meta name="citation_reference" content="citation_title=Nonlinear dynamics and chaos;citation_publication_date=2015;citation_publisher=Westview Press, Boulder, CO;citation_author=Steven H. Strogatz"/>
   <!--radix_placeholder_rmarkdown_metadata-->
 
   <script type="text/json" id="radix-rmarkdown-metadata">
@@ -2414,7 +2415,38 @@ unstable.</p>
 <p>To see and interact with the cobweb diagram for the discrete logistic
 model, check out <a
 href="https://jmgraham30rs.shinyapps.io/discrete_logistic/">this shiny
-web app</a>.</p>
+web app</a>. This app displays the time course for the dynamics of the
+discrete logistic model together with the corresponding cobweb plot.</p>
+<p>To summarize the behavior of the discrete logistic model <span
+class="math inline">\(x_{t+1}=rx_{t}(1-x_{t})\)</span>, for values of
+the parameter <span class="math inline">\(r\)</span>:</p>
+<ul>
+<li><p>If <span class="math inline">\(r&lt;1\)</span> then <span
+class="math inline">\(x=0\)</span> is a stable fixed-point and the
+population decreases for any starting value <span
+class="math inline">\(0 &lt; x_{0} &lt; 1\)</span>.</p></li>
+<li><p>If <span class="math inline">\(1 &lt; r &lt; 3\)</span>, then
+<span class="math inline">\(x=\frac{r-1}{r}\)</span> is a stable
+fixed-point and the population tends toward the carrying capacity <span
+class="math inline">\(\frac{r-1}{r}\)</span>.</p></li>
+<li><p>When <span class="math inline">\(r\)</span> is around 3, the
+population oscillates in a periodic fashion.</p></li>
+<li><p>If <span class="math inline">\(r\)</span> is continuously
+increased up to 4 we see that the dynamics show a <a
+href="https://en.wikipedia.org/wiki/Period-doubling_bifurcation">period
+doubling bifurcation</a> and then eventually <a
+href="https://en.wikipedia.org/wiki/Chaos_theory">chaotic
+dynamics</a>.</p></li>
+</ul>
+<p>Thus, the dynamics of the discrete logistic model are very rich. We
+can summarize the changes in the dynamic behavior of the discrete
+logistic model using a so-called <strong>orbit diagram</strong>. Such a
+diagram shows the distinct values that an iteration <span
+class="math inline">\(x_{t+1}=f(x_{t})\)</span> takes on (in the
+long-term) displayed vertically above values of a parameter such as
+<span class="math inline">\(r\)</span> in the discrete logistic model.
+The following figure is the orbit diagam for <span
+class="math inline">\(x_{t+1}=rx_{t}(1-x_{t})\)</span>.</p>
 <div class="layout-chunk" data-layout="l-body">
 <details>
 <summary>
@@ -2429,8 +2461,13 @@ Show code
 </details>
 <p><img src="notes015_files/figure-html5/unnamed-chunk-2-1.png" width="624" /></p>
 </div>
-<p>Let’s zoom in a bit and take a closer look at what is happening after
-<span class="math inline">\(r\)</span> gets to 3.</p>
+<p>You can clearly see the period doubling behavior in this diagram.
+What is more, the diagram possesses <a
+href="https://en.wikipedia.org/wiki/Self-similarity">self-similarity</a>.
+That is, if we zoom in on a smaller portion of the diagram, we see all
+of the features of the larger diagram reproduced. Let’s zoom in a bit
+and take a closer look at what is happening after <span
+class="math inline">\(r\)</span> gets to 3.</p>
 <div class="layout-chunk" data-layout="l-body">
 <details>
 <summary>
@@ -2445,6 +2482,10 @@ Show code
 </details>
 <p><img src="notes015_files/figure-html5/unnamed-chunk-3-1.png" width="624" /></p>
 </div>
+<p>Note that self-similarity is a hallmark feature of <a
+href="https://en.wikipedia.org/wiki/Fractal">fractals</a>. In fact, the
+orbit diagram for the discrete logistic model is an example of a
+fractal.</p>
 <h1 id="further-reading">Further Reading</h1>
 <p>For more on discrete time models and linear difference equations in
 particular, see chapter 2 of <span class="citation"
@@ -2455,7 +2496,11 @@ class="citation" data-cites="devriesCourseMathematicalBiology2006">(<a
 href="#ref-devriesCourseMathematicalBiology2006" role="doc-biblioref">de
 Vries et al. 2006</a>)</span>. Both of these books also contain
 references to further reading on the topics of difference equations and
-their applications within biomathematics.</p>
+their applications within biomathematics. You can learn more about chaos
+and fractals as theses concepts relate to dynamical systems from <span
+class="citation" data-cites="strogatzNonlinearDynamicsChaos2015">(<a
+href="#ref-strogatzNonlinearDynamicsChaos2015"
+role="doc-biblioref">Strogatz 2015</a>)</span>.</p>
 <div class="sourceCode" id="cb1"><pre
 class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
 <div id="refs" class="references csl-bib-body hanging-indent"
@@ -2465,6 +2510,12 @@ role="doc-biblioentry">
 Allen, Linda J. S. 2007. <em>Introduction to Mathematical Biology</em>.
 <span>Pearson/Prentice Hall</span>. <a
 href="https://agris.fao.org/agris-search/search.do?recordID=US201300115181">https://agris.fao.org/agris-search/search.do?recordID=US201300115181</a>.
+</div>
+<div id="ref-strogatzNonlinearDynamicsChaos2015" class="csl-entry"
+role="doc-biblioentry">
+Strogatz, Steven H. 2015. <em>Nonlinear Dynamics and Chaos</em>. Second.
+<span>Westview Press, Boulder, CO</span>. <a
+href="https://mathscinet.ams.org/mathscinet-getitem?mr=3837141">https://mathscinet.ams.org/mathscinet-getitem?mr=3837141</a>.
 </div>
 <div id="ref-devriesCourseMathematicalBiology2006" class="csl-entry"
 role="doc-biblioentry">

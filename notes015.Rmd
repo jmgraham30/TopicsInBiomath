@@ -187,7 +187,19 @@ If the points $(x_{k},x_{k+1}=f(x_{k}))$ become increasingly close to $(\xi,\xi)
 
 ### Cobweb for Discrete Logistic
 
-To see and interact with the cobweb diagram for the discrete logistic model, check out  [this shiny web app]( https://jmgraham30rs.shinyapps.io/discrete_logistic/).
+To see and interact with the cobweb diagram for the discrete logistic model, check out  [this shiny web app](https://jmgraham30rs.shinyapps.io/discrete_logistic/). This app displays the time course for the dynamics of the discrete logistic model together with the corresponding cobweb plot. 
+
+To summarize the behavior of the discrete logistic model $x_{t+1}=rx_{t}(1-x_{t})$, for values of the parameter $r$: 
+
+* If $r<1$ then $x=0$ is a stable fixed-point and the population decreases for any starting value $0 < x_{0} < 1$.
+
+* If $1 < r < 3$, then $x=\frac{r-1}{r}$ is a stable fixed-point and the population tends toward the carrying capacity $\frac{r-1}{r}$. 
+
+* When $r$ is around 3, the population oscillates in a periodic fashion.
+
+* If $r$ is continuously increased up to 4 we see that the dynamics show a [period doubling bifurcation](https://en.wikipedia.org/wiki/Period-doubling_bifurcation) and then eventually [chaotic dynamics](https://en.wikipedia.org/wiki/Chaos_theory).
+
+Thus, the dynamics of the discrete logistic model are very rich. We can summarize the changes in the dynamic behavior of the discrete logistic model using a so-called **orbit diagram**. Such a diagram shows the distinct values that an iteration $x_{t+1}=f(x_{t})$ takes on (in the long-term) displayed vertically above values of a parameter such as $r$ in the discrete logistic model. The following figure is the orbit diagam for $x_{t+1}=rx_{t}(1-x_{t})$.     
 
 ```{r,echo=TRUE,code_folding=TRUE}
 library(map1d)
@@ -195,7 +207,7 @@ plotOrbitDiagram(function(x, r) r * x*sin(1-x), 1, 4, 400, 200, 100)
 title("Orbit diagram of discrete logistic model")
 ```
 
-Let's zoom in a bit and take a closer look at what is happening after $r$ gets to 3. 
+You can clearly see the period doubling behavior in this diagram. What is more, the diagram possesses [self-similarity](https://en.wikipedia.org/wiki/Self-similarity). That is, if we zoom in on a smaller portion of the diagram, we see all of the features of the larger diagram reproduced. Let's zoom in a bit and take a closer look at what is happening after $r$ gets to 3. 
 
 ```{r,echo=TRUE,code_folding=TRUE}
 library(map1d)
@@ -203,7 +215,9 @@ plotOrbitDiagram(function(x, r) r * x*sin(1-x), 3, 4, 400, 200, 100)
 title("Zoomed in orbit diagram of discrete logistic model")
 ```
 
+Note that self-similarity is a hallmark feature of [fractals](https://en.wikipedia.org/wiki/Fractal). In fact, the orbit diagram for the discrete logistic model is an example of a fractal.
+
 # Further Reading
 
-For more on discrete time models and linear difference equations in particular, see chapter 2 of [@allenIntroductionMathematicalBiology2007] or chapter 1 of [@devriesCourseMathematicalBiology2006]. Both of these books also contain references to further reading on the topics of difference equations and their applications within biomathematics.
+For more on discrete time models and linear difference equations in particular, see chapter 2 of [@allenIntroductionMathematicalBiology2007] or chapter 1 of [@devriesCourseMathematicalBiology2006]. Both of these books also contain references to further reading on the topics of difference equations and their applications within biomathematics. You can learn more about chaos and fractals as theses concepts relate to dynamical systems from [@strogatzNonlinearDynamicsChaos2015].
 
