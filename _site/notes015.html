@@ -2122,6 +2122,7 @@ Notes
 <a href="notes012.html">Notes 12</a>
 <a href="notes013.html">Notes 13</a>
 <a href="notes014.html">Notes 14</a>
+<a href="notes015.html">Notes 15</a>
 </div>
 </div>
 <div class="nav-dropdown">
@@ -2357,8 +2358,7 @@ can not draw any conclusions.</p></li>
 <p>Let’s apply the stated linear stability analysis for nonlinear
 difference equations to the discrete logistic model <span
 class="math inline">\(x_{t+1}=f(x_{t})=rx_{t}(1-x_{t})\)</span>. We have
-that <span class="math inline">\(f&#39;(x)=r-2rx_{t}\)</span> and
-thus</p>
+that <span class="math inline">\(f&#39;(x)=r-2rx\)</span> and thus</p>
 <ul>
 <li><p><span class="math inline">\(|f&#39;(0)| = r\)</span>,
 and</p></li>
@@ -2395,7 +2395,8 @@ possible to see the fixed points. Then, starting with an initial
 condition, <span class="math inline">\(x_{0}\)</span>, plot the series
 of points consecutively while connecting the points with a straight line
 at each step:</p>
-<p>$$ <span class="math display">\[\begin{align}
+<p><span class="math display">\[
+\begin{align}
 &amp;(x_{0},0) \\
 &amp;(x_{0},x_{1}=f(x_{0})) \\
 &amp;(x_{1},x_{1}) \\
@@ -2404,14 +2405,66 @@ at each step:</p>
 &amp;(x_{k},x_{k}) \\
 &amp;(x_{k},x_{k+1}=f(x_{k})) \\
 &amp; \text{so on}
-
-\end{align}\]</span> $$</p>
+\end{align}
+\]</span></p>
 <p>If the points <span
 class="math inline">\((x_{k},x_{k+1}=f(x_{k}))\)</span> become
 increasingly close to <span class="math inline">\((\xi,\xi)\)</span>
 then the fixed point is stable, otherwise the fixed point is
 unstable.</p>
-<h3 id="cobweb-for-discrete-logistic">Cobweb for Discrete Logistic</h3>
+<p>Here are the first four steps in creating a cobweb plot for <span
+class="math inline">\(x_{t+1}=2x_{t}(1-x_{t})\)</span></p>
+<div class="layout-chunk" data-layout="l-body">
+<details>
+<summary>
+Show code
+</summary>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>dl_2</span> <span class='op'>&lt;-</span> <span class='kw'>function</span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span><span class='op'>{</span><span class='fl'>2.0</span><span class='op'>*</span><span class='va'>x</span><span class='op'>*</span><span class='op'>(</span><span class='fl'>1</span><span class='op'>-</span><span class='va'>x</span><span class='op'>)</span><span class='op'>}</span>
+
+<span class='va'>p1</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span><span class='op'>(</span>data<span class='op'>=</span><span class='fu'><a href='https://tibble.tidyverse.org/reference/tibble.html'>tibble</a></span><span class='op'>(</span>x<span class='op'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='op'>-</span><span class='fl'>0.1</span>,<span class='fl'>1</span><span class='op'>)</span><span class='op'>)</span>,<span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span>x<span class='op'>=</span><span class='va'>x</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span> 
+    <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_function.html'>geom_function</a></span><span class='op'>(</span>fun<span class='op'>=</span><span class='va'>dl_2</span><span class='op'>)</span> <span class='op'>+</span> 
+    <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_abline.html'>geom_abline</a></span><span class='op'>(</span>slope <span class='op'>=</span> <span class='fl'>1.0</span>,intercept<span class='op'>=</span><span class='fl'>0.0</span><span class='op'>)</span> <span class='op'>+</span> 
+    <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_point.html'>geom_point</a></span><span class='op'>(</span>x<span class='op'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>0</span>,<span class='fl'>1</span><span class='op'>/</span><span class='fl'>2</span><span class='op'>)</span>,y<span class='op'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>0</span>,<span class='fl'>1</span><span class='op'>/</span><span class='fl'>2</span><span class='op'>)</span>,color<span class='op'>=</span><span class='st'>"lightgreen"</span>,size<span class='op'>=</span><span class='fl'>2</span><span class='op'>)</span> <span class='op'>+</span> 
+    <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/lims.html'>ylim</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='op'>-</span><span class='fl'>0.1</span>,<span class='fl'>1.2</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span> 
+    <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/labs.html'>xlab</a></span><span class='op'>(</span><span class='st'>"x"</span><span class='op'>)</span> <span class='op'>+</span> 
+    <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggtheme.html'>theme_light</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>+</span> 
+    <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/theme.html'>theme</a></span><span class='op'>(</span>text <span class='op'>=</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/element.html'>element_text</a></span><span class='op'>(</span>size <span class='op'>=</span> <span class='fl'>18</span><span class='op'>)</span><span class='op'>)</span>
+
+<span class='va'>x0</span> <span class='op'>&lt;-</span> <span class='fl'>0.25</span>
+
+<span class='va'>p1</span> <span class='op'>&lt;-</span> <span class='va'>p1</span> <span class='op'>+</span> 
+    <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_point.html'>geom_point</a></span><span class='op'>(</span>x<span class='op'>=</span><span class='va'>x0</span>,y<span class='op'>=</span><span class='fl'>0.0</span>,color<span class='op'>=</span><span class='st'>"red"</span><span class='op'>)</span> <span class='op'>+</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/labs.html'>ggtitle</a></span><span class='op'>(</span><span class='st'>"x0=0.25"</span><span class='op'>)</span>
+
+<span class='va'>x1</span> <span class='op'>&lt;-</span> <span class='fu'>dl_2</span><span class='op'>(</span><span class='va'>x0</span><span class='op'>)</span>
+
+<span class='va'>p2</span> <span class='op'>&lt;-</span> <span class='va'>p1</span>  <span class='op'>+</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_point.html'>geom_point</a></span><span class='op'>(</span>x<span class='op'>=</span><span class='va'>x0</span>,y<span class='op'>=</span><span class='va'>x1</span>,color<span class='op'>=</span><span class='st'>"red"</span><span class='op'>)</span> <span class='op'>+</span> 
+  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_segment.html'>geom_segment</a></span><span class='op'>(</span>x<span class='op'>=</span><span class='va'>x0</span>,y<span class='op'>=</span><span class='fl'>0.0</span>,
+                     xend<span class='op'>=</span><span class='va'>x0</span>,yend<span class='op'>=</span><span class='va'>x1</span>,
+                 color<span class='op'>=</span><span class='st'>"blue"</span><span class='op'>)</span> <span class='op'>+</span> 
+  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/labs.html'>ggtitle</a></span><span class='op'>(</span><span class='st'>"x1=f(x0)"</span><span class='op'>)</span>
+
+<span class='va'>p3</span> <span class='op'>&lt;-</span> <span class='va'>p2</span> <span class='op'>+</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_point.html'>geom_point</a></span><span class='op'>(</span>x<span class='op'>=</span><span class='va'>x1</span>,y<span class='op'>=</span><span class='va'>x1</span>,color<span class='op'>=</span><span class='st'>"red"</span><span class='op'>)</span> <span class='op'>+</span> 
+  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_segment.html'>geom_segment</a></span><span class='op'>(</span>x<span class='op'>=</span><span class='va'>x0</span>,y<span class='op'>=</span><span class='va'>x1</span>,
+               xend<span class='op'>=</span><span class='va'>x1</span>,yend<span class='op'>=</span><span class='va'>x1</span>,
+               color<span class='op'>=</span><span class='st'>"blue"</span><span class='op'>)</span> 
+
+<span class='va'>x2</span> <span class='op'>&lt;-</span> <span class='fu'>dl_2</span><span class='op'>(</span><span class='va'>x1</span><span class='op'>)</span>
+
+<span class='va'>p4</span> <span class='op'>&lt;-</span> <span class='va'>p3</span> <span class='op'>+</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_point.html'>geom_point</a></span><span class='op'>(</span>x<span class='op'>=</span><span class='va'>x1</span>,y<span class='op'>=</span><span class='va'>x2</span>,color<span class='op'>=</span><span class='st'>"red"</span><span class='op'>)</span> <span class='op'>+</span> 
+  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_segment.html'>geom_segment</a></span><span class='op'>(</span>x<span class='op'>=</span><span class='va'>x1</span>,y<span class='op'>=</span><span class='va'>x1</span>,
+               xend<span class='op'>=</span><span class='va'>x1</span>,yend<span class='op'>=</span><span class='va'>x2</span>,
+               color<span class='op'>=</span><span class='st'>"blue"</span><span class='op'>)</span> <span class='op'>+</span> 
+  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/labs.html'>ggtitle</a></span><span class='op'>(</span><span class='st'>"x2=f(x1)"</span><span class='op'>)</span>
+
+<span class='op'>(</span><span class='va'>p1</span><span class='op'>+</span><span class='va'>p2</span><span class='op'>)</span> <span class='op'>/</span> <span class='op'>(</span><span class='va'>p3</span><span class='op'>+</span><span class='va'>p4</span><span class='op'>)</span>
+</code></pre>
+</div>
+</details>
+<p><img src="notes015_files/figure-html5/unnamed-chunk-2-1.png" width="624" /></p>
+</div>
+<h3 id="cobweb-and-discrete-logistic-dynamics">Cobweb and Discrete
+Logistic Dynamics</h3>
 <p>To see and interact with the cobweb diagram for the discrete logistic
 model, check out <a
 href="https://jmgraham30rs.shinyapps.io/discrete_logistic/">this shiny
@@ -2459,7 +2512,7 @@ Show code
 </code></pre>
 </div>
 </details>
-<p><img src="notes015_files/figure-html5/unnamed-chunk-2-1.png" width="624" /></p>
+<p><img src="notes015_files/figure-html5/unnamed-chunk-3-1.png" width="624" /></p>
 </div>
 <p>You can clearly see the period doubling behavior in this diagram.
 What is more, the diagram possesses <a
@@ -2480,7 +2533,7 @@ Show code
 </code></pre>
 </div>
 </details>
-<p><img src="notes015_files/figure-html5/unnamed-chunk-3-1.png" width="624" /></p>
+<p><img src="notes015_files/figure-html5/unnamed-chunk-4-1.png" width="624" /></p>
 </div>
 <p>Note that self-similarity is a hallmark feature of <a
 href="https://en.wikipedia.org/wiki/Fractal">fractals</a>. In fact, the
