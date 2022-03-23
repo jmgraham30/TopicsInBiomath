@@ -32,6 +32,7 @@ Suppose that we have two alleles denoted by $A$ and $a$. We think of $A$ as the 
 
 * $aa$
 
+# Hardy-Weinberg Equilibrium
 
 Let $P_{A}$ denote the frequency of allele $A$ in a population and $P_{a}$ denote the frequency of allele $a$ in a population. We view these frequency values as probabilities and thus must have
 
@@ -89,6 +90,15 @@ Note that we have
 
 $P_{A} + P_{a} = P_{AA} + \frac{1}{2} P_{Aa} + P_{aa} + \frac{1}{2} P_{Aa} = 1$. 
 
+Given that we know the genotype frequencies in the current generation, how can we find the genotype frequencies in the following generation? Making use of our previous assumptions which allows us to conclude [independence](https://en.wikipedia.org/wiki/Independence_(probability_theory)), we have that
+
+$$
+\begin{align}
+\text{next generation frequency of AA} = Q_{AA} = P_{AA}P_{AA} = P_{AA}^2 \\
+\text{next generation frequency of Aa} = Q_{Aa} = P_{Aa} + P_{Aa} = 2P_{Aa} \\
+\text{next generation frequency of aa} = Q_{aa} = P_{aa}P_{aa} = P_{aa}^2
+\end{align}
+$$
 
 
 
