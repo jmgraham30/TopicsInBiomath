@@ -1,0 +1,95 @@
+---
+title: "Population Genetics Models"
+description: |
+  In this post, we introduce population genetics models and the Hardy-Weinberg theory.
+author:
+  - name: Jason M. Graham
+    url: {}
+date: 2022-03-23
+output:
+  distill::distill_article:
+    self_contained: false
+---
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+# Introduction
+
+Over the course of the *Topics in Biomathematics* notes, we have seen many applications of biomathematical models and techniques related to population dynamics. However, the models we have looked at largely ignore evolutionary phenomena. In this post, we briefly describe some of the introductory mathematical models for population genetics which is a path of entry to incorporating biological evolution into the study of populations. The treatment here closely follows Chapter 14 from [*Mathematics for the Life Sciences*](https://mathematicsforthelifesciences.com/) by Bodine et al. Further material of using more advanced mathematics may be found in Section 3.7 of *An Introduction to Mathematical Biology* by Allen or Chapter 4 from *Essential Mathematical Biology* by Britton.  
+
+# Background
+
+Recall that [genetics](https://en.wikipedia.org/wiki/Genetics) is concerned with [genes](https://en.wikipedia.org/wiki/Gene) which are the basic biological unit of heredity. Population genetics studies how the genetics of a population changes over time. That is, population genetics tracks genes from one generation to the next. An [allele](https://en.wikipedia.org/wiki/Allele) is a variant of a given gene and the frequencies of alleles that occur in a population is an important variable in population genetics models.
+
+Suppose that we have two alleles denoted by $A$ and $a$. We think of $A$ as the dominant allele and $a$ as the recessive allele. A human with two sets of [chromosomes](https://en.wikipedia.org/wiki/Chromosome) could have one of any of the three allele combinations:
+
+* $AA$
+
+* $Aa$
+
+* $aa$
+
+
+Let $P_{A}$ denote the frequency of allele $A$ in a population and $P_{a}$ denote the frequency of allele $a$ in a population. We view these frequency values as probabilities and thus must have
+
+$P_{A} + P_{a} = 1$
+
+since the sum of all possible probability values must add to 1. 
+
+Suppose that we want to track genetics across a single generation. We would compute the following frequencies:
+
+* $P_{AA}$ - frequency of $AA$ genotype in the population, 
+
+* $P_{Aa}$ - frequency of $Aa$ genotype in the population, and
+
+* $P_{aa}$ - frequency of $aa$ genotype in the population. 
+
+Viewing these frequencies as probabilities then leads to 
+
+$P_{AA} + P_{Aa} + P_{aa} = 1$
+
+because those three options exhaust all possibilities.  
+
+We want to relate the values $P_{AA}$, $P_{Aa}$, $P_{aa}$, and $P_{A}$ and $P_{a}$. The following are assumed ot hold:
+
+1) Mating is random, 
+
+2) there is no variation in the number of progeny from parents of different genotypes, 
+
+3) all genotypes are equal with regard to fitness, and
+
+4) there are no mutations. 
+
+<aside>
+[G.H. Hardy](https://en.wikipedia.org/wiki/G._H._Hardy) was a prominant mathematician of the time and [Wilhelm Weinberg](https://en.wikipedia.org/wiki/Wilhelm_Weinberg) was an  obstetrician-gynecologist. The two independently developed the ideas known as the Hardy-Weinberg law. However, others had developed previously developed soem special cases of the Hardy-Weinberg law.
+</aside>
+
+Then the [**Hardy-Weinberg law**](https://en.wikipedia.org/wiki/Hardy%E2%80%93Weinberg_principle) states that gene frequencies and allele frequencies do not vary from one generation to the next. If $N$ is the total population size, then 
+
+$$
+\begin{align}
+P_{A} &= \frac{\text{total number of A alleles}}{2N} \\
+P_{a} &= \frac{\text{total number of a alleles}}{2N}
+\end{align}
+$$
+
+Then, by Hardy-Weinberg, 
+
+$$
+\begin{align}
+P_{A} &= \frac{2 N P_{AA} + N P_{Aa}}{2N} = P_{AA} + \frac{1}{2} P_{Aa}, 
+P_{a} &= \frac{2 N P_{aa} + N P_{Aa}}{2N} = P_{aa} + \frac{1}{2} P_{Aa}
+\end{align}
+$$
+
+Note that we have
+
+$P_{A} + P_{a} = P_{AA} + \frac{1}{2} P_{Aa} + P_{aa} + \frac{1}{2} P_{Aa} = 1$. 
+
+
+
+
+
