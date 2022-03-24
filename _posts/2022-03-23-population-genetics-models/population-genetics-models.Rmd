@@ -18,7 +18,9 @@ knitr::opts_chunk$set(echo = FALSE)
 
 # Introduction
 
-Over the course of the *Topics in Biomathematics* notes, we have seen many applications of biomathematical models and techniques related to population dynamics. However, the models we have looked at largely ignore evolutionary phenomena. In this post, we briefly describe some of the introductory mathematical models for population genetics which is a path of entry to incorporating biological evolution into the study of populations. The treatment here closely follows Chapter 14 from [*Mathematics for the Life Sciences*](https://mathematicsforthelifesciences.com/) by Bodine et al. Further material of using more advanced mathematics may be found in Section 3.7 of *An Introduction to Mathematical Biology* by Allen or Chapter 4 from *Essential Mathematical Biology* by Britton.  
+Over the course of the *Topics in Biomathematics* notes, we have seen many applications of biomathematical models and techniques related to population dynamics. However, the models we have looked at largely ignore evolutionary phenomena. In this post, we briefly describe some of the introductory mathematical models for population genetics which is a path of entry to incorporating biological evolution into the study of populations. Our goal is to provide an point of entry to an area of biomathematics that is not covered in the primary lectures and notes. Further, this topic provides an simple exampl eof the use of probability in biomathematics.   
+
+The treatment here closely follows Chapter 14 from [*Mathematics for the Life Sciences*](https://mathematicsforthelifesciences.com/) by Bodine et al. Further material of using more advanced mathematics may be found in Section 3.7 of *An Introduction to Mathematical Biology* by Allen or Chapter 4 from *Essential Mathematical Biology* by Britton.  
 
 # Background
 
@@ -64,10 +66,6 @@ We want to relate the values $P_{AA}$, $P_{Aa}$, $P_{aa}$, and $P_{A}$ and $P_{a
 
 4) there are no mutations. 
 
-<aside>
-[G.H. Hardy](https://en.wikipedia.org/wiki/G._H._Hardy) was a prominant mathematician of the time and [Wilhelm Weinberg](https://en.wikipedia.org/wiki/Wilhelm_Weinberg) was an  obstetrician-gynecologist. The two independently developed the ideas known as the Hardy-Weinberg law. However, others had developed previously developed soem special cases of the Hardy-Weinberg law.
-</aside>
-
 Then the [**Hardy-Weinberg law**](https://en.wikipedia.org/wiki/Hardy%E2%80%93Weinberg_principle) states that gene frequencies and allele frequencies do not vary from one generation to the next. If $N$ is the total population size, then 
 
 $$
@@ -77,11 +75,16 @@ P_{a} &= \frac{\text{total number of a alleles}}{2N}
 \end{align}
 $$
 
+<aside>
+[G.H. Hardy](https://en.wikipedia.org/wiki/G._H._Hardy) was a prominant mathematician of the time and [Wilhelm Weinberg](https://en.wikipedia.org/wiki/Wilhelm_Weinberg) was an  obstetrician-gynecologist. The two independently developed the ideas known as the Hardy-Weinberg law. However, others had developed previously developed soem special cases of the Hardy-Weinberg law.
+</aside>
+
+
 Then, by Hardy-Weinberg, 
 
 $$
 \begin{align}
-P_{A} &= \frac{2 N P_{AA} + N P_{Aa}}{2N} = P_{AA} + \frac{1}{2} P_{Aa}, 
+P_{A} &= \frac{2 N P_{AA} + N P_{Aa}}{2N} = P_{AA} + \frac{1}{2} P_{Aa}, \\
 P_{a} &= \frac{2 N P_{aa} + N P_{Aa}}{2N} = P_{aa} + \frac{1}{2} P_{Aa}
 \end{align}
 $$
@@ -94,12 +97,107 @@ Given that we know the genotype frequencies in the current generation, how can w
 
 $$
 \begin{align}
-\text{next generation frequency of AA} = Q_{AA} = P_{AA}P_{AA} = P_{AA}^2 \\
-\text{next generation frequency of Aa} = Q_{Aa} = P_{Aa} + P_{Aa} = 2P_{Aa} \\
-\text{next generation frequency of aa} = Q_{aa} = P_{aa}P_{aa} = P_{aa}^2
+\text{next generation frequency of AA} = Q_{AA} = P_{A}P_{A} = P_{A}^2 \\
+\text{next generation frequency of Aa} = Q_{Aa} = P_{Aa} + P_{Aa} = 2P_{Aa} = 2P_{A}P_{a} \\
+\text{next generation frequency of aa} = Q_{aa} = P_{a}P_{a} = P_{a}^2
+\end{align}
+$$
+Now observe that
+
+$Q_{AA} + Q_{Aa} + Q_{aa} = P_{A}^2 + 2P_{A}P_{a} + P_{a}^2 = (P_{A}+P_{a})^2 = 1$
+
+From this, we have
+
+$$
+\begin{align}
+Q_{A} &= Q{AA} + \frac{1}{2}Q_{Aa} \\
+      &=  P_{A}^2 + \frac{1}{2}2P_{A}P_{a} \\
+      &=  P_{A}^2 + P_{A}P_{a} \\
+      &= P_{A}(P_{A} + P_{a}) \\
+      &= P_{A} \cdot 1 \\
+      &= P_{A}
+\end{align}
+$$
+
+and similarly
+
+$$
+\begin{align}
+Q_{a} &= Q_{aa} + \frac{1}{2}Q_{Aa} \\
+      &= P_{a}^2 + \frac{1}{2}2P_{A}P_{a} \\
+      &=  P_{a}^2 + P_{A}P_{a} \\
+      &= P_{a}(P_{a} + P_{A}) \\
+      &= P_{a} \cdot 1 \\
+      &= P_{a}
+\end{align}
+$$
+and thus we have that in the next generation
+
+$Q_{A} + Q_{a} = P_{A} + P_{a} = 1$
+
+## Hardy-Weinberg Selection Model
+
+Suppose that survival is a function of genotype and let $S=$probability of survival to reproductive age. Define
+
+* $s_{AA}=P(S|AA)$, 
+
+* $s_{Aa}=P(S,Aa)$, 
+
+* $s_{aa}=P(S|aa)$
+
+Recall that $P(X|Y)$ denotes a [conditional probability](https://en.wikipedia.org/wiki/Conditional_probability).  By the [law of total probability](https://en.wikipedia.org/wiki/Law_of_total_probability) we must have
+
+$$
+\begin{align}
+P(S) &= P(S|AA)P(AA) + P(S|Aa)P(Aa) + P(S|aa)P(aa) \\
+&= s_{AA}P_{A}^2 + 2s_{Aa}P_{A}P_{a} + s_{aa}P_{a}^2
+\end{align}
+$$
+Then, [Bayes' theorem](https://en.wikipedia.org/wiki/Bayes%27_theorem) implies
+
+$$
+\begin{align}
+P(AA|S) &= \frac{P(S|AA)P(AA)}{P(S)} = \frac{s_{AA}P_{A}^2}{s_{AA}P_{A}^2 + 2s_{Aa}P_{A}P_{a} + s_{aa}P_{a}^2} \\
+P(Aa|S) &= \frac{P(S|Aa)P(Aa)}{P(S)} = \frac{2s_{A2}P_{A}P_{a}}{s_{AA}P_{A}^2 + 2s_{Aa}P_{A}P_{a} + s_{aa}P_{a}^2} \\
+P(aa|S) &= \frac{P(S|aa)P(aa)}{P(S)} = \frac{s_{AA}P_{a}^2}{s_{AA}P_{A}^2 + 2s_{Aa}P_{A}P_{a} + s_{aa}P_{a}^2} 
 \end{align}
 $$
 
 
 
+Now, for an initial generation, denote $p_{0}=P_{A}$ and $q_{0}=P_{a}$ in the next generation we will have
 
+$$
+\begin{align}
+p_{1} &= P(AA|S) + \frac{1}{2}P(Aa|S) \\
+&= \frac{s_{AA}P_{A}^2}{s_{AA}P_{A}^2 + 2s_{Aa}P_{A}P_{a} + s_{aa}P_{a}^2} + \frac{1}{2}\frac{2s_{Aa}P_{A}P_{a}}{s_{AA}P_{A}^2 + 2s_{Aa}P_{A}P_{a} + s_{aa}P_{a}^2} \\
+&= \frac{s_{AA}p_{0}^2+s_{Aa}p_{0}q_{0}}{s_{AA}p_{0}^2 + 2s_{Aa}p_{0}q_{0} + s_{aa}q_{0}^2} \\
+&= p_{0} \frac{s_{AA}p_{0} + s_{Aa}q_{0}}{s_{AA}p_{0}^2 + 2s_{Aa}p_{0}q_{0} + s_{aa}q_{0}^2}
+\end{align}
+$$
+
+and
+
+$$
+\begin{align}
+q_{1} &= P(aa|S) + \frac{1}{2}P(Aa|S) \\
+&= \frac{s_{aa}P_{a}^2}{s_{AA}P_{A}^2 + 2s_{Aa}P_{A}P_{a} + s_{aa}P_{a}^2} + \frac{1}{2}\frac{2s_{Aa}P_{A}P_{a}}{s_{AA}P_{A}^2 + 2s_{Aa}P_{A}P_{a} + s_{aa}P_{a}^2} \\
+&= \frac{s_{aa}q_{0}^2+s_{Aa}p_{0}q_{0}}{s_{AA}p_{0}^2 + 2s_{Aa}p_{0}q_{0} + s_{aa}q_{0}^2} \\
+&= q_{0} \frac{s_{aa}q_{0} + s_{Aa}p_{0}}{s_{AA}p_{0}^2 + 2s_{Aa}p_{0}q_{0} + s_{aa}q_{0}^2}
+\end{align}
+$$
+
+More generally, from generation $n$ to generation $n+1$ we have
+
+$$
+\begin{align}
+p_{n+1} &= p_{n} \frac{s_{AA}p_{n} + s_{Aa}q_{n}}{s_{AA}p_{n}^2 + 2s_{Aa}p_{n}q_{n} + s_{aa}q_{n}^2} \\
+q_{n+1} &= q_{n} \frac{s_{aa}q_{n} + s_{Aa}p_{n}}{s_{AA}p_{n}^2 + 2s_{Aa}p_{n}q_{n} + s_{aa}q_{n}^2}
+\end{align}
+$$
+
+which is a system of nonlinear difference equations. 
+
+# Conclusion
+
+We have introduced the beginnings of population genetics and the Hardy-Weinberg theory. Further, we have seen how basic probability theory combines with this to derive difference equation models. To explore this topic further, see the references suggested at the beginning of the post. 
