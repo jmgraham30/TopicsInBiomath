@@ -26,7 +26,7 @@ library(ggformula)
 library(patchwork)
 library(phaseR)
 library(latex2exp)
-library(DiagrammeR)
+library(ContourFunctions)
 theme_set(theme_light())
 ```
 
@@ -55,11 +55,217 @@ may possess closed orbits either in the form of a nonlinear center or a limit cy
 
 # Techniques for Ruling Out Closed Orbits
 
+In this section, we introduce three common and relatively easy techniques that can be used to rule out the possibility that a system of the form
+
+$$
+\begin{align}
+\frac{dx}{dt} &= f(x,y) \\
+\frac{dy}{dt} &= g(x,y)
+\end{align}
+$$
+
+possesses closed orbits. These are gradient systems, Liapunoz functions, and Dulac's criterion. 
 
 ## Gradient systems
 
+Suppose that $F:\mathbb{R}^{n} \rightarrow \mathbb{R}$ is a function such that $\frac{\partial F}{\partial x_{i}}$ exists for $i=1,2,\ldots , n$. We define the [gradient](https://en.wikipedia.org/wiki/Gradient) $\nabla F$ of $F$ to be the vector
 
+$$
+\nabla F(x_{1},x_{2},\ldots, x_{n}) = \left(\begin{array}{c} \frac{\partial F}{\partial x_{1}}(x_{1},x_{2},\ldots, x_{n}) \\\frac{\partial F}{\partial x_{2}}(x_{1},x_{2},\ldots, x_{n}) \\
+\vdots \\
+\frac{\partial F}{\partial x_{n}}(x_{1},x_{2},\ldots, x_{n})
+\end{array}\right)
+$$
+ 
+In particular, in two-dimensions
+
+$$
+\nabla F(x,y) = \left(\begin{array}{c} \frac{\partial F}{\partial x}(x,y) \\ \frac{\partial F}{\partial y}(x,y) 
+\end{array}\right)
+$$
+
+**Notation:** We will use bold face letters such as ${\bf x}$ to stand for vectors. That is, ${\bf x} = (x_{1},x_{2},\ldots , x_{n})^{T}$. Further, notation such as ${\bf f}({\bf x})$ denotes concisely
+
+$$
+{\bf f}({\bf x}) = \left(\begin{array}{c} f_{1}(x_{1},x_{2},\ldots, x_{n}) \\ f_{2}(x_{1},x_{2},\ldots, x_{n}) \\
+\vdots \\
+f_{n}(x_{1},x_{2},\ldots, x_{n})
+\end{array}\right)
+$$
+
+
+### Definition: Gradient system
+
+We say that a system $\frac{d}{dt}{\bf x}={\bf f}({\bf x})$ is a **gradient system** if there is a function $F({\bf x})$ that satisfies $-\nabla F = {\bf f}({\bf x})$ in which case we have $\frac{d}{dt}{\bf x} = -\nabla F$. Sometimes a gradient system is also called a conservative system and the function $F$ is called a potential. 
+
+In the plane $\mathbb{R}^2$, a system
+
+$$
+\begin{align}
+\frac{dx}{dt} &= f(x,y) \\
+\frac{dy}{dt} &= g(x,y)
+\end{align}
+$$
+
+is a gradient system if there is a function $F(x,y)$ satisfying 
+
+$$
+\begin{align}
+\frac{dx}{dt} &= f(x,y) = -\frac{\partial F}{\partial x} \\
+\frac{dy}{dt} &= g(x,y) = -\frac{\partial F}{\partial y} 
+\end{align}
+$$
+
+For example, the system 
+
+$$
+\begin{align}
+\frac{dx}{dt} &=  -2x\\
+\frac{dy}{dt} &=  2y
+\end{align}
+$$
+is a gradient system with potential $F(x,y) = x^2 - y^2$ since 
+
+$$
+\begin{align}
+-\frac{\partial F}{\partial x} &=  -2x\\
+-\frac{\partial F}{\partial y} &=  -(-2y) = 2y
+\end{align}
+$$
+Now this particular system happens to be linear with trace $\tau = 0$ and determinant $\delta = -4$ from which we deduce that the origin is a saddle. The phase portrait for the system is shown below.  
+
+```{r,echo=TRUE,code_folding=TRUE}
+lin_sys <- function(t,state,parameters){
+  with(as.list(c(state,parameters)),{
+    
+    dx <- A %*% state
+    
+    list(dx)
+  })
+}
+
+A <- matrix(c(-2,0,0,2),2,2,byrow=TRUE)
+
+parms_mat <- list(A=A)
+linear_flowField  <- flowField(lin_sys,
+                                       xlim       = c(-2, 2),
+                                       ylim       = c(-2, 2),
+                                       parameters = parms_mat,
+                                       points     = 19,
+                                       add = FALSE)
+state                        <- matrix(c(1,0,1.0,0.25,-1.0,0.25,-1.0,-0.25,1.0,-0.25,-1,0,0,0.1,0,-0.1),
+                                    8, 2, byrow = TRUE)
+linear_trajectory <- trajectory(lin_sys,
+                                        y0         = state,
+                                        tlim       = c(0, 10),
+                                        parameters = parms_mat,
+                                        add=TRUE)
+
+```
+ 
+In general, gradient systems will not be linear. Further, not all linear systems are gradient systems.  
+
+
+### Gradient systems and closed orbits
+
+**Theorem:** Closed orbits are impossible in gradient systems. 
+
+See [@strogatzNonlinearDynamicsChaos2015] for a proof. 
+
+Given a system
+
+$$
+\begin{align}
+\frac{dx}{dt} &= f(x,y) \\
+\frac{dy}{dt} &= g(x,y)
+\end{align}
+$$
+it may not be easy to find a potential function $F$ even if the system is actually a gradient system. There is an approach that sometimes works. Let's look at the example system
+
+$$
+\begin{align}
+\frac{dx}{dt} &=  -2x\\
+\frac{dy}{dt} &=  2y
+\end{align}
+$$
+
+again. A potential $F$ must satisfy $\frac{\partial F}{\partial x}=-(-2x)=2x$. So let's integrate this with respect to $x$. Doing so give
+
+$F(x,y) = \int 2x \ dx  = x^2 + \phi(y)$
+
+why do we have the additive term of $\phi(y)$? It is because any function of $y$ alone is treated as a constant whenever we take a partial derivative with respect to $x$. Now, if $F(x,y) = x^2 + \phi(y)$ is actually a potential, then it must satisfy 
+
+$$
+\frac{\partial F}{\partial y} = \frac{\partial}{\partial y}(x^2 + \phi(y)) = \phi'(y) = -2y
+$$
+This happens provided $\phi(y) = -y^2 + c$ for any constant value. This was obtained by integrating
+
+$$
+\int \phi'(y)\ dy = \int -2y \ dy
+$$
+ 
+Thus, we conclude that $F(x,y)=x^2 - y^2$ is a potential for the system
+
+$$
+\begin{align}
+\frac{dx}{dt} &=  -2x\\
+\frac{dy}{dt} &=  2y
+\end{align}
+$$
+Note that $F(x,y)=x^2 - y^2 + c$ for any constant value of $c$ would also be a potential for this system. Thus, potentials are only unique up to an additive constant. 
+
+In general, finding a potential in this way involes solving a system of differential equations
+
+$$
+\begin{align}
+\frac{\partial F}{\partial x} &= -f(x,y) \\
+\frac{\partial F}{\partial y} &= -g(x,y) 
+\end{align}
+$$
+
+and this may or may not be easy depending on how difficult it is to find antiderivatives for the functions on the right hand side.
+
+### Countours of potential functions
+ 
+Suppose that a system
+$$
+\begin{align}
+\frac{dx}{dt} &=  f(x,y)\\
+\frac{dy}{dt} &=  g(x,y)
+\end{align}
+$$
+is a gradient system with potential function $F(x,y)$. As we know from calculus III, the graph of $z=F(x,y)$ is a surface but it can be visualized in the plane by displaying its contours. It turns out that the contours of a potential function $F(x,y)$ are closely related to the phase portrait of the corresponding autonomous system. 
+
+In particular, a parametric curve $(x(t),y(t))$ that is a solution to a system
+
+$$
+\begin{align}
+\frac{dx}{dt} &=  f(x,y)\\
+\frac{dy}{dt} &=  g(x,y)
+\end{align}
+$$
+that possesses a potential $F(x,y)$ will be orthogonal to contour lines $F(x,y)=c$. You will show that this is the case in the homework exercises.  
+
+For now, let's make a contour plot of the potential $F(x,y)=x^2-y^2$ for the system
+
+$$
+\begin{align}
+\frac{dx}{dt} &=  -2x\\
+\frac{dy}{dt} &=  2y
+\end{align}
+$$
+
+the phase portrait of which was shown above. 
+
+```{r,echo=TRUE,code_folding=TRUE}
+F1 <- function(x) x[1]^2 - x[2]^2
+cf_func(F1,xlim=c(-1.5,1.5),ylim=c(-1.5,1.5))
+```
+ 
+Can you see how the contour lines are orthogonal to the trajectories of the system?  Note that we have used the function `cf_func` from the [`CountourFunctions`](https://cran.r-project.org/web/packages/ContourFunctions/vignettes/Introduction_to_the_cf_R_package.html) package to obtain the previous plot. 
+ 
 ## Liapunov functions
+
 
 
 ## Dulac's criterion
