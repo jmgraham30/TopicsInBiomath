@@ -46,7 +46,7 @@ After reading this section of notes, you should
 In [a previous note](https://topicsinbiomath.netlify.app/notes011.html), we completely classified the possible phase portraits for a two-dimensional system of the form
 
 $$
-\left(\begin{array}{c} \frac{dx}{dt} \\ \frac{dy}{dt}  \end{array} \right) = \left(\begin{array}{cc} a_{11} & a_{12} \\ a_{21} & a_{22}  \end{array}  \begin{array}{c} x \\ y \end{array} \right)
+\left(\begin{array}{c} \frac{dx}{dt} \\ \frac{dy}{dt}  \end{array} \right) = \left(\begin{array}{cc} a_{11} & a_{12} \\ a_{21} & a_{22}  \end{array}\right) \left( \begin{array}{c} x \\ y \end{array} \right)
 $$
 
 Recall that such as system may have a phase portrait such that the origin is a stable node, stable spiral, center, unstable spiral, unstable node, or a saddle. Further, an equilibrium point $(x^{\ast},y^{\ast})$ for an autonomous system
