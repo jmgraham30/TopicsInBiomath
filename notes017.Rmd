@@ -43,14 +43,32 @@ After reading this section of notes, you should
 
 # Background
 
+From our experiences so far, we know that a two-dimensional autonomous system of the form
+
+$$
+\begin{align}
+\frac{dx}{dt} &= f(x,y) \\
+\frac{dy}{dt} &= g(x,y)
+\end{align}
+$$
+may possess closed orbits either in the form of a nonlinear center or a limit cycle. However, in general, it is tricky to confirm the existence of a closed orbit for a nonlinear system. In this section of notes, we provide some techniques for ruling out the possibility of closed orbits. Here we closely follow section 7.2 from [@strogatzNonlinearDynamicsChaos2015] and recommend it for further reading. 
+
+# Techniques for Ruling Out Closed Orbits
+
+
+## Gradient systems
+
+
+## Liapunov functions
+
+
+## Dulac's criterion
 
 
 
 
 
-
-
-
+# Summary
 
 
 
