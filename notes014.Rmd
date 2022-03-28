@@ -272,7 +272,7 @@ Before we proceed to consider the analysis of the dynamics of a Leslie matrix mo
 
 ## Analyzing the Leslie Matrix Model
 
-Given an $n\times n$ Leslie matrix $L$, a typical problem is to determine if its coefficients are such that $L$ has a **strictly dominant eigenvalue** $\lambda_{1}$. That is, a unique eigenvalue $\lambda_{1}$ such that $|\lambda_{1}| > |\lambda_{j}|$ for $j=2,3,\ldots, n$. As we have seen in a previous section, if this is the case then $\lambda_{1}$ and its corresponding eigenvector $v_{1}$ determine the long-term dynamics of the Leslie model. In the context of Leslie models, an eigenvector $v_{1}$ associated with a strictly dominant eigenvalue $\lambda_{1}$ is called **stable age distribution**. 
+Given an $n\times n$ Leslie matrix $L$, a typical problem is to determine if its coefficients are such that $L$ has a **strictly dominant eigenvalue** $\lambda_{1}$. That is, a unique eigenvalue $\lambda_{1}$ such that $|\lambda_{1}| > |\lambda_{j}|$ for $j=2,3,\ldots, n$. As we have seen in a previous section, if this is the case then $\lambda_{1}$ and its corresponding eigenvector $v_{1}$ determine the long-term dynamics of the Leslie model. In the context of Leslie models, an eigenvector $v_{1}$ associated with a strictly dominant eigenvalue $\lambda_{1}$ is called a **stable age distribution**. 
 
 We suspect from our previous analysis of linear difference equations that if $\lambda_{1}$ is a strictly dominant eigenvalue, then
 
