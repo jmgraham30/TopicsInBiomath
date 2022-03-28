@@ -225,7 +225,7 @@ $$
 
 and this may or may not be easy depending on how difficult it is to find antiderivatives for the functions on the right hand side.
 
-### Countours of potential functions
+### Contours of potential functions
  
 Suppose that a system
 $$
@@ -262,7 +262,7 @@ F1 <- function(x) x[1]^2 - x[2]^2
 cf_func(F1,xlim=c(-1.5,1.5),ylim=c(-1.5,1.5))
 ```
  
-Can you see how the contour lines are orthogonal to the trajectories of the system?  Note that we have used the function `cf_func` from the [`CountourFunctions`](https://cran.r-project.org/web/packages/ContourFunctions/vignettes/Introduction_to_the_cf_R_package.html) package to obtain the previous plot. 
+Can you see how the contour lines are orthogonal to the trajectories of the system?  Note that we have used the function `cf_func` from the [`ContourFunctions`](https://cran.r-project.org/web/packages/ContourFunctions/vignettes/Introduction_to_the_cf_R_package.html) package to obtain the previous plot. 
  
 ## Liapunov functions
 
