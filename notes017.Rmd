@@ -278,7 +278,79 @@ is called a [Liapunov function](https://en.wikipedia.org/wiki/Lyapunov_function)
 
 That ${\bf x}^{\ast}$ is globally asymptotically stable means that for any initial condition ${\bf x}(t) \rightarrow {\bf x}^{\ast}$ as $t\rightarrow \infty$. A system that has a globally asymptotically stable equilibrium can not have a closed orbit since otherwise there would be at least one trajectory which would fail to approach the equilibrium ${\bf x}^{\ast}$. Thus, we can use the existence of a Liapunov function for the purpose of ruling out closed orbits. 
 
+### Example
 
+Consider the system
+
+$$
+\begin{align}
+\frac{dx}{dt} &= -x+4y \\
+\frac{dy}{dt} &= -x - y^3
+\end{align}
+$$
+We claim that $V(x,y) = x^2 + 4y^2$ is a Liapunov function for this system. Note that the system has a single equilibrium at ${\bf x}^{\ast}=(0,0)$. Observe, 
+
+1) $V(0,0)=0$ and $V(x,y) > 0$ as long as $(x,y)\neq (0,0)$, and
+
+2) 
+
+$$
+\begin{align}
+\frac{d}{dt}V(x,y) &= \frac{\partial V}{\partial x}\frac{dx}{dt} + \frac{\partial V}{\partial y}\frac{dy}{dt} \\
+&= (2x)\frac{dx}{dt} + (8y)\frac{dy}{dt} \\
+&= 2x(-x+4y) + 8y(-x - y^3) \\
+&= -2x^2 + 8xy - 8xy - 8y^4 \\
+&= -2x^2 - 8y^4
+\end{align}
+$$
+for any trajectory of the system. Now, we have that $-2x^2 - 8y^4 \leq 0$ and only equals zero at $(0,0)$. Thus $V(x,y)=x^2 + 4y^2$ is in fact a Liapunov function for the system. 
+
+As you can check, the linearization of the system
+
+$$
+\begin{align}
+\frac{dx}{dt} &= -x+4y \\
+\frac{dy}{dt} &= -x - y^3
+\end{align}
+$$
+
+at $(0,0)$ is 
+
+$$
+\left(\begin{array}{cc} -1 & 4 \\ -1 & 0 \end{array}\right)
+$$
+
+which has trace $\tau = -1$ and determinant $\delta = 4$. So we conclude that the phase portrait near $(0,0)$ is a stable spiral. The existence of a Liapunov function allows us to make an even stronger conclusion that the global phase portrait for the system is a stable spiral. We plot the phase portrait for this system here
+
+```{r,echo=TRUE,code_folding=TRUE}
+nonlinear_example <- function(t,state,parameters){
+  with(as.list(c(state,parameters)),{
+    
+    dx <- -state[1] + 4*state[2]
+    dy <- -state[1] - state[2]^3
+    
+    list(c(dx,dy))
+  })
+}
+
+nonlinear_flowfield  <- flowField(nonlinear_example,
+                                       xlim       = c(-2, 2),
+                                       ylim       = c(-2, 2),
+                                       parameters = NULL,
+                                       points     = 17,
+                                       add = FALSE)
+
+state <- matrix(c(1,1,-1,-1),2,2,byrow = TRUE)
+nonlinear_trajs <- trajectory(nonlinear_example,
+                                        y0         = state,
+                                        tlim       = c(0, 10),
+                                        parameters = NULL,add=TRUE)
+
+```
+
+The stable spiral is apparent. 
+
+The method of Liapunov functions is very powerful. However, it is in general not trivial to find Liapunov functions. 
 
 ## Dulac's criterion
 
@@ -289,7 +361,7 @@ That ${\bf x}^{\ast}$ is globally asymptotically stable means that for any initi
 # Summary
 
 
-
+Gradient systems, systems for which a Liapunov function exists, and systems for which Dulac's criterion applies can not have closed orbits. This includes both limit cycles and nonlinear centers. If you have a system for which you have reason to believe that there should be no closed orbits, then you might be able to use one of these techniques to prove it. On the other hand, what do you do if you suspect that a system does possess closed orbits and you want to confirm it? In the case of stable limit cycles, the famous Poincarè-Bendixson theorem can often be used to provide a rigorous verification of the existence of a closed orbit. We will take up the study of this in the next section of notes.  
 
 
 # Further Reading 
