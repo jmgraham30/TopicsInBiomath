@@ -2573,6 +2573,105 @@ Show code
 <p>The method of Liapunov functions is very powerful. However, it is in
 general not trivial to find Liapunov functions.</p>
 <h2 id="dulacs-criterion">Dulac’s criterion</h2>
+<p>The following result is known as <a
+href="https://en.wikipedia.org/wiki/Bendixson%E2%80%93Dulac_theorem">Dulac’s
+criterion</a>:</p>
+<p><strong>Theorem:</strong> Let <span
+class="math inline">\(\frac{d}{dt}{\bf x}={\bf f}({\bf x})\)</span> be a
+continuously differentiable vector field defined on a <a
+href="https://en.wikipedia.org/wiki/Simply_connected_space">simply
+connected</a> region <span class="math inline">\(R\)</span> of the plane
+<span class="math inline">\(\mathbb{R}^{2}\)</span>. If there exists a
+continuously differentiable, real-valued function <span
+class="math inline">\(s({\bf x})\)</span> such that <span
+class="math inline">\(\nabla \cdot (s \frac{d}{dt}{\bf x})\)</span> has
+one sign throughout <span class="math inline">\(R\)</span>, then there
+are no closed orbits lying entirely in <span
+class="math inline">\(R\)</span>.</p>
+<p>Recall that the notation <span class="math inline">\(\nabla \cdot
+{\bf f}\)</span> refers to the <a
+href="https://en.wikipedia.org/wiki/Divergence">divergence</a> of the
+vector field <span class="math inline">\({\bf f}\)</span>.</p>
+<p>We refer to <span class="citation"
+data-cites="strogatzNonlinearDynamicsChaos2015">(<a
+href="#ref-strogatzNonlinearDynamicsChaos2015"
+role="doc-biblioref">Strogatz 2015</a>)</span> for the proof but note
+that the proof is an application of <a
+href="https://en.wikipedia.org/wiki/Green%27s_theorem">Green’s
+theorem</a> from calculus.</p>
+<h3 id="example-1">Example</h3>
+<p>We use Dulac’s criterion to show that</p>
+<p><span class="math display">\[
+\begin{align}
+\frac{dx}{dt} &amp;= y\\
+\frac{dy}{dt} &amp;= -x-y + x^2 + y^2
+\end{align}
+\]</span></p>
+<p>has no closed orbits. Obviously the right hand side of this system is
+a continuously differentiable vector field defined in the entire plane
+<span class="math inline">\(\mathbb{R}^2\)</span> which happens to be a
+simply connected set (this essentially means that there are no holes in
+the plane). Now, let <span
+class="math inline">\(s(x,y)=e^{-2x}\)</span>, then</p>
+<p><span class="math display">\[
+\begin{align}
+\nabla \cdot (g(x,y) \left(\begin{array}{cc}\frac{dx}{dt} &amp;
+\frac{dy}{dt}  \end{array}\right)^{T}) &amp;= \nabla \cdot (e^{-2x}
+\left(\begin{array}{cc}\frac{dx}{dt} &amp;
+\frac{dy}{dt}  \end{array}\right)^{T})\\
+&amp;= \frac{\partial }{\partial x}\left(e^{-2x}\frac{dx}{dt} \right) +
+\frac{\partial}{\partial y}\left(e^{-2x} \frac{dy}{dt} \right) \\
+&amp;= \frac{\partial }{\partial x}\left(e^{-2x}(y) \right) +
+\frac{\partial}{\partial y}\left(e^{-2x} (-x-y+x^2+y^2) \right) \\
+&amp;= -2ye^{-2x} - e^{-2x} + 2ye^{-2x} \\
+&amp;= -e^{-2x} &lt; 0, \ \forall \ x
+\end{align}
+\]</span> Thus, Dulac’s criterion is satisfied for this particular
+system. In the homework, you will be asked to determine the equilibria
+for the system</p>
+<p><span class="math display">\[
+\begin{align}
+\frac{dx}{dt} &amp;= y\\
+\frac{dy}{dt} &amp;= -x-y + x^2 + y^2
+\end{align}
+\]</span></p>
+<p>and examine their corresponding stability properties. Further, you
+will rewrite the system in polar coordinates and see what that suggests
+about the phase portrait for the system which looks as follows</p>
+<div class="layout-chunk" data-layout="l-body">
+<details>
+<summary>
+Show code
+</summary>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>dulacs_example</span> <span class='op'>&lt;-</span> <span class='kw'>function</span><span class='op'>(</span><span class='va'>t</span>,<span class='va'>state</span>,<span class='va'>parameters</span><span class='op'>)</span><span class='op'>{</span>
+  <span class='fu'><a href='https://rdrr.io/r/base/with.html'>with</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/list.html'>as.list</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='va'>state</span>,<span class='va'>parameters</span><span class='op'>)</span><span class='op'>)</span>,<span class='op'>{</span>
+    
+    <span class='va'>dx</span> <span class='op'>&lt;-</span> <span class='va'>state</span><span class='op'>[</span><span class='fl'>2</span><span class='op'>]</span>
+    <span class='va'>dy</span> <span class='op'>&lt;-</span> <span class='op'>-</span><span class='va'>state</span><span class='op'>[</span><span class='fl'>1</span><span class='op'>]</span> <span class='op'>-</span> <span class='va'>state</span><span class='op'>[</span><span class='fl'>2</span><span class='op'>]</span> <span class='op'>+</span> <span class='va'>state</span><span class='op'>[</span><span class='fl'>1</span><span class='op'>]</span><span class='op'>^</span><span class='fl'>2</span> <span class='op'>+</span> <span class='va'>state</span><span class='op'>[</span><span class='fl'>2</span><span class='op'>]</span><span class='op'>^</span><span class='fl'>2</span>
+    
+    <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='va'>dx</span>,<span class='va'>dy</span><span class='op'>)</span><span class='op'>)</span>
+  <span class='op'>}</span><span class='op'>)</span>
+<span class='op'>}</span>
+
+<span class='va'>nonlinear_flowfield</span>  <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/phaseR/man/flowField.html'>flowField</a></span><span class='op'>(</span><span class='va'>dulacs_example</span>,
+                                       xlim       <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='op'>-</span><span class='fl'>3</span>, <span class='fl'>3</span><span class='op'>)</span>,
+                                       ylim       <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='op'>-</span><span class='fl'>3</span>, <span class='fl'>3</span><span class='op'>)</span>,
+                                       parameters <span class='op'>=</span> <span class='cn'>NULL</span>,
+                                       points     <span class='op'>=</span> <span class='fl'>17</span>,
+                                       add <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span>
+
+<span class='va'>state</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/matrix.html'>matrix</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>1</span>,<span class='fl'>0</span>,<span class='fl'>0</span>,<span class='fl'>1</span>,<span class='op'>-</span><span class='fl'>1</span>,<span class='fl'>0</span>,<span class='fl'>0</span>,<span class='op'>-</span><span class='fl'>1</span>,<span class='fl'>1</span>,<span class='fl'>1</span>,<span class='op'>-</span><span class='fl'>1</span>,<span class='fl'>1</span>,<span class='op'>-</span><span class='fl'>1</span>,<span class='op'>-</span><span class='fl'>1</span>,<span class='fl'>1</span>,<span class='op'>-</span><span class='fl'>1</span>,
+                  <span class='fl'>2</span>,<span class='op'>-</span><span class='fl'>1</span>,<span class='fl'>2</span>,<span class='fl'>1</span><span class='op'>)</span>,<span class='fl'>10</span>,<span class='fl'>2</span>,byrow <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
+<span class='va'>nonlinear_trajs</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/phaseR/man/trajectory.html'>trajectory</a></span><span class='op'>(</span><span class='va'>dulacs_example</span>,
+                                        y0         <span class='op'>=</span> <span class='va'>state</span>,
+                                        tlim       <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>0</span>, <span class='fl'>50</span><span class='op'>)</span>,
+                                        parameters <span class='op'>=</span> <span class='cn'>NULL</span>,add<span class='op'>=</span><span class='cn'>TRUE</span><span class='op'>)</span>
+</code></pre>
+</div>
+</details>
+<p><img src="notes017_files/figure-html5/unnamed-chunk-4-1.png" width="624" /></p>
+</div>
 <h1 id="summary">Summary</h1>
 <p>Gradient systems, systems for which a Liapunov function exists, and
 systems for which Dulac’s criterion applies can not have closed orbits.

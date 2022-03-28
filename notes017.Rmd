@@ -354,7 +354,74 @@ The method of Liapunov functions is very powerful. However, it is in general not
 
 ## Dulac's criterion
 
+The following result is known as [Dulac's criterion](https://en.wikipedia.org/wiki/Bendixson%E2%80%93Dulac_theorem):
 
+**Theorem:** Let $\frac{d}{dt}{\bf x}={\bf f}({\bf x})$ be a continuously differentiable vector field defined on a [simply connected](https://en.wikipedia.org/wiki/Simply_connected_space) region $R$ of the plane $\mathbb{R}^{2}$. If there exists a continuously differentiable, real-valued function $s({\bf x})$ such that $\nabla \cdot (s \frac{d}{dt}{\bf x})$ has one sign throughout $R$, then there are no closed orbits lying entirely in $R$. 
+
+Recall that the notation $\nabla \cdot {\bf f}$ refers to the [divergence](https://en.wikipedia.org/wiki/Divergence) of the vector field ${\bf f}$.
+
+We refer to [@strogatzNonlinearDynamicsChaos2015] for the proof but note that the proof is an application of [Green's theorem](https://en.wikipedia.org/wiki/Green%27s_theorem) from calculus.
+
+### Example
+
+We use Dulac's criterion to show that 
+
+$$
+\begin{align}
+\frac{dx}{dt} &= y\\
+\frac{dy}{dt} &= -x-y + x^2 + y^2
+\end{align}
+$$
+
+has no closed orbits. Obviously the right hand side of this system is a continuously differentiable vector field defined in the entire plane $\mathbb{R}^2$ which happens to be a simply connected set (this essentially means that there are no holes in the plane). Now, let $s(x,y)=e^{-2x}$, then
+
+$$
+\begin{align}
+\nabla \cdot (g(x,y) \left(\begin{array}{cc}\frac{dx}{dt} & \frac{dy}{dt}  \end{array}\right)^{T}) &= \nabla \cdot (e^{-2x} \left(\begin{array}{cc}\frac{dx}{dt} & \frac{dy}{dt}  \end{array}\right)^{T})\\
+&= \frac{\partial }{\partial x}\left(e^{-2x}\frac{dx}{dt} \right) + \frac{\partial}{\partial y}\left(e^{-2x} \frac{dy}{dt} \right) \\
+&= \frac{\partial }{\partial x}\left(e^{-2x}(y) \right) + \frac{\partial}{\partial y}\left(e^{-2x} (-x-y+x^2+y^2) \right) \\
+&= -2ye^{-2x} - e^{-2x} + 2ye^{-2x} \\
+&= -e^{-2x} < 0, \ \forall \ x
+\end{align}
+$$
+Thus, Dulac's criterion is satisfied for this particular system. In the homework, you will be asked to determine the equilibria for the system
+
+$$
+\begin{align}
+\frac{dx}{dt} &= y\\
+\frac{dy}{dt} &= -x-y + x^2 + y^2
+\end{align}
+$$
+
+and examine their corresponding stability properties. Further, you will rewrite the system in polar coordinates and see what that suggests about the phase portrait for the system which looks as follows
+
+```{r,echo=TRUE,code_folding=TRUE}
+
+dulacs_example <- function(t,state,parameters){
+  with(as.list(c(state,parameters)),{
+    
+    dx <- state[2]
+    dy <- -state[1] - state[2] + state[1]^2 + state[2]^2
+    
+    list(c(dx,dy))
+  })
+}
+
+nonlinear_flowfield  <- flowField(dulacs_example,
+                                       xlim       = c(-3, 3),
+                                       ylim       = c(-3, 3),
+                                       parameters = NULL,
+                                       points     = 17,
+                                       add = FALSE)
+
+state <- matrix(c(1,0,0,1,-1,0,0,-1,1,1,-1,1,-1,-1,1,-1,
+                  2,-1,2,1),10,2,byrow = TRUE)
+nonlinear_trajs <- trajectory(dulacs_example,
+                                        y0         = state,
+                                        tlim       = c(0, 50),
+                                        parameters = NULL,add=TRUE)
+
+```
 
 
 
