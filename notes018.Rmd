@@ -35,14 +35,88 @@ theme_set(theme_light())
 
 After reading this section of notes, you should
 
-1) know what the Poincarè-Bendixson theorem says and understand how to use it to derive the existence of a stable limit cycle when applicable.  
+1) know what the Poincarè-Bendixson theorem says and understand how to use it to derive the existence of a stable limit cycle, when applicable.  
 
 
 # Background
 
+Consider the nonlinear autonomous two-dimensional system
 
+$$
+\begin{align}
+\frac{dx}{dt} &= x(1-x^2-y^2) - y + \mu\frac{x^2}{\sqrt{x^2+y^2}} \\
+\frac{dy}{dt} &= y(1-x^2-y^2) + x + \mu\frac{xy}{\sqrt{x^2+y^2}}
+\end{align}
+$$
+Using the expression
 
+$$
+\begin{align}
+\frac{dr}{dt} &= \frac{1}{r}\left(x\frac{dx}{dt} + y\frac{dy}{dt} \right) \\
+\frac{d\theta}{dt} &= \frac{1}{r^2}\left(x\frac{dy}{dt} - y\frac{dx}{dt} \right)
+\end{align}
+$$
 
+that we derived in our [discussion on polar coordinates](https://topicsinbiomath.netlify.app/notes016.html#polar-coordinates), one can rewrite the previous system as
+
+$$
+\begin{align}
+\frac{dr}{dt} &= r(1-r^2) + \mu r \cos(\theta) \\
+\frac{d\theta}{dt} &= 1
+\end{align}
+$$
+
+from which it is easy to see that whenever $\mu=0$ the system has a stable limit cycle in the form of the circle $r=1$. The phase portrait for this system in the case $\mu=0$ is shown below.
+
+```{r,echo=TRUE,code_folding=TRUE}
+pb_example <- function(t,state,parameters){
+  with(as.list(c(state,parameters)),{
+    x <- state[1]
+    y <- state[2]
+    r <- sqrt(x^2+y^2)
+    if (x==0.0 && y==0.0){
+      dx <- 0.0
+      dy <- 0.0
+    }else{
+    dx <- x*(1-x^2-y^2) - y + mu*x^2/r
+    dy <- y*(1-x^2-y^2) + x + mu*x*y/r
+    }
+    
+    list(c(dx,dy))
+  })
+}
+nonlinear_flowfield  <- flowField(pb_example ,
+                                       xlim       = c(-2, 2),
+                                       ylim       = c(-2, 2),
+                                       parameters = c(mu=0.0),
+                                       points     = 17,
+                                       add = FALSE)
+state <- matrix(c(-0.25,0.25,1.0/sqrt(2.0),1.0/sqrt(2.0),0.0,2.0),3,2,byrow = TRUE)
+
+nonlinear_trajs <- trajectory(pb_example,
+                                        y0         = state,
+                                        tlim       = c(0, 10),
+                                        parameters = c(mu=0.0),add=TRUE)
+```
+
+What  happens if $\mu > 0$? Intuitively, we expect the persistence of a stable limit cycle, at least for small values of $\mu$. This is because if we gradually make a small change to a continuous system there should not be a dramatic change in the results. Let's compute an example with $\mu = 0.5$.
+
+```{r,echo=TRUE,code_folding=TRUE}
+new_nonlinear_flowfield  <- flowField(pb_example ,
+                                       xlim       = c(-2, 2),
+                                       ylim       = c(-2, 2),
+                                       parameters = c(mu=0.5),
+                                       points     = 17,
+                                       add = FALSE)
+state <- matrix(c(-0.25,0.25,1.0/sqrt(2.0),1.0/sqrt(2.0),0.0,2.0),3,2,byrow = TRUE)
+
+new_nonlinear_trajs <- trajectory(pb_example,
+                                        y0         = state,
+                                        tlim       = c(0, 10),
+                                        parameters = c(mu=0.5),add=TRUE)
+```
+
+# The Poincarè-Bendixson Theorem
 
 
 
