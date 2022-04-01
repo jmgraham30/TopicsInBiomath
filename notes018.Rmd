@@ -116,12 +116,77 @@ new_nonlinear_trajs <- trajectory(pb_example,
                                         parameters = c(mu=0.5),add=TRUE)
 ```
 
+The stable limit cycle persist. Although it is difficult to see, the shape of the limit cycle has changed slightly when the $\mu = 0.5$ case is compared with that of the $\mu = 0$ case. Let's return to the equations
+
+$$
+\begin{align}
+\frac{dr}{dt} &= r(1-r^2) + \mu r \cos(\theta) \\
+\frac{d\theta}{dt} &= 1
+\end{align}
+$$
+
+
+When $\mu \neq 0$ the equation for the rate of change in the radial direction no longer decouples from the equation for the rate of change in the angular direction due to the presence of the $r\cos(\theta)$ part. Thus, we can not as easily see that the system possesses a stable limit cycle. As we will show, the  [Poincarè-Bendixson theorem](https://en.wikipedia.org/wiki/Poincar%C3%A9%E2%80%93Bendixson_theorem) is a relatively simple tool that can be used to derive the existence  of a stable limit cycle for a system like the one above even when $\mu > 0$. In the following section, we will state the theorem as in [@strogatzNonlinearDynamicsChaos2015] and then apply it to our example system. 
+
 # The Poincarè-Bendixson Theorem
 
+Consider a nonlinear autonomous two-dimensional system of the form
 
+$$
+\begin{align}
+\frac{dx}{dt} &=  f(x,y)\\
+\frac{dy}{dt} &=  g(x,y)
+\end{align}
+$$
+and suppose that $R$ is a [closed](https://en.wikipedia.org/wiki/Closed_set), [bounded](https://en.wikipedia.org/wiki/Bounded_set) subset of the plan such that $R$ is contained in a domain for the system upon which it is differentiable. Further, suppose that $R$ does not contain any equilibrium points of the system.Then, if there exists a trajectory $C$ that is confined in $R$ so that if it starts in $R$ it stays in $R$ as $t\rightarrow \infty$, then either $C$ is a closed orbit, or it spirals toward a closed orbit as  $t\rightarrow \infty$. This setup and conclusion is the result known as the Poincarè-Bendixson theorem. 
 
+A region $R$ satisfying the properties just described is sometimes known as a trapping region. Often, the key to an effective application of the Poincarè-Bendixson theorem is in the construction of an appropriate trapping region. This technique is illustrated by the following example. 
 
+## Example
 
+Consider again the system in polar coordinates,
+
+$$
+\begin{align}
+\frac{dr}{dt} &= r(1-r^2) + \mu r \cos(\theta) \\
+\frac{d\theta}{dt} &= 1
+\end{align}
+$$
+
+Note that the only equilibrium for this system is the point $r=0$. 
+
+Now, since $-1 \leq \cos(\theta) \leq 1$ and $r\geq 0$, then for any $\mu \geq 0$ we have
+
+$r(1-r^2) - \mu r \leq r(1-r^2) + \mu r \cos(\theta) \leq r(1-r^2) + \mu r$
+
+We are going to use this observation in order to try to find two concentric circles such that on the outer radius $r_{\text{out}}$ we have that $r_{\text{out}}(1-r_{\text{out}}^2) + \mu r_{\text{out}} \cos(\theta) < 0$, and on the inner radius $r_{\text{in}}$ we have that $0 < r_{\text{in}}(1-r_{\text{in}}^2) + \mu r_{\text{in}} \cos(\theta)$. If this is the case, then we can conclude that trajectories on the inner radius are directed away from the origin, and trajectories on the outer radius are directed toward the origin. This makes $R = \{r| r_{\text{in}} \leq r \leq r_{\text{out}}\}$ a suitable trapping region because no trajectory that starts within $R$ can exit it. 
+
+To complete the analysis, note that if $r(1-r^2) + \mu r < 0$, then $r(1-r^2) + \mu r \cos(\theta)$ is certainly negative. On the other hand, if $0 < r(1-r^2) - \mu r$, then $r(1-r^2) + \mu r \cos(\theta)$ is certainly positive. We have that
+
+$r(1-r^2) + \mu r < 0 \ \text{whenever}\ \sqrt{1+\mu} < r $
+
+and 
+
+$0 < r(1-r^2) - \mu r < 0 \ \text{whenever}\ r < \sqrt{1-\mu} $
+
+Thus, we can take something like
+
+$r_{\text{in}} = 0.999 \sqrt{1-\mu}$
+
+provided that $0 < \mu < 1$, and
+
+$r_{\text{out}} = 1.001 \sqrt{1+\mu}.$
+
+We conclude that whenever $0 < \mu < 1$ we have a trapping region given by $r_{\text{in}} \leq r \leq r_{\text{out}}$. All of the other qualifications necessary for the Poincarè-Bendixson theorem to apply are met for trivial reasons thus there must be a closed orbit in the form of a stable limit cycle for the system
+
+$$
+\begin{align}
+\frac{dr}{dt} &= r(1-r^2) + \mu r \cos(\theta) \\
+\frac{d\theta}{dt} &= 1
+\end{align}
+$$
+
+Additional examples using the Poincarè-Bendixson theorem and some biomathematical applications of the technique will be provided during in-class lecture. 
 
 # Further Reading 
 

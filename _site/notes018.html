@@ -2123,6 +2123,7 @@ Notes
 <a href="notes015.html">Notes 15</a>
 <a href="notes016.html">Notes 16</a>
 <a href="notes017.html">Notes 17</a>
+<a href="notes018.html">Notes 18</a>
 </div>
 </div>
 <div class="nav-dropdown">
@@ -2172,7 +2173,10 @@ class="uri">https://sites.google.com/site/jasonmgrahamus/</a>
 <li><a href="#goals">Goals</a></li>
 <li><a href="#background">Background</a></li>
 <li><a href="#the-poincarè-bendixson-theorem">The Poincarè-Bendixson
-Theorem</a></li>
+Theorem</a>
+<ul>
+<li><a href="#example">Example</a></li>
+</ul></li>
 <li><a href="#further-reading">Further Reading</a></li>
 </ul>
 </nav>
@@ -2282,8 +2286,123 @@ Show code
 </details>
 <p><img src="notes018_files/figure-html5/unnamed-chunk-2-1.png" width="624" /></p>
 </div>
+<p>The stable limit cycle persist. Although it is difficult to see, the
+shape of the limit cycle has changed slightly when the <span
+class="math inline">\(\mu = 0.5\)</span> case is compared with that of
+the <span class="math inline">\(\mu = 0\)</span> case. Let’s return to
+the equations</p>
+<p><span class="math display">\[
+\begin{align}
+\frac{dr}{dt} &amp;= r(1-r^2) + \mu r \cos(\theta) \\
+\frac{d\theta}{dt} &amp;= 1
+\end{align}
+\]</span></p>
+<p>When <span class="math inline">\(\mu \neq 0\)</span> the equation for
+the rate of change in the radial direction no longer decouples from the
+equation for the rate of change in the angular direction due to the
+presence of the <span class="math inline">\(r\cos(\theta)\)</span> part.
+Thus, we can not as easily see that the system possesses a stable limit
+cycle. As we will show, the <a
+href="https://en.wikipedia.org/wiki/Poincar%C3%A9%E2%80%93Bendixson_theorem">Poincarè-Bendixson
+theorem</a> is a relatively simple tool that can be used to derive the
+existence of a stable limit cycle for a system like the one above even
+when <span class="math inline">\(\mu &gt; 0\)</span>. In the following
+section, we will state the theorem as in <span class="citation"
+data-cites="strogatzNonlinearDynamicsChaos2015">(<a
+href="#ref-strogatzNonlinearDynamicsChaos2015"
+role="doc-biblioref">Strogatz 2015</a>)</span> and then apply it to our
+example system.</p>
 <h1 id="the-poincarè-bendixson-theorem">The Poincarè-Bendixson
 Theorem</h1>
+<p>Consider a nonlinear autonomous two-dimensional system of the
+form</p>
+<p><span class="math display">\[
+\begin{align}
+\frac{dx}{dt} &amp;=  f(x,y)\\
+\frac{dy}{dt} &amp;=  g(x,y)
+\end{align}
+\]</span> and suppose that <span class="math inline">\(R\)</span> is a
+<a href="https://en.wikipedia.org/wiki/Closed_set">closed</a>, <a
+href="https://en.wikipedia.org/wiki/Bounded_set">bounded</a> subset of
+the plan such that <span class="math inline">\(R\)</span> is contained
+in a domain for the system upon which it is differentiable. Further,
+suppose that <span class="math inline">\(R\)</span> does not contain any
+equilibrium points of the system.Then, if there exists a trajectory
+<span class="math inline">\(C\)</span> that is confined in <span
+class="math inline">\(R\)</span> so that if it starts in <span
+class="math inline">\(R\)</span> it stays in <span
+class="math inline">\(R\)</span> as <span
+class="math inline">\(t\rightarrow \infty\)</span>, then either <span
+class="math inline">\(C\)</span> is a closed orbit, or it spirals toward
+a closed orbit as <span class="math inline">\(t\rightarrow
+\infty\)</span>. This setup and conclusion is the result known as the
+Poincarè-Bendixson theorem.</p>
+<p>A region <span class="math inline">\(R\)</span> satisfying the
+properties just described is sometimes known as a trapping region.
+Often, the key to an effective application of the Poincarè-Bendixson
+theorem is in the construction of an appropriate trapping region. This
+technique is illustrated by the following example.</p>
+<h2 id="example">Example</h2>
+<p>Consider again the system in polar coordinates,</p>
+<p><span class="math display">\[
+\begin{align}
+\frac{dr}{dt} &amp;= r(1-r^2) + \mu r \cos(\theta) \\
+\frac{d\theta}{dt} &amp;= 1
+\end{align}
+\]</span></p>
+<p>Note that the only equilibrium for this system is the point <span
+class="math inline">\(r=0\)</span>.</p>
+<p>Now, since <span class="math inline">\(-1 \leq \cos(\theta) \leq
+1\)</span> and <span class="math inline">\(r\geq 0\)</span>, then for
+any <span class="math inline">\(\mu \geq 0\)</span> we have</p>
+<p><span class="math inline">\(r(1-r^2) - \mu r \leq r(1-r^2) + \mu r
+\cos(\theta) \leq r(1-r^2) + \mu r\)</span></p>
+<p>We are going to use this observation in order to try to find two
+concentric circles such that on the outer radius <span
+class="math inline">\(r_{\text{out}}\)</span> we have that <span
+class="math inline">\(r_{\text{out}}(1-r_{\text{out}}^2) + \mu
+r_{\text{out}} \cos(\theta) &lt; 0\)</span>, and on the inner radius
+<span class="math inline">\(r_{\text{in}}\)</span> we have that <span
+class="math inline">\(0 &lt; r_{\text{in}}(1-r_{\text{in}}^2) + \mu
+r_{\text{in}} \cos(\theta)\)</span>. If this is the case, then we can
+conclude that trajectories on the inner radius are directed away from
+the origin, and trajectories on the outer radius are directed toward the
+origin. This makes <span class="math inline">\(R = \{r| r_{\text{in}}
+\leq r \leq r_{\text{out}}\}\)</span> a suitable trapping region because
+no trajectory that starts within <span class="math inline">\(R\)</span>
+can exit it.</p>
+<p>To complete the analysis, note that if <span
+class="math inline">\(r(1-r^2) + \mu r &lt; 0\)</span>, then <span
+class="math inline">\(r(1-r^2) + \mu r \cos(\theta)\)</span> is
+certainly negative. On the other hand, if <span class="math inline">\(0
+&lt; r(1-r^2) - \mu r\)</span>, then <span
+class="math inline">\(r(1-r^2) + \mu r \cos(\theta)\)</span> is
+certainly positive. We have that</p>
+<p>$r(1-r^2) + r &lt; 0    &lt; r $</p>
+<p>and</p>
+<p>$0 &lt; r(1-r^2) - r &lt; 0   r &lt; $</p>
+<p>Thus, we can take something like</p>
+<p><span class="math inline">\(r_{\text{in}} = 0.999
+\sqrt{1-\mu}\)</span></p>
+<p>provided that <span class="math inline">\(0 &lt; \mu &lt; 1\)</span>,
+and</p>
+<p><span class="math inline">\(r_{\text{out}} = 1.001
+\sqrt{1+\mu}.\)</span></p>
+<p>We conclude that whenever <span class="math inline">\(0 &lt; \mu &lt;
+1\)</span> we have a trapping region given by <span
+class="math inline">\(r_{\text{in}} \leq r \leq r_{\text{out}}\)</span>.
+All of the other qualifications necessary for the Poincarè-Bendixson
+theorem to apply are met for trivial reasons thus there must be a closed
+orbit in the form of a stable limit cycle for the system</p>
+<p><span class="math display">\[
+\begin{align}
+\frac{dr}{dt} &amp;= r(1-r^2) + \mu r \cos(\theta) \\
+\frac{d\theta}{dt} &amp;= 1
+\end{align}
+\]</span></p>
+<p>Additional examples using the Poincarè-Bendixson theorem and some
+biomathematical applications of the technique will be provided during
+in-class lecture.</p>
 <h1 id="further-reading">Further Reading</h1>
 <p>For further details on the topics covered in this section of notes,
 see Chapter 7 from <span class="citation"
