@@ -1,0 +1,39 @@
+---
+title: "Course Notes 19"
+description: |
+  An introduction to the Hodgkim-Huxley ODEs. 
+author:
+  - name: Jason M. Graham 
+    url: https://topicsinbiomath.netlify.app/
+    affiliation: University of Scranton 
+    affiliation_url: https://sites.google.com/site/jasonmgrahamus/
+date: "`r Sys.Date()`"
+output: 
+  distill::distill_article:
+    toc: true
+    toc_depth: 2
+creative_commons: CC BY-NC
+bibliography: topics_in_biomath.bib
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+library(knitr)
+library(kableExtra)
+library(deSolve)
+library(tidyverse)
+library(ggformula)
+library(patchwork)
+library(phaseR)
+library(latex2exp)
+library(DiagrammeR)
+theme_set(theme_light())
+```
+
+
+# Goals
+
+After reading this section of notes, you should
+
+1) know what the Poincarè-Bendixson theorem says and understand how to use it to derive the existence of a stable limit cycle, when applicable. 
+
