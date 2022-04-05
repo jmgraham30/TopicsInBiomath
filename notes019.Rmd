@@ -46,13 +46,15 @@ After reading this section of notes, you should
 
 Nerve cells known as [neurons](https://en.wikipedia.org/wiki/Neuron) can produce electrical impulses. During the 1940s and 1950s scientists conducted and published research results that elucidate the biophysics of nerve cell electrical impulses. This work is remarkable for its synthesis of experiment and theory. In particular, researchers measured electrical output from the [giant axon of a squid](https://en.wikipedia.org/wiki/Squid_giant_axon) and used these measurements as a basis for deriving a mathematical model that captures key features of the so-called [action potential](https://en.wikipedia.org/wiki/Action_potential) of the neuron. 
 
-Noteworthy is the paper [*A quantitative description of membrane current and its application to conduction and excitation in nerve*](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC1392413/) by [Alan Hodgkin](https://en.wikipedia.org/wiki/Alan_Hodgkin) and [Andrew Huxley](https://en.wikipedia.org/wiki/Andrew_Huxley) which presents equations now known as the [Hodgkin-Huxley model](https://en.wikipedia.org/wiki/Hodgkin%E2%80%93Huxley_model). This paper is one in a series of five papers presenting research for which Hodgkin and Huxley where eventually awarded a [Nobel Prize in Physiology or Medicine](https://en.wikipedia.org/wiki/Nobel_Prize_in_Physiology_or_Medicine). The Hodgkin-Huxley model is foundational for mathematical and computational neuroscience, and the equations have generated a lot of interest in the field of biomathematics due to the interesting dynamics they exhibit. 
+Noteworthy is the paper [*A quantitative description of membrane current and its application to conduction and excitation in nerve*](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC1392413/) by [Alan Hodgkin](https://en.wikipedia.org/wiki/Alan_Hodgkin) and [Andrew Huxley](https://en.wikipedia.org/wiki/Andrew_Huxley) which presents equations now known as the [Hodgkin-Huxley model](https://en.wikipedia.org/wiki/Hodgkin%E2%80%93Huxley_model). This paper is one in a series of five papers presenting research for which Hodgkin and Huxley where eventually awarded a [Nobel Prize in Physiology or Medicine](https://en.wikipedia.org/wiki/Nobel_Prize_in_Physiology_or_Medicine). The Hodgkin-Huxley model is foundational for mathematical and [computational neuroscience](https://en.wikipedia.org/wiki/Computational_neuroscience), and the equations have generated a lot of interest in the field of biomathematics due to the interesting dynamics they exhibit. 
 
 In this section of notes, we present the classical Hodgkin-Huxley ODEs and attempt to explain what they model. Additionally, we suggest some other avenues of research in mathematical neuroscience. We proceed by quickly reviewing the biophysical concepts that are most essential in understanding the meaning of the terms in the Hodgkin-Huxley model. 
 
 # A Primer in Neural Biophysics 
 
+Here we follow section 1.1 of [@borgersIntroductionModelingNeuronal2017] in presenting the biophysical background and terminology needed to understand the formulation of the classical Hodgkin-Huxley ODEs.  
 
+See, for example, figures in the paper of [Han et al,](https://academic.oup.com/brain/article/135/9/2613/326668).  
 
 # The Hodgkin-Huxley ODEs
 

@@ -296,6 +296,20 @@
       "last_modified": "2022-04-01T13:55:17-04:00"
     },
     {
+      "path": "notes019.html",
+      "title": "Course Notes 19",
+      "description": "An introduction to the Hodgkim-Huxley ODEs. \n",
+      "author": [
+        {
+          "name": "Jason M. Graham",
+          "url": "https://topicsinbiomath.netlify.app/"
+        }
+      ],
+      "date": "`r Sys.Date()`",
+      "contents": "\n\nContents\nGoals\nBackground\nA Primer in Neural\nBiophysics\nThe Hodgkin-Huxley ODEs\nFurther Reading\n\nGoals\nAfter reading this section of notes, you should\nknow what is a membrane potential, an action potential, and an\nion channel in the context of nerve cells (neurons);\nhave an appreciation for how the classical Hodgkin-Huxley ODEs\nmodel essential biophysics of neurons;\nbe aware of some of the dynamics exhibited by neural systems and\nhow this relates to neural physiology.\nBackground\nNerve cells known as neurons can produce\nelectrical impulses. During the 1940s and 1950s scientists conducted and\npublished research results that elucidate the biophysics of nerve cell\nelectrical impulses. This work is remarkable for its synthesis of\nexperiment and theory. In particular, researchers measured electrical\noutput from the giant axon of a\nsquid and used these measurements as a basis for deriving a\nmathematical model that captures key features of the so-called action\npotential of the neuron.\nNoteworthy is the paper A\nquantitative description of membrane current and its application to\nconduction and excitation in nerve by Alan Hodgkin and\nAndrew Huxley\nwhich presents equations now known as the Hodgkin-Huxley\nmodel. This paper is one in a series of five papers presenting\nresearch for which Hodgkin and Huxley where eventually awarded a Nobel\nPrize in Physiology or Medicine. The Hodgkin-Huxley model is\nfoundational for mathematical and computational neuroscience, and the\nequations have generated a lot of interest in the field of\nbiomathematics due to the interesting dynamics they exhibit.\nIn this section of notes, we present the classical Hodgkin-Huxley\nODEs and attempt to explain what they model. Additionally, we suggest\nsome other avenues of research in mathematical neuroscience. We proceed\nby quickly reviewing the biophysical concepts that are most essential in\nunderstanding the meaning of the terms in the Hodgkin-Huxley model.\nA Primer in Neural\nBiophysics\nThe Hodgkin-Huxley ODEs\nFurther Reading\n\n\n\n",
+      "last_modified": "2022-04-05T09:19:14-04:00"
+    },
+    {
       "path": "r_for_biomath.html",
       "title": "R for Biomathematics",
       "description": "An Introduction to R for Biomathematics\n",
