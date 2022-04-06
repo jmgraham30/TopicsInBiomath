@@ -85,37 +85,59 @@ code span.vs { color: #20794d; } /* VerbatimString */
 code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 </style>
 
+<style>
+  div.csl-bib-body { }
+  div.csl-entry {
+    clear: both;
+    }
+  .hanging div.csl-entry {
+    margin-left:2em;
+    text-indent:-2em;
+  }
+  div.csl-left-margin {
+    min-width:2em;
+    float:left;
+  }
+  div.csl-right-inline {
+    margin-left:2em;
+    padding-left:1em;
+  }
+  div.csl-indent {
+    margin-left: 2em;
+  }
+</style>
 
   <!--radix_placeholder_meta_tags-->
   <title>Topics in Biomathematics: Course Notes 19</title>
 
-  <meta property="description" itemprop="description" content="An introduction to the Hodgkim-Huxley ODEs."/>
+  <meta property="description" itemprop="description" content="An introduction to the Hodgkin-Huxley ODEs."/>
 
   <link rel="license" href="https://creativecommons.org/licenses/by-nc/4.0/"/>
 
   <!--  https://schema.org/Article -->
-  <meta property="article:published" itemprop="datePublished" content="2022-04-05"/>
-  <meta property="article:created" itemprop="dateCreated" content="2022-04-05"/>
+  <meta property="article:published" itemprop="datePublished" content="2022-04-06"/>
+  <meta property="article:created" itemprop="dateCreated" content="2022-04-06"/>
   <meta name="article:author" content="Jason M. Graham"/>
 
   <!--  https://developers.facebook.com/docs/sharing/webmasters#markup -->
   <meta property="og:title" content="Topics in Biomathematics: Course Notes 19"/>
   <meta property="og:type" content="article"/>
-  <meta property="og:description" content="An introduction to the Hodgkim-Huxley ODEs."/>
+  <meta property="og:description" content="An introduction to the Hodgkin-Huxley ODEs."/>
   <meta property="og:locale" content="en_US"/>
   <meta property="og:site_name" content="Topics in Biomathematics"/>
 
   <!--  https://dev.twitter.com/cards/types/summary -->
   <meta property="twitter:card" content="summary"/>
   <meta property="twitter:title" content="Topics in Biomathematics: Course Notes 19"/>
-  <meta property="twitter:description" content="An introduction to the Hodgkim-Huxley ODEs."/>
+  <meta property="twitter:description" content="An introduction to the Hodgkin-Huxley ODEs."/>
 
   <!--/radix_placeholder_meta_tags-->
   
+  <meta name="citation_reference" content="citation_title=An introduction to modeling neuronal dynamics;citation_publication_date=2017;citation_publisher=Springer, Cham;citation_volume=66;citation_doi=10.1007/978-3-319-51171-9;citation_author=Christoph Börgers"/>
   <!--radix_placeholder_rmarkdown_metadata-->
 
   <script type="text/json" id="radix-rmarkdown-metadata">
-  {"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["title","description","author","date","output","creative_commons","bibliography"]}},"value":[{"type":"character","attributes":{},"value":["Course Notes 19"]},{"type":"character","attributes":{},"value":["An introduction to the Hodgkim-Huxley ODEs. \n"]},{"type":"list","attributes":{},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","url","affiliation","affiliation_url"]}},"value":[{"type":"character","attributes":{},"value":["Jason M. Graham"]},{"type":"character","attributes":{},"value":["https://topicsinbiomath.netlify.app/"]},{"type":"character","attributes":{},"value":["University of Scranton"]},{"type":"character","attributes":{},"value":["https://sites.google.com/site/jasonmgrahamus/"]}]}]},{"type":"character","attributes":{},"value":["2022-04-05"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["distill::distill_article"]}},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["toc","toc_depth"]}},"value":[{"type":"logical","attributes":{},"value":[true]},{"type":"integer","attributes":{},"value":[2]}]}]},{"type":"character","attributes":{},"value":["CC BY-NC"]},{"type":"character","attributes":{},"value":["topics_in_biomath.bib"]}]}
+  {"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["title","description","author","date","output","creative_commons","bibliography"]}},"value":[{"type":"character","attributes":{},"value":["Course Notes 19"]},{"type":"character","attributes":{},"value":["An introduction to the Hodgkin-Huxley ODEs. \n"]},{"type":"list","attributes":{},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","url","affiliation","affiliation_url"]}},"value":[{"type":"character","attributes":{},"value":["Jason M. Graham"]},{"type":"character","attributes":{},"value":["https://topicsinbiomath.netlify.app/"]},{"type":"character","attributes":{},"value":["University of Scranton"]},{"type":"character","attributes":{},"value":["https://sites.google.com/site/jasonmgrahamus/"]}]}]},{"type":"character","attributes":{},"value":["2022-04-06"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["distill::distill_article"]}},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["toc","toc_depth"]}},"value":[{"type":"logical","attributes":{},"value":[true]},{"type":"integer","attributes":{},"value":[2]}]}]},{"type":"character","attributes":{},"value":["CC BY-NC"]},{"type":"character","attributes":{},"value":["topics_in_biomath.bib"]}]}
   </script>
   <!--/radix_placeholder_rmarkdown_metadata-->
   <!--radix_placeholder_navigation_in_header-->
@@ -2063,7 +2085,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <!--radix_placeholder_front_matter-->
 
 <script id="distill-front-matter" type="text/json">
-{"title":"Course Notes 19","description":"An introduction to the Hodgkim-Huxley ODEs.","authors":[{"author":"Jason M. Graham","authorURL":"https://topicsinbiomath.netlify.app/","affiliation":"University of Scranton","affiliationURL":"https://sites.google.com/site/jasonmgrahamus/","orcidID":""}],"publishedDate":"2022-04-05T00:00:00.000-04:00","citationText":"Graham, 2022"}
+{"title":"Course Notes 19","description":"An introduction to the Hodgkin-Huxley ODEs.","authors":[{"author":"Jason M. Graham","authorURL":"https://topicsinbiomath.netlify.app/","affiliation":"University of Scranton","affiliationURL":"https://sites.google.com/site/jasonmgrahamus/","orcidID":""}],"publishedDate":"2022-04-06T00:00:00.000-04:00","citationText":"Graham, 2022"}
 </script>
 
 <!--/radix_placeholder_front_matter-->
@@ -2131,7 +2153,7 @@ Case Studies
 <h1>Course Notes 19</h1>
 <!--radix_placeholder_categories-->
 <!--/radix_placeholder_categories-->
-<p><p>An introduction to the Hodgkim-Huxley ODEs.</p></p>
+<p><p>An introduction to the Hodgkin-Huxley ODEs.</p></p>
 </div>
 
 <div class="d-byline">
@@ -2140,7 +2162,7 @@ class="uri">https://topicsinbiomath.netlify.app/</a> (University of
 Scranton)<a href="https://sites.google.com/site/jasonmgrahamus/"
 class="uri">https://sites.google.com/site/jasonmgrahamus/</a>
   
-<br/>2022-04-05
+<br/>2022-04-06
 </div>
 
 <div class="d-article">
@@ -2163,7 +2185,7 @@ Biophysics</a></li>
 <li><p>know what is a membrane potential, an action potential, and an
 ion channel in the context of nerve cells (neurons);</p></li>
 <li><p>have an appreciation for how the classical Hodgkin-Huxley ODEs
-model essential biophysics of neurons;</p></li>
+model essential biophysics of neurons; and</p></li>
 <li><p>be aware of some of the dynamics exhibited by neural systems and
 how this relates to neural physiology.</p></li>
 </ol>
@@ -2192,9 +2214,11 @@ model</a>. This paper is one in a series of five papers presenting
 research for which Hodgkin and Huxley where eventually awarded a <a
 href="https://en.wikipedia.org/wiki/Nobel_Prize_in_Physiology_or_Medicine">Nobel
 Prize in Physiology or Medicine</a>. The Hodgkin-Huxley model is
-foundational for mathematical and computational neuroscience, and the
-equations have generated a lot of interest in the field of
-biomathematics due to the interesting dynamics they exhibit.</p>
+foundational for mathematical and <a
+href="https://en.wikipedia.org/wiki/Computational_neuroscience">computational
+neuroscience</a>, and the equations have generated a lot of interest in
+the field of biomathematics due to the interesting dynamics they
+exhibit.</p>
 <p>In this section of notes, we present the classical Hodgkin-Huxley
 ODEs and attempt to explain what they model. Additionally, we suggest
 some other avenues of research in mathematical neuroscience. We proceed
@@ -2202,10 +2226,73 @@ by quickly reviewing the biophysical concepts that are most essential in
 understanding the meaning of the terms in the Hodgkin-Huxley model.</p>
 <h1 id="a-primer-in-neural-biophysics">A Primer in Neural
 Biophysics</h1>
+<p>Here we follow section 1.1 of <span class="citation"
+data-cites="borgersIntroductionModelingNeuronal2017">(<a
+href="#ref-borgersIntroductionModelingNeuronal2017"
+role="doc-biblioref">Börgers 2017</a>)</span> in presenting the
+biophysical background and terminology needed to understand the
+formulation of the classical Hodgkin-Huxley ODEs.</p>
+<p>Recall from physics that <a
+href="https://en.wikipedia.org/wiki/Electric_potential">electric
+potential</a> is the work required to move a unit of electric charge.
+Nerve and muscle cells contain and are surrounded by charged particles
+in the form of ions. This may result in a difference in electric
+potential between the exterior and interior of a cell that is known as a
+<a href="https://en.wikipedia.org/wiki/Membrane_potential">membrane
+potential</a>. Further, nerve and muscle cells are capable of generating
+brief spikes in the membrane potential creating what is known as an <a
+href="https://en.wikipedia.org/wiki/Action_potential">action
+potential</a>. Thus, physiologists say that nerve and muscle cells are
+<strong>excitable</strong>. Our goal is to understand and model the
+mechanisms underlying the electrical activity in nerve cells known as
+neurons.</p>
+<p><a href="https://en.wikipedia.org/wiki/Neuron">Neurons</a> are one of
+the primary cells in the brain. A neuron possesses a cell body known as
+a <a href="https://en.wikipedia.org/wiki/Soma_(biology)">soma</a>, input
+branches called <a
+href="https://en.wikipedia.org/wiki/Dendrite">dendrites</a>, and an
+output unit known as an <a
+href="https://en.wikipedia.org/wiki/Axon">axon</a>. Moreover, neurons
+are filled and surrounded by fluid containing sodium (<span
+class="math inline">\(\text{Na}^{+}\)</span>), potassium (<span
+class="math inline">\(\text{K}^{+}\)</span>), chloride (<span
+class="math inline">\(\text{Cl}^{-}\)</span>), and calcium (<span
+class="math inline">\(\text{Ca}^{2+}\)</span>) ions. The superscripts
+denote the electric charge of the ion. We will denote the concentration
+of ion <span class="math inline">\(\text{X}\)</span> by <span
+class="math inline">\([\text{X}]_{\text{in}}\)</span> if it is within
+the cell and <span class="math inline">\([\text{X}]_{\text{ex}}\)</span>
+if it is outside the cell.</p>
+<p>It is known that ions can pass through the cell membrane of a neuron
+through so-called <a
+href="https://en.wikipedia.org/wiki/Ion_channel">ion channels</a>. These
+channels are typically ion specific in that a sodium ion channel only
+lets sodium through, a potassium channel only lets potassium through,
+and so on. Additionally, there are ion pumps at the neuron cell membrane
+that actively transport ions in or out of a cell but not necessarily at
+the same rate. For example, the well-known <a
+href="https://en.wikipedia.org/wiki/Sodium-potassium_pump">sodium-potassium</a>
+pump removes sodium and intakes potassium at a 2 potassium for 3 sodium
+ratio.</p>
+<p>Researchers have observed experimentally the change in membrane
+potential of neurons. See, for example, figures in the paper of <a
+href="https://academic.oup.com/brain/article/135/9/2613/326668">Han et
+al,</a> where one can see a plot of a recording of membrane potential
+from a neuron in the superior cervical ganglion of a rat.</p>
 <h1 id="the-hodgkin-huxley-odes">The Hodgkin-Huxley ODEs</h1>
 <h1 id="further-reading">Further Reading</h1>
 <div class="sourceCode" id="cb1"><pre
 class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
+<div id="refs" class="references csl-bib-body hanging-indent"
+role="doc-bibliography">
+<div id="ref-borgersIntroductionModelingNeuronal2017" class="csl-entry"
+role="doc-biblioentry">
+Börgers, Christoph. 2017. <em>An Introduction to Modeling Neuronal
+Dynamics</em>. Vol. 66. Texts in <span>Applied Mathematics</span>.
+<span>Springer, Cham</span>. <a
+href="https://doi.org/10.1007/978-3-319-51171-9">https://doi.org/10.1007/978-3-319-51171-9</a>.
+</div>
+</div>
 <!--radix_placeholder_article_footer-->
 <!--/radix_placeholder_article_footer-->
 </div>
@@ -2213,6 +2300,15 @@ class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"><
 <div class="d-appendix">
 </div>
 
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
 
 <!--radix_placeholder_site_after_body-->
 <!--/radix_placeholder_site_after_body-->
