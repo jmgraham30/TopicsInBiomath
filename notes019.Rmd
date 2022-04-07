@@ -139,22 +139,28 @@ which is a coupled system of nonlinear equations. We still need to describe the 
 
 ## Interpretation of Gating Variables. 
 
-A sodium channel has four gates aligned in series such that three of the gates are of one type (say type m), and one of the gates is of a second type (say type h). If $m$ is the fraction of open m-gates and $h$ is the fraction of open h-gates, then the fraction of open sodium channels is $m^3h$. Similarly, we assume that potassium has four gates aligned in series all of the same type, type n. Then the fraction of open potassium channels is $n^4$.      
+A sodium channel has four gates aligned in series such that three of the gates are of one type (say type m), and one of the gates is of a second type (say type h). If $m$ is the fraction of open m-gates and $h$ is the fraction of open h-gates, then the fraction of open sodium channels is $m^3h$. Similarly, we assume that potassium has four gates aligned in series all of the same type, type n. Then the fraction of open potassium channels is $n^4$.   
+
 
 ### Plots of Gating Variable Functional Forms
 
-```{r,echo=FALSE,code_folding=TRUE}
+As mentioned, each of the gating variables $m$, $h$, and $n$ satisfy a differential equation of the form
+
+$\frac{dx}{dt} = \frac{x_{\infty}(v) - x}{\tau_{x}(v)}$
+
+where there are two functional forms for each equation. The functional forms $x_{\infty}(v)$ for $x=m,h,n$ can be thought of as equilibrium values for $m,h,n$ but ones that vary with the value of $v$. The functional forms $\tau_{x}(v)$ establish the time-scale on which an equilibrium is reached. Detailed expressions for these functional forms may be found on page 19 of [@borgersIntroductionModelingNeuronal2017]. Insead of writing them down here, we implement them in R code and display their graphs. 
+
+Here is the R code implementing the functional forms:
+
+```{r,echo=TRUE,code_folding=TRUE}
 alpha_h <- function(v){
   alpha_h<-0.07*exp(-(v+70)/20)  
 }
 
 
 alpha_m <- function(v){
-  if (abs(v+45)>1.0e-8){
-    alpha_m<-(v+45)/10./(1-exp(-(v+45)/10))
-  }else{
-    alpha_m=1  
-  }
+  
+  a_m <- ifelse(abs(v+45)>1.0e-8,(v+45)/10./(1-exp(-(v+45)/10)),1)
   
 }
 
@@ -188,9 +194,10 @@ tau_n <- function(v){1/(alpha_n(v) + beta_n(v))}
 
 ```
 
-Plots
 
-```{r,echo=FALSE,code_folding=TRUE}
+Here are plots of the functional forms. 
+
+```{r,echo=TRUE,code_folding=TRUE}
 v_df <- tibble(v=c(-100,50))
 
 p_m_inf <- v_df %>% ggplot(aes(x=v)) + 
@@ -233,13 +240,77 @@ p_n_tau <- v_df %>% ggplot(aes(x=v)) +
 
 ```
 
+A few points to take away include
+
+1) The time scale corresponding to the $m$ gating variable is an order of magnitude smaller than for $h$ and $m$. The consequence of this is that the Hodgkin-Huxley model exhibits *slow-fast* dynamics. We will discuss what this means in a future section of notes. 
+
+2) The functions $m_{\infty}$ and $n_{\infty}$ are increasing functions of membrane potential while $h_{\infty}$ is a decreasign function of membrane potential. Due to this, $m$ and $n$ are considered activation variables while $h$ is considered to be an inactivation variable. 
 
 # Dynamics of Hodgkin-Huxley
 
+```{r,echo=TRUE,code_folding=TRUE}
+HH <- function (t, y, parameters) {
+   with(as.list(c(y,parameters)),{
+    # variables
+    v <- y[1]
+    h <- y[2]
+    m <- y[3]
+    n <- y[4]
+  
+    dv <- (gna*m^3*h*(vna - v) + gk*n^4*(vk - v) + gl*(vl - v) + iext)/C
+    dh <- (h_inf(v) - h)/tau_h(v)
+    dm <- (m_inf(v) - m)/tau_m(v)
+    dn <- (n_inf(v) - n)/tau_n(v)
+    
+    return(list(c(dv, dh, dm, dn)))
+  })
+}
+```
 
+
+
+```{r,echo=TRUE,code_folding=TRUE}
+# parameters
+parameters <- list(C=1,gk=36,gna=120,gl=0.3,vk=-82,vna=45,vl=-59,iext=10)
+
+# initial conditions
+v0 <- -50
+m0 <- alpha_m(v0)/(alpha_m(v0)+beta_m(v0));
+
+yini <- c(v=v0, h=1, m=m0, n=0.4)
+
+
+t_initial <- 0
+t_final <- 75
+times <- seq(from = t_initial, to = t_final, by = 0.08)
+
+out <- ode(y = yini, times = times, func = HH,
+           parms = parameters,method = "ode45")
+```
+
+
+
+```{r,echo=TRUE,code_folding=TRUE}
+HHsol <- data.frame(t=out[,"time"],v=out[,"v"],h=out[,"h"],m=out[,"m"],n=out[,"n"])
+
+
+p1 <- HHsol %>%
+  ggplot(aes(x = t, y = v)) +
+  geom_line(aes(x = t, y = v),lwd=1) +
+  labs(x="time [ms]",y = "v [mV]")
+
+p2 <- HHsol %>%
+  gather(Column, Value, -t,-v) %>%
+  ggplot(aes(x = t, y = Value, color = Column)) +
+  geom_line(aes(x = t, y = Value),lwd=1) +
+  labs(x="time [ms]",y = " ") +
+  guides(color=guide_legend(title="Gating variable"))
+
+p1 / p2
+```
 
 # Further Reading
 
-
+The Hoddgkin-Huxley model originally appears in [@hodgkinQuantitativeDescriptionMembrane1952]. Our discussion largely follows Chapters 1, 3, and 4 from [@borgersIntroductionModelingNeuronal2017]. The text [@ermentroutMathematicalFoundationsNeuroscience2010] provides similar coverage but goes further into some of the mathematics associated with mathematical neuroscience.  We also reccommend the recorded conference talks [Fields of Dreams: Modeling and Analysis of Large Scale Activity in the Brain](https://www.pathlms.com/siam/courses/1288/sections/1411/video_presentations/11633) by [Bard Ermentrout](https://sites.pitt.edu/~phase/) and [Brain Control - It's Not Just for Mad Scientists](https://www.pathlms.com/siam/courses/1288/sections/1425/video_presentations/11676) by [Jeff Moehlis](http://sites.me.ucsb.edu/~moehlis/). 
 
 

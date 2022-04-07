@@ -134,6 +134,8 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   <!--/radix_placeholder_meta_tags-->
   
   <meta name="citation_reference" content="citation_title=An introduction to modeling neuronal dynamics;citation_publication_date=2017;citation_publisher=Springer, Cham;citation_volume=66;citation_doi=10.1007/978-3-319-51171-9;citation_author=Christoph Börgers"/>
+  <meta name="citation_reference" content="citation_title=Mathematical foundations of neuroscience;citation_publication_date=2010;citation_publisher=Springer, New York;citation_volume=35;citation_doi=10.1007/978-0-387-87708-2;citation_author=G. Bard Ermentrout;citation_author=David H. Terman"/>
+  <meta name="citation_reference" content="citation_title=A quantitative description of membrane current and its application to conduction and excitation in nerve;citation_publication_date=1952;citation_volume=117;citation_issn=0022-3751;citation_author=A. L. Hodgkin;citation_author=A. F. Huxley"/>
   <!--radix_placeholder_rmarkdown_metadata-->
 
   <script type="text/json" id="radix-rmarkdown-metadata">
@@ -2425,15 +2427,247 @@ type, type n. Then the fraction of open potassium channels is <span
 class="math inline">\(n^4\)</span>.</p>
 <h3 id="plots-of-gating-variable-functional-forms">Plots of Gating
 Variable Functional Forms</h3>
+<p>As mentioned, each of the gating variables <span
+class="math inline">\(m\)</span>, <span
+class="math inline">\(h\)</span>, and <span
+class="math inline">\(n\)</span> satisfy a differential equation of the
+form</p>
+<p><span class="math inline">\(\frac{dx}{dt} = \frac{x_{\infty}(v) -
+x}{\tau_{x}(v)}\)</span></p>
+<p>where there are two functional forms for each equation. The
+functional forms <span class="math inline">\(x_{\infty}(v)\)</span> for
+<span class="math inline">\(x=m,h,n\)</span> can be thought of as
+equilibrium values for <span class="math inline">\(m,h,n\)</span> but
+ones that vary with the value of <span class="math inline">\(v\)</span>.
+The functional forms <span class="math inline">\(\tau_{x}(v)\)</span>
+establish the time-scale on which an equilibrium is reached. Detailed
+expressions for these functional forms may be found on page 19 of <span
+class="citation"
+data-cites="borgersIntroductionModelingNeuronal2017">(<a
+href="#ref-borgersIntroductionModelingNeuronal2017"
+role="doc-biblioref">Börgers 2017</a>)</span>. Insead of writing them
+down here, we implement them in R code and display their graphs.</p>
+<p>Here is the R code implementing the functional forms:</p>
 <div class="layout-chunk" data-layout="l-body">
+<details>
+<summary>
+Show code
+</summary>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>alpha_h</span> <span class='op'>&lt;-</span> <span class='kw'>function</span><span class='op'>(</span><span class='va'>v</span><span class='op'>)</span><span class='op'>{</span>
+  <span class='va'>alpha_h</span><span class='op'>&lt;-</span><span class='fl'>0.07</span><span class='op'>*</span><span class='fu'><a href='https://rdrr.io/r/base/Log.html'>exp</a></span><span class='op'>(</span><span class='op'>-</span><span class='op'>(</span><span class='va'>v</span><span class='op'>+</span><span class='fl'>70</span><span class='op'>)</span><span class='op'>/</span><span class='fl'>20</span><span class='op'>)</span>  
+<span class='op'>}</span>
 
+
+<span class='va'>alpha_m</span> <span class='op'>&lt;-</span> <span class='kw'>function</span><span class='op'>(</span><span class='va'>v</span><span class='op'>)</span><span class='op'>{</span>
+  
+  <span class='va'>a_m</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/ifelse.html'>ifelse</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/MathFun.html'>abs</a></span><span class='op'>(</span><span class='va'>v</span><span class='op'>+</span><span class='fl'>45</span><span class='op'>)</span><span class='op'>&gt;</span><span class='fl'>1.0e-8</span>,<span class='op'>(</span><span class='va'>v</span><span class='op'>+</span><span class='fl'>45</span><span class='op'>)</span><span class='op'>/</span><span class='fl'>10.</span><span class='op'>/</span><span class='op'>(</span><span class='fl'>1</span><span class='op'>-</span><span class='fu'><a href='https://rdrr.io/r/base/Log.html'>exp</a></span><span class='op'>(</span><span class='op'>-</span><span class='op'>(</span><span class='va'>v</span><span class='op'>+</span><span class='fl'>45</span><span class='op'>)</span><span class='op'>/</span><span class='fl'>10</span><span class='op'>)</span><span class='op'>)</span>,<span class='fl'>1</span><span class='op'>)</span>
+  
+<span class='op'>}</span>
+
+
+<span class='va'>alpha_n</span> <span class='op'>&lt;-</span> <span class='kw'>function</span><span class='op'>(</span><span class='va'>v</span><span class='op'>)</span><span class='op'>{</span>
+  <span class='va'>alpha_n</span><span class='op'>&lt;-</span><span class='fl'>0.01</span><span class='op'>*</span><span class='op'>(</span><span class='op'>-</span><span class='fl'>60.0</span><span class='op'>-</span><span class='va'>v</span><span class='op'>)</span><span class='op'>/</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/Log.html'>exp</a></span><span class='op'>(</span><span class='op'>(</span><span class='op'>-</span><span class='fl'>60</span><span class='op'>-</span><span class='va'>v</span><span class='op'>)</span><span class='op'>/</span><span class='fl'>10</span><span class='op'>)</span><span class='op'>-</span><span class='fl'>1</span><span class='op'>)</span>  
+<span class='op'>}</span>
+
+
+<span class='va'>beta_h</span> <span class='op'>&lt;-</span> <span class='kw'>function</span><span class='op'>(</span><span class='va'>v</span><span class='op'>)</span><span class='op'>{</span>
+  <span class='va'>beta_h</span><span class='op'>&lt;-</span><span class='fl'>1.</span><span class='op'>/</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/Log.html'>exp</a></span><span class='op'>(</span><span class='op'>-</span><span class='op'>(</span><span class='va'>v</span><span class='op'>+</span><span class='fl'>40</span><span class='op'>)</span><span class='op'>/</span><span class='fl'>10</span><span class='op'>)</span><span class='op'>+</span><span class='fl'>1</span><span class='op'>)</span>  
+<span class='op'>}</span>
+
+
+<span class='va'>beta_m</span> <span class='op'>&lt;-</span> <span class='kw'>function</span><span class='op'>(</span><span class='va'>v</span><span class='op'>)</span><span class='op'>{</span>
+  <span class='va'>beta_m</span><span class='op'>&lt;-</span><span class='fl'>4</span><span class='op'>*</span><span class='fu'><a href='https://rdrr.io/r/base/Log.html'>exp</a></span><span class='op'>(</span><span class='op'>-</span><span class='op'>(</span><span class='va'>v</span><span class='op'>+</span><span class='fl'>70</span><span class='op'>)</span><span class='op'>/</span><span class='fl'>18</span><span class='op'>)</span>  
+<span class='op'>}</span>
+
+
+<span class='va'>beta_n</span> <span class='op'>&lt;-</span> <span class='kw'>function</span><span class='op'>(</span><span class='va'>v</span><span class='op'>)</span><span class='op'>{</span>
+  <span class='va'>beta_n</span><span class='op'>&lt;-</span><span class='fl'>0.125</span><span class='op'>*</span><span class='fu'><a href='https://rdrr.io/r/base/Log.html'>exp</a></span><span class='op'>(</span><span class='op'>-</span><span class='op'>(</span><span class='va'>v</span><span class='op'>+</span><span class='fl'>70</span><span class='op'>)</span><span class='op'>/</span><span class='fl'>80</span><span class='op'>)</span>  
+<span class='op'>}</span>
+
+<span class='va'>h_inf</span> <span class='op'>&lt;-</span> <span class='kw'>function</span><span class='op'>(</span><span class='va'>v</span><span class='op'>)</span><span class='op'>{</span><span class='fu'>alpha_h</span><span class='op'>(</span><span class='va'>v</span><span class='op'>)</span><span class='op'>/</span><span class='op'>(</span><span class='fu'>alpha_h</span><span class='op'>(</span><span class='va'>v</span><span class='op'>)</span> <span class='op'>+</span> <span class='fu'>beta_h</span><span class='op'>(</span><span class='va'>v</span><span class='op'>)</span><span class='op'>)</span><span class='op'>}</span>
+<span class='va'>m_inf</span> <span class='op'>&lt;-</span> <span class='kw'>function</span><span class='op'>(</span><span class='va'>v</span><span class='op'>)</span><span class='op'>{</span><span class='fu'>alpha_m</span><span class='op'>(</span><span class='va'>v</span><span class='op'>)</span><span class='op'>/</span><span class='op'>(</span><span class='fu'>alpha_m</span><span class='op'>(</span><span class='va'>v</span><span class='op'>)</span> <span class='op'>+</span> <span class='fu'>beta_m</span><span class='op'>(</span><span class='va'>v</span><span class='op'>)</span><span class='op'>)</span><span class='op'>}</span>
+<span class='va'>n_inf</span> <span class='op'>&lt;-</span> <span class='kw'>function</span><span class='op'>(</span><span class='va'>v</span><span class='op'>)</span><span class='op'>{</span><span class='fu'>alpha_n</span><span class='op'>(</span><span class='va'>v</span><span class='op'>)</span><span class='op'>/</span><span class='op'>(</span><span class='fu'>alpha_n</span><span class='op'>(</span><span class='va'>v</span><span class='op'>)</span> <span class='op'>+</span> <span class='fu'>beta_n</span><span class='op'>(</span><span class='va'>v</span><span class='op'>)</span><span class='op'>)</span><span class='op'>}</span>
+    
+<span class='va'>tau_h</span> <span class='op'>&lt;-</span> <span class='kw'>function</span><span class='op'>(</span><span class='va'>v</span><span class='op'>)</span><span class='op'>{</span><span class='fl'>1</span><span class='op'>/</span><span class='op'>(</span><span class='fu'>alpha_h</span><span class='op'>(</span><span class='va'>v</span><span class='op'>)</span> <span class='op'>+</span> <span class='fu'>beta_h</span><span class='op'>(</span><span class='va'>v</span><span class='op'>)</span><span class='op'>)</span><span class='op'>}</span>
+<span class='va'>tau_m</span> <span class='op'>&lt;-</span> <span class='kw'>function</span><span class='op'>(</span><span class='va'>v</span><span class='op'>)</span><span class='op'>{</span><span class='fl'>1</span><span class='op'>/</span><span class='op'>(</span><span class='fu'>alpha_m</span><span class='op'>(</span><span class='va'>v</span><span class='op'>)</span> <span class='op'>+</span> <span class='fu'>beta_m</span><span class='op'>(</span><span class='va'>v</span><span class='op'>)</span><span class='op'>)</span><span class='op'>}</span>
+<span class='va'>tau_n</span> <span class='op'>&lt;-</span> <span class='kw'>function</span><span class='op'>(</span><span class='va'>v</span><span class='op'>)</span><span class='op'>{</span><span class='fl'>1</span><span class='op'>/</span><span class='op'>(</span><span class='fu'>alpha_n</span><span class='op'>(</span><span class='va'>v</span><span class='op'>)</span> <span class='op'>+</span> <span class='fu'>beta_n</span><span class='op'>(</span><span class='va'>v</span><span class='op'>)</span><span class='op'>)</span><span class='op'>}</span>
+</code></pre>
 </div>
-<p>Plots</p>
+</details>
+</div>
+<p>Here are plots of the functional forms.</p>
 <div class="layout-chunk" data-layout="l-body">
+<details>
+<summary>
+Show code
+</summary>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>v_df</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://tibble.tidyverse.org/reference/tibble.html'>tibble</a></span><span class='op'>(</span>v<span class='op'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='op'>-</span><span class='fl'>100</span>,<span class='fl'>50</span><span class='op'>)</span><span class='op'>)</span>
+
+<span class='va'>p_m_inf</span> <span class='op'>&lt;-</span> <span class='va'>v_df</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span><span class='op'>(</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span>x<span class='op'>=</span><span class='va'>v</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span> 
+  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_function.html'>geom_function</a></span><span class='op'>(</span>fun<span class='op'>=</span><span class='va'>m_inf</span><span class='op'>)</span> <span class='op'>+</span> 
+  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/lims.html'>ylim</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>0</span>,<span class='fl'>1</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span> 
+  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/labs.html'>xlab</a></span><span class='op'>(</span><span class='st'>"v [mV]"</span><span class='op'>)</span> <span class='op'>+</span> 
+  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/labs.html'>ylab</a></span><span class='op'>(</span><span class='fu'><a href='https://www.stefanom.io/latex2exp/reference/TeX.html'>TeX</a></span><span class='op'>(</span><span class='st'>r'($m_{\infty}$)'</span><span class='op'>)</span><span class='op'>)</span>
+
+<span class='va'>p_m_tau</span> <span class='op'>&lt;-</span> <span class='va'>v_df</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span><span class='op'>(</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span>x<span class='op'>=</span><span class='va'>v</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span> 
+  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_function.html'>geom_function</a></span><span class='op'>(</span>fun<span class='op'>=</span><span class='va'>tau_m</span><span class='op'>)</span> <span class='op'>+</span> 
+  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/lims.html'>ylim</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>0</span>,<span class='fl'>1</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span> 
+  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/labs.html'>xlab</a></span><span class='op'>(</span><span class='st'>"v [mV]"</span><span class='op'>)</span> <span class='op'>+</span> 
+  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/labs.html'>ylab</a></span><span class='op'>(</span><span class='fu'><a href='https://www.stefanom.io/latex2exp/reference/TeX.html'>TeX</a></span><span class='op'>(</span><span class='st'>r'($\tau_{m}$ (ms))'</span><span class='op'>)</span><span class='op'>)</span>
+
+<span class='va'>p_h_inf</span> <span class='op'>&lt;-</span> <span class='va'>v_df</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span><span class='op'>(</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span>x<span class='op'>=</span><span class='va'>v</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span> 
+  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_function.html'>geom_function</a></span><span class='op'>(</span>fun<span class='op'>=</span><span class='va'>h_inf</span><span class='op'>)</span> <span class='op'>+</span> 
+  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/lims.html'>ylim</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>0</span>,<span class='fl'>1</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span> 
+  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/labs.html'>xlab</a></span><span class='op'>(</span><span class='st'>"v [mV]"</span><span class='op'>)</span> <span class='op'>+</span> 
+  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/labs.html'>ylab</a></span><span class='op'>(</span><span class='fu'><a href='https://www.stefanom.io/latex2exp/reference/TeX.html'>TeX</a></span><span class='op'>(</span><span class='st'>r'($h_{\infty}$)'</span><span class='op'>)</span><span class='op'>)</span>
+
+<span class='va'>p_h_tau</span> <span class='op'>&lt;-</span> <span class='va'>v_df</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span><span class='op'>(</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span>x<span class='op'>=</span><span class='va'>v</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span> 
+  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_function.html'>geom_function</a></span><span class='op'>(</span>fun<span class='op'>=</span><span class='va'>tau_h</span><span class='op'>)</span> <span class='op'>+</span> 
+  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/lims.html'>ylim</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>0</span>,<span class='fl'>10</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span> 
+  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/labs.html'>xlab</a></span><span class='op'>(</span><span class='st'>"v [mV]"</span><span class='op'>)</span> <span class='op'>+</span> 
+  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/labs.html'>ylab</a></span><span class='op'>(</span><span class='fu'><a href='https://www.stefanom.io/latex2exp/reference/TeX.html'>TeX</a></span><span class='op'>(</span><span class='st'>r'($\tau_{h}$ (ms))'</span><span class='op'>)</span><span class='op'>)</span>
+
+<span class='va'>p_n_inf</span> <span class='op'>&lt;-</span> <span class='va'>v_df</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span><span class='op'>(</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span>x<span class='op'>=</span><span class='va'>v</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span> 
+  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_function.html'>geom_function</a></span><span class='op'>(</span>fun<span class='op'>=</span><span class='va'>n_inf</span><span class='op'>)</span> <span class='op'>+</span> 
+  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/lims.html'>ylim</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>0</span>,<span class='fl'>1</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span> 
+  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/labs.html'>xlab</a></span><span class='op'>(</span><span class='st'>"v [mV]"</span><span class='op'>)</span> <span class='op'>+</span> 
+  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/labs.html'>ylab</a></span><span class='op'>(</span><span class='fu'><a href='https://www.stefanom.io/latex2exp/reference/TeX.html'>TeX</a></span><span class='op'>(</span><span class='st'>r'($n_{\infty}$)'</span><span class='op'>)</span><span class='op'>)</span>
+
+<span class='va'>p_n_tau</span> <span class='op'>&lt;-</span> <span class='va'>v_df</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span><span class='op'>(</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span>x<span class='op'>=</span><span class='va'>v</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span> 
+  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_function.html'>geom_function</a></span><span class='op'>(</span>fun<span class='op'>=</span><span class='va'>tau_n</span><span class='op'>)</span> <span class='op'>+</span> 
+  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/lims.html'>ylim</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>0</span>,<span class='fl'>10</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span> 
+  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/labs.html'>xlab</a></span><span class='op'>(</span><span class='st'>"v [mV]"</span><span class='op'>)</span> <span class='op'>+</span> 
+  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/labs.html'>ylab</a></span><span class='op'>(</span><span class='fu'><a href='https://www.stefanom.io/latex2exp/reference/TeX.html'>TeX</a></span><span class='op'>(</span><span class='st'>r'($\tau_{n}$ (ms))'</span><span class='op'>)</span><span class='op'>)</span>
+
+<span class='op'>(</span><span class='va'>p_m_inf</span> <span class='op'>+</span> <span class='va'>p_m_tau</span><span class='op'>)</span> <span class='op'>/</span> <span class='op'>(</span><span class='va'>p_h_inf</span> <span class='op'>+</span> <span class='va'>p_h_tau</span><span class='op'>)</span> <span class='op'>/</span> <span class='op'>(</span><span class='va'>p_n_inf</span> <span class='op'>+</span> <span class='va'>p_n_tau</span><span class='op'>)</span>
+</code></pre>
+</div>
+</details>
 <p><img src="notes019_files/figure-html5/unnamed-chunk-2-1.png" width="624" /></p>
 </div>
+<p>A few points to take away include</p>
+<ol type="1">
+<li><p>The time scale corresponding to the <span
+class="math inline">\(m\)</span> gating variable is an order of
+magnitude smaller than for <span class="math inline">\(h\)</span> and
+<span class="math inline">\(m\)</span>. The consequence of this is that
+the Hodgkin-Huxley model exhibits <em>slow-fast</em> dynamics. We will
+discuss what this means in a future section of notes.</p></li>
+<li><p>The functions <span class="math inline">\(m_{\infty}\)</span> and
+<span class="math inline">\(n_{\infty}\)</span> are increasing functions
+of membrane potential while <span
+class="math inline">\(h_{\infty}\)</span> is a decreasign function of
+membrane potential. Due to this, <span class="math inline">\(m\)</span>
+and <span class="math inline">\(n\)</span> are considered activation
+variables while <span class="math inline">\(h\)</span> is considered to
+be an inactivation variable.</p></li>
+</ol>
 <h1 id="dynamics-of-hodgkin-huxley">Dynamics of Hodgkin-Huxley</h1>
+<div class="layout-chunk" data-layout="l-body">
+<details>
+<summary>
+Show code
+</summary>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>HH</span> <span class='op'>&lt;-</span> <span class='kw'>function</span> <span class='op'>(</span><span class='va'>t</span>, <span class='va'>y</span>, <span class='va'>parameters</span><span class='op'>)</span> <span class='op'>{</span>
+   <span class='fu'><a href='https://rdrr.io/r/base/with.html'>with</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/list.html'>as.list</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='va'>y</span>,<span class='va'>parameters</span><span class='op'>)</span><span class='op'>)</span>,<span class='op'>{</span>
+    <span class='co'># variables</span>
+    <span class='va'>v</span> <span class='op'>&lt;-</span> <span class='va'>y</span><span class='op'>[</span><span class='fl'>1</span><span class='op'>]</span>
+    <span class='va'>h</span> <span class='op'>&lt;-</span> <span class='va'>y</span><span class='op'>[</span><span class='fl'>2</span><span class='op'>]</span>
+    <span class='va'>m</span> <span class='op'>&lt;-</span> <span class='va'>y</span><span class='op'>[</span><span class='fl'>3</span><span class='op'>]</span>
+    <span class='va'>n</span> <span class='op'>&lt;-</span> <span class='va'>y</span><span class='op'>[</span><span class='fl'>4</span><span class='op'>]</span>
+  
+    <span class='va'>dv</span> <span class='op'>&lt;-</span> <span class='op'>(</span><span class='va'>gna</span><span class='op'>*</span><span class='va'>m</span><span class='op'>^</span><span class='fl'>3</span><span class='op'>*</span><span class='va'>h</span><span class='op'>*</span><span class='op'>(</span><span class='va'>vna</span> <span class='op'>-</span> <span class='va'>v</span><span class='op'>)</span> <span class='op'>+</span> <span class='va'>gk</span><span class='op'>*</span><span class='va'>n</span><span class='op'>^</span><span class='fl'>4</span><span class='op'>*</span><span class='op'>(</span><span class='va'>vk</span> <span class='op'>-</span> <span class='va'>v</span><span class='op'>)</span> <span class='op'>+</span> <span class='va'>gl</span><span class='op'>*</span><span class='op'>(</span><span class='va'>vl</span> <span class='op'>-</span> <span class='va'>v</span><span class='op'>)</span> <span class='op'>+</span> <span class='va'>iext</span><span class='op'>)</span><span class='op'>/</span><span class='va'>C</span>
+    <span class='va'>dh</span> <span class='op'>&lt;-</span> <span class='op'>(</span><span class='fu'>h_inf</span><span class='op'>(</span><span class='va'>v</span><span class='op'>)</span> <span class='op'>-</span> <span class='va'>h</span><span class='op'>)</span><span class='op'>/</span><span class='fu'>tau_h</span><span class='op'>(</span><span class='va'>v</span><span class='op'>)</span>
+    <span class='va'>dm</span> <span class='op'>&lt;-</span> <span class='op'>(</span><span class='fu'>m_inf</span><span class='op'>(</span><span class='va'>v</span><span class='op'>)</span> <span class='op'>-</span> <span class='va'>m</span><span class='op'>)</span><span class='op'>/</span><span class='fu'>tau_m</span><span class='op'>(</span><span class='va'>v</span><span class='op'>)</span>
+    <span class='va'>dn</span> <span class='op'>&lt;-</span> <span class='op'>(</span><span class='fu'>n_inf</span><span class='op'>(</span><span class='va'>v</span><span class='op'>)</span> <span class='op'>-</span> <span class='va'>n</span><span class='op'>)</span><span class='op'>/</span><span class='fu'>tau_n</span><span class='op'>(</span><span class='va'>v</span><span class='op'>)</span>
+    
+    <span class='kw'><a href='https://rdrr.io/r/base/function.html'>return</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='va'>dv</span>, <span class='va'>dh</span>, <span class='va'>dm</span>, <span class='va'>dn</span><span class='op'>)</span><span class='op'>)</span><span class='op'>)</span>
+  <span class='op'>}</span><span class='op'>)</span>
+<span class='op'>}</span>
+</code></pre>
+</div>
+</details>
+</div>
+<div class="layout-chunk" data-layout="l-body">
+<details>
+<summary>
+Show code
+</summary>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='co'># parameters</span>
+<span class='va'>parameters</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span>C<span class='op'>=</span><span class='fl'>1</span>,gk<span class='op'>=</span><span class='fl'>36</span>,gna<span class='op'>=</span><span class='fl'>120</span>,gl<span class='op'>=</span><span class='fl'>0.3</span>,vk<span class='op'>=</span><span class='op'>-</span><span class='fl'>82</span>,vna<span class='op'>=</span><span class='fl'>45</span>,vl<span class='op'>=</span><span class='op'>-</span><span class='fl'>59</span>,iext<span class='op'>=</span><span class='fl'>10</span><span class='op'>)</span>
+
+<span class='co'># initial conditions</span>
+<span class='va'>v0</span> <span class='op'>&lt;-</span> <span class='op'>-</span><span class='fl'>50</span>
+<span class='va'>m0</span> <span class='op'>&lt;-</span> <span class='fu'>alpha_m</span><span class='op'>(</span><span class='va'>v0</span><span class='op'>)</span><span class='op'>/</span><span class='op'>(</span><span class='fu'>alpha_m</span><span class='op'>(</span><span class='va'>v0</span><span class='op'>)</span><span class='op'>+</span><span class='fu'>beta_m</span><span class='op'>(</span><span class='va'>v0</span><span class='op'>)</span><span class='op'>)</span>;
+
+<span class='va'>yini</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span>v<span class='op'>=</span><span class='va'>v0</span>, h<span class='op'>=</span><span class='fl'>1</span>, m<span class='op'>=</span><span class='va'>m0</span>, n<span class='op'>=</span><span class='fl'>0.4</span><span class='op'>)</span>
+
+
+<span class='va'>t_initial</span> <span class='op'>&lt;-</span> <span class='fl'>0</span>
+<span class='va'>t_final</span> <span class='op'>&lt;-</span> <span class='fl'>75</span>
+<span class='va'>times</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/seq.html'>seq</a></span><span class='op'>(</span>from <span class='op'>=</span> <span class='va'>t_initial</span>, to <span class='op'>=</span> <span class='va'>t_final</span>, by <span class='op'>=</span> <span class='fl'>0.08</span><span class='op'>)</span>
+
+<span class='va'>out</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/deSolve/man/ode.html'>ode</a></span><span class='op'>(</span>y <span class='op'>=</span> <span class='va'>yini</span>, times <span class='op'>=</span> <span class='va'>times</span>, func <span class='op'>=</span> <span class='va'>HH</span>,
+           parms <span class='op'>=</span> <span class='va'>parameters</span>,method <span class='op'>=</span> <span class='st'>"ode45"</span><span class='op'>)</span>
+</code></pre>
+</div>
+</details>
+</div>
+<div class="layout-chunk" data-layout="l-body">
+<details>
+<summary>
+Show code
+</summary>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>HHsol</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span><span class='op'>(</span>t<span class='op'>=</span><span class='va'>out</span><span class='op'>[</span>,<span class='st'>"time"</span><span class='op'>]</span>,v<span class='op'>=</span><span class='va'>out</span><span class='op'>[</span>,<span class='st'>"v"</span><span class='op'>]</span>,h<span class='op'>=</span><span class='va'>out</span><span class='op'>[</span>,<span class='st'>"h"</span><span class='op'>]</span>,m<span class='op'>=</span><span class='va'>out</span><span class='op'>[</span>,<span class='st'>"m"</span><span class='op'>]</span>,n<span class='op'>=</span><span class='va'>out</span><span class='op'>[</span>,<span class='st'>"n"</span><span class='op'>]</span><span class='op'>)</span>
+
+
+<span class='va'>p1</span> <span class='op'>&lt;-</span> <span class='va'>HHsol</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span>
+  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span><span class='op'>(</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span>x <span class='op'>=</span> <span class='va'>t</span>, y <span class='op'>=</span> <span class='va'>v</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_path.html'>geom_line</a></span><span class='op'>(</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span>x <span class='op'>=</span> <span class='va'>t</span>, y <span class='op'>=</span> <span class='va'>v</span><span class='op'>)</span>,lwd<span class='op'>=</span><span class='fl'>1</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/labs.html'>labs</a></span><span class='op'>(</span>x<span class='op'>=</span><span class='st'>"time [ms]"</span>,y <span class='op'>=</span> <span class='st'>"v [mV]"</span><span class='op'>)</span>
+
+<span class='va'>p2</span> <span class='op'>&lt;-</span> <span class='va'>HHsol</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span>
+  <span class='fu'><a href='https://tidyr.tidyverse.org/reference/gather.html'>gather</a></span><span class='op'>(</span><span class='va'>Column</span>, <span class='va'>Value</span>, <span class='op'>-</span><span class='va'>t</span>,<span class='op'>-</span><span class='va'>v</span><span class='op'>)</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span>
+  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span><span class='op'>(</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span>x <span class='op'>=</span> <span class='va'>t</span>, y <span class='op'>=</span> <span class='va'>Value</span>, color <span class='op'>=</span> <span class='va'>Column</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_path.html'>geom_line</a></span><span class='op'>(</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span>x <span class='op'>=</span> <span class='va'>t</span>, y <span class='op'>=</span> <span class='va'>Value</span><span class='op'>)</span>,lwd<span class='op'>=</span><span class='fl'>1</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/labs.html'>labs</a></span><span class='op'>(</span>x<span class='op'>=</span><span class='st'>"time [ms]"</span>,y <span class='op'>=</span> <span class='st'>" "</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/guides.html'>guides</a></span><span class='op'>(</span>color<span class='op'>=</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/guide_legend.html'>guide_legend</a></span><span class='op'>(</span>title<span class='op'>=</span><span class='st'>"Gating variable"</span><span class='op'>)</span><span class='op'>)</span>
+
+<span class='va'>p1</span> <span class='op'>/</span> <span class='va'>p2</span>
+</code></pre>
+</div>
+</details>
+<p><img src="notes019_files/figure-html5/unnamed-chunk-5-1.png" width="624" /></p>
+</div>
 <h1 id="further-reading">Further Reading</h1>
+<p>The Hoddgkin-Huxley model originally appears in <span
+class="citation"
+data-cites="hodgkinQuantitativeDescriptionMembrane1952">(<a
+href="#ref-hodgkinQuantitativeDescriptionMembrane1952"
+role="doc-biblioref">Hodgkin and Huxley 1952</a>)</span>. Our discussion
+largely follows Chapters 1, 3, and 4 from <span class="citation"
+data-cites="borgersIntroductionModelingNeuronal2017">(<a
+href="#ref-borgersIntroductionModelingNeuronal2017"
+role="doc-biblioref">Börgers 2017</a>)</span>. The text <span
+class="citation"
+data-cites="ermentroutMathematicalFoundationsNeuroscience2010">(<a
+href="#ref-ermentroutMathematicalFoundationsNeuroscience2010"
+role="doc-biblioref">Ermentrout and Terman 2010</a>)</span> provides
+similar coverage but goes further into some of the mathematics
+associated with mathematical neuroscience. We also reccommend the
+recorded conference talks <a
+href="https://www.pathlms.com/siam/courses/1288/sections/1411/video_presentations/11633">Fields
+of Dreams: Modeling and Analysis of Large Scale Activity in the
+Brain</a> by <a href="https://sites.pitt.edu/~phase/">Bard
+Ermentrout</a> and <a
+href="https://www.pathlms.com/siam/courses/1288/sections/1425/video_presentations/11676">Brain
+Control - It’s Not Just for Mad Scientists</a> by <a
+href="http://sites.me.ucsb.edu/~moehlis/">Jeff Moehlis</a>.</p>
 <div class="sourceCode" id="cb1"><pre
 class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
 <div id="refs" class="references csl-bib-body hanging-indent"
@@ -2444,6 +2678,21 @@ Börgers, Christoph. 2017. <em>An Introduction to Modeling Neuronal
 Dynamics</em>. Vol. 66. Texts in <span>Applied Mathematics</span>.
 <span>Springer, Cham</span>. <a
 href="https://doi.org/10.1007/978-3-319-51171-9">https://doi.org/10.1007/978-3-319-51171-9</a>.
+</div>
+<div id="ref-ermentroutMathematicalFoundationsNeuroscience2010"
+class="csl-entry" role="doc-biblioentry">
+Ermentrout, G. Bard, and David H. Terman. 2010. <em>Mathematical
+Foundations of Neuroscience</em>. Vol. 35. Interdisciplinary
+<span>Applied Mathematics</span>. <span>Springer, New York</span>. <a
+href="https://doi.org/10.1007/978-0-387-87708-2">https://doi.org/10.1007/978-0-387-87708-2</a>.
+</div>
+<div id="ref-hodgkinQuantitativeDescriptionMembrane1952"
+class="csl-entry" role="doc-biblioentry">
+Hodgkin, A. L., and A. F. Huxley. 1952. <span>“A Quantitative
+Description of Membrane Current and Its Application to Conduction and
+Excitation in Nerve.”</span> <em>The Journal of Physiology</em> 117 (4):
+500–544. <a
+href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC1392413/">https://www.ncbi.nlm.nih.gov/pmc/articles/PMC1392413/</a>.
 </div>
 </div>
 <!--radix_placeholder_article_footer-->
