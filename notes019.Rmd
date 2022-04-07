@@ -309,6 +309,12 @@ p2 <- HHsol %>%
 p1 / p2
 ```
 
+
+```{r,echo=TRUE,code_folding=TRUE}
+ggplot(HHsol) + geom_path(aes(x = v, y = n, color = t),lwd=1) + 
+  xlim(c(-100,70)) + ylim(c(0,1)) + xlab("v [mV]") + ylab("n")
+```
+
 # Further Reading
 
 The Hoddgkin-Huxley model originally appears in [@hodgkinQuantitativeDescriptionMembrane1952]. Our discussion largely follows Chapters 1, 3, and 4 from [@borgersIntroductionModelingNeuronal2017]. The text [@ermentroutMathematicalFoundationsNeuroscience2010] provides similar coverage but goes further into some of the mathematics associated with mathematical neuroscience.  We also reccommend the recorded conference talks [Fields of Dreams: Modeling and Analysis of Large Scale Activity in the Brain](https://www.pathlms.com/siam/courses/1288/sections/1411/video_presentations/11633) by [Bard Ermentrout](https://sites.pitt.edu/~phase/) and [Brain Control - It's Not Just for Mad Scientists](https://www.pathlms.com/siam/courses/1288/sections/1425/video_presentations/11676) by [Jeff Moehlis](http://sites.me.ucsb.edu/~moehlis/). 
