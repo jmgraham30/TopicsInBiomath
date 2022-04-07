@@ -65,8 +65,81 @@ Going further, the membrane potential of a neuron can decrease (known as hyperpo
 
 # The Hodgkin-Huxley ODEs
 
+Let $v(t)$ denote the neuron membrane potential at time $t$ measured in units of millivolts (mV). For the purposes of the Hodgkin_Huxley model, time will be measured in units of milliseconds (ms). A principle part of the Hodgkin-Huxley models expresses how $v$ changes over time. We start by assuming that a nerve cell membrane acts as a [capacitor](https://en.wikipedia.org/wiki/Capacitor) so that
 
+$Cv = Q$
 
+where $C$ is the (constant) capacitance and $Q$ is the electric charge across the membrane. Recall that the total current relates to the charge by 
+
+$I_{\text{total}} = \frac{dQ}{dt}$
+
+so that if we differentiate both sides of $Cv=Q$ we obtain
+
+$C\frac{dv}{dt} = I_{\text{total}}$
+
+Based on experiments, Hodgkin adn Huxley determined that the total current $I_{\text{total}}$ arises from a combination of 
+
+* a sodium induced current $I_{\text{Na}}$, 
+
+* a potassium induced current $I_{\text{K}}$, 
+
+* a "leak" current $I_{\text{L}}$ induced by chloride and other ions, and
+
+* an experimentally injected current $I$. 
+
+Thus, 
+
+$C\frac{dv}{dt} = I_{\text{Na}} + I_{\text{K}} + I_{\text{L}} + I$
+
+which is the primary equation for the time rate of chance of the  membrane potential $v$. 
+
+Further, it is assumed that the sodium, potassium, and leak currents all obey [Ohm's law](https://en.wikipedia.org/wiki/Ohm%27s_law) which states that the current is proportional to a difference in voltage leading to equations
+
+$$
+\begin{align}
+I_{\text{Na}} &= g_{\text{Na}}(v_{\text{Na}} - v) \\
+I_{\text{K}} &= g_{\text{K}}(v_{\text{K}} - v) \\
+I_{\text{L}} &= g_{\text{L}}(v_{\text{L}} - v) 
+\end{align}
+$$
+where $v_{\text{Na}}$, $v_{\text{K}}$, and $v_{\text{L}}$ are the [reversal potential](https://en.wikipedia.org/wiki/Reversal_potential) values for sodium. potassium, and leak, respectively. The values $g_{\text{Na}}$, $g_{\text{K}}$, and $g_{\text{L}}$ are the [conductances](https://en.wikipedia.org/wiki/Electrical_resistance_and_conductance). Thus, we have that
+
+$C\frac{dv}{dt} = g_{\text{Na}}(v_{\text{Na}} - v) + g_{\text{K}}(v_{\text{K}} - v) + g_{\text{L}}(v_{\text{L}} - v) + I$
+
+This appears to be a fairly simple equation. However, it has been determined that while that leak conductance $g_{\text{L}}=\bar{g}_{\text{L}}$ with $\bar{g}_{\text{L}}$ a constant, in contrast, the sodium and potassium conductances change in time in concert with the membrane potential $v$. Thus, it is required to derive equations that relate how the sodium and potassium conductance functions vary. In order to do this, we take in to account the actions of the ion channels discussed previously.
+
+## Gating Variables
+
+From an analysis of experimental results, Hodgkin and Huxley concluded that
+
+$$
+\begin{align}
+g_{\text{Na}}(t) &= \bar{g}_{\text{Na}} m(t)^3 h(t) \\
+g_{\text{K}}(t) &= \bar{g}_{\text{K}} n(t)^4
+\end{align}
+$$
+where the three **gating variables** $m$, $h$, and $n$ are dimensionless time varying functions that each satisfy a differential equation of the form
+
+$\frac{dx}{dt} = \frac{x_{\infty}(v) - x}{\tau_{x}(v)}$
+
+where $x_{\infty}(v)$ and $\tau_{x}(v)$ are functional forms depending on the membrane potential.
+
+Thus, the Hodgkin-Huxley model is
+
+$$
+\begin{align}
+C\frac{dv}{dt} &= \bar{g}_{\text{Na}}m^3 h (v_{\text{Na}} - v) + \bar{g}_{\text{K}}n^4(v_{\text{K}} - v) + \bar{g}_{\text{L}}(v_{\text{L}} - v) + I \\
+\frac{dm}{dt} &= \frac{m_{\infty}(v) - m}{\tau_{m}(v)} \\
+\frac{dh}{dt} &= \frac{h_{\infty}(v) - h}{\tau_{h}(v)} \\
+\frac{dn}{dt} &= \frac{n_{\infty}(v) - n}{\tau_{n}(v)} 
+\end{align}
+$$
+
+which is a coupled system of nonlinear equations. We still need to describe the functional forms $m_{\infty}(v)$, $\tau_{m}(v)$; $h_{\infty}(v)$, $\tau_{h}(v)$; and $n_{\infty}(v)$, $\tau_{n}(v)$, but first we consider what is the biophysical interpretation of the gating variables $m$, $h$, and $n$.  
+
+## Interpretation of Gating Variables. 
+
+A sodium channel has four gates aligned in series such that three of the gates are of one type (say type m), and one of the gates is of a second type (say type h). If $m$ is the fraction of open m-gates and $h$ is the fraction of open h-gates, then the fraction of open sodium channels is $m^3h$. Similarly, we assume that potassium has four gates aligned in series all of the same type, type n. Then the fraction of open potassium channels is $n^4$.      
 
 # Further Reading
 

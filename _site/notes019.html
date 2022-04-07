@@ -115,8 +115,8 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   <link rel="license" href="https://creativecommons.org/licenses/by-nc/4.0/"/>
 
   <!--  https://schema.org/Article -->
-  <meta property="article:published" itemprop="datePublished" content="2022-04-06"/>
-  <meta property="article:created" itemprop="dateCreated" content="2022-04-06"/>
+  <meta property="article:published" itemprop="datePublished" content="2022-04-07"/>
+  <meta property="article:created" itemprop="dateCreated" content="2022-04-07"/>
   <meta name="article:author" content="Jason M. Graham"/>
 
   <!--  https://developers.facebook.com/docs/sharing/webmasters#markup -->
@@ -137,7 +137,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   <!--radix_placeholder_rmarkdown_metadata-->
 
   <script type="text/json" id="radix-rmarkdown-metadata">
-  {"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["title","description","author","date","output","creative_commons","bibliography"]}},"value":[{"type":"character","attributes":{},"value":["Course Notes 19"]},{"type":"character","attributes":{},"value":["An introduction to the Hodgkin-Huxley ODEs. \n"]},{"type":"list","attributes":{},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","url","affiliation","affiliation_url"]}},"value":[{"type":"character","attributes":{},"value":["Jason M. Graham"]},{"type":"character","attributes":{},"value":["https://topicsinbiomath.netlify.app/"]},{"type":"character","attributes":{},"value":["University of Scranton"]},{"type":"character","attributes":{},"value":["https://sites.google.com/site/jasonmgrahamus/"]}]}]},{"type":"character","attributes":{},"value":["2022-04-06"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["distill::distill_article"]}},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["toc","toc_depth"]}},"value":[{"type":"logical","attributes":{},"value":[true]},{"type":"integer","attributes":{},"value":[2]}]}]},{"type":"character","attributes":{},"value":["CC BY-NC"]},{"type":"character","attributes":{},"value":["topics_in_biomath.bib"]}]}
+  {"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["title","description","author","date","output","creative_commons","bibliography"]}},"value":[{"type":"character","attributes":{},"value":["Course Notes 19"]},{"type":"character","attributes":{},"value":["An introduction to the Hodgkin-Huxley ODEs. \n"]},{"type":"list","attributes":{},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","url","affiliation","affiliation_url"]}},"value":[{"type":"character","attributes":{},"value":["Jason M. Graham"]},{"type":"character","attributes":{},"value":["https://topicsinbiomath.netlify.app/"]},{"type":"character","attributes":{},"value":["University of Scranton"]},{"type":"character","attributes":{},"value":["https://sites.google.com/site/jasonmgrahamus/"]}]}]},{"type":"character","attributes":{},"value":["2022-04-07"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["distill::distill_article"]}},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["toc","toc_depth"]}},"value":[{"type":"logical","attributes":{},"value":[true]},{"type":"integer","attributes":{},"value":[2]}]}]},{"type":"character","attributes":{},"value":["CC BY-NC"]},{"type":"character","attributes":{},"value":["topics_in_biomath.bib"]}]}
   </script>
   <!--/radix_placeholder_rmarkdown_metadata-->
   <!--radix_placeholder_navigation_in_header-->
@@ -2085,7 +2085,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <!--radix_placeholder_front_matter-->
 
 <script id="distill-front-matter" type="text/json">
-{"title":"Course Notes 19","description":"An introduction to the Hodgkin-Huxley ODEs.","authors":[{"author":"Jason M. Graham","authorURL":"https://topicsinbiomath.netlify.app/","affiliation":"University of Scranton","affiliationURL":"https://sites.google.com/site/jasonmgrahamus/","orcidID":""}],"publishedDate":"2022-04-06T00:00:00.000-04:00","citationText":"Graham, 2022"}
+{"title":"Course Notes 19","description":"An introduction to the Hodgkin-Huxley ODEs.","authors":[{"author":"Jason M. Graham","authorURL":"https://topicsinbiomath.netlify.app/","affiliation":"University of Scranton","affiliationURL":"https://sites.google.com/site/jasonmgrahamus/","orcidID":""}],"publishedDate":"2022-04-07T00:00:00.000-04:00","citationText":"Graham, 2022"}
 </script>
 
 <!--/radix_placeholder_front_matter-->
@@ -2162,7 +2162,7 @@ class="uri">https://topicsinbiomath.netlify.app/</a> (University of
 Scranton)<a href="https://sites.google.com/site/jasonmgrahamus/"
 class="uri">https://sites.google.com/site/jasonmgrahamus/</a>
   
-<br/>2022-04-06
+<br/>2022-04-07
 </div>
 
 <div class="d-article">
@@ -2174,7 +2174,12 @@ class="uri">https://sites.google.com/site/jasonmgrahamus/</a>
 <li><a href="#background">Background</a></li>
 <li><a href="#a-primer-in-neural-biophysics">A Primer in Neural
 Biophysics</a></li>
-<li><a href="#the-hodgkin-huxley-odes">The Hodgkin-Huxley ODEs</a></li>
+<li><a href="#the-hodgkin-huxley-odes">The Hodgkin-Huxley ODEs</a>
+<ul>
+<li><a href="#gating-variables">Gating Variables</a></li>
+<li><a href="#interpretation-of-gating-variables.">Interpretation of
+Gating Variables.</a></li>
+</ul></li>
 <li><a href="#further-reading">Further Reading</a></li>
 </ul>
 </nav>
@@ -2293,6 +2298,129 @@ spikes or fires. This is all based on opening and closing of ion
 channels and the ion channel activity is incorporated into the
 Hodgkin-Huxley mathematical we describe next.</p>
 <h1 id="the-hodgkin-huxley-odes">The Hodgkin-Huxley ODEs</h1>
+<p>Let <span class="math inline">\(v(t)\)</span> denote the neuron
+membrane potential at time <span class="math inline">\(t\)</span>
+measured in units of millivolts (mV). For the purposes of the
+Hodgkin_Huxley model, time will be measured in units of milliseconds
+(ms). A principle part of the Hodgkin-Huxley models expresses how <span
+class="math inline">\(v\)</span> changes over time. We start by assuming
+that a nerve cell membrane acts as a <a
+href="https://en.wikipedia.org/wiki/Capacitor">capacitor</a> so that</p>
+<p><span class="math inline">\(Cv = Q\)</span></p>
+<p>where <span class="math inline">\(C\)</span> is the (constant)
+capacitance and <span class="math inline">\(Q\)</span> is the electric
+charge across the membrane. Recall that the total current relates to the
+charge by</p>
+<p><span class="math inline">\(I_{\text{total}} =
+\frac{dQ}{dt}\)</span></p>
+<p>so that if we differentiate both sides of <span
+class="math inline">\(Cv=Q\)</span> we obtain</p>
+<p><span class="math inline">\(C\frac{dv}{dt} =
+I_{\text{total}}\)</span></p>
+<p>Based on experiments, Hodgkin adn Huxley determined that the total
+current <span class="math inline">\(I_{\text{total}}\)</span> arises
+from a combination of</p>
+<ul>
+<li><p>a sodium induced current <span
+class="math inline">\(I_{\text{Na}}\)</span>,</p></li>
+<li><p>a potassium induced current <span
+class="math inline">\(I_{\text{K}}\)</span>,</p></li>
+<li><p>a “leak” current <span
+class="math inline">\(I_{\text{L}}\)</span> induced by chloride and
+other ions, and</p></li>
+<li><p>an experimentally injected current <span
+class="math inline">\(I\)</span>.</p></li>
+</ul>
+<p>Thus,</p>
+<p><span class="math inline">\(C\frac{dv}{dt} = I_{\text{Na}} +
+I_{\text{K}} + I_{\text{L}} + I\)</span></p>
+<p>which is the primary equation for the time rate of chance of the
+membrane potential <span class="math inline">\(v\)</span>.</p>
+<p>Further, it is assumed that the sodium, potassium, and leak currents
+all obey <a href="https://en.wikipedia.org/wiki/Ohm%27s_law">Ohm’s
+law</a> which states that the current is proportional to a difference in
+voltage leading to equations</p>
+<p><span class="math display">\[
+\begin{align}
+I_{\text{Na}} &amp;= g_{\text{Na}}(v_{\text{Na}} - v) \\
+I_{\text{K}} &amp;= g_{\text{K}}(v_{\text{K}} - v) \\
+I_{\text{L}} &amp;= g_{\text{L}}(v_{\text{L}} - v)
+\end{align}
+\]</span> where <span class="math inline">\(v_{\text{Na}}\)</span>,
+<span class="math inline">\(v_{\text{K}}\)</span>, and <span
+class="math inline">\(v_{\text{L}}\)</span> are the <a
+href="https://en.wikipedia.org/wiki/Reversal_potential">reversal
+potential</a> values for sodium. potassium, and leak, respectively. The
+values <span class="math inline">\(g_{\text{Na}}\)</span>, <span
+class="math inline">\(g_{\text{K}}\)</span>, and <span
+class="math inline">\(g_{\text{L}}\)</span> are the <a
+href="https://en.wikipedia.org/wiki/Electrical_resistance_and_conductance">conductances</a>.
+Thus, we have that</p>
+<p><span class="math inline">\(C\frac{dv}{dt} =
+g_{\text{Na}}(v_{\text{Na}} - v) + g_{\text{K}}(v_{\text{K}} - v) +
+g_{\text{L}}(v_{\text{L}} - v) + I\)</span></p>
+<p>This appears to be a fairly simple equation. However, it has been
+determined that while that leak conductance <span
+class="math inline">\(g_{\text{L}}=\bar{g}_{\text{L}}\)</span> with
+<span class="math inline">\(\bar{g}_{\text{L}}\)</span> a constant, in
+contrast, the sodium and potassium conductances change in time in
+concert with the membrane potential <span
+class="math inline">\(v\)</span>. Thus, it is required to derive
+equations that relate how the sodium and potassium conductance functions
+vary. In order to do this, we take in to account the actions of the ion
+channels discussed previously.</p>
+<h2 id="gating-variables">Gating Variables</h2>
+<p>From an analysis of experimental results, Hodgkin and Huxley
+concluded that</p>
+<p><span class="math display">\[
+\begin{align}
+g_{\text{Na}}(t) &amp;= \bar{g}_{\text{Na}} m(t)^3 h(t) \\
+g_{\text{K}}(t) &amp;= \bar{g}_{\text{K}} n(t)^4
+\end{align}
+\]</span> where the three <strong>gating variables</strong> <span
+class="math inline">\(m\)</span>, <span
+class="math inline">\(h\)</span>, and <span
+class="math inline">\(n\)</span> are dimensionless time varying
+functions that each satisfy a differential equation of the form</p>
+<p><span class="math inline">\(\frac{dx}{dt} = \frac{x_{\infty}(v) -
+x}{\tau_{x}(v)}\)</span></p>
+<p>where <span class="math inline">\(x_{\infty}(v)\)</span> and <span
+class="math inline">\(\tau_{x}(v)\)</span> are functional forms
+depending on the membrane potential.</p>
+<p>Thus, the Hodgkin-Huxley model is</p>
+<p><span class="math display">\[
+\begin{align}
+C\frac{dv}{dt} &amp;= \bar{g}_{\text{Na}}m^3 h (v_{\text{Na}} - v) +
+\bar{g}_{\text{K}}n^4(v_{\text{K}} - v) +
+\bar{g}_{\text{L}}(v_{\text{L}} - v) + I \\
+\frac{dm}{dt} &amp;= \frac{m_{\infty}(v) - m}{\tau_{m}(v)} \\
+\frac{dh}{dt} &amp;= \frac{h_{\infty}(v) - h}{\tau_{h}(v)} \\
+\frac{dn}{dt} &amp;= \frac{n_{\infty}(v) - n}{\tau_{n}(v)}
+\end{align}
+\]</span></p>
+<p>which is a coupled system of nonlinear equations. We still need to
+describe the functional forms <span
+class="math inline">\(m_{\infty}(v)\)</span>, <span
+class="math inline">\(\tau_{m}(v)\)</span>; <span
+class="math inline">\(h_{\infty}(v)\)</span>, <span
+class="math inline">\(\tau_{h}(v)\)</span>; and <span
+class="math inline">\(n_{\infty}(v)\)</span>, <span
+class="math inline">\(\tau_{n}(v)\)</span>, but first we consider what
+is the biophysical interpretation of the gating variables <span
+class="math inline">\(m\)</span>, <span
+class="math inline">\(h\)</span>, and <span
+class="math inline">\(n\)</span>.</p>
+<h2 id="interpretation-of-gating-variables.">Interpretation of Gating
+Variables.</h2>
+<p>A sodium channel has four gates aligned in series such that three of
+the gates are of one type (say type m), and one of the gates is of a
+second type (say type h). If <span class="math inline">\(m\)</span> is
+the fraction of open m-gates and <span class="math inline">\(h\)</span>
+is the fraction of open h-gates, then the fraction of open sodium
+channels is <span class="math inline">\(m^3h\)</span>. Similarly, we
+assume that potassium has four gates aligned in series all of the same
+type, type n. Then the fraction of open potassium channels is <span
+class="math inline">\(n^4\)</span>.</p>
 <h1 id="further-reading">Further Reading</h1>
 <div class="sourceCode" id="cb1"><pre
 class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
