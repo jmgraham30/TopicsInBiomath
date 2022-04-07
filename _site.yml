@@ -47,6 +47,8 @@ navbar:
         href: notes017.html
       - text: "Notes 18"
         href: notes018.html
+      - text: "Notes 19"
+        href: notes019.html
     - text: "Case Studies"
       menu: 
       - text: "Case Study 1"
