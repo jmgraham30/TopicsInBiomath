@@ -2565,6 +2565,11 @@ variables while <span class="math inline">\(h\)</span> is considered to
 be an inactivation variable.</p></li>
 </ol>
 <h1 id="dynamics-of-hodgkin-huxley">Dynamics of Hodgkin-Huxley</h1>
+<p>The Hodgkin-Huxley ODEs are complicated and difficult to work with
+analytically. Here we present some numerical solutions, discuss key
+features of the dynamics, and indicate some avenues of further
+study.</p>
+<p>We begin by implementing the Hodgkin-Huxley equations in R code.</p>
 <div class="layout-chunk" data-layout="l-body">
 <details>
 <summary>
@@ -2591,6 +2596,9 @@ Show code
 </div>
 </details>
 </div>
+<p>In order to solve the equations numerically, it is necessary to list
+parameter values and initial conditions. This is done in the following
+code.</p>
 <div class="layout-chunk" data-layout="l-body">
 <details>
 <summary>
@@ -2605,9 +2613,20 @@ Show code
 <span class='va'>m0</span> <span class='op'>&lt;-</span> <span class='fu'>alpha_m</span><span class='op'>(</span><span class='va'>v0</span><span class='op'>)</span><span class='op'>/</span><span class='op'>(</span><span class='fu'>alpha_m</span><span class='op'>(</span><span class='va'>v0</span><span class='op'>)</span><span class='op'>+</span><span class='fu'>beta_m</span><span class='op'>(</span><span class='va'>v0</span><span class='op'>)</span><span class='op'>)</span>;
 
 <span class='va'>yini</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span>v<span class='op'>=</span><span class='va'>v0</span>, h<span class='op'>=</span><span class='fl'>1</span>, m<span class='op'>=</span><span class='va'>m0</span>, n<span class='op'>=</span><span class='fl'>0.4</span><span class='op'>)</span>
-
-
-<span class='va'>t_initial</span> <span class='op'>&lt;-</span> <span class='fl'>0</span>
+</code></pre>
+</div>
+</details>
+</div>
+<p>The next step is to set time points at which a numerical solution is
+desired and then to call the numerical solver. This is done in the
+following code.</p>
+<div class="layout-chunk" data-layout="l-body">
+<details>
+<summary>
+Show code
+</summary>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>t_initial</span> <span class='op'>&lt;-</span> <span class='fl'>0</span>
 <span class='va'>t_final</span> <span class='op'>&lt;-</span> <span class='fl'>75</span>
 <span class='va'>times</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/seq.html'>seq</a></span><span class='op'>(</span>from <span class='op'>=</span> <span class='va'>t_initial</span>, to <span class='op'>=</span> <span class='va'>t_final</span>, by <span class='op'>=</span> <span class='fl'>0.08</span><span class='op'>)</span>
 
@@ -2617,6 +2636,7 @@ Show code
 </div>
 </details>
 </div>
+<p>Finally, we plot out numerical solutions.</p>
 <div class="layout-chunk" data-layout="l-body">
 <details>
 <summary>
@@ -2642,8 +2662,18 @@ Show code
 </code></pre>
 </div>
 </details>
-<p><img src="notes019_files/figure-html5/unnamed-chunk-5-1.png" width="624" /></p>
+<p><img src="notes019_files/figure-html5/unnamed-chunk-6-1.png" width="624" /></p>
 </div>
+<p>The previous plot of solutions of the Hodgkin-Huxley equations
+exhibit the features of the action potential that have been observed in
+physical measurements as described earlier. Notice how the membrane
+potential slowly increases to a threshold level and then quickly
+spikes.</p>
+<p>While the Hodgkin-Huxley equations form a four-dimensional system, we
+can project components into the plane two at a time. It is illuminating
+to project the <span class="math inline">\(v\)</span> and <span
+class="math inline">\(n\)</span> components into the plane. When this is
+done, we recognize the presence of a stable limit cycle.</p>
 <div class="layout-chunk" data-layout="l-body">
 <details>
 <summary>
@@ -2655,11 +2685,14 @@ Show code
 </code></pre>
 </div>
 </details>
-<p><img src="notes019_files/figure-html5/unnamed-chunk-6-1.png" width="624" /></p>
+<p><img src="notes019_files/figure-html5/unnamed-chunk-7-1.png" width="624" /></p>
 </div>
+<p>This feature of the Hodgkin-Huxley model is the inspiration for
+certain reduced models for neural dynamics. Our goal moving forward will
+be to develop mathematical tools that can be used to study the dynamics
+of these reduced models.</p>
 <h1 id="further-reading">Further Reading</h1>
-<p>The Hoddgkin-Huxley model originally appears in <span
-class="citation"
+<p>The Hodgkin-Huxley model originally appears in <span class="citation"
 data-cites="hodgkinQuantitativeDescriptionMembrane1952">(<a
 href="#ref-hodgkinQuantitativeDescriptionMembrane1952"
 role="doc-biblioref">Hodgkin and Huxley 1952</a>)</span>. Our discussion
