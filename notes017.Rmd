@@ -84,7 +84,7 @@ $$
 \end{array}\right)
 $$
 
-**Notation:** We will use bold face letters such as ${\bf x}$ to stand for vectors. That is, ${\bf x} = (x_{1},x_{2},\ldots , x_{n})^{T}$. Further, notation such as ${\bf f}({\bf x})$ denotes concisely
+**Notation:** We will use bold face letters such as ${\bf x}$ to stand for vectors. That is, ${\bf x} = (x_{1},x_{2},\ldots , x_{n})^{T}$. Further, notation such as ${\bf f}({\bf x})$ denotes concisely a vector field such as
 
 $$
 {\bf f}({\bf x}) = \left(\begin{array}{c} f_{1}(x_{1},x_{2},\ldots, x_{n}) \\ f_{2}(x_{1},x_{2},\ldots, x_{n}) \\
@@ -96,7 +96,7 @@ $$
 
 ### Definition: Gradient system
 
-We say that a system $\frac{d}{dt}{\bf x}={\bf f}({\bf x})$ is a **gradient system** if there is a function $F({\bf x})$ that satisfies $-\nabla F = {\bf f}({\bf x})$ in which case we have $\frac{d}{dt}{\bf x} = -\nabla F$. Sometimes a gradient system is also called a conservative system and the function $F$ is called a potential. 
+We say that a system $\frac{d}{dt}{\bf x}={\bf f}({\bf x})$ is a **gradient system** if there is a (scalar) function $F({\bf x})$ that satisfies $-\nabla F = {\bf f}({\bf x})$ in which case we have $\frac{d}{dt}{\bf x} = -\nabla F$. Sometimes a gradient system is also called a conservative system and the function $F$ is called a potential. 
 
 In the plane $\mathbb{R}^2$, a system
 
@@ -189,11 +189,11 @@ $$
 \end{align}
 $$
 
-again. A potential $F$ must satisfy $\frac{\partial F}{\partial x}=-(-2x)=2x$. So let's integrate this with respect to $x$. Doing so give
+again. A potential $F$ must satisfy $\frac{\partial F}{\partial x}=-(-2x)=2x$. So let's integrate this with respect to $x$. Doing so gives
 
 $F(x,y) = \int 2x \ dx  = x^2 + \phi(y)$
 
-why do we have the additive term of $\phi(y)$? It is because any function of $y$ alone is treated as a constant whenever we take a partial derivative with respect to $x$. Now, if $F(x,y) = x^2 + \phi(y)$ is actually a potential, then it must satisfy 
+Why do we have the additive term of $\phi(y)$? It is because any function of $y$ alone is treated as a constant whenever we take a partial derivative with respect to $x$. Now, if $F(x,y) = x^2 + \phi(y)$ is actually a potential, then it must also satisfy 
 
 $$
 \frac{\partial F}{\partial y} = \frac{\partial}{\partial y}(x^2 + \phi(y)) = \phi'(y) = -2y
@@ -234,7 +234,7 @@ $$
 \frac{dy}{dt} &=  g(x,y)
 \end{align}
 $$
-is a gradient system with potential function $F(x,y)$. As we know from calculus III, the graph of $z=F(x,y)$ is a surface but it can be visualized in the plane by displaying its contours. It turns out that the contours of a potential function $F(x,y)$ are closely related to the phase portrait of the corresponding autonomous system. 
+is a gradient system with potential function $F(x,y)$. As we know from Calculus III, the graph of $z=F(x,y)$ is a surface but it can be visualized in the plane by displaying its contours. It turns out that the contours of a potential function $F(x,y)$ are closely related to the phase portrait of the corresponding autonomous system. 
 
 In particular, a parametric curve $(x(t),y(t))$ that is a solution to a system
 
@@ -274,9 +274,9 @@ Suppose that we have an autonomous system $\frac{d}{dt}{\bf x}={\bf f}({\bf x})$
 
 is called a [Liapunov function](https://en.wikipedia.org/wiki/Lyapunov_function).
 
-**Theorem:** If a system $\frac{d}{dt}{\bf x}={\bf f}({\bf x})$ with an equilibrium ${\bf x}^{\ast}$ has a Liapunov function, then the equilibrium ${\bf x}^{\ast}$ is globally asymptotically stable. Hence, the system can not have a closed orbit. 
+**Theorem:** If a system $\frac{d}{dt}{\bf x}={\bf f}({\bf x})$ with an equilibrium ${\bf x}^{\ast}$ has a Liapunov function, then the equilibrium ${\bf x}^{\ast}$ is globally asymptotically stable. Hence, the system cannot have a closed orbit. 
 
-That ${\bf x}^{\ast}$ is globally asymptotically stable means that for any initial condition ${\bf x}(t) \rightarrow {\bf x}^{\ast}$ as $t\rightarrow \infty$. A system that has a globally asymptotically stable equilibrium can not have a closed orbit since otherwise there would be at least one trajectory which would fail to approach the equilibrium ${\bf x}^{\ast}$. Thus, we can use the existence of a Liapunov function for the purpose of ruling out closed orbits. 
+That ${\bf x}^{\ast}$ is globally asymptotically stable means that for any initial condition ${\bf x}(t) \rightarrow {\bf x}^{\ast}$ as $t\rightarrow \infty$. A system that has a globally asymptotically stable equilibrium cannot have a closed orbit since otherwise there would be at least one trajectory which would fail to approach the equilibrium ${\bf x}^{\ast}$. Thus, we can use the existence of a Liapunov function for the purpose of ruling out closed orbits. 
 
 ### Example
 
@@ -360,7 +360,7 @@ The following result is known as [Dulac's criterion](https://en.wikipedia.org/wi
 
 Recall that the notation $\nabla \cdot {\bf f}$ refers to the [divergence](https://en.wikipedia.org/wiki/Divergence) of the vector field ${\bf f}$.
 
-We refer to [@strogatzNonlinearDynamicsChaos2015] for the proof but note that the proof is an application of [Green's theorem](https://en.wikipedia.org/wiki/Green%27s_theorem) from calculus.
+We refer to [@strogatzNonlinearDynamicsChaos2015] for the proof but note that the proof is an application of [Green's theorem](https://en.wikipedia.org/wiki/Green%27s_theorem) from Calculus III.
 
 ### Example
 

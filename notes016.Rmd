@@ -60,9 +60,9 @@ $$
 
 may be a stable node, stable spiral, center, unstable spiral, unstable node, or a saddle. Note that we can not detect a center for a nonlinear system using linearization. 
 
-As we will see in this note, nonlinear autonomous systems can have phase-portraits with a distinct feature that is not possible for linear systems. In particular, nonlinear autonomous systems may possess [limit cycles](https://en.wikipedia.org/wiki/Limit_cycle). A limit cycle is a closed trajectory such that there is another trajectory the spirals into or out of it. Recall that a closed trajectory corresponds to a periodic solution of a system. Thus, for linear systems there is only one way in which periodic solutions may arise and that happens when there phase portrait is a center. In contrast, for nonlinear systems, limit cycles provide another mechanism for the existence of a periodic solution. Note that for continuous time autonomous systems periodic solutions are not possible.  
+As we will see in this note, nonlinear autonomous systems can have phase-portraits with a distinct feature that is not possible for linear systems. In particular, nonlinear autonomous systems may possess [limit cycles](https://en.wikipedia.org/wiki/Limit_cycle). A limit cycle is a closed trajectory such that there is another trajectory that spirals into or out of it. Recall that a closed trajectory corresponds to a periodic solution of a system. Thus, for linear systems there is only one way in which periodic solutions may arise and that happens when the phase portrait is a center. In contrast, for nonlinear systems, limit cycles provide another mechanism for the existence of a periodic solution. Note that for one-dimensional continuous time autonomous systems periodic solutions are not possible.  
 
-In the theory of dynamical systems, an [attractor](https://en.wikipedia.org/wiki/Attractor) is a state that the system will eventually settle into. For linear systems,  the only possible attractors are stable nodes and stable spirals. However, for a nonlinear system a limit cycle may be an attractor.  Mathematical models for certain physiological systems such as the nervous system and the cardiovascular system may exhibit limit cycles and this is part of our motivation for studying them in *Topics in Biomathematics*.
+In the theory of dynamical systems, an [attractor](https://en.wikipedia.org/wiki/Attractor) is a state that the system will eventually settle into. For linear systems,  the only possible attractors are stable nodes and stable spirals. However, for a nonlinear system a limit cycle may be an attractor.  Mathematical models for certain physiological systems such as the nervous system and the cardiovascular system often exhibit limit cycles and this is part of our motivation for studying them in *Topics in Biomathematics*.
 
 # Motivating Example
 
@@ -98,7 +98,7 @@ Points in the plane may be labeled by their [Cartesian coordinates](https://en.w
 
 $r = \sqrt{x^2 + y^2} \Leftrightarrow r^2 = x^2 + y^2$
 
-and $\theta$ measures the angle that the line passing through the origin and the point $(x,y)$ makes with the positive $x$-axis going in a counterclockwise direction. We have the relation
+and $\theta$ measures the angle that the line segment from the origin to the point $(x,y)$ makes with the positive $x$-axis going in a counterclockwise direction. We have the relation
 
 $$
 \begin{align}
@@ -118,7 +118,7 @@ $$
 
 It is convenient to also have a relation between the derivatives $\frac{dx}{dt}$ and $\frac{dy}{dt}$, and $\frac{dr}{dt}$ and $\frac{d\theta}{dt}$. We will derive such a relation and then consider the interpretation of $\frac{dr}{dt}$ and $\frac{d\theta}{dt}$.
 
-We compute
+We compute using the product and chain rules
 
 $$
 \begin{align}
@@ -131,7 +131,7 @@ and
 
 $$
 \begin{align}
-\frac{d}{dt}y(t) &= \frac{d}{dt}r(t)\sim(\theta(t)) \\
+\frac{d}{dt}y(t) &= \frac{d}{dt}r(t)\sin(\theta(t)) \\
 &= \frac{dr}{dt}\sin(\theta(t)) + r(t)\frac{d}{dt}\sin(\theta(t)) \\
 &= \frac{dr}{dt}\sin(\theta(t)) + r(t)\cos(\theta(t))\frac{d\theta}{dt} 
 \end{align}
@@ -239,7 +239,7 @@ $$
 \end{align}
 $$
 
-possesses a limit cycle which corresponds to the unit circle $r=1$. Further, this limit cycle is stable since any trajectory that begins off of $r=1$ will eventually approach $r=1$. Limit cycles may also be unstable as we will see shortly. 
+possesses a limit cycle which corresponds to the unit circle $r=1$. Further, this limit cycle is *stable* since any trajectory that begins off of $r=1$ will eventually approach $r=1$. Limit cycles may also be unstable as we will see shortly. 
 
 Here is a phase portrait for the system obtained using `phaseR`. 
 
@@ -314,7 +314,7 @@ $$
 \end{align}
 $$
 
-but in general, we can not always decouple the two equations as we were able to do with our previous example system. So how do we analyze systems that may possess a limit cycle? First off, note that linearization does not explicitly detect limit cycles. Nevertheless, it is useful to begin an analysis by finding equilibrium values and the linearization of the system at the equilibria. Next, convert the system to polar coordinates and try to see if this is helpful. If not, then we need to consider other techniques. Namely, we might be able to rule out the possibility of there being any closed trajectories. We will discuss techniques for this in the next set of notes. If you can not rule out closed orbits, then the so-called [Poincarè-Bendixson theorem](https://en.wikipedia.org/wiki/Poincar%C3%A9%E2%80%93Bendixson_theorem) can often be used to derive the existence of a limit cycle. We will take this up in the next set of notes as well. 
+but in general, we can not always decouple the two equations as we were able to do with our previous example system. So how do we analyze systems that may possess a limit cycle? First off, note that linearization does not explicitly detect limit cycles. Nevertheless, it is useful to begin an analysis by finding equilibrium values and the linearization of the system at the equilibria. Next, convert the system to polar coordinates and try to see if this is helpful. If not, then we need to consider other techniques. Namely, we might be able to rule out the possibility of there being any closed trajectories. We will discuss techniques for this in the next set of notes. If you can not rule out closed orbits, then the so-called [Poincarè-Bendixson theorem](https://en.wikipedia.org/wiki/Poincar%C3%A9%E2%80%93Bendixson_theorem) can often be used to derive the existence of a limit cycle. We will cover as well in a later section of notes. 
 
 # Summary
 
