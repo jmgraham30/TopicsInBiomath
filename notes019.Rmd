@@ -308,8 +308,8 @@ p1 <- HHsol %>%
   labs(x="time [ms]",y = "v [mV]")
 
 p2 <- HHsol %>%
-  gather(Column, Value, -t,-v) %>%
-  ggplot(aes(x = t, y = Value, color = Column)) +
+  pivot_longer(-c(t,v),names_to="Variable", values_to="Value") %>%
+  ggplot(aes(x = t, y = Value, color = Variable)) +
   geom_line(aes(x = t, y = Value),lwd=1) +
   labs(x="time [ms]",y = " ") +
   guides(color=guide_legend(title="Gating variable"))

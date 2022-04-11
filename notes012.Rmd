@@ -434,14 +434,13 @@ p1 <- HHsol %>%
   theme_bw() + theme(text=element_text(size=20))
 
 p2 <- HHsol %>%
-  gather(Column, Value, -t,-v) %>%
-  ggplot(aes(x = t, y = Value, color = Column)) +
+  pivot_longer(-c(t,v),names_to="Variable", values_to="Value") %>%
+  ggplot(aes(x = t, y = Value, color = Variable)) +
   geom_line(aes(x = t, y = Value),lwd=1) +
   labs(x="time [ms]",y = " ") +
-  guides(color=guide_legend(title="Gating variable")) + 
-  theme_bw() + theme(text=element_text(size=20))
+  guides(color=guide_legend(title="Gating variable")) + theme(text=element_text(size=20))
 
-(p1 + p2)
+(p1 / p2)
 ```
 
 A distinct feature of the dynamics is the periodic nonlinear oscillations. We will have more to say about this later. From now on, anytime you encounter a model that is made up of large system of equations in *Topics in Biomathematics*, you should try to explore the model behavior by producing numerical solutions as we have done here with the [Hodgkin-Huxley](https://en.wikipedia.org/wiki/Hodgkin%E2%80%93Huxley_model) model.
