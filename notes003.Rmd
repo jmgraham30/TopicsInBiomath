@@ -91,6 +91,8 @@ With this overview in hand, the next lecture will cover compartment modeling and
 
 For general texts on mathematical modeling we recommend [@barnesMathematicalModellingCase2015; @calvettiComputationalMathematicalModeling2013; @witelskiMethodsMathematicalModelling2015]. Both [@barnesMathematicalModellingCase2015; @calvettiComputationalMathematicalModeling2013] provide good coverage of [compartment modeling](https://en.wikipedia.org/wiki/Multi-compartment_model#:~:text=A%20multi%2Dcompartment%20model%20is,entities%20being%20modelled%20are%20equivalent.). [Dimensional analysis](https://en.wikipedia.org/wiki/Dimensional_analysis) is covered well in  [@calvettiComputationalMathematicalModeling2013; @witelskiMethodsMathematicalModelling2015]. 
 
+One of the biggest challenges in mathematical modeling is in getting started with your first model. The article [@bodner2021ten] provides ten simple rules for starting your first model, this paper is available online [here](https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1008539).
+
 A nice recent reference on mathematical modeling of biological systems is the chapter [@ayatiConsiderationsModelingProteus2019], which discusses modeling approaches in the context of microbial ecology. 
 
 
