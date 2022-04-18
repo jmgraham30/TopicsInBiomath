@@ -1,0 +1,172 @@
+---
+title: "Course Notes 20"
+description: |
+  Introduction to some classical two-dimensional reductions of the Hodgkin-Huxley ODEs. 
+author:
+  - name: Jason M. Graham 
+    url: https://topicsinbiomath.netlify.app/
+    affiliation: University of Scranton 
+    affiliation_url: https://sites.google.com/site/jasonmgrahamus/
+date: "`r Sys.Date()`"
+output: 
+  distill::distill_article:
+    toc: true
+    toc_depth: 2
+creative_commons: CC BY-NC
+bibliography: topics_in_biomath.bib
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+library(knitr)
+library(kableExtra)
+library(deSolve)
+library(tidyverse)
+library(ggformula)
+library(patchwork)
+library(phaseR)
+library(latex2exp)
+library(DiagrammeR)
+source("./R/gatingVariables.R")
+source("./R/neuralModels.R")
+theme_set(theme_light())
+```
+
+
+# Goals
+
+After reading this section of notes, you should
+
+1) be aware of some classical two-dimensional reductions of the  Hodgkin-Huxley ODEs including the [FitzHugh-Nagumo model](http://www.scholarpedia.org/article/FitzHugh-Nagumo_model), and 
+
+2) recognize the "slow-fast" dynamics of the Hodgkin-Huxley model and corresponding reductions.
+
+# Background
+
+Recall the classical Hodgkin-Huxley (HH) ODEs from [notes 19](https://topicsinbiomath.netlify.app/notes019.html):
+
+$$
+\begin{align}
+C\frac{dv}{dt} &= \bar{g}_{\text{Na}}m^3 h (v_{\text{Na}} - v) + \bar{g}_{\text{K}}n^4(v_{\text{K}} - v) + \bar{g}_{\text{L}}(v_{\text{L}} - v) + I \\
+\frac{dm}{dt} &= \frac{m_{\infty}(v) - m}{\tau_{m}(v)} \\
+\frac{dh}{dt} &= \frac{h_{\infty}(v) - h}{\tau_{h}(v)} \\
+\frac{dn}{dt} &= \frac{n_{\infty}(v) - n}{\tau_{n}(v)} 
+\end{align}
+$$
+
+A common situation is one in which $\tau_{m}(v)$ is very small in magnitude for all relevant values of $v$. In such cases, we expect $m \approx m_{\infty}(v)$ (think about why this is the case). Motivated by the previous observation, we will start to simplify the HH model by taking $m(t) = m_{\infty}(v(t))$, then we can eliminate the second equation from the HH model. 
+
+Further, let's plot $h(t) + n(t)$ as obtained from a numerical solution of the HH model for a range of time values.
+
+```{r,echo=TRUE,code_folding=TRUE}
+# time points
+t_initial <- 0
+t_final <- 75
+times <- seq(from = t_initial, to = t_final, by = 0.08)
+
+# initial conditions
+v0 <- -50
+m0 <- alpha_m(v0)/(alpha_m(v0)+beta_m(v0))
+yini <- c(v=v0, h=1, m=m0, n=0.4)
+
+# numerical solution
+out <- ode(y = yini, times = times, func = HH,
+           parms = HH_parameters,method = "ode45")
+
+HHsol <- data.frame(t=out[,"time"],v=out[,"v"],h=out[,"h"],m=out[,"m"],n=out[,"n"])
+
+# plot
+HHsol %>% mutate(h_plus_n=h+n) %>% filter(t >= 20) %>%
+  ggplot(aes(x=t,y=h_plus_n)) + geom_line(lwd=1) + 
+  geom_hline(yintercept=0.83,linetype="dashed") + ylim(c(0,1)) +
+  labs(x="time [ms]",y = "h+n") +
+  theme_bw() + theme(text=element_text(size=15))
+```
+
+We observe that $h(t) + n(t) \approx 0.83$ for much of the time. Based on this observation, we set $h + n = 0.83$ which gives $h = 0.83 - n$ allowing for the elimination of the $h$ equation from the classical HH model. 
+
+# Two-Dimensional Reduced HH
+
+Making the two simplifications previously described reduces the Hodgkin-Huxley model to a two-dimensional system
+
+$$
+\begin{align}
+C\frac{dv}{dt} &= \bar{g}_{\text{Na}}m_{\infty}(v)^3 (0.83 - n)(v_{\text{Na}} - v) + \bar{g}_{\text{K}}n^4(v_{\text{K}} - v) + \bar{g}_{\text{L}}(v_{\text{L}} - v) + I \\
+\frac{dn}{dt} &= \frac{n_{\infty}(v) - n}{\tau_{n}(v)} 
+\end{align}
+$$
+
+We call this system the **two-dimensional reduced Hodgkin-Huxley model**. This system has the form
+
+$$
+\begin{align}
+\frac{dv}{dt} &= f(v,n) \\
+\frac{dn}{dt} &= g(v,n)
+\end{align}
+$$
+
+which is a two-dimensional nonlinear autonomous system and thus can be studied via phase-plane methods. 
+
+## Nullclines for Reduced HH
+
+The first step in a phase-plane analysis of the two-dimensional reduced Hodgkin-Huxley model is to examine the nullclines for the system. These are shown in the next figure. 
+
+```{r,echo=TRUE,code_folding=TRUE}
+# initial conditions
+yini <- c(v=-55, n=0.0)
+
+# numerical solution
+out <- ode(y = yini, times = times, func = HH_reduced,
+           parms = HH_parameters,method = "ode45")
+
+HHsol_reduced <- data.frame(t=out[,"time"],v=out[,"v"],n=out[,"n"])
+
+v_nulls <- map_dbl(HHsol_reduced$v,compute_v_null)
+n_nulls <- n_inf(HHsol_reduced$v)
+
+HHsol_reduced <- HHsol_reduced %>% mutate(v_nulls=v_nulls,n_nulls=n_nulls)
+
+ggplot(HHsol_reduced) + geom_line(aes(x=v,y=v_nulls),color="blue",lwd=1) +
+  annotate(geom="text", x=58, y=0.25, label="v nullcline",
+              color="blue") + 
+  geom_line(aes(x=v,y=n_nulls),color="red",lwd=1) +
+    annotate(geom="text", x=50, y=0.9, label="n nullcline",
+              color="red") + 
+  xlim(c(-100,70)) + ylim(c(0,1)) +
+  xlab("v [mV]") + ylab("n") +
+  theme_bw() + theme(text=element_text(size=15))
+```
+
+Note that in order to determine the $v$ nullcline we need to solve the nonlinear equation
+
+$\bar{g}_{\text{Na}}m_{\infty}(v)^3 (0.83 - n)(v_{\text{Na}} - v) + \bar{g}_{\text{K}}n^4(v_{\text{K}} - v) + \bar{g}_{\text{L}}(v_{\text{L}} - v) + I = 0$
+
+for $n$ in terms of $v$. It is not possible to do this easily in closed form so we utilize a root-finding algorithm via the `uniroot` function in order to do this numerically. 
+
+Notice that there is a unique equilibrium point where the two nullclines intersect. Furthermore, one nullcline is monotonically increasing while the other has one local minimum and one local maximum. These are important geometric features that we will return to later on. 
+
+The next plot shows the nullclines together with a trajecory that approaches a limit cycle. 
+
+```{r,echo=TRUE,code_folding=TRUE}
+ggplot(HHsol_reduced) + geom_line(aes(x=v,y=v_nulls),color="blue") +
+  geom_line(aes(x=v,y=n_nulls),color="red") +
+  geom_path(aes(x = v, y = n),linetype="dashed") + 
+  xlim(c(-100,70)) + ylim(c(0,1)) +
+  xlab("v [mV]") + ylab("n") +
+  theme_bw() + theme(text=element_text(size=15))
+```
+
+Notice how the trajectory "flows along" part of the one nullcline. Let's examine how this corresponds to the time series plot of the solution. 
+
+## Slow-Fast Dynamics
+
+
+
+# The FitzHugh-Nagumo Model
+
+$$
+\begin{align}
+\frac{dv}{dt} &= v - \frac{v^3}{3} - n + I\\
+\frac{dn}{dt} &= \frac{av - n}{\tau_{n}}
+\end{align}
+$$

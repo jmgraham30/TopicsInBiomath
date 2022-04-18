@@ -28,6 +28,7 @@ library(phaseR)
 library(latex2exp)
 library(DiagrammeR)
 source("./R/gatingVariables.R")
+source("./R/neuralModels.R")
 theme_set(theme_light())
 ```
 
