@@ -163,11 +163,11 @@ We are going to use this observation in order to try to find two concentric circ
 
 To complete the analysis, note that if $r(1-r^2) + \mu r < 0$, then $r(1-r^2) + \mu r \cos(\theta)$ is certainly negative. On the other hand, if $0 < r(1-r^2) - \mu r$, then $r(1-r^2) + \mu r \cos(\theta)$ is certainly positive. We have that
 
-$r(1-r^2) + \mu r < 0 \ \text{whenever}\ \sqrt{1+\mu} < r $
+$r(1-r^2) + \mu r < 0 \ \text{whenever}\ \sqrt{1+\mu} < r$
 
 and 
 
-$0 < r(1-r^2) - \mu r < 0 \ \text{whenever}\ r < \sqrt{1-\mu} $
+$0 < r(1-r^2) - \mu r < 0 \ \text{whenever}\ r < \sqrt{1-\mu}$
 
 Thus, we can take something like
 
