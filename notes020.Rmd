@@ -175,10 +175,14 @@ p2 <- ggplot(HHsol_reduced) + geom_line(aes(x=t,y=n),lwd=1) +
 p1 + p2
 ```
 
-We see that there are two time-scales at play here. There is a slow time-scale corresponding to the time it takes the potential to increase up to the firing threshold, and then there is a fast time-scale associated with the quick spike in potential. This means that the speed of a trajectory around the limit cycle is not constant. The motion is slow along the left side of the limit cycle corresponding to the slow increase in potential from its minimum value to the firing threshold value. During this time, there is a slow decrease in the value of $n$. The right hand side of the limit cycle corresponds to the fast increase and decrease in $v$ associated with the action potential spike. This type of two-time-scale dynamics is called slow-fast dynamics. One often refers to $n$ as the slow variable and $v$ as the fast variable.  
+We see that there are two time-scales at play here. There is a slow time-scale corresponding to the time it takes the potential to increase up to the firing threshold, and then there is a fast time-scale associated with the quick spike in potential. This means that the speed of a trajectory around the limit cycle is not constant. The motion is slow along the left side of the limit cycle corresponding to the slow increase in potential from its minimum value to the firing threshold value. During this time, there is a slow decrease in the value of $n$. The right hand side of the limit cycle corresponds to the fast increase and decrease in $v$ associated with the action potential spike. This type of two-time-scale dynamics is called slow-fast dynamics. One often refers to $n$ as the slow variable and $v$ as the fast variable. Oscillations associated with slow-fast dynamics such as we see with the reduced HH model are called [relaxation oscillations](https://en.wikipedia.org/wiki/Relaxation_oscillator).  As we will see, the analysis of slow-fast dynamics and relaxation oscillations is a major theme in mathematical/computational studies of neural and cardiac systems. In fact, mathematical methods such as [geometric singular perturbation theory](http://www.scholarpedia.org/article/Singular_perturbation_theory) have been developed in part to study such dynamics. 
 
+
+While the two-dimensional reduced Hodgkin-Huxley model is obtained by direct simplification of the classical HH ODEs, it is also possible to obtain systems with dynamics similar to that of the reduced HH model by a sort of geometric simplification. 
 
 # The FitzHugh-Nagumo Model
+
+Recall that for the two-dimensional reduced Hodgkin-Huxley model, one nullcline is monotonically increasing while the other has one local minimum and one local maximum. Now, a straight line is monotonically increasing and a cubic polynomial  has one local minimum and one local maximum. So, what if we replace the $n$ nullcline with a straight line and the $v$ nullcline with a cubic? The following system, known as the [FitzHugh-Nagumo model](http://www.scholarpedia.org/article/FitzHugh-Nagumo_model) (FH) does exactly that. 
 
 $$
 \begin{align}
@@ -186,3 +190,11 @@ $$
 \frac{dn}{dt} &= \frac{av - n}{\tau_{n}}
 \end{align}
 $$
+
+We leave it as an exercise to show that the FitzHugh-Nagumo model exhibits slow-fast relaxation oscillations similar to those of the reduced HH model. 
+
+Note that the HH, reduced HH, and FH models all have a parameter $I$ for input current. In some cases, this may act as a bifurcation parameter. This is the topic we take up in the next section of notes.  
+
+# Further Reading
+
+Our discussion largely follows Chapter 10 from [@borgersIntroductionModelingNeuronal2017]. The text [@ermentroutMathematicalFoundationsNeuroscience2010] provides similar coverage but goes further into some of the mathematics associated with mathematical neuroscience.

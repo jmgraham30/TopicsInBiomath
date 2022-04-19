@@ -85,6 +85,27 @@ code span.vs { color: #20794d; } /* VerbatimString */
 code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 </style>
 
+<style>
+  div.csl-bib-body { }
+  div.csl-entry {
+    clear: both;
+    }
+  .hanging div.csl-entry {
+    margin-left:2em;
+    text-indent:-2em;
+  }
+  div.csl-left-margin {
+    min-width:2em;
+    float:left;
+  }
+  div.csl-right-inline {
+    margin-left:2em;
+    padding-left:1em;
+  }
+  div.csl-indent {
+    margin-left: 2em;
+  }
+</style>
 
   <!--radix_placeholder_meta_tags-->
   <title>Topics in Biomathematics: Course Notes 20</title>
@@ -112,6 +133,8 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 
   <!--/radix_placeholder_meta_tags-->
   
+  <meta name="citation_reference" content="citation_title=An introduction to modeling neuronal dynamics;citation_publication_date=2017;citation_publisher=Springer, Cham;citation_volume=66;citation_doi=10.1007/978-3-319-51171-9;citation_author=Christoph Börgers"/>
+  <meta name="citation_reference" content="citation_title=Mathematical foundations of neuroscience;citation_publication_date=2010;citation_publisher=Springer, New York;citation_volume=35;citation_doi=10.1007/978-0-387-87708-2;citation_author=G. Bard Ermentrout;citation_author=David H. Terman"/>
   <!--radix_placeholder_rmarkdown_metadata-->
 
   <script type="text/json" id="radix-rmarkdown-metadata">
@@ -2103,6 +2126,7 @@ Notes
 <a href="notes017.html">Notes 17</a>
 <a href="notes018.html">Notes 18</a>
 <a href="notes019.html">Notes 19</a>
+<a href="notes020.html">Notes 20</a>
 </div>
 </div>
 <div class="nav-dropdown">
@@ -2162,6 +2186,8 @@ Dynamics</a></li>
 </ul></li>
 <li><a href="#the-fitzhugh-nagumo-model"
 id="toc-the-fitzhugh-nagumo-model">The FitzHugh-Nagumo Model</a></li>
+<li><a href="#further-reading" id="toc-further-reading">Further
+Reading</a></li>
 </ul>
 </nav>
 </div>
@@ -2361,15 +2387,88 @@ Show code
 </details>
 <p><img src="notes020_files/figure-html5/unnamed-chunk-4-1.png" width="624" /></p>
 </div>
+<p>We see that there are two time-scales at play here. There is a slow
+time-scale corresponding to the time it takes the potential to increase
+up to the firing threshold, and then there is a fast time-scale
+associated with the quick spike in potential. This means that the speed
+of a trajectory around the limit cycle is not constant. The motion is
+slow along the left side of the limit cycle corresponding to the slow
+increase in potential from its minimum value to the firing threshold
+value. During this time, there is a slow decrease in the value of <span
+class="math inline">\(n\)</span>. The right hand side of the limit cycle
+corresponds to the fast increase and decrease in <span
+class="math inline">\(v\)</span> associated with the action potential
+spike. This type of two-time-scale dynamics is called slow-fast
+dynamics. One often refers to <span class="math inline">\(n\)</span> as
+the slow variable and <span class="math inline">\(v\)</span> as the fast
+variable. Oscillations associated with slow-fast dynamics such as we see
+with the reduced HH model are called <a
+href="https://en.wikipedia.org/wiki/Relaxation_oscillator">relaxation
+oscillations</a>. As we will see, the analysis of slow-fast dynamics and
+relaxation oscillations is a major theme in mathematical/computational
+studies of neural and cardiac systems. In fact, mathematical methods
+such as <a
+href="http://www.scholarpedia.org/article/Singular_perturbation_theory">geometric
+singular perturbation theory</a> have been developed in part to study
+such dynamics.</p>
+<p>While the two-dimensional reduced Hodgkin-Huxley model is obtained by
+direct simplification of the classical HH ODEs, it is also possible to
+obtain systems with dynamics similar to that of the reduced HH model by
+a sort of geometric simplification.</p>
 <h1 id="the-fitzhugh-nagumo-model">The FitzHugh-Nagumo Model</h1>
+<p>Recall that for the two-dimensional reduced Hodgkin-Huxley model, one
+nullcline is monotonically increasing while the other has one local
+minimum and one local maximum. Now, a straight line is monotonically
+increasing and a cubic polynomial has one local minimum and one local
+maximum. So, what if we replace the <span
+class="math inline">\(n\)</span> nullcline with a straight line and the
+<span class="math inline">\(v\)</span> nullcline with a cubic? The
+following system, known as the <a
+href="http://www.scholarpedia.org/article/FitzHugh-Nagumo_model">FitzHugh-Nagumo
+model</a> (FH) does exactly that.</p>
 <p><span class="math display">\[
 \begin{align}
 \frac{dv}{dt} &amp;= v - \frac{v^3}{3} - n + I\\
 \frac{dn}{dt} &amp;= \frac{av - n}{\tau_{n}}
 \end{align}
 \]</span></p>
+<p>We leave it as an exercise to show that the FitzHugh-Nagumo model
+exhibits slow-fast relaxation oscillations similar to those of the
+reduced HH model.</p>
+<p>Note that the HH, reduced HH, and FH models all have a parameter
+<span class="math inline">\(I\)</span> for input current. In some cases,
+this may act as a bifurcation parameter. This is the topic we take up in
+the next section of notes.</p>
+<h1 id="further-reading">Further Reading</h1>
+<p>Our discussion largely follows Chapter 10 from <span class="citation"
+data-cites="borgersIntroductionModelingNeuronal2017">(<a
+href="#ref-borgersIntroductionModelingNeuronal2017"
+role="doc-biblioref">Börgers 2017</a>)</span>. The text <span
+class="citation"
+data-cites="ermentroutMathematicalFoundationsNeuroscience2010">(<a
+href="#ref-ermentroutMathematicalFoundationsNeuroscience2010"
+role="doc-biblioref">Ermentrout and Terman 2010</a>)</span> provides
+similar coverage but goes further into some of the mathematics
+associated with mathematical neuroscience.</p>
 <div class="sourceCode" id="cb1"><pre
 class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
+<div id="refs" class="references csl-bib-body hanging-indent"
+role="doc-bibliography">
+<div id="ref-borgersIntroductionModelingNeuronal2017" class="csl-entry"
+role="doc-biblioentry">
+Börgers, Christoph. 2017. <em>An Introduction to Modeling Neuronal
+Dynamics</em>. Vol. 66. Texts in <span>Applied Mathematics</span>.
+<span>Springer, Cham</span>. <a
+href="https://doi.org/10.1007/978-3-319-51171-9">https://doi.org/10.1007/978-3-319-51171-9</a>.
+</div>
+<div id="ref-ermentroutMathematicalFoundationsNeuroscience2010"
+class="csl-entry" role="doc-biblioentry">
+Ermentrout, G. Bard, and David H. Terman. 2010. <em>Mathematical
+Foundations of Neuroscience</em>. Vol. 35. Interdisciplinary
+<span>Applied Mathematics</span>. <span>Springer, New York</span>. <a
+href="https://doi.org/10.1007/978-0-387-87708-2">https://doi.org/10.1007/978-0-387-87708-2</a>.
+</div>
+</div>
 <!--radix_placeholder_article_footer-->
 <!--/radix_placeholder_article_footer-->
 </div>
