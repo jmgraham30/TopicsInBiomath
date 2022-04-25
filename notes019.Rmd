@@ -61,12 +61,12 @@ Recall from physics that [electric potential](https://en.wikipedia.org/wiki/Elec
 
 It is known that ions can pass through the cell membrane of a neuron through so-called [ion channels](https://en.wikipedia.org/wiki/Ion_channel). These channels are typically ion specific in that a sodium ion channel only lets sodium through, a potassium channel only lets potassium through, and so on. Additionally, there are ion pumps at the neuron cell membrane that actively transport ions in or out of a cell but not necessarily at the same rate. For example, the well-known [sodium-potassium](https://en.wikipedia.org/wiki/Sodium-potassium_pump) pump removes sodium and intakes potassium at a 2 potassium for 3 sodium ratio. The point is that this prevents the occurrence of a perfect balance of ion concentrations inside and outside of a neuron cell membrane.  Thus, we have an explanation for the membrane potential of a neuron. 
 
-Going further, the membrane potential of a neuron can decrease (known as hyperpolarization) creating a so-called inhibitory state, or increase (known as depolarization)  creating a so-called excitatory state.  Researchers have observed experimentally these changes in time of the membrane potential of neurons. See, for example, figures in the paper of [Han et al,](https://academic.oup.com/brain/article/135/9/2613/326668) where one can see a plot of a recording of membrane potential from a neuron in the superior cervical ganglion of a rat.  What is seen is that the voltage corresponding to the membrane potential slowly rises until it reaches a threshold level (known as a firing threshold) then a sudden rapid increase in voltage occurs creating a action potential. When a neuron generates an action potential, one often says that it spikes or fires. This is all based on opening and closing of ion channels and the ion channel activity is incorporated into the Hodgkin-Huxley mathematical we describe next. 
+Going further, the membrane potential of a neuron can decrease (known as hyperpolarization) creating a so-called inhibitory state, or increase (known as depolarization)  creating a so-called excitatory state.  Researchers have observed experimentally these changes in time of the membrane potential of neurons. See, for example, figures in the paper of [Han et al,](https://academic.oup.com/brain/article/135/9/2613/326668) where one can see a plot of a recording of membrane potential from a neuron in the superior cervical ganglion of a rat.  What is seen is that the voltage corresponding to the membrane potential slowly rises until it reaches a threshold level (known as a firing threshold) then a sudden rapid increase in voltage occurs creating a action potential. When a neuron generates an action potential, one often says that it spikes or fires. This is all based on opening and closing of ion channels and the ion channel activity is incorporated into the Hodgkin-Huxley mathematical model we describe next. 
 
 
 # The Hodgkin-Huxley ODEs
 
-Let $v(t)$ denote the neuron membrane potential at time $t$ measured in units of millivolts (mV). For the purposes of the Hodgkin_Huxley model, time will be measured in units of milliseconds (ms). A principle part of the Hodgkin-Huxley models expresses how $v$ changes over time. We start by assuming that a nerve cell membrane acts as a [capacitor](https://en.wikipedia.org/wiki/Capacitor) so that
+Let $v(t)$ denote the neuron membrane potential at time $t$ measured in units of millivolts (mV). For the purposes of the Hodgkin-Huxley model, time will be measured in units of milliseconds (ms). A principle part of the Hodgkin-Huxley model expresses how $v$ changes over time. We start by assuming that a nerve cell membrane acts as a [capacitor](https://en.wikipedia.org/wiki/Capacitor) so that
 
 $Cv = Q$
 
@@ -78,7 +78,7 @@ so that if we differentiate both sides of $Cv=Q$ we obtain
 
 $C\frac{dv}{dt} = I_{\text{total}}$
 
-Based on experiments, Hodgkin adn Huxley determined that the total current $I_{\text{total}}$ arises from a combination of 
+Based on experiments, Hodgkin and Huxley determined that the total current $I_{\text{total}}$ arises from a combination of 
 
 * a sodium induced current $I_{\text{Na}}$, 
 
@@ -103,11 +103,11 @@ I_{\text{K}} &= g_{\text{K}}(v_{\text{K}} - v) \\
 I_{\text{L}} &= g_{\text{L}}(v_{\text{L}} - v) 
 \end{align}
 $$
-where $v_{\text{Na}}$, $v_{\text{K}}$, and $v_{\text{L}}$ are the [reversal potential](https://en.wikipedia.org/wiki/Reversal_potential) values for sodium. potassium, and leak, respectively. The values $g_{\text{Na}}$, $g_{\text{K}}$, and $g_{\text{L}}$ are the [conductances](https://en.wikipedia.org/wiki/Electrical_resistance_and_conductance). Thus, we have that
+where $v_{\text{Na}}$, $v_{\text{K}}$, and $v_{\text{L}}$ are the [reversal potential](https://en.wikipedia.org/wiki/Reversal_potential) values for sodium, potassium, and leak, respectively. The values $g_{\text{Na}}$, $g_{\text{K}}$, and $g_{\text{L}}$ are the [conductances](https://en.wikipedia.org/wiki/Electrical_resistance_and_conductance). Thus, we have that
 
 $C\frac{dv}{dt} = g_{\text{Na}}(v_{\text{Na}} - v) + g_{\text{K}}(v_{\text{K}} - v) + g_{\text{L}}(v_{\text{L}} - v) + I$
 
-This appears to be a fairly simple equation. However, it has been determined that while that leak conductance $g_{\text{L}}=\bar{g}_{\text{L}}$ with $\bar{g}_{\text{L}}$ a constant, in contrast, the sodium and potassium conductances change in time in concert with the membrane potential $v$. Thus, it is required to derive equations that relate how the sodium and potassium conductance functions vary. In order to do this, we take in to account the actions of the ion channels discussed previously.
+This appears to be a fairly simple equation. However, it has been determined that while the leak conductance $g_{\text{L}}=\bar{g}_{\text{L}}$ with $\bar{g}_{\text{L}}$ a constant, in contrast, the sodium and potassium conductances change in time in concert with the membrane potential $v$. Thus, it is required to derive equations that relate how the sodium and potassium conductance functions vary. In order to do this, we take in to account the actions of the ion channels discussed previously.
 
 ## Gating Variables
 
