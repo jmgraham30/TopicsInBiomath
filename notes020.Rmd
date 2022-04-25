@@ -197,4 +197,4 @@ Note that the HH, reduced HH, and FH models all have a parameter $I$ for input c
 
 # Further Reading
 
-Our discussion largely follows Chapter 10 from [@borgersIntroductionModelingNeuronal2017]. The text [@ermentroutMathematicalFoundationsNeuroscience2010] provides similar coverage but goes further into some of the mathematics associated with mathematical neuroscience.
+Our discussion largely follows Chapter 10 from [@borgersIntroductionModelingNeuronal2017]. The texts [@ermentroutMathematicalFoundationsNeuroscience2010] and [@gerstner2014neuronal] provides similar coverage but goes further into some of the mathematics associated with mathematical neuroscience. You can access [@gerstner2014neuronal] for free online [here](https://neuronaldynamics.epfl.ch/index.html).
